@@ -1,9 +1,40 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9187493483642692"
+     crossorigin="anonymous"></script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>じぶんマトリクス（じぶマト） - 8つの知能で才能を可視化する診断</title>
+
+<!-- SEO -->
+<meta name="description" content="あなたの中に眠る8種類の知性を測定する無料診断。ハーバード大学のハワード・ガードナーが提唱した多重知能理論（MI理論）をベースに、性格ではなく才能を可視化します。3分で完了。">
+<meta name="keywords" content="才能診断,性格診断,MI理論,多重知能,キャリア診断,自己分析,適性診断,じぶマト,じぶんマトリクス">
+<meta name="author" content="じぶんマトリクス">
+
+<!-- Open Graph (Facebook / LINE / Slack 等) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="じぶんマトリクス — 8つの才能診断">
+<meta property="og:description" content="あなたの中に眠る、8つの知性を測定。ハーバード大学のMI理論をベースにした、無料の才能診断。3分で完了。">
+<meta property="og:image" content="https://www.jibunmatrix.com/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="じぶんマトリクス - 8つの才能診断">
+<meta property="og:url" content="https://www.jibunmatrix.com/">
+<meta property="og:site_name" content="じぶんマトリクス">
+<meta property="og:locale" content="ja_JP">
+
+<!-- Twitter (X) Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="じぶんマトリクス — 8つの才能診断">
+<meta name="twitter:description" content="あなたの中に眠る、8つの知性を測定。ハーバード大学のMI理論をベースにした、無料の才能診断。3分で完了。">
+<meta name="twitter:image" content="https://www.jibunmatrix.com/ogp.png">
+
+<!-- テーマカラー -->
+<meta name="theme-color" content="#8a2922">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Shippori+Mincho:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -994,6 +1025,62 @@
     opacity: 0.9;
   }
 
+  /* ===== MIタイプ ラベル & 「・・・」演出 ===== */
+  .mi-type-prelude {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 16px;
+    animation: prelude-fade-in 0.6s ease-out 0.15s both;
+  }
+
+  .mi-type-label {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 14px;
+    color: var(--gold-light);
+    letter-spacing: 0.25em;
+    font-weight: 500;
+    opacity: 0.95;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  }
+
+  .mi-type-em {
+    color: var(--paper);
+    font-weight: 700;
+    margin: 0 2px;
+    letter-spacing: 0.15em;
+  }
+
+  .mi-type-dots {
+    display: inline-flex;
+    gap: 2px;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 18px;
+    color: var(--gold-light);
+    letter-spacing: 0.15em;
+  }
+
+  .mi-type-dots .dot {
+    display: inline-block;
+    opacity: 0;
+    animation: dot-appear 0.4s ease-out forwards;
+  }
+
+  .mi-type-dots .dot:nth-child(1) { animation-delay: 0.5s; }
+  .mi-type-dots .dot:nth-child(2) { animation-delay: 0.9s; }
+  .mi-type-dots .dot:nth-child(3) { animation-delay: 1.3s; }
+
+  @keyframes prelude-fade-in {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes dot-appear {
+    0% { opacity: 0; transform: translateY(2px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
   .character-name {
     font-family: 'Shippori Mincho', serif;
     font-weight: 800;
@@ -1003,6 +1090,7 @@
     margin-bottom: 8px;
     color: var(--paper);
     text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    animation: name-reveal 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 1.7s both;
   }
 
   .character-en {
@@ -1011,7 +1099,19 @@
     font-size: 16px;
     color: var(--gold-light);
     letter-spacing: 0.1em;
-    opacity: 0.85;
+    opacity: 0;
+    animation: en-reveal 0.5s ease-out 2.1s both;
+  }
+
+  @keyframes name-reveal {
+    0% { opacity: 0; transform: translateY(12px) scale(0.94); filter: blur(8px); }
+    50% { filter: blur(0); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+
+  @keyframes en-reveal {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 0.85; transform: translateY(0); }
   }
 
   .talent-subtitle {
@@ -1663,6 +1763,78 @@
     letter-spacing: 0.05em;
   }
 
+  /* ============ FAMOUS PEOPLE SECTION ============ */
+  .famous-section {
+    margin-bottom: 40px;
+  }
+
+  .famous-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--gold);
+    text-align: center;
+    letter-spacing: 0.08em;
+    margin-bottom: 22px;
+  }
+
+  .famous-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .famous-card {
+    background: rgba(15,14,12,0.04);
+    border: 1px solid rgba(184,137,58,0.3);
+    padding: 14px 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .famous-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .famous-era {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    background: rgba(184,137,58,0.12);
+    border: 1px solid rgba(184,137,58,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    margin-top: 1px;
+  }
+
+  .famous-body { flex: 1; min-width: 0; }
+
+  .famous-name {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--ink);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+
+  .famous-note {
+    font-size: 11.5px;
+    line-height: 1.75;
+    color: rgba(15,14,12,0.68);
+  }
+
+  @media (max-width: 520px) {
+    .famous-grid { grid-template-columns: 1fr; }
+  }
+
   /* ============ MISSION CARD ============ */
   .mission-card {
     padding: 32px 28px;
@@ -1715,6 +1887,318 @@
   .mission-refresh:hover {
     background: var(--gold-light);
     color: var(--ink);
+  }
+
+  /* ============ PREMIUM REPORT SECTION ============ */
+  .premium-section {
+    background: linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
+    padding: 50px 28px 40px;
+    margin: 50px 0 30px;
+    border: 1px solid rgba(184,137,58,0.4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .premium-section::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 1px dashed rgba(184,137,58,0.3);
+    pointer-events: none;
+  }
+
+  .premium-section::after {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(212,173,94,0.15), transparent 70%);
+    pointer-events: none;
+  }
+
+  .premium-section > * { position: relative; z-index: 2; }
+
+  .premium-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+
+  .premium-badge-mark {
+    color: var(--crimson);
+    font-size: 14px;
+  }
+
+  .premium-title {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 800;
+    font-size: clamp(26px, 6vw, 32px);
+    line-height: 1.35;
+    text-align: center;
+    margin-bottom: 16px;
+    letter-spacing: 0.02em;
+  }
+
+  .premium-subtitle {
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.95;
+    color: rgba(15,14,12,0.7);
+    margin-bottom: 36px;
+  }
+
+  /* チラ見せ */
+  .premium-preview {
+    background: var(--paper);
+    padding: 26px 24px;
+    margin-bottom: 36px;
+    border: 1px solid rgba(15,14,12,0.15);
+    position: relative;
+  }
+
+  .premium-preview-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .premium-preview-headline {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+
+  .premium-preview-body {
+    position: relative;
+    max-height: 180px;
+    overflow: hidden;
+  }
+
+  .premium-preview-text {
+    font-size: 14px;
+    line-height: 2;
+    color: rgba(15,14,12,0.85);
+    text-align: justify;
+  }
+
+  .premium-blur {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      rgba(244,237,224,0) 0%,
+      rgba(244,237,224,0.4) 30%,
+      rgba(244,237,224,0.95) 70%,
+      rgba(244,237,224,1) 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 12px;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+
+  .premium-blur-content {
+    text-align: center;
+  }
+
+  .lock-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .premium-blur-content p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--crimson);
+    text-transform: uppercase;
+  }
+
+  /* 含まれる内容 */
+  .premium-features {
+    margin-bottom: 36px;
+  }
+
+  .premium-features-label {
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .premium-feature-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .premium-feature-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px dashed rgba(15,14,12,0.15);
+  }
+
+  .premium-feature-list li:last-child {
+    border-bottom: none;
+  }
+
+  .feature-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--gold);
+    width: 26px;
+    flex-shrink: 0;
+    line-height: 1.2;
+  }
+
+  .premium-feature-list li > div {
+    flex: 1;
+  }
+
+  .premium-feature-list strong {
+    display: block;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 14px;
+    color: var(--ink);
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+
+  .premium-feature-list span {
+    display: block;
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: rgba(15,14,12,0.65);
+  }
+
+  /* 価格＆ボタン */
+  .premium-cta {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 30px 24px;
+    text-align: center;
+    position: relative;
+  }
+
+  .premium-cta::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(212,173,94,0.3);
+    pointer-events: none;
+  }
+
+  .premium-price-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 22px;
+    position: relative;
+  }
+
+  .premium-price-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+  }
+
+  .premium-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  .premium-price-currency {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 26px;
+    color: var(--gold-light);
+  }
+
+  .premium-price-num {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 800;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--paper);
+  }
+
+  .premium-price-tax {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: rgba(244,237,224,0.6);
+    margin-left: 8px;
+  }
+
+  .premium-buy-btn {
+    width: 100%;
+    padding: 20px;
+    background: var(--gold-light);
+    color: var(--ink);
+    border: none;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+  }
+
+  .premium-buy-btn:hover {
+    background: var(--paper);
+    letter-spacing: 0.35em;
+  }
+
+  .premium-buy-btn.clicked {
+    background: var(--crimson);
+    color: var(--paper);
+    pointer-events: none;
+  }
+
+  .premium-buy-icon {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .premium-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    line-height: 1.7;
+    color: rgba(244,237,224,0.55);
+    margin-top: 18px;
+  }
+
+  @media (max-width: 600px) {
+    .premium-section { padding: 40px 22px 32px; }
+    .premium-price-num { font-size: 48px; }
   }
 
   /* ============ Enhanced Share Section ============ */
@@ -1981,6 +2465,162 @@
     color: rgba(244,237,224,0.85);
     text-align: left;
     margin-top: 18px;
+  }
+
+  /* ============ COMPATIBILITY DETAILS ============ */
+  .compat-section {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(212,173,94,0.2);
+    text-align: left;
+  }
+
+  .compat-section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .compat-section-title {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--paper);
+    margin-bottom: 14px;
+  }
+
+  .compat-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .compat-item {
+    background: rgba(212,173,94,0.08);
+    border-left: 2px solid var(--gold-light);
+    padding: 12px 16px;
+  }
+
+  .compat-item-label {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--gold-light);
+    margin-bottom: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  .compat-item-desc {
+    font-size: 13px;
+    line-height: 1.85;
+    color: rgba(244,237,224,0.88);
+  }
+
+  .compat-item-empty {
+    background: rgba(244,237,224,0.04);
+    border-left: 2px solid rgba(212,173,94,0.3);
+  }
+
+  .compat-item-empty .compat-item-desc {
+    font-style: italic;
+    color: rgba(244,237,224,0.7);
+  }
+
+  /* 3つの相性カテゴリ */
+  .compat-categories {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(212,173,94,0.2);
+    text-align: left;
+  }
+
+  .compat-categories-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .compat-categories-title {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--paper);
+    margin-bottom: 22px;
+  }
+
+  .compat-cat-item {
+    margin-bottom: 22px;
+    padding: 16px 18px;
+    background: rgba(244,237,224,0.05);
+    border: 1px solid rgba(212,173,94,0.18);
+  }
+
+  .compat-cat-item:last-child { margin-bottom: 0; }
+
+  .compat-cat-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .compat-cat-icon {
+    font-size: 20px;
+    color: var(--gold-light);
+    width: 26px;
+    text-align: center;
+  }
+
+  .compat-cat-name {
+    flex: 1;
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--paper);
+  }
+
+  .compat-cat-score {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 26px;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+
+  .compat-cat-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(212,173,94,0.15);
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .compat-cat-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    transition: width 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .compat-cat-desc {
+    font-size: 12.5px;
+    line-height: 1.85;
+    color: rgba(244,237,224,0.82);
+    margin: 0;
+  }
+
+  @media (max-width: 600px) {
+    .compat-item { padding: 10px 14px; }
+    .compat-cat-item { padding: 14px 14px; }
+    .compat-cat-name { font-size: 14px; }
+    .compat-cat-score { font-size: 22px; }
   }
 
   /* Prevent body scroll when modal open */
@@ -2303,6 +2943,12 @@
 
     <div class="character-name-block">
       <div class="character-tagline" id="characterTagline">— —</div>
+      <div class="mi-type-prelude">
+        <span class="mi-type-label">あなたの<span class="mi-type-em">MIタイプ</span>は</span>
+        <span class="mi-type-dots">
+          <span class="dot">・</span><span class="dot">・</span><span class="dot">・</span>
+        </span>
+      </div>
       <h2 class="character-name" id="characterName">— —</h2>
       <div class="character-en" id="characterEn">— —</div>
     </div>
@@ -2341,6 +2987,14 @@
     <span class="en">Detailed Scores</span>
   </div>
   <div class="scores-list" id="scoresList"></div>
+
+  <!-- 同じMIタイプの著名人 -->
+  <div class="section-title">
+    <span class="num">—</span>
+    <h3>同じMIタイプの人物</h3>
+    <span class="en">People Like You</span>
+  </div>
+  <div class="famous-section" id="famousSection"></div>
 
   <!-- 引用 -->
   <div class="quote-block">
@@ -2399,6 +3053,119 @@
     <div class="mission-label">— This Week's Practice —</div>
     <div class="mission-text" id="missionText">— —</div>
     <button class="mission-refresh" onclick="rollMission()">▷ 別のミッションに変える</button>
+  </div>
+
+  <!-- ============ PREMIUM REPORT (有料拡張レポート) ============ -->
+  <div class="premium-section">
+    <div class="premium-badge">
+      <span class="premium-badge-mark">✦</span>
+      <span>JIBU-MATO PREMIUM REPORT</span>
+      <span class="premium-badge-mark">✦</span>
+    </div>
+
+    <h3 class="premium-title">あなたの才能を、<br>もっと深く知る</h3>
+    <p class="premium-subtitle">
+      無料診断は、入り口に過ぎません。<br>
+      ¥980で、あなただけの「才能の取扱説明書」を解錠できます。
+    </p>
+
+    <!-- チラ見せセクション(ぼかし) -->
+    <div class="premium-preview">
+      <div class="premium-preview-header">
+        <div class="premium-preview-label" id="premiumPreviewLabel">— —</div>
+        <h4 class="premium-preview-headline" id="premiumPreviewHeadline">— —</h4>
+      </div>
+
+      <div class="premium-preview-body">
+        <p class="premium-preview-text" id="premiumPreviewText">— —</p>
+
+        <!-- ぼかしオーバーレイ -->
+        <div class="premium-blur">
+          <div class="premium-blur-content">
+            <div class="lock-icon">🔒</div>
+            <p>続きはプレミアム会員限定</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 含まれる内容のリスト -->
+    <div class="premium-features">
+      <div class="premium-features-label">— Premium Report に含まれるもの —</div>
+      <ul class="premium-feature-list">
+        <li>
+          <span class="feature-num">01</span>
+          <div>
+            <strong>才能の科学的深掘り</strong>
+            <span>あなたの脳がなぜそう動くのか、神経科学レベルの解説（約2,000字）</span>
+          </div>
+        </li>
+        <li>
+          <span class="feature-num">02</span>
+          <div>
+            <strong>30日間プログラム</strong>
+            <span>才能を日常に組み込むための、毎日5分の具体メニュー</span>
+          </div>
+        </li>
+        <li>
+          <span class="feature-num">03</span>
+          <div>
+            <strong>100の職業リスト</strong>
+            <span>あなたの才能が活きる100の職業を10カテゴリで分類して提示</span>
+          </div>
+        </li>
+        <li>
+          <span class="feature-num">04</span>
+          <div>
+            <strong>副業の始め方ロードマップ</strong>
+            <span>月3〜30万円を稼ぐための、6ステップの実践プラン</span>
+          </div>
+        </li>
+        <li>
+          <span class="feature-num">05</span>
+          <div>
+            <strong>苦手なタイプとの付き合い方</strong>
+            <span>あなたを消耗させる相手の正体と、3つの対応策</span>
+          </div>
+        </li>
+        <li>
+          <span class="feature-num">06</span>
+          <div>
+            <strong>PDF版「じぶんの取扱説明書」</strong>
+            <span>全コンテンツをA4 8ページのPDFで保存・印刷可能</span>
+          </div>
+        </li>
+        <li>
+          <span class="feature-num">07</span>
+          <div>
+            <strong>高解像度の結果カード画像</strong>
+            <span>SNSでのシェアにそのまま使える、印刷品質の画像</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 価格＆購入ボタン -->
+    <div class="premium-cta">
+      <div class="premium-price-row">
+        <div class="premium-price-label">プレミアムレポート</div>
+        <div class="premium-price">
+          <span class="premium-price-currency">¥</span>
+          <span class="premium-price-num">980</span>
+          <span class="premium-price-tax">（税込・買い切り）</span>
+        </div>
+      </div>
+
+      <button class="premium-buy-btn" onclick="onPremiumInterest()">
+        <span class="premium-buy-icon">✦</span>
+        <span>プレミアムレポートを開く</span>
+      </button>
+
+      <p class="premium-note">
+        ※ お試し公開中につき、現在は決済システムを準備中です。<br>
+        「興味あり」のクリック数を集計しています。
+      </p>
+    </div>
   </div>
 
   <!-- シェア -->
@@ -2895,6 +3662,351 @@ const WEEKLY_MISSIONS = {
   ]
 };
 
+// ============ PREMIUM REPORT DATA (¥980 有料レポート) ============
+// 各知能タイプごとに、無料版では出さない深い解説とキャリアを定義
+const PREMIUM_REPORT = {
+  linguistic: {
+    // 才能の深掘り
+    deepDive: {
+      title: "なぜあなたは「言葉」が武器なのか",
+      body: "あなたの脳は、世界を「言葉のフィルター」を通して受け取り、再構築するように設計されています。これは単に語彙が豊富というレベルの話ではありません。感情を言語化する速度、語感の繊細さ、文脈を読む力——これら全てが脳内で連動して働き、他人には見えない「ことばの地図」を描いています。\n\nこの才能の本質は、目に見えない感情・思考・関係性を、誰かに伝わる形に翻訳する力です。あなたが書く一行のメッセージ、話す一言の選択、それらは無意識のうちに「相手の心に届く形」へと最適化されています。\n\nただし、注意点もあります。言葉が達者であるがゆえに、「言葉にできないもの」を軽視してしまう傾向があります。沈黙の価値、身体感覚、数字の力——これらを尊重できるかが、あなたの才能をさらに深める鍵です。"
+    },
+    // 30日プログラム
+    program: [
+      "Day 1-5: 毎日100字の日記を書く（テーマ自由）",
+      "Day 6-10: 1冊の本から、心に響いた3フレーズを抜き書きする",
+      "Day 11-15: 友人や同僚に手書きの手紙を1通書く",
+      "Day 16-20: 短編小説を1本読み、登場人物について200字で書く",
+      "Day 21-25: 自分の意見を200字で発信する（SNSでもメモでも）",
+      "Day 26-30: 1ヶ月の自分を振り返り、500字のエッセイにまとめる"
+    ],
+    // 100の職業（カテゴリ別）
+    careers: {
+      "創作・表現系": ["小説家", "脚本家", "詩人", "ライター", "コピーライター", "作詞家", "エッセイスト", "翻訳家", "通訳", "コラムニスト"],
+      "メディア・出版系": ["編集者", "ジャーナリスト", "記者", "校正者", "出版プロデューサー", "Webメディア運営", "podcasterの脚本担当", "ドキュメンタリー制作", "ノンフィクション作家", "リサーチャー"],
+      "教育・伝達系": ["国語教師", "塾講師", "言語療法士", "日本語教師", "司書", "図書館員", "アナウンサー", "ナレーター", "MC・司会者", "ボイスコーチ"],
+      "ビジネス系": ["広報・PR", "マーケター（コンテンツ寄り）", "セールスコピー作家", "プレゼン資料作成", "営業企画", "ブランドマネージャー", "広告代理店プランナー", "スピーチライター", "渉外担当", "プロダクトマーケター"],
+      "対人・支援系": ["カウンセラー", "コーチ", "メンター", "セラピスト", "司法書士", "弁護士", "行政書士", "キャリアコンサルタント", "クレーム対応", "対話型ファシリテーター"],
+      "メディア・芸能系": ["放送作家", "TVプロデューサー", "演出家", "舞台脚本家", "声優", "朗読家", "落語家", "漫才作家", "ラジオパーソナリティ", "YouTube脚本"],
+      "新興職業": ["プロンプトエンジニア", "AI調教師（RLHF担当）", "Note・ブログでの発信業", "オンラインサロン主宰", "ニュースレター作家", "電子書籍著者", "ストーリーテラー（ブランド向け）", "音声配信者", "オーディオブック朗読", "対話型AIシナリオ作家"],
+      "副業向き": ["Webライター", "ブログ運営", "メルマガ発行", "添削サービス", "命名・ネーミング", "リライト業", "校正業", "プロフィール文作成", "推敲サービス", "電子書籍販売"],
+      "意外な適性": ["占い師（言葉で運命を編む）", "結婚式の司会", "葬儀の語り部", "美術館の解説員", "観光ガイド", "ツアーコンダクター", "クルーズ船のホスト", "ホテルのコンシェルジュ", "高級ブランドの接客", "刑事の聴取担当"]
+    },
+    // 副業の始め方
+    sideHustle: {
+      title: "言葉で月3〜10万円を稼ぐ最短ルート",
+      steps: [
+        "STEP 1: noteで週1本、自分の専門分野について書く（最初の3ヶ月は無料公開）",
+        "STEP 2: 30本貯まったら、有料記事（¥500〜)を月1本リリース",
+        "STEP 3: Twitterで日々の気づきを発信、フォロワー1000人を目指す",
+        "STEP 4: クラウドワークス・ランサーズで初心者向けライティング案件を受注",
+        "STEP 5: 単価¥1〜3/字で月10本納品 → 月3〜10万円が現実圏内",
+        "STEP 6: 専門性が高まったら、企業のオウンドメディアと直契約（月20万円も可能）"
+      ]
+    },
+    // 苦手なタイプとの付き合い方
+    relationship: {
+      title: "言語に頼らない相手と、どう関わるか",
+      body: "あなたが特に苦手と感じるのは、「身体運動的知能」が高い実践派や、「内省的知能」が高い無口な思想家です。彼らは言葉で説明されることを「冗長」と感じる傾向があります。\n\n対応のコツは3つ。①長文で説明せず、図や実演で見せる ②結論を最初に言う（PREP法を徹底する）③沈黙を埋めようとしない。\n\n逆に彼らはあなたが「言葉にできない真理」に触れた時、強くリスペクトしてくれます。短く、的確に、本質を突く一言を放てるようになると、彼らとも深い関係が築けます。"
+    }
+  },
+
+  logical: {
+    deepDive: {
+      title: "なぜあなたは「構造」を見抜けるのか",
+      body: "あなたの脳は、混沌とした情報の中から「パターン」を抽出することに快感を覚えるように設計されています。これは数学が得意かどうかとは別の話で、もっと深いところで世界を「関係性のネットワーク」として認識しているのです。\n\nあなたにとって、誰かの言動の矛盾、システムのバグ、社会の歪み——これらは「気持ち悪さ」として身体的に感じられます。だから他人より早く問題を発見できる。\n\n注意点は、感情を「非論理的なノイズ」として処理してしまうこと。人間関係において、これは時に冷たい印象を与えます。論理と感情は対立するものではなく、別の次元の情報だと理解できると、才能が更に開花します。"
+    },
+    program: [
+      "Day 1-5: 毎日「今日の意思決定3つ」とその理由を記録する",
+      "Day 6-10: 興味のあるテーマを1つ選び、論文・データを1本読む",
+      "Day 11-15: 自分の仮説を立て、3つの反証可能性を考える",
+      "Day 16-20: SQL/Python/Excel関数のいずれかを1日30分学ぶ",
+      "Day 21-25: 身の回りの「なぜ?」を3つ書き出し、それぞれ調べる",
+      "Day 26-30: 1ヶ月で学んだ思考フレームを、図解1枚にまとめる"
+    ],
+    careers: {
+      "IT・エンジニア系": ["ソフトウェアエンジニア", "データサイエンティスト", "機械学習エンジニア", "アルゴリズム研究者", "セキュリティエンジニア", "インフラエンジニア", "DBエンジニア", "競技プログラマー", "CTO", "QAエンジニア"],
+      "コンサル・戦略系": ["経営コンサルタント", "戦略コンサルタント", "M&Aアドバイザー", "投資銀行アナリスト", "事業企画", "リスク管理担当", "監査法人", "シンクタンク研究員", "事業再生コンサル", "DXコンサル"],
+      "金融・投資系": ["ヘッジファンドマネージャー", "クオンツ", "アクチュアリー", "証券アナリスト", "為替トレーダー", "暗号資産トレーダー", "ファンドマネージャー", "金融工学", "リスクモデラー", "保険数理"],
+      "研究・学術系": ["数学者", "物理学者", "経済学者", "統計学者", "認知科学者", "計算機科学者", "オペレーションズリサーチ", "オペレーション最適化", "AI研究者", "ロジシャン"],
+      "ビジネス分析系": ["ビジネスアナリスト", "プロダクトマネージャー", "グロースハッカー", "BizDev", "事業ポートフォリオ管理", "KPIマネージャー", "オペレーション最適化", "サプライチェーン分析", "需要予測", "プライシング担当"],
+      "起業・経営系": ["スタートアップ起業家", "VCのキャピタリスト", "エンジェル投資家", "戦略担当役員", "経営企画", "新規事業開発", "M&A担当", "IR担当", "経営者・CEO", "オペレーティングパートナー"],
+      "法律・規則系": ["弁護士（複雑案件）", "弁理士", "公認会計士", "税理士", "司法試験対策講師", "法務担当", "コンプライアンス", "知的財産", "規制対応", "国際法務"],
+      "新興職業": ["プロンプトエンジニア（高度系）", "AIアラインメント研究", "Web3アーキテクト", "DAOガバナンス設計", "アルゴリズム監査", "ESGアナリスト", "DeepTech評価", "量子コンピューティング応用", "AI倫理コンサル", "因果推論コンサル"],
+      "副業向き": ["プログラミング受託", "データ分析受託", "投資・トレーディング", "コンサル副業", "テクニカルライティング", "教材作成", "オンライン講師", "システム監査", "技術ブログ運営", "アルゴリズムコンテスト"],
+      "意外な適性": ["プロ棋士", "ポーカープロ", "推理小説家", "経済評論家", "占い師（論理派タロット解読）", "ボードゲームデザイナー", "ゲームバランス設計", "暗号研究者", "戦略系eスポーツ", "ファクトチェッカー"]
+    },
+    sideHustle: {
+      title: "論理で月5〜30万円を稼ぐ最短ルート",
+      steps: [
+        "STEP 1: 自分の専門分野で技術ブログを開設（Qiita・Zenn等）",
+        "STEP 2: 月2本のテクニカル記事を3ヶ月続け、SNSでも発信",
+        "STEP 3: クラウドワークスでデータ分析・スクレイピング案件を受注（時給¥3,000〜）",
+        "STEP 4: スキルが認知されたら、企業の技術顧問契約（月¥5〜20万円）",
+        "STEP 5: 自作のSaaS・ツール（マイクロサース）を月額¥500〜¥3,000で販売",
+        "STEP 6: 投資の本気の学習も並行 → 自分の判断で資産運用（年利5〜15%目標）"
+      ]
+    },
+    relationship: {
+      title: "感情派と、どう関わるか",
+      body: "あなたが特に疲れるのは、「対人的知能」「音楽的知能」が高い感性派です。「なぜ?」が通じず、「なんとなく」で物事を決められるのが理解できない。\n\n対応のコツは3つ。①「論破」より「共感の演技」を覚える。②データを出す前に、まず感情を肯定する一言。③相手の直感は、あなたが見えていない情報を捉えている可能性が高いと信じる。\n\n逆にあなたが感情派から学べるのは、「結論より過程を共有する」コミュニケーションの価値。これができると、あなたの論理は「冷たい正論」から「説得力のあるリーダーシップ」に進化します。"
+    }
+  },
+
+  spatial: {
+    deepDive: {
+      title: "なぜあなたは「視える」のか",
+      body: "あなたの脳には、世界を「3次元の地図」として捉える特別な領域が発達しています。他人が「言葉で説明されないと理解できない」ものを、あなたは一瞥して全体像を掴める。これはMRIで明確に観察できる脳の構造的特徴です。\n\n空間認識・色彩感覚・構図のセンスは、デザインや建築だけでなく、人生のあらゆる場面で「全体俯瞰」の力として働きます。会議の流れ、組織の構造、人間関係の力学——これらを「見える化」できるのがあなたの強みです。\n\n注意点は、言語化が遅いこと。頭の中に完成図があるのに、それを言葉で説明するのに時間がかかる。スケッチや図解の習慣を持つことで、この才能が「他人に伝わる」レベルに引き上がります。"
+    },
+    program: [
+      "Day 1-5: 毎日1枚、見たものをラフスケッチする（5分でOK）",
+      "Day 6-10: 好きな空間・建築物の写真を集め、構図を分析する",
+      "Day 11-15: 自分の部屋・デスクのレイアウトを再設計する",
+      "Day 16-20: 配色パレットを1日1セット作る（5色組み合わせ）",
+      "Day 21-25: 自分のアイデアを必ず「図解」で説明する練習",
+      "Day 26-30: 1ヶ月で集めたビジュアル素材で、ムードボードを完成させる"
+    ],
+    careers: {
+      "デザイン系": ["UI/UXデザイナー", "グラフィックデザイナー", "プロダクトデザイナー", "Webデザイナー", "ロゴデザイナー", "ブランドデザイナー", "パッケージデザイナー", "エディトリアルデザイナー", "サインデザイナー", "情報デザイナー"],
+      "建築・空間系": ["建築家", "インテリアデザイナー", "ランドスケープデザイナー", "店舗デザイナー", "舞台美術", "展示デザイナー", "ディスプレイデザイナー", "テーマパークデザイナー", "都市計画", "リノベーションデザイナー"],
+      "映像・写真系": ["映画監督", "撮影監督", "VFXアーティスト", "アニメーター", "MV監督", "CMディレクター", "フォトグラファー", "コマーシャルフォト", "ファッションフォト", "ドキュメンタリーカメラマン"],
+      "アート系": ["画家", "イラストレーター", "彫刻家", "現代美術家", "ストリートアーティスト", "コンセプトアーティスト", "コミックアーティスト", "絵本作家", "テキスタイルデザイナー", "陶芸家"],
+      "テック系": ["3Dモデラー", "ゲームグラフィックス", "AR/VRデザイナー", "メタバースデザイナー", "プロダクトCAD", "工業デザイン", "ロボットデザイン", "ドローン操縦", "地図デザイナー", "データビジュアライザー"],
+      "ファッション・服飾系": ["ファッションデザイナー", "パタンナー", "スタイリスト", "ジュエリーデザイナー", "シューズデザイナー", "ヘアデザイナー", "ネイルアーティスト", "メイクアップアーティスト", "コスチュームデザイナー", "テキスタイルデザイン"],
+      "ビジネス系": ["アートディレクター", "クリエイティブディレクター", "プロダクトマネージャー（デザイン寄り）", "デザインリサーチャー", "ブランドコンサルタント", "PRビジュアル担当", "イベント空間設計", "ショーケース演出", "リテールデザイナー", "VMD"],
+      "新興職業": ["AIアートディレクター", "Midjourneyオペレーター", "プロンプトベースのデザイナー", "NFTアーティスト", "ジェネレーティブアート作家", "メタバース建築家", "AR広告設計", "ホログラム演出", "AI画像合成師", "デジタルツインデザイナー"],
+      "副業向き": ["ロゴ販売（ココナラ・SUZURI）", "ストックフォト販売", "Tシャツデザイン", "デジタルイラスト販売", "Notionテンプレート販売", "壁紙販売", "Etsy出品", "Pinterest運営", "デザインのレビュー業", "オンライン教室開設"],
+      "意外な適性": ["美術館学芸員", "古美術鑑定士", "風水師", "庭師", "盆栽家", "華道家", "茶道家", "考古学者", "建築史家", "美術評論家"]
+    },
+    sideHustle: {
+      title: "視覚で月3〜20万円を稼ぐ最短ルート",
+      steps: [
+        "STEP 1: ポートフォリオサイト（Behance・Dribbble・自前）を整える",
+        "STEP 2: SNS（Instagram・X）に作品を週3回投稿",
+        "STEP 3: ココナラ・Lancersでロゴ・バナー受注（単価¥5,000〜¥30,000）",
+        "STEP 4: 月10件納品を目標 → 月5〜15万円",
+        "STEP 5: ストックフォト・テンプレート販売で不労所得を構築",
+        "STEP 6: 企業のリピート案件を獲得 → 月20万円の安定収入"
+      ]
+    },
+    relationship: {
+      title: "言葉派と、どう関わるか",
+      body: "あなたが特に苦労するのは、「言語的知能」「論理数学的知能」が高い言葉派です。彼らは「言葉で正確に説明する」ことを重視し、あなたの「なんとなくこんな感じ」を理解しません。\n\n対応のコツは3つ。①必ずスケッチ・図解と一緒に説明する。②3つのキーワードに絞って言葉にする。③「なぜそう感じるか」を後から言語化する習慣を持つ。\n\n逆にあなたが言葉派から学べるのは、感覚の「再現性」を上げる力。これができると、あなたのクリエイティブは「天才の偶然」から「狙って当てられる職人技」へ進化します。"
+    }
+  },
+
+  musical: {
+    deepDive: {
+      title: "なぜあなたは「響き」を感じるのか",
+      body: "あなたの脳は、聴覚情報を感情と直結させる特別な経路を持っています。これは音楽だけでなく、人の声のトーン、環境音、会話の「間」——すべてに対する超高感度なセンサーとして機能しています。\n\n単に「耳がいい」のではなく、音から「その場の感情」を抽出する力。これは音楽家・音響エンジニアだけでなく、心理カウンセラー・営業・接客業など、あらゆる「人と関わる仕事」で武器になります。\n\n注意点は、騒がしい環境で疲弊しやすいこと。音情報をすべて拾ってしまうため、人より早く消耗します。意識的に「無音の時間」を確保することで、才能を長く保てます。"
+    },
+    program: [
+      "Day 1-5: 毎日30分、新しい音楽を聴き、印象を3行でメモする",
+      "Day 6-10: 自分の声を録音して聴き直す（朗読・歌・会話）",
+      "Day 11-15: 環境音（雨・電車・カフェ）に意識を向け、3つの違いを言語化",
+      "Day 16-20: 楽器（アプリでも可）を1日10分触る",
+      "Day 21-25: 好きな曲を1曲、楽譜なしで耳コピしてみる",
+      "Day 26-30: 1分間のオリジナルメロディを作って録音する"
+    ],
+    careers: {
+      "音楽制作系": ["作曲家", "編曲家", "サウンドプロデューサー", "DJ", "トラックメイカー", "サウンドデザイナー", "ジングル制作", "BGM制作", "音楽プロデューサー", "音響監督"],
+      "演奏・歌唱系": ["ミュージシャン", "シンガーソングライター", "オーケストラ奏者", "ジャズミュージシャン", "セッションミュージシャン", "コーラスメンバー", "ボイスアクター", "声楽家", "ラッパー", "ビートボクサー"],
+      "音響技術系": ["レコーディングエンジニア", "ミキシングエンジニア", "マスタリングエンジニア", "PAエンジニア", "音響設計", "音響コンサルタント", "音響機器開発", "ホール音響設計", "騒音調査員", "音楽医療"],
+      "教育・指導系": ["音楽教師", "ボイストレーナー", "音楽療法士", "ピアノ講師", "リトミック指導者", "発声指導", "音感トレーナー", "音楽大学講師", "音楽セラピー", "幼児音楽教育"],
+      "メディア系": ["ラジオパーソナリティ", "podcaster", "ナレーター", "声優", "音響演出（舞台）", "映画音楽担当", "ゲーム音楽担当", "TV番組音楽", "CM音楽", "アニメ音楽"],
+      "新興職業": ["音声配信プロデューサー", "Voicy・stand.fmパーソナリティ", "AI音声プロンプト設計", "音声UIデザイナー", "オーディオブック制作", "ASMRクリエイター", "メンタルケア音源作成", "睡眠用音楽制作", "Spotifyプレイリスター", "音声SNS運営"],
+      "イベント系": ["音響オペレーター", "ライブハウス運営", "コンサート企画", "音楽フェスティバル運営", "音楽イベントプロデューサー", "ウェディング音響", "BGM選曲業", "音楽コーディネーター", "DJイベント主催", "音楽ツアーマネージャー"],
+      "ビジネス系": ["音楽レーベル運営", "音楽出版", "音楽著作権管理", "アーティストマネージャー", "音楽マーケター", "音楽ライター", "音楽評論家", "音楽ジャーナリスト", "音楽ビジネス顧問", "音楽スタートアップ"],
+      "副業向き": ["BGM販売（AudioStock）", "ボイスオーバー受注", "podcast配信", "Spotifyプレイリスト運営", "音楽レッスン（オンライン）", "歌ってみた投稿", "楽曲提供", "効果音販売", "ASMR配信", "音楽ブログ運営"],
+      "意外な適性": ["心理カウンセラー", "営業（声と間が武器）", "高級接客業", "コールセンター（高難度）", "通訳（同時通訳系）", "司会業", "結婚式プランナー", "ホテル支配人", "占い師（声で運命を読む）", "宗教家・牧師"]
+    },
+    sideHustle: {
+      title: "音で月3〜15万円を稼ぐ最短ルート",
+      steps: [
+        "STEP 1: AudioStock・Pondで自作BGMを販売（月¥1〜3万円が現実圏）",
+        "STEP 2: podcast配信を週1で続け、リスナー1000人を目指す",
+        "STEP 3: ココナラでナレーション・ボイスオーバー受注",
+        "STEP 4: 楽曲制作の受注（同人ゲーム・YouTuber向け、1曲¥1〜5万円）",
+        "STEP 5: SpotifyやYouTubeでオリジナル楽曲を配信",
+        "STEP 6: 企業BGM・CM音楽の受注ルートを開拓（月10万円超も可能）"
+      ]
+    },
+    relationship: {
+      title: "音に鈍感な相手と、どう関わるか",
+      body: "あなたが特に違和感を持つのは、「論理数学的知能」が高く、「音」「空気」「間」に鈍感な人です。彼らは正論を言いますが、場の温度を下げます。\n\n対応のコツは3つ。①あなたが察した「空気」を、相手にも言葉で共有する。②BGM・場所選びを意識的に提案する。③相手の鈍感さを「悪意」ではなく「気づけない」と理解する。\n\n逆にあなたが論理派から学べるのは、「感じたこと」を構造化する力。空気の悪さを「3つの要因」に分解できると、ただの感性派から、組織を動かせる感性派へ進化します。"
+    }
+  },
+
+  bodily: {
+    deepDive: {
+      title: "なぜあなたは「動き」で考えるのか",
+      body: "あなたの脳は、運動野と前頭前野が他の人より太く繋がっています。これにより、思考と身体の動きが分離せず、「動くこと=考えること」になっています。\n\nこれは単にスポーツが得意というレベルではありません。職人の手仕事、料理、楽器演奏、ダンス、演技——身体を通して「言葉にできない知識」を扱える力。これは現代社会で過小評価されがちですが、AI時代に最も価値が上がる才能の一つです。\n\n注意点は、長時間の座学・会議で消耗すること。じっとしていると思考も止まる。立ち会議・歩きながらの読書・スタンディングデスクなど、身体を動かせる環境を整えることで、本来の能力を発揮できます。"
+    },
+    program: [
+      "Day 1-5: 毎朝5分のストレッチ・ヨガを習慣化",
+      "Day 6-10: 新しい身体の動きを1つ試す（ヨガ・ピラティス・武道）",
+      "Day 11-15: 手を使った創作活動を1日30分（料理・工作・園芸）",
+      "Day 16-20: 散歩しながらアイデア出し（25分歩く）",
+      "Day 21-25: 自分の身体の癖・歪みを観察し、整える",
+      "Day 26-30: 1ヶ月で身につけた「身体の感覚」を3つ言語化"
+    ],
+    careers: {
+      "スポーツ系": ["プロアスリート", "スポーツトレーナー", "パーソナルトレーナー", "ヨガインストラクター", "ピラティス講師", "格闘技選手", "ダンサー", "振付師", "スポーツコーチ", "アスレチックトレーナー"],
+      "医療・健康系": ["外科医", "理学療法士", "作業療法士", "鍼灸師", "整体師", "カイロプラクター", "看護師（手技重視）", "助産師", "救急救命士", "義肢装具士"],
+      "職人・ものづくり系": ["大工", "陶芸家", "ガラス工芸家", "革職人", "和菓子職人", "寿司職人", "シェフ", "パティシエ", "鍛冶職人", "宮大工"],
+      "演技・表現系": ["俳優", "舞台俳優", "ミュージカル俳優", "声優（身体表現派）", "パントマイマー", "サーカス芸人", "コメディアン", "アクションスタントマン", "マジシャン", "操り人形師"],
+      "建築・施工系": ["建築職人", "左官", "庭師", "造園家", "石工", "彫刻職人", "舞台美術製作", "現場監督", "リフォーム職人", "建築模型師"],
+      "実技系": ["パイロット", "船長", "鉄道運転士", "シェフ", "ソムリエ（テイスティング)", "バリスタ", "バーテンダー", "美容師", "ヘアスタイリスト", "歯科技工士"],
+      "サービス系": ["介護士", "看護助手", "保育士", "幼稚園教諭", "学童指導員", "障害者支援", "高齢者支援", "ホテルマン", "添乗員", "ツアーガイド"],
+      "新興職業": ["VRトレーナー", "eスポーツコーチ", "オンラインフィットネス講師", "メタバースアバター動作デザイナー", "ロボット動作デザイナー", "モーションキャプチャ役者", "AIフィットネスコーチ", "ホリスティック・コーチ", "オンライン料理講師", "サブスク型パーソナル指導"],
+      "副業向き": ["パーソナルトレーニング", "ヨガ講師", "料理教室", "ハンドメイド販売", "DIY指導", "自宅菜園講師", "整体・マッサージ", "YouTubeでの実演解説", "Instagram運動コンテンツ", "ココナラで技術指導"],
+      "意外な適性": ["手相占い師", "茶道家", "華道家", "書道家", "陶芸家", "農家", "漁師", "酒蔵職人", "蒔絵師", "刀鍛冶"]
+    },
+    sideHustle: {
+      title: "身体で月3〜20万円を稼ぐ最短ルート",
+      steps: [
+        "STEP 1: 自分の得意分野（料理・スポーツ・工芸など）を1つ決める",
+        "STEP 2: Instagram・TikTokで実演動画を毎日投稿（フォロワー3000人目標）",
+        "STEP 3: ストアカ・ココナラで対面/オンライン教室を開設（¥3,000〜¥10,000/回）",
+        "STEP 4: 月10名指導 → 月3〜10万円",
+        "STEP 5: ハンドメイド作品・自家製食品を販売（minne・BASEなど）",
+        "STEP 6: 企業のワークショップ・社内研修を受注（1回¥5〜20万円）"
+      ]
+    },
+    relationship: {
+      title: "頭でっかちな相手と、どう関わるか",
+      body: "あなたが特にイライラするのは、「言語的知能」「論理数学的知能」が高すぎる頭でっかちタイプ。彼らは「動く前に考える」を徹底し、あなたの「動きながら考える」を否定します。\n\n対応のコツは3つ。①「やってみてから話す」を堂々と主張する。②彼らの言葉に対し、行動と結果で応える。③自分の身体感覚を、後から言葉で説明する習慣を持つ。\n\n逆にあなたが頭脳派から学べるのは、「事前準備」の価値。直感だけで動くと再現性が下がるので、計画と振り返りを取り入れると、職人の腕が「教えられる技術」に進化します。"
+    }
+  },
+
+  interpersonal: {
+    deepDive: {
+      title: "なぜあなたは「人」が読めるのか",
+      body: "あなたの脳には、ミラーニューロンと呼ばれる「他人の感情を自分のことのように感じる回路」が、特に発達しています。これは社会的な才能の根源です。\n\nあなたは、相手の表情・声のトーン・姿勢・呼吸の微細な変化を無意識に拾い、その人の感情を瞬時に推測できる。これは営業・教育・カウンセリング・マネジメント、あらゆる「人と関わる仕事」で圧倒的な優位性となります。\n\n注意点は、共感疲労です。他人の感情を吸収しすぎて、自分が空っぽになる。意識的に「他人と切り離す時間」を持つこと、内省的な活動（瞑想・日記）を取り入れることで、長く才能を保てます。"
+    },
+    program: [
+      "Day 1-5: 毎日3人の感情を観察し、メモする（推測でOK）",
+      "Day 6-10: 1日1回、誰かに感謝のメッセージを送る",
+      "Day 11-15: 苦手な相手1人と、5分話す機会を作る",
+      "Day 16-20: 新しいコミュニティに参加（オンラインでもOK）",
+      "Day 21-25: 自分の感情も観察し、1日3回メモする",
+      "Day 26-30: 1ヶ月で築いた人間関係を振り返り、感謝の手紙を1通書く"
+    ],
+    careers: {
+      "対人サービス系": ["営業（特に法人）", "カスタマーサクセス", "コンシェルジュ", "ホテルマン", "客室乗務員", "ツアーガイド", "ウェディングプランナー", "イベントコーディネーター", "コールセンター（高度）", "クレーム対応"],
+      "教育・指導系": ["教師", "保育士", "塾講師", "予備校講師", "コーチ", "メンター", "ファシリテーター", "ワークショップ講師", "幼児教育", "特別支援教育"],
+      "心理・支援系": ["心理カウンセラー", "臨床心理士", "セラピスト", "ソーシャルワーカー", "精神保健福祉士", "産業カウンセラー", "キャリアコンサルタント", "メンタルヘルス支援", "依存症ケア", "家族療法士"],
+      "マネジメント系": ["人事・採用担当", "組織開発", "マネージャー", "プロジェクトマネージャー", "経営者", "CHRO", "労務担当", "社内コミュニケーション", "ダイバーシティ推進", "サクセッションプランナー"],
+      "メディア系": ["プロデューサー", "司会者", "アナウンサー", "インタビュアー", "ドキュメンタリー制作", "ライター（人物取材）", "MC", "ファシリテーター", "podcasterのホスト", "YouTuberのインタビュー枠"],
+      "ビジネス系": ["コンサルタント（人系）", "BizDev", "PR担当", "広報担当", "ブランドアンバサダー", "コミュニティマネージャー", "顧客分析", "営業企画", "ステークホルダー対応", "渉外担当"],
+      "医療・福祉系": ["看護師", "介護福祉士", "医療ソーシャルワーカー", "保健師", "助産師", "リハビリ専門士", "栄養士（カウンセリング寄り）", "ピアサポーター", "終末期ケア", "障害者支援"],
+      "新興職業": ["コミュニティビルダー", "オンラインサロン主宰", "Discordサーバー運営", "AIアシスタントの感情設計", "顧客体験設計（CX）", "オンラインメンター", "ヘルスケアコーチ", "ライフコーチ", "起業家コーチ", "婚活コンサルタント"],
+      "副業向き": ["コーチング", "コンサルティング", "SNSコミュニティ運営", "イベント主催", "メンタリング", "人材紹介", "婚活支援", "オンラインサロン", "1on1セッション", "対話型ワークショップ"],
+      "意外な適性": ["占い師（タロット・対面型）", "心理ホラー作家", "詐欺対策アドバイザー", "ネゴシエーター", "国際交渉官", "外交官", "宗教家", "葬儀社", "結婚相談所", "ボディランゲージ解読家"]
+    },
+    sideHustle: {
+      title: "対人力で月5〜30万円を稼ぐ最短ルート",
+      steps: [
+        "STEP 1: 自分の得意分野（恋愛・キャリア・子育てなど）を1つ決める",
+        "STEP 2: SNSで日々の気づきを発信、フォロワー2000人を目指す",
+        "STEP 3: ココナラ・MENTAで個別コーチング受注（¥3,000〜¥10,000/回）",
+        "STEP 4: 月10名のクライアント → 月3〜10万円",
+        "STEP 5: オンラインサロン（¥1,000/月）を立ち上げ、100名集客で月10万円",
+        "STEP 6: 企業向け研修・コーチング契約（1回¥10〜30万円）"
+      ]
+    },
+    relationship: {
+      title: "感情に冷たい相手と、どう関わるか",
+      body: "あなたが特に傷つくのは、「論理数学的知能」「内省的知能」が高く、対人コミュニケーションに無関心なタイプ。彼らは悪気なく、あなたの感情を「ノイズ」として扱います。\n\n対応のコツは3つ。①彼らの「冷たさ」を「敵意」と勘違いしない。②感情ではなく、データと事実で会話する練習。③彼らはあなたを尊敬していても、それを表現しないだけと信じる。\n\n逆にあなたが内省派から学べるのは、「他人ではなく自分と向き合う時間」の価値。共感疲労を防ぐためにも、内省的な習慣はあなたの長期的な健康に必須です。"
+    }
+  },
+
+  intrapersonal: {
+    deepDive: {
+      title: "なぜあなたは「自分」を深く知れるのか",
+      body: "あなたの脳は、デフォルト・モード・ネットワーク（自分について考える時に活性化する脳の回路）が他の人より発達しています。これは「自分自身を観察する」能力の生物学的な基盤です。\n\nあなたは、自分の感情・動機・矛盾を客観的に観察できる稀な存在です。SNSの流行、他人の評価、時代の風潮——これらに振り回されず、自分の軸で判断できる。これは現代において、最も希少で価値の高い才能です。\n\n注意点は、「考えすぎて動けなくなる」傾向。内省は強みですが、行動と組み合わせて初めて成果になります。「思考7：行動3」を「思考5：行動5」に寄せることが、才能を世に届ける鍵です。"
+    },
+    program: [
+      "Day 1-5: 毎日5分のジャーナリング（手書き推奨）",
+      "Day 6-10: 自分の感情の波を3つに分類して観察",
+      "Day 11-15: 「自分が本当にしたいこと」を毎日1つ書き出す",
+      "Day 16-20: 短い瞑想（10分）を毎日続ける",
+      "Day 21-25: 自分の価値観を5つの言葉で表現する",
+      "Day 26-30: 1ヶ月の自分の変化を、1000字のエッセイにまとめる"
+    ],
+    careers: {
+      "創作・表現系": ["作家", "詩人", "エッセイスト", "ノンフィクション作家", "脚本家", "コラムニスト", "哲学者", "思想家", "評論家", "批評家"],
+      "心理・支援系": ["心理カウンセラー", "臨床心理士", "セラピスト", "コーチ", "メンター", "瞑想指導者", "マインドフルネス講師", "スピリチュアルカウンセラー", "ホリスティックヘルスコーチ", "ライフコーチ"],
+      "学術・研究系": ["哲学者", "宗教学者", "心理学者", "文化人類学者", "歴史学者", "教育学者", "研究者全般", "大学教授", "シンクタンク", "リサーチャー"],
+      "経営・起業系": ["起業家", "経営者", "個人事業主", "プロフェッショナルフリーランス", "ビジョナリーリーダー", "CXO", "経営コンサル", "事業企画", "戦略家", "プロデューサー"],
+      "メディア系": ["編集者", "雑誌編集長", "ドキュメンタリー制作", "podcaster", "noteクリエイター", "オンライン講師", "オンライン記事ライター", "ブロガー", "YouTuber（思想系）", "ニュースレター作家"],
+      "教育系": ["教師（思想を教える）", "予備校講師", "オンライン講師", "大学教員", "教育コンサルタント", "教育プログラム開発", "リベラルアーツ", "哲学カフェ主宰", "読書会主宰", "学習支援"],
+      "宗教・スピリチュアル系": ["僧侶", "牧師", "神父", "シャーマン", "占い師", "霊媒師", "瞑想指導者", "宗教研究者", "新興宗教家（注意）", "宗教コラムニスト"],
+      "新興職業": ["AIファースト・ライター", "オンラインコーチ", "デジタルクリエイター", "ニュースレター運営", "サブスタック作家", "オーディオブック作家", "ボイスメモリスト", "デジタルノマド", "メタバース哲学者", "AIプロンプター（思想設計）"],
+      "副業向き": ["note・ブログ運営", "コーチング・カウンセリング", "ジャーナリングワークショップ", "瞑想ワークショップ", "電子書籍出版", "メンタリング", "オンラインサロン", "ニュースレター発行", "podcast配信", "自伝的コンテンツ販売"],
+      "意外な適性": ["占い師（哲学派）", "葬儀社のグリーフケア", "ホスピスのカウンセラー", "刑務所の更生支援", "禅僧", "離島の暮らし", "山小屋の管理人", "孤独な作家業", "登山ガイド", "巡礼者"]
+    },
+    sideHustle: {
+      title: "内省力で月3〜20万円を稼ぐ最短ルート",
+      steps: [
+        "STEP 1: noteで自分の内面・気づきを週2本書く",
+        "STEP 2: 半年で100本貯まったら、有料noteマガジン化（¥500/月）",
+        "STEP 3: ココナラで1on1カウンセリング・コーチング受注",
+        "STEP 4: 月5名のクライアント（¥10,000/回）→ 月5万円",
+        "STEP 5: 電子書籍を1冊出版（Kindle Direct Publishing）",
+        "STEP 6: オンラインサロン・ニュースレターで継続収入を構築"
+      ]
+    },
+    relationship: {
+      title: "賑やかな相手と、どう関わるか",
+      body: "あなたが特に消耗するのは、「対人的知能」「身体運動的知能」が高い行動派・賑やか派。彼らは「今すぐ動く」「みんなで話そう」を好み、あなたの「ひとりで考えたい」を理解しません。\n\n対応のコツは3つ。①あなたの「ひとり時間」を堂々と確保し、説明する。②彼らとは深い1対1の対話で繋がる（飲み会・大人数は避ける）。③彼らの「行動の速さ」を、あなたの「思考の深さ」と組み合わせると無敵。\n\n逆にあなたが行動派から学べるのは、「考える前にやってみる」スピード感。思考7行動3を行動5にできれば、内省的な才能が世界に届きます。"
+    }
+  },
+
+  naturalist: {
+    deepDive: {
+      title: "なぜあなたは「違い」が見えるのか",
+      body: "あなたの脳は、視覚的・分類的な情報処理に特化しています。これはダーウィンやアリストテレスのような博物学者たちの脳と同じ特徴です。\n\nあなたは、似たもの同士の微細な違いを瞬時に見分け、整理し、体系化する才能を持っています。これは自然界の生物だけでなく、データ・商品・情報・コレクション——分類できるあらゆるものに発揮されます。情報過多な現代において、整理する力は最も価値の高いスキルの一つです。\n\n注意点は、「分類すること自体に時間を使いすぎて、アウトプットが遅れる」傾向。8割でも公開する勇気を持つことで、あなたの整理力が世に届きます。"
+    },
+    program: [
+      "Day 1-5: 毎日1つ、植物・動物・物事を観察し記録する",
+      "Day 6-10: 自分のコレクション（写真・本・物）を整理する",
+      "Day 11-15: 興味のあるテーマで「分類体系」を1つ作る",
+      "Day 16-20: 自然のある場所に週1回30分以上滞在",
+      "Day 21-25: データベース・スプレッドシートで情報を体系化",
+      "Day 26-30: 1ヶ月で整理した知識を、図鑑形式で1ページにまとめる"
+    ],
+    careers: {
+      "自然科学系": ["生物学者", "植物学者", "動物学者", "海洋生物学者", "昆虫学者", "鳥類学者", "古生物学者", "地質学者", "気象学者", "天文学者"],
+      "農業・園芸系": ["農家（高度）", "果樹園経営", "園芸家", "造園家", "盆栽家", "種苗業", "養蜂家", "ハーブ農園", "オーガニックファーマー", "アクアポニックス"],
+      "獣医・畜産系": ["獣医", "動物園飼育員", "水族館飼育員", "野生動物保護", "動物行動学者", "ペットトレーナー", "牧場主", "畜産業", "動物リハビリ", "動物セラピスト"],
+      "環境系": ["環境コンサルタント", "環境ジャーナリスト", "サステナビリティ担当", "ESG担当", "森林管理", "国立公園レンジャー", "野生生物保護", "海洋環境", "再生エネルギー", "気候変動研究"],
+      "整理・分類系": ["図書館員", "アーキビスト", "学芸員", "博物館研究員", "美術館キュレーター", "データキュレーター", "情報アーキテクト", "分類学者", "編集者（百科事典）", "資料管理"],
+      "食・料理系": ["シェフ（食材重視）", "ソムリエ", "茶葉鑑定士", "コーヒー鑑定士", "酒鑑定士（日本酒・ワイン）", "オーガニックフードバイヤー", "農産物バイヤー", "発酵食品研究", "薬膳料理人", "食文化研究"],
+      "ビジネス・コンサル系": ["商品バイヤー", "MD（マーチャンダイザー）", "アンティーク鑑定士", "宝石鑑定士", "美術品鑑定士", "アパレルプレス", "コレクター", "ヴィンテージディーラー", "オークショニア", "目利き"],
+      "新興職業": ["データキュレーター", "AIトレーニング用データ整理", "NFT・デジタル資産整理", "サブスク型商品キュレーター", "Pinterestキュレーター", "ニッチ分野データベース運営", "コミュニティ図書館", "サステナブル商品認証", "リサイクル鑑定", "アップサイクル"],
+      "副業向き": ["情報まとめサイト運営", "コレクション販売", "ガーデニング講師", "植物コンサル", "Notion・データベース構築受注", "ニッチ分野の解説note", "図鑑形式コンテンツ", "Pinterest運営", "ヴィンテージ販売", "古書店オンライン"],
+      "意外な適性": ["古美術鑑定士", "盆栽家", "茶道家", "華道家", "風水師", "占星術師（星座のパターン）", "考古学者", "歴史家（家系図系）", "音楽分析家（ジャンル分類）", "ファッション史家"]
+    },
+    sideHustle: {
+      title: "整理力で月3〜15万円を稼ぐ最短ルート",
+      steps: [
+        "STEP 1: 興味のあるニッチ分野を1つ決め、SNSで発信",
+        "STEP 2: Pinterest・Instagramで「図鑑」「コレクション」アカウントを運営",
+        "STEP 3: noteでニッチ分野の図鑑コンテンツを販売（¥500〜¥3,000）",
+        "STEP 4: ココナラでNotionテンプレート・データベース構築受注",
+        "STEP 5: ヴィンテージ・コレクション品を仕入れ・販売",
+        "STEP 6: ニッチ分野のオンライン講師・コンサルタントへ進化"
+      ]
+    },
+    relationship: {
+      title: "ざっくり派と、どう関わるか",
+      body: "あなたが特にストレスを感じるのは、「身体運動的知能」「対人的知能」が高い、勢いとノリで動くタイプ。彼らは細かな違いに無頓着で、あなたの「分類してから決める」を「めんどくさい」と感じます。\n\n対応のコツは3つ。①最初に「結論3択」を提示する。②全パターンを説明せず、相手に必要な情報だけ絞る。③彼らの「ざっくり判断のスピード」を学ぶ。\n\n逆にあなたが勢い派から学べるのは、「とりあえずやってみる」軽やかさ。整理が完璧になるまで動かない癖を直すと、あなたのコレクション・分類が、世の中の役に立ち始めます。"
+    }
+  }
+};
+
+
 // ============ CHARACTER SYMBOLS (知性別の浮遊シンボル) ============
 const CHARACTER_SYMBOLS = {
   linguistic:    ['📜', '✒', 'A', '𝔄', '¶'],
@@ -2905,6 +4017,90 @@ const CHARACTER_SYMBOLS = {
   interpersonal: ['♡', '✧', '◯', '❀', '✤'],
   intrapersonal: ['◯', '☯', '✦', '❍', '⊙'],
   naturalist:    ['❋', '✿', '❀', '❁', '✺']
+};
+
+// ============ 同じMIタイプの著名人データ ============
+const FAMOUS_PEOPLE = {
+  linguistic: [
+    { name: "夏目漱石",        era: "historic", note: "日本語の繊細さと人間の内面を余すことなく描いた、明治の文豪。" },
+    { name: "シェイクスピア",   era: "historic", note: "人間の感情のすべてを言葉に封じ込めた、史上最大の劇作家。" },
+    { name: "村上春樹",        era: "historic", note: "独自の比喩と文体で世界を魅了し続ける、現代日本を代表する作家。" },
+    { name: "マヤ・アンジェロウ", era: "historic", note: "詩と自伝で人権運動を動かした、20世紀アメリカの声。" },
+    { name: "又吉直樹",        era: "modern",   note: "芥川賞作家にして芸人。日常の言葉を詩にする類稀な才能。" },
+    { name: "宇多田ヒカル",    era: "modern",   note: "歌詞の言語感覚が圧倒的。日本語の可能性を広げたアーティスト。" },
+    { name: "星野源",          era: "modern",   note: "音楽・文章・演技と多面的に言葉を操るマルチクリエイター。" },
+    { name: "ジェイ・Z",       era: "modern",   note: "ラップを詩の領域に引き上げた。言葉で帝国を築いたビジネスマン。" }
+  ],
+  logical: [
+    { name: "アルベルト・アインシュタイン", era: "historic", note: "相対性理論で宇宙の構造を書き換えた、20世紀最大の物理学者。" },
+    { name: "レオナルド・ダ・ヴィンチ",    era: "historic", note: "芸術と科学を一体で考えた、ルネサンスが生んだ天才。" },
+    { name: "ソクラテス",      era: "historic", note: "問答によって真理を追求した、西洋哲学の父。" },
+    { name: "アダム・スミス",  era: "historic", note: "市場の仕組みを論理的に解き明かし、経済学という学問を創った。" },
+    { name: "イーロン・マスク", era: "modern",  note: "第一原理思考で電気自動車と宇宙産業を同時に変革した起業家。" },
+    { name: "ビル・ゲイツ",    era: "modern",   note: "論理的思考でソフトウェア産業を創造し、慈善活動でも世界を動かす。" },
+    { name: "ひろゆき",        era: "modern",   note: "論理と詭弁を駆使して議論を制する、インターネット世代の論客。" },
+    { name: "落合陽一",        era: "modern",   note: "デジタルネイチャーを提唱。計算と魔術を架橋する現代の魔法使い。" }
+  ],
+  spatial: [
+    { name: "パブロ・ピカソ",   era: "historic", note: "キュビズムで視覚の常識を壊した、20世紀最大の美術家。" },
+    { name: "安藤忠雄",        era: "historic", note: "コンクリートと光で空間の詩を書く、世界が認めた日本の建築家。" },
+    { name: "フリーダ・カーロ", era: "historic", note: "鮮烈な色彩と構図で内面世界を可視化した、メキシコの天才画家。" },
+    { name: "レオナルド・ダ・ヴィンチ", era: "historic", note: "解剖学・工学・絵画を統合し、空間を多角的に見抜いた万能人。" },
+    { name: "佐藤可士和",      era: "modern",   note: "ユニクロや楽天のブランドを視覚言語で再構築した国民的デザイナー。" },
+    { name: "宮崎駿",          era: "modern",   note: "頭の中の映像を手描きで紙に落とす。アニメーションの神様。" },
+    { name: "新海誠",          era: "modern",   note: "「光の表現」で日本アニメの映像美を塗り替えた映像作家。" },
+    { name: "ヴァージル・アブロー", era: "modern", note: "ファッションと建築を横断し、視覚でカルチャーを動かしたデザイナー。" }
+  ],
+  musical: [
+    { name: "ルートヴィヒ・ヴァン・ベートーヴェン", era: "historic", note: "聴力を失いながら交響曲第九番を完成させた、不屈の作曲家。" },
+    { name: "モーツァルト",     era: "historic", note: "5歳で作曲を始め、35年の生涯で600曲以上を残した神童。" },
+    { name: "マイルス・デイヴィス", era: "historic", note: "ジャズを5度変革した。音の間（ま）を音楽にした革命家。" },
+    { name: "ボブ・ディラン",   era: "historic", note: "ロックにノーベル文学賞をもたらした、音楽と詩の融合者。" },
+    { name: "Ado",             era: "modern",   note: "圧倒的な声域と表現力で顔出しなしに世界を席巻したシンガー。" },
+    { name: "坂本龍一",        era: "modern",   note: "音楽・映画・環境活動を横断した、日本が誇る音楽の哲人。" },
+    { name: "ビョーク",        era: "modern",   note: "音の実験と感情表現の極致。音楽の可能性を常に更新するアイスランドの鬼才。" },
+    { name: "藤井聡太(将棋から類推)", era: "modern", note: "直感と論理が音楽的なリズムで合体した思考法の持ち主。" }
+  ],
+  bodily: [
+    { name: "大谷翔平",        era: "modern",   note: "投打二刀流で野球の常識を書き換えた、令和最大のアスリート。" },
+    { name: "ブルース・リー",   era: "historic", note: "武道を哲学と融合し、身体表現で世界を変えたカルチャーアイコン。" },
+    { name: "チャーリー・チャップリン", era: "historic", note: "身体だけで喜びと悲しみを表現した、映画史上最大のパフォーマー。" },
+    { name: "マルセル・マルソー", era: "historic", note: "無言の身体で最も深いドラマを語った、20世紀最高のマイム師。" },
+    { name: "羽生結弦",        era: "modern",   note: "氷上で芸術と競技を統合した、フィギュアスケートの最高峰。" },
+    { name: "三浦知良",        era: "modern",   note: "57歳でも現役を続ける身体と意志の持ち主。日本サッカーの象徴。" },
+    { name: "ジャッキー・チェン", era: "modern", note: "アクションをアートに昇華させた、身体表現の天才。" },
+    { name: "白鵬",            era: "modern",   note: "45回の幕内優勝。身体の細部まで制御する、技術と精神の横綱。" }
+  ],
+  interpersonal: [
+    { name: "マザー・テレサ",   era: "historic", note: "貧者への無償の愛で世界を動かした、20世紀最大の人道主義者。" },
+    { name: "マハトマ・ガンジー", era: "historic", note: "人の心を非暴力で変え、インド独立を成し遂げた精神的指導者。" },
+    { name: "マーティン・ルーサー・キング", era: "historic", note: "言葉と共感で公民権運動を牽引したアメリカの良心。" },
+    { name: "スティーヴ・ジョブズ", era: "historic", note: "人の欲求を先読みし、製品で時代の感情を動かしたカリスマ。" },
+    { name: "前田裕二",        era: "modern",   note: "SHOWROOMで人のつながりを経済化した、熱狂の設計者。" },
+    { name: "オプラ・ウィンフリー", era: "modern", note: "対話の力で世界中の人を癒し、動かしてきたメディアの女王。" },
+    { name: "澤穂希",          era: "modern",   note: "チームの感情を読み、一致団結で世界を頂点に導いたキャプテン。" },
+    { name: "孫正義",          era: "modern",   note: "ビジョンと情熱で人を巻き込み続ける、日本最大のビジョナリー。" }
+  ],
+  intrapersonal: [
+    { name: "フリードリヒ・ニーチェ", era: "historic", note: "自己の深淵を見つめ、神の死と超人を問い続けた哲学者。" },
+    { name: "マルクス・アウレリウス", era: "historic", note: "ローマ皇帝でありながら毎朝内省し、「自省録」を残したストア哲学者。" },
+    { name: "河合隼雄",        era: "historic", note: "日本人の無意識を探求した心理学者。内側への旅を案内し続けた。" },
+    { name: "エミリー・ディキンソン", era: "historic", note: "孤独の中で1800篇の詩を書き続けた、内省の詩人。" },
+    { name: "梅原猛",          era: "modern",   note: "哲学と日本文化の深層を独自に掘り下げた、日本の知の巨人。" },
+    { name: "池田晶子",        era: "modern",   note: "「14歳からの哲学」で自己を問い続けることを説いた哲学エッセイスト。" },
+    { name: "ビル・ゲイツ",    era: "modern",   note: "年2回の「Think Week」に一人こもる、深い自己対話の実践者。" },
+    { name: "嵐の相葉雅紀",    era: "modern",   note: "場の空気を内側で感じ取り、静かに周囲を包む共感の人。" }
+  ],
+  naturalist: [
+    { name: "チャールズ・ダーウィン", era: "historic", note: "自然の細部を観察し続け、進化論で生命の歴史を書き換えた博物学者。" },
+    { name: "ジャン＝アンリ・ファーブル", era: "historic", note: "昆虫の生態を生涯かけて記録した「昆虫記」の著者。観察の哲人。" },
+    { name: "南方熊楠",        era: "historic", note: "粘菌から民俗学まで、森羅万象を蒐集・分類した日本最大の博物学者。" },
+    { name: "レイチェル・カーソン", era: "historic", note: "「沈黙の春」で環境問題に警鐘を鳴らした、自然の語り部。" },
+    { name: "さかなクン",      era: "modern",   note: "魚への純粋な愛と観察眼で、魚類学者・アーティストとして輝く。" },
+    { name: "池上彰",          era: "modern",   note: "複雑な情報を整理・分類し、誰にでも分かる形に変換するプロ。" },
+    { name: "デビッド・アッテンボロー", era: "modern", note: "自然界のすべてを敬い、映像で世界に伝え続ける自然の証人。" },
+    { name: "養老孟司",        era: "modern",   note: "虫と人間と社会を同じ目線で観察し続ける解剖学者・思想家。" }
+  ]
 };
 
 function setCharacterSymbols(key) {
@@ -3811,6 +5007,12 @@ function _showResultInner() {
   state.currentMission = pickMission(top1);
   document.getElementById('missionText').textContent = '“ ' + state.currentMission + ' ”';
 
+  // Premium report preview
+  renderPremiumPreview(top1);
+
+  // Famous people
+  renderFamousPeople(top1);
+
   // Update URL hash with scores for sharing
   updateShareableURL(scores);
 
@@ -3818,6 +5020,86 @@ function _showResultInner() {
 
   // If user came in via match link, automatically show match result
   maybeShowPendingMatch();
+}
+
+// ============ FAMOUS PEOPLE ============
+function renderFamousPeople(key) {
+  const container = document.getElementById('famousSection');
+  if (!container) return;
+  const people = FAMOUS_PEOPLE[key];
+  if (!people) return;
+
+  container.innerHTML = `
+    <p class="famous-intro">— あなたと同じ才能の系譜を持つ人たち —</p>
+    <div class="famous-grid" id="famousGrid">
+      ${people.map((p, i) => `
+        <div class="famous-card" style="transition-delay: ${i * 80}ms;">
+          <div class="famous-era">${p.era === 'historic' ? '⌛' : '✦'}</div>
+          <div class="famous-body">
+            <div class="famous-name">${p.name}</div>
+            <div class="famous-note">${p.note}</div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  // IntersectionObserver でスクロール時にカードを順番に表示
+  const cards = container.querySelectorAll('.famous-card');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  cards.forEach(card => observer.observe(card));
+}
+
+// ============ PREMIUM REPORT ============
+function renderPremiumPreview(key) {
+  const report = PREMIUM_REPORT[key];
+  if (!report) return;
+
+  document.getElementById('premiumPreviewLabel').textContent =
+    '— Section 01 of 07 · Deep Dive —';
+  document.getElementById('premiumPreviewHeadline').textContent =
+    report.deepDive.title;
+  document.getElementById('premiumPreviewText').textContent =
+    report.deepDive.body;
+}
+
+function onPremiumInterest() {
+  const btn = document.querySelector('.premium-buy-btn');
+  if (!btn || btn.classList.contains('clicked')) return;
+
+  // ボタンを「興味あり登録済み」状態に
+  btn.classList.add('clicked');
+  btn.innerHTML = '<span class="premium-buy-icon">✓</span><span>ご興味ありがとうございます</span>';
+
+  // ローカルに記録（需要検証用）
+  try {
+    const log = JSON.parse(localStorage.getItem('jibumato_premium_interest') || '[]');
+    log.push({
+      timestamp: Date.now(),
+      top1: state.top1,
+      top2: state.top2,
+      top3: state.top3
+    });
+    localStorage.setItem('jibumato_premium_interest', JSON.stringify(log));
+  } catch (e) { /* ignore */ }
+
+  showToast('「興味あり」をカウントしました。サービス開始まで、もう少しお待ちください。', 4000);
+
+  // 3秒後にメッセージ表示
+  setTimeout(() => {
+    const note = document.querySelector('.premium-note');
+    if (note) {
+      note.innerHTML = '✦ サービス開始時、ご登録のメールアドレスに先行案内をお送りします。<br>準備が整い次第お知らせします。';
+      note.style.color = 'rgba(212,173,94,0.85)';
+    }
+  }, 800);
 }
 
 // ============ RADAR CHART ============
@@ -4705,35 +5987,60 @@ function renderMatchResult(myScores, friendScores) {
   const myTop3 = mySorted.slice(0, 3);
   const friendTop3 = friendSorted.slice(0, 3);
   const myBottom3 = mySorted.slice(-3);
+  const friendBottom3 = friendSorted.slice(-3);
 
   // Common strengths
   const common = myTop3.filter(k => friendTop3.includes(k));
   // Complementary: my weakness covered by friend's strength
   const covered = myBottom3.filter(k => friendTop3.includes(k));
+  // What I give to friend (friend's weakness covered by my strength)
+  const giving = friendBottom3.filter(k => myTop3.includes(k));
 
-  // Score (0-100)
+  // 総合スコア (0-100)
   let score = 50;
-  score += covered.length * 12;     // 補完が多いほどプラス
-  score += common.length * 6;       // 共通もある程度プラス
-  // 全体相関(差が小さければ似ている)
+  score += covered.length * 12;
+  score += common.length * 6;
   const diffs = KEYS.map(k => Math.abs(myScores[k] - friendScores[k]));
   const avgDiff = diffs.reduce((a,b)=>a+b,0) / 8;
-  // 差が0でも100でもなく適度なバラつきが理想
   const idealDiff = 20;
   const diffPenalty = Math.abs(avgDiff - idealDiff) * 0.3;
   score -= diffPenalty;
   score = Math.max(20, Math.min(98, Math.round(score)));
 
-  // Build characters
+  // ===== 3カテゴリ別の相性スコア =====
+  // ビジネスパートナーとしての相性：補完性を重視
+  let businessScore = 50 + covered.length * 14 + giving.length * 6 + common.length * 3;
+  // ロジカル+対人のいずれかが片方にあるとプラス
+  const hasLogical = myTop3.includes('logical') || friendTop3.includes('logical');
+  const hasInter = myTop3.includes('interpersonal') || friendTop3.includes('interpersonal');
+  if (hasLogical) businessScore += 5;
+  if (hasInter) businessScore += 5;
+  businessScore = Math.max(25, Math.min(98, Math.round(businessScore)));
+
+  // 友達としての相性：共通性とバランスを重視
+  let friendScoreVal = 50 + common.length * 10 + covered.length * 4;
+  // 差分が適度（15-30）が理想
+  if (avgDiff >= 12 && avgDiff <= 32) friendScoreVal += 8;
+  friendScoreVal = Math.max(25, Math.min(98, Math.round(friendScoreVal)));
+
+  // 恋愛の相性：補完性 + 内省 + 対人
+  let loveScore = 50 + covered.length * 11 + common.length * 5;
+  const hasIntra = myTop3.includes('intrapersonal') || friendTop3.includes('intrapersonal');
+  const hasMusical = myTop3.includes('musical') || friendTop3.includes('musical');
+  if (hasInter) loveScore += 6;
+  if (hasIntra) loveScore += 4;
+  if (hasMusical) loveScore += 4;
+  loveScore = Math.max(25, Math.min(98, Math.round(loveScore)));
+
+  // キャラクター
   const myTalent = TALENT_TYPES[mySorted[0]];
   const friendTalent = TALENT_TYPES[friendSorted[0]];
 
-  // Headline
-  let headline;
-  let comment;
+  // 総合のヘッドライン
+  let headline, comment;
   if (score >= 85) {
     headline = '奇跡の補完関係';
-    comment = `お互いに足りないところを、相手が自然に埋めてくれる関係です。一緒にいると「思考の死角」が見えるようになり、二人で世界の解像度が上がります。チームを組むなら最高クラス。`;
+    comment = `お互いに足りないところを、相手が自然に埋めてくれる関係です。一緒にいると「思考の死角」が見えるようになり、二人で世界の解像度が上がります。`;
   } else if (score >= 70) {
     headline = '頼れるバランス型';
     comment = `共通点と違いがちょうど良いバランスで存在する関係。話していて飽きず、でも意外と気が合う。長く付き合える相性です。`;
@@ -4748,18 +6055,93 @@ function renderMatchResult(myScores, friendScores) {
     comment = `驚くほど対照的な才能の組み合わせ。お互いの行動が理解しがたいこともあるけれど、その差こそが宝です。「説明し合う関係」を意識して。`;
   }
 
-  // Detail bullets
-  let details = '<p style="margin-top: 18px; font-size: 13px; line-height: 1.95;">';
-  if (covered.length > 0) {
-    details += `<strong style="color:#d4ad5e;">▎相手が補ってくれる</strong><br>${covered.map(k => INTELLIGENCES[k].name.replace('的知能','')).join('・')}<br><br>`;
-  }
+  // ===== 共通する強みのHTMLを構築 =====
+  let commonHTML;
   if (common.length > 0) {
-    details += `<strong style="color:#d4ad5e;">▎共通する強み</strong><br>${common.map(k => INTELLIGENCES[k].name.replace('的知能','')).join('・')}`;
+    commonHTML = common.map(k => {
+      const name = INTELLIGENCES[k].name.replace('的知能', '');
+      const desc = COMPATIBILITY_LEXICON.common[k];
+      return `
+        <div class="compat-item">
+          <div class="compat-item-label">${name}</div>
+          <div class="compat-item-desc">${desc}</div>
+        </div>
+      `;
+    }).join('');
   } else {
-    details += `<strong style="color:#d4ad5e;">▎共通する強み</strong><br>なし（だからこそ補完しあえる関係です）`;
+    commonHTML = `
+      <div class="compat-item compat-item-empty">
+        <div class="compat-item-desc">TOP3に共通の知能はありません。だからこそ、お互いの違いが新鮮で、補完しあえる関係性です。</div>
+      </div>
+    `;
   }
-  details += '</p>';
 
+  // ===== 相手が補ってくれるHTMLを構築 =====
+  let coveredHTML;
+  if (covered.length > 0) {
+    coveredHTML = covered.map(k => {
+      const name = INTELLIGENCES[k].name.replace('的知能', '');
+      const desc = COMPATIBILITY_LEXICON.complement[k];
+      return `
+        <div class="compat-item">
+          <div class="compat-item-label">${name}</div>
+          <div class="compat-item-desc">${desc}</div>
+        </div>
+      `;
+    }).join('');
+  } else {
+    coveredHTML = `
+      <div class="compat-item compat-item-empty">
+        <div class="compat-item-desc">あなたの弱みを相手のTOP3が直接補う形にはなっていません。ただし、共通の強みで結ばれる関係です。</div>
+      </div>
+    `;
+  }
+
+  // ===== あなたが相手に与えるHTMLを構築 =====
+  let givingHTML;
+  if (giving.length > 0) {
+    givingHTML = giving.map(k => {
+      const name = INTELLIGENCES[k].name.replace('的知能', '');
+      const desc = COMPATIBILITY_LEXICON.complement[k];
+      return `
+        <div class="compat-item">
+          <div class="compat-item-label">${name}</div>
+          <div class="compat-item-desc">${desc}</div>
+        </div>
+      `;
+    }).join('');
+  } else {
+    givingHTML = `
+      <div class="compat-item compat-item-empty">
+        <div class="compat-item-desc">相手の弱みを直接補う形ではありませんが、共通項を通じて関係を深められます。</div>
+      </div>
+    `;
+  }
+
+  // ===== 3カテゴリのコメント =====
+  function getBusinessComment(s) {
+    if (s >= 85) return '理想のビジネスパートナー。お互いの強みが噛み合い、二人で一人前ではなく「一人ずつで二人前」の生産性を発揮できます。';
+    if (s >= 70) return '建設的に動けるチーム。役割分担を意識すれば、安定して成果を出せる関係。';
+    if (s >= 55) return '違いを活かせばパートナーになれる関係。コミュニケーションの「翻訳」を意識すると伸びます。';
+    if (s >= 40) return '同じプロジェクトで動く時は、明確な役割分担が必須。中間に潤滑油役がいるとうまくいきます。';
+    return '価値観が大きく異なるため、ビジネスより個別の協力関係がおすすめ。お互いの領域を侵さないように。';
+  }
+  function getFriendComment(s) {
+    if (s >= 85) return '何時間でも話していられる、稀有な相性。共通の話題から、深い心情まで自然に共有できる関係。';
+    if (s >= 70) return '気軽に会えて、深い話もできる、バランスの取れた友情。長く続く関係になりやすい。';
+    if (s >= 55) return 'ふとした瞬間に「分かる」と思える友達。共有できるテーマを見つけると、絆が深まります。';
+    if (s >= 40) return '違う世界を覗かせてくれる存在。会うたびに発見がある、刺激的な友人関係。';
+    return 'お互いの世界が違いすぎるけど、それを面白がれれば「飽きない」関係。深い付き合いより、ライトな交友がおすすめ。';
+  }
+  function getLoveComment(s) {
+    if (s >= 85) return '深い理解と尊敬で結ばれる関係。お互いを高め合い、長期的に成熟する稀な相性。';
+    if (s >= 70) return '安心感と新鮮さを両立できる関係。日常の中に小さな発見が絶えません。';
+    if (s >= 55) return '時間をかけてお互いを知ることで、深い愛情を育てられる関係。最初の3ヶ月が鍵。';
+    if (s >= 40) return '惹かれあう瞬間と、すれ違う瞬間が交互にやってくる。「相手を変えようとしない」のがコツ。';
+    return '価値観の違いが大きく、深い恋愛関係には努力が必要。友達から始めるのがおすすめ。';
+  }
+
+  // ===== HTML出力 =====
   document.getElementById('matchResult').innerHTML = `
     <div class="match-result-card">
       <div class="match-pair">
@@ -4775,6 +6157,7 @@ function renderMatchResult(myScores, friendScores) {
           <div class="pair-name">${friendTalent.character}</div>
         </div>
       </div>
+
       <div class="match-score-circle">
         <svg viewBox="0 0 100 100" style="width:100%; height:100%;">
           <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(212,173,94,0.2)" stroke-width="3"/>
@@ -4787,15 +6170,104 @@ function renderMatchResult(myScores, friendScores) {
           <span class="pct">COMPATIBILITY</span>
         </div>
       </div>
+
       <div class="match-headline">『${headline}』</div>
-      <p class="match-comment">${comment}${details}</p>
+      <p class="match-comment">${comment}</p>
+
+      <!-- 共通する強み -->
+      <div class="compat-section">
+        <div class="compat-section-label">— 共通する強み —</div>
+        <div class="compat-section-title">二人を結ぶ、似た才能</div>
+        <div class="compat-list">${commonHTML}</div>
+      </div>
+
+      <!-- 相手があなたを補ってくれる -->
+      <div class="compat-section">
+        <div class="compat-section-label">— Complementary · for You —</div>
+        <div class="compat-section-title">相手があなたを補ってくれる</div>
+        <div class="compat-list">${coveredHTML}</div>
+      </div>
+
+      <!-- あなたが相手を補う -->
+      <div class="compat-section">
+        <div class="compat-section-label">— Complementary · for Them —</div>
+        <div class="compat-section-title">あなたが相手に与えるもの</div>
+        <div class="compat-list">${givingHTML}</div>
+      </div>
+
+      <!-- 3つの相性 -->
+      <div class="compat-categories">
+        <div class="compat-categories-label">— Three Dimensions of Connection —</div>
+        <div class="compat-categories-title">三つの関係性で見る</div>
+
+        <div class="compat-cat-item">
+          <div class="compat-cat-head">
+            <div class="compat-cat-icon">✦</div>
+            <div class="compat-cat-name">ビジネスパートナー</div>
+            <div class="compat-cat-score">${businessScore}</div>
+          </div>
+          <div class="compat-cat-bar">
+            <div class="compat-cat-bar-fill" style="width:${businessScore}%;"></div>
+          </div>
+          <p class="compat-cat-desc">${getBusinessComment(businessScore)}</p>
+        </div>
+
+        <div class="compat-cat-item">
+          <div class="compat-cat-head">
+            <div class="compat-cat-icon">♢</div>
+            <div class="compat-cat-name">友達</div>
+            <div class="compat-cat-score">${friendScoreVal}</div>
+          </div>
+          <div class="compat-cat-bar">
+            <div class="compat-cat-bar-fill" style="width:${friendScoreVal}%;"></div>
+          </div>
+          <p class="compat-cat-desc">${getFriendComment(friendScoreVal)}</p>
+        </div>
+
+        <div class="compat-cat-item">
+          <div class="compat-cat-head">
+            <div class="compat-cat-icon">♡</div>
+            <div class="compat-cat-name">恋愛</div>
+            <div class="compat-cat-score">${loveScore}</div>
+          </div>
+          <div class="compat-cat-bar">
+            <div class="compat-cat-bar-fill" style="width:${loveScore}%;"></div>
+          </div>
+          <p class="compat-cat-desc">${getLoveComment(loveScore)}</p>
+        </div>
+      </div>
+
     </div>
   `;
 }
 
-// ===========================================
-// INIT: check URL hash for match mode
-// ===========================================
+// ============ MATCH (相性診断) - 知能別の補完・共通解説データ ============
+const COMPATIBILITY_LEXICON = {
+  // 共通する強みとして持つとどうなるか
+  common: {
+    linguistic:    "言葉のセンスが共通。会話の妙味やニュアンスを共有でき、知的な対話で何時間でも盛り上がれます。",
+    logical:       "論理思考が共通。問題の構造をすぐ共有でき、議論が建設的に進みます。「なぜ?」で深掘りできる関係。",
+    spatial:       "視覚的センスが共通。「あの構図、いいよね」が通じる関係。美的感覚で繋がれます。",
+    musical:       "音や雰囲気への感度が共通。場の空気を同じテンポで読めるので、一緒にいて心地よい。",
+    bodily:        "身体感覚が共通。一緒に何かを「やってみる」関係性に強く、行動で結ばれます。",
+    interpersonal: "対人感度が共通。お互いの感情をすぐ察し合えるので、深い共感関係を築けます。",
+    intrapersonal: "内省力が共通。沈黙の時間も心地よく、お互いの内なる世界を尊重し合えます。",
+    naturalist:    "観察力・分類力が共通。細部の違いを語り合うことに尽きない楽しさを感じる関係。"
+  },
+  // 相手が補ってくれるとどう価値があるか
+  complement: {
+    linguistic:    "あなたが言葉にできない感情・思考を、相手が代弁・整理してくれます。「それそれ!」が頻発する関係。",
+    logical:       "あなたが感覚で動く時、相手が構造化して整理してくれる。曖昧さを論理で支えてくれる頼もしさ。",
+    spatial:       "あなたが言葉で説明に詰まった時、相手が図や全体像で見える化してくれる。情報の翻訳者。",
+    musical:       "あなたが見逃す「場の空気」「人の声色」を、相手が察知して教えてくれる繊細なセンサー。",
+    bodily:        "あなたが頭で考えすぎる時、相手が「とりあえずやってみよう」と動かしてくれる行動の起爆剤。",
+    interpersonal: "あなたが見落としがちな人間関係の機微を、相手が拾って関係を整えてくれます。",
+    intrapersonal: "あなたが外に向きすぎる時、相手が「立ち止まろう」と内省の時間をくれる。心の地図役。",
+    naturalist:    "あなたが見落とす細部・違いを、相手が拾い集めて体系化してくれる。情報の整理者。"
+  }
+};
+
+// ============ MATCH関数 ============
 function checkURLHash() {
   const hash = location.hash;
   if (hash.startsWith('#match=')) {
