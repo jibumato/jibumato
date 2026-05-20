@@ -1234,6 +1234,29 @@
     align-items: center;
   }
 
+  .score-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    min-width: 44px;
+  }
+
+  .score-grade {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid;
+    letter-spacing: 0;
+    font-style: normal;
+  }
+
   .score-rank {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
@@ -1833,6 +1856,45 @@
 
   @media (max-width: 520px) {
     .famous-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ============ LANG SWITCHER ============ */
+  .lang-switcher {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 28px 0 12px;
+  }
+
+  .lang-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    padding: 7px 16px;
+    border: 1px solid rgba(15,14,12,0.3);
+    background: transparent;
+    color: rgba(15,14,12,0.5);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .lang-btn.active {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .lang-btn:hover:not(.active) {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+
+  .lang-sep {
+    font-family: 'Cormorant Garamond', serif;
+    color: rgba(15,14,12,0.3);
+    font-size: 14px;
   }
 
   /* ============ MISSION CARD ============ */
@@ -2734,16 +2796,16 @@
   <div class="ornament"></div>
 
   <div class="intelligences-preview-wrap">
-    <div class="intel-hint">▼ タップで詳しい解説 ▼</div>
+    <div class="intel-hint" data-i18n="title.hint">▼ タップで詳しい解説 ▼</div>
     <div class="intelligences-preview">
-      <button class="intel-cell" onclick="openIntelModal('linguistic')"><span class="num">01</span><div class="name">言語</div><span class="en">Linguistic</span></button>
-      <button class="intel-cell" onclick="openIntelModal('logical')"><span class="num">02</span><div class="name">論理数学</div><span class="en">Logical</span></button>
-      <button class="intel-cell" onclick="openIntelModal('spatial')"><span class="num">03</span><div class="name">空間</div><span class="en">Spatial</span></button>
-      <button class="intel-cell" onclick="openIntelModal('musical')"><span class="num">04</span><div class="name">音楽</div><span class="en">Musical</span></button>
-      <button class="intel-cell" onclick="openIntelModal('bodily')"><span class="num">05</span><div class="name">身体運動</div><span class="en">Bodily</span></button>
-      <button class="intel-cell" onclick="openIntelModal('interpersonal')"><span class="num">06</span><div class="name">対人</div><span class="en">Interpersonal</span></button>
-      <button class="intel-cell" onclick="openIntelModal('intrapersonal')"><span class="num">07</span><div class="name">内省</div><span class="en">Intrapersonal</span></button>
-      <button class="intel-cell" onclick="openIntelModal('naturalist')"><span class="num">08</span><div class="name">博物</div><span class="en">Naturalist</span></button>
+      <button class="intel-cell" onclick="openIntelModal('linguistic')"><span class="num">01</span><div class="name" data-i18n="cell.linguistic">言語</div><span class="en">Linguistic</span></button>
+      <button class="intel-cell" onclick="openIntelModal('logical')"><span class="num">02</span><div class="name" data-i18n="cell.logical">論理数学</div><span class="en">Logical</span></button>
+      <button class="intel-cell" onclick="openIntelModal('spatial')"><span class="num">03</span><div class="name" data-i18n="cell.spatial">空間</div><span class="en">Spatial</span></button>
+      <button class="intel-cell" onclick="openIntelModal('musical')"><span class="num">04</span><div class="name" data-i18n="cell.musical">音楽</div><span class="en">Musical</span></button>
+      <button class="intel-cell" onclick="openIntelModal('bodily')"><span class="num">05</span><div class="name" data-i18n="cell.bodily">身体運動</div><span class="en">Bodily</span></button>
+      <button class="intel-cell" onclick="openIntelModal('interpersonal')"><span class="num">06</span><div class="name" data-i18n="cell.interpersonal">対人</div><span class="en">Interpersonal</span></button>
+      <button class="intel-cell" onclick="openIntelModal('intrapersonal')"><span class="num">07</span><div class="name" data-i18n="cell.intrapersonal">内省</div><span class="en">Intrapersonal</span></button>
+      <button class="intel-cell" onclick="openIntelModal('naturalist')"><span class="num">08</span><div class="name" data-i18n="cell.naturalist">博物</div><span class="en">Naturalist</span></button>
     </div>
   </div>
 
@@ -2753,23 +2815,33 @@
     <span>TYPE · MI THEORY</span>
   </div>
 
-  <!-- 途中保存からの再開バナー -->
+  <!-- 言語切り替え -->
+  <div class="lang-switcher">
+    <button class="lang-btn active" data-lang="ja" onclick="setLang('ja')">JA</button>
+    <span class="lang-sep">·</span>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+    <span class="lang-sep">·</span>
+    <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button>
+    <span class="lang-sep">·</span>
+    <button class="lang-btn" data-lang="ko" onclick="setLang('ko')">한국어</button>
+  </div>
+
   <div id="resumeBanner" class="resume-banner" style="display:none;">
-    <div class="resume-banner-label">— Continue Where You Left Off —</div>
+    <div class="resume-banner-label" data-i18n="title.resume.label">— Continue Where You Left Off —</div>
     <div class="resume-banner-text" id="resumeBannerText">— —</div>
     <div class="resume-banner-buttons">
-      <button class="resume-btn primary" onclick="resumeDiagnosis()">続きから再開</button>
-      <button class="resume-btn ghost" onclick="discardSavedAndStart()">最初からやり直す</button>
+      <button class="resume-btn primary" onclick="resumeDiagnosis()" data-i18n="title.resume.btn">続きから再開</button>
+      <button class="resume-btn ghost" onclick="discardSavedAndStart()" data-i18n="title.restart.btn">最初からやり直す</button>
     </div>
   </div>
 
-  <button class="start-btn" id="startButton" onclick="startDiagnosis()">診断をはじめる</button>
+  <button class="start-btn" id="startButton" onclick="startDiagnosis()" data-i18n="title.start">診断をはじめる</button>
 
   <p style="text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; color:rgba(15,14,12,0.5); margin-top:20px;">
     "Each of us has a unique blend of intelligences."<br>— Howard Gardner
   </p>
 
-  <p class="disclaimer">
+  <p class="disclaimer" data-i18n="title.disclaimer">
     本診断は、ハワード・ガードナーの多重知能理論（MI理論）を着想源とした、じぶんマトリクス独自のエンターテインメント診断です。学術的・心理学的な診断や評価を行うものではありません。結果は娯楽・自己理解の参考として、楽しくお使いください。
   </p>
 </section>
@@ -2829,7 +2901,7 @@
     <h2 class="interlude-headline" id="interludeHeadline">— —</h2>
     <p class="interlude-body" id="interludeBody">— —</p>
     <div class="interlude-hint" id="interludeHint">— —</div>
-    <button class="interlude-continue" id="interludeContinue" onclick="continueFromInterlude()">
+    <button class="interlude-continue" id="interludeContinue" onclick="continueFromInterlude()" data-i18n="q.interlude.next">
       次の章へ進む <span style="margin-left:8px;">→</span>
     </button>
   </div>
@@ -2851,8 +2923,8 @@
         </g>
       </svg>
     </div>
-    <h2 id="computingText">あなたの才能を読み解いています...</h2>
-    <p class="computing-text">8つの知性のバランスを解析中。<br>あなたが何者であるかが、いま、浮かび上がります。</p>
+    <h2 id="computingText" data-i18n="computing.title">あなたの才能を読み解いています...</h2>
+    <p class="computing-text" data-i18n="computing.body">8つの知性のバランスを解析中。<br>あなたが何者であるかが、いま、浮かび上がります。</p>
   </div>
 </section>
 
@@ -2944,7 +3016,7 @@
     <div class="character-name-block">
       <div class="character-tagline" id="characterTagline">— —</div>
       <div class="mi-type-prelude">
-        <span class="mi-type-label">あなたの<span class="mi-type-em">MIタイプ</span>は</span>
+        <span class="mi-type-label" data-i18n="result.mi_type">あなたの<span class="mi-type-em">MIタイプ</span>は</span>
         <span class="mi-type-dots">
           <span class="dot">・</span><span class="dot">・</span><span class="dot">・</span>
         </span>
@@ -2956,13 +3028,13 @@
     <div class="talent-divider">✦ ✦ ✦</div>
 
     <div class="talent-subtitle">
-      <span class="talent-subtitle-label">才能タイプ</span>
+      <span class="talent-subtitle-label" data-i18n="result.talent_type">才能タイプ</span>
       <span class="talent-subtitle-name" id="talentName">— —</span>
       <span class="talent-subtitle-en" id="talentEn">— —</span>
     </div>
 
     <div class="compound-banner" id="compoundBanner">
-      <div class="compound-label">— Rare Type · あなたの複合キャラ —</div>
+      <div class="compound-label" data-i18n="result.compound">— Rare Type · あなたの複合キャラ —</div>
       <div class="compound-name" id="compoundName">— —</div>
       <div class="compound-note" id="compoundNote">— —</div>
     </div>
@@ -2973,8 +3045,8 @@
   <!-- レーダーチャート -->
   <div class="section-title">
     <span class="num">I.</span>
-    <h3>知能バランス</h3>
-    <span class="en">Intelligence Map</span>
+    <h3 data-i18n="result.sec1">知能バランス</h3>
+    <span class="en" data-i18n="result.sec1en">Intelligence Map</span>
   </div>
   <div class="radar-container">
     <canvas id="radarChart" width="600" height="600"></canvas>
@@ -2983,16 +3055,16 @@
   <!-- スコアリスト -->
   <div class="section-title">
     <span class="num">II.</span>
-    <h3>8つの知能スコア</h3>
-    <span class="en">Detailed Scores</span>
+    <h3 data-i18n="result.sec2">8つの知能スコア</h3>
+    <span class="en" data-i18n="result.sec2en">Detailed Scores</span>
   </div>
   <div class="scores-list" id="scoresList"></div>
 
   <!-- 同じMIタイプの著名人 -->
   <div class="section-title">
     <span class="num">—</span>
-    <h3>同じMIタイプの人物</h3>
-    <span class="en">People Like You</span>
+    <h3 data-i18n="result.famous">同じMIタイプの人物</h3>
+    <span class="en" data-i18n="result.famous_en">People Like You</span>
   </div>
   <div class="famous-section" id="famousSection"></div>
 
@@ -3006,53 +3078,53 @@
   <!-- TOP3詳細 -->
   <div class="section-title">
     <span class="num">III.</span>
-    <h3>あなたの武器</h3>
-    <span class="en">Your Strengths</span>
+    <h3 data-i18n="result.sec3">あなたの武器</h3>
+    <span class="en" data-i18n="result.sec3en">Your Strengths</span>
   </div>
   <div class="detail-cards" id="topStrengths"></div>
 
   <!-- 弱点 -->
   <div class="section-title">
     <span class="num">IV.</span>
-    <h3>伸びしろの領域</h3>
-    <span class="en">Growth Areas</span>
+    <h3 data-i18n="result.sec4">伸びしろの領域</h3>
+    <span class="en" data-i18n="result.sec4en">Growth Areas</span>
   </div>
   <div class="detail-cards" id="growthArea"></div>
 
   <!-- キャリア -->
   <div class="section-title">
     <span class="num">V.</span>
-    <h3>向いている道</h3>
-    <span class="en">Career & Side Hustle</span>
+    <h3 data-i18n="result.sec5">向いている道</h3>
+    <span class="en" data-i18n="result.sec5en">Career & Side Hustle</span>
   </div>
   <div class="detail-cards" id="careerSection"></div>
 
   <!-- アドバイス -->
   <div class="section-title">
     <span class="num">VI.</span>
-    <h3>これからのために</h3>
-    <span class="en">Advice for You</span>
+    <h3 data-i18n="result.sec6">これからのために</h3>
+    <span class="en" data-i18n="result.sec6en">Advice for You</span>
   </div>
   <div class="detail-cards" id="adviceSection"></div>
 
   <!-- ベストパートナー -->
   <div class="section-title">
     <span class="num">VII.</span>
-    <h3>あなたを補ってくれる人</h3>
-    <span class="en">Best Partner</span>
+    <h3 data-i18n="result.sec7">あなたを補ってくれる人</h3>
+    <span class="en" data-i18n="result.sec7en">Best Partner</span>
   </div>
   <div class="detail-cards" id="partnerSection"></div>
 
   <!-- 今週のミッション -->
   <div class="section-title">
     <span class="num">VIII.</span>
-    <h3>今週のミッション</h3>
-    <span class="en">Weekly Mission</span>
+    <h3 data-i18n="result.mission">今週のミッション</h3>
+    <span class="en" data-i18n="result.mission_en">Weekly Mission</span>
   </div>
   <div class="mission-card" id="missionCard">
-    <div class="mission-label">— This Week's Practice —</div>
+    <div class="mission-label" data-i18n="result.mission_en">— This Week's Practice —</div>
     <div class="mission-text" id="missionText">— —</div>
-    <button class="mission-refresh" onclick="rollMission()">▷ 別のミッションに変える</button>
+    <button class="mission-refresh" onclick="rollMission()" data-i18n="result.mission_refresh">▷ 別のミッションに変える</button>
   </div>
 
   <!-- ============ PREMIUM REPORT (有料拡張レポート) ============ -->
@@ -3063,8 +3135,8 @@
       <span class="premium-badge-mark">✦</span>
     </div>
 
-    <h3 class="premium-title">あなたの才能を、<br>もっと深く知る</h3>
-    <p class="premium-subtitle">
+    <h3 class="premium-title" data-i18n="premium.title">あなたの才能を、<br>もっと深く知る</h3>
+    <p class="premium-subtitle" data-i18n="premium.sub">
       無料診断は、入り口に過ぎません。<br>
       ¥980で、あなただけの「才能の取扱説明書」を解錠できます。
     </p>
@@ -3158,7 +3230,7 @@
 
       <button class="premium-buy-btn" onclick="onPremiumInterest()">
         <span class="premium-buy-icon">✦</span>
-        <span>プレミアムレポートを開く</span>
+        <span data-i18n="premium.btn">プレミアムレポートを開く</span>
       </button>
 
       <p class="premium-note">
@@ -3170,10 +3242,10 @@
 
   <!-- シェア -->
   <div class="share-section">
-    <div class="share-section-label">— Share Your Result —</div>
+    <div class="share-section-label" data-i18n="result.share_label">— Share Your Result —</div>
     <button class="share-btn primary" onclick="downloadResultCard()">
       <span class="share-btn-icon">⬇</span>
-      <span>結果カードを画像で保存</span>
+      <span data-i18n="result.share_img">結果カードを画像で保存</span>
     </button>
     <button class="share-btn" onclick="copyMatchLink()">
       <span class="share-btn-icon">⚭</span>
@@ -3181,7 +3253,7 @@
     </button>
     <button class="share-btn" onclick="shareResult()">
       <span class="share-btn-icon">✦</span>
-      <span>テキストでシェア</span>
+      <span data-i18n="result.share_sns">テキストでシェア</span>
     </button>
     <button class="share-btn ghost" onclick="showGallery()">
       <span class="share-btn-icon">◇</span>
@@ -3189,11 +3261,11 @@
     </button>
     <button class="share-btn ghost" onclick="restart()">
       <span class="share-btn-icon">↻</span>
-      <span>もう一度診断する</span>
+      <span data-i18n="result.back">もう一度診断する</span>
     </button>
   </div>
 
-  <p class="disclaimer">
+  <p class="disclaimer" data-i18n="title.disclaimer">
     本診断は、ハワード・ガードナーの多重知能理論（MI理論）を着想源とした、じぶんマトリクス独自のエンターテインメント診断です。学術的・心理学的な診断や評価を行うものではなく、結果は娯楽・自己理解の参考としてお楽しみください。
   </p>
 
@@ -4631,9 +4703,17 @@ function startDiagnosis() {
 
 function renderQuestion() {
   const idx = state.current;
-  const q = QUESTIONS[idx];
+  const questions = currentLang === 'en' ? QUESTIONS_EN
+                  : currentLang === 'zh' ? QUESTIONS_ZH
+                  : currentLang === 'ko' ? QUESTIONS_KO
+                  : QUESTIONS;
+  const chapters  = currentLang === 'en' ? CHAPTERS_EN
+                  : currentLang === 'zh' ? CHAPTERS_ZH
+                  : currentLang === 'ko' ? CHAPTERS_KO
+                  : CHAPTERS;
+  const q = questions[idx];
   const chapterIdx = getChapterForQuestion(idx);
-  const chapter = CHAPTERS[chapterIdx];
+  const chapter = chapters[chapterIdx];
 
   document.getElementById('qNum').textContent = String(idx + 1).padStart(2, '0');
   document.getElementById('qText').textContent = q.text;
@@ -4641,7 +4721,7 @@ function renderQuestion() {
   document.getElementById('chapterName').textContent = chapter.name;
 
   // 進捗％
-  const pct = Math.round((idx / QUESTIONS.length) * 100);
+  const pct = Math.round((idx / questions.length) * 100);
   document.getElementById('progressPct').textContent = pct + '%';
 
   // 4セグメント進捗バーの更新
@@ -4649,12 +4729,13 @@ function renderQuestion() {
 
   const opts = document.getElementById('optionsList');
   opts.innerHTML = '';
-  ANSWERS.forEach((ans, i) => {
+  const ansLabels = [t('ans.0'), t('ans.1'), t('ans.2'), t('ans.3'), t('ans.4')];
+  ansLabels.forEach((label, i) => {
     const btn = document.createElement('button');
     btn.className = 'option';
     btn.style.animationDelay = (i * 60) + 'ms';
     btn.style.animation = 'slideIn 0.5s ease both';
-    btn.innerHTML = `<span class="option-marker">${['i','ii','iii','iv','v'][i]}</span><span>${ans.label}</span>`;
+    btn.innerHTML = `<span class="option-marker">${['i','ii','iii','iv','v'][i]}</span><span>${label}</span>`;
     btn.onclick = () => answer(i, btn);
     opts.appendChild(btn);
   });
@@ -4697,15 +4778,24 @@ function answer(choiceIndex, btnEl) {
     btnEl.classList.add('tapped');
   }
 
+  const questions = currentLang === 'en' ? QUESTIONS_EN
+                  : currentLang === 'zh' ? QUESTIONS_ZH
+                  : currentLang === 'ko' ? QUESTIONS_KO
+                  : QUESTIONS;
+  const chapters  = currentLang === 'en' ? CHAPTERS_EN
+                  : currentLang === 'zh' ? CHAPTERS_ZH
+                  : currentLang === 'ko' ? CHAPTERS_KO
+                  : CHAPTERS;
+
   // 少し待ってから次の質問へ
   setTimeout(() => {
     const currentChapter = getChapterForQuestion(state.current);
-    const isLastQ = state.current >= QUESTIONS.length - 1;
+    const isLastQ = state.current >= questions.length - 1;
     const nextIdx = state.current + 1;
     const nextChapter = isLastQ ? null : getChapterForQuestion(nextIdx);
 
     // 章が変わるタイミングで節目メッセージを表示（最終章へ移る時を除く）
-    if (!isLastQ && nextChapter !== currentChapter && CHAPTERS[currentChapter].interludeLabel) {
+    if (!isLastQ && nextChapter !== currentChapter && chapters[currentChapter].interludeLabel) {
       // この章は既に表示済みでないか確認
       if (state.lastChapterShown !== currentChapter) {
         state.lastChapterShown = currentChapter;
@@ -4726,7 +4816,11 @@ function answer(choiceIndex, btnEl) {
 }
 
 function showInterlude(chapterIdx) {
-  const ch = CHAPTERS[chapterIdx];
+  const chapters = currentLang === 'en' ? CHAPTERS_EN
+                 : currentLang === 'zh' ? CHAPTERS_ZH
+                 : currentLang === 'ko' ? CHAPTERS_KO
+                 : CHAPTERS;
+  const ch = chapters[chapterIdx];
   document.getElementById('interludeLabel').textContent = ch.interludeLabel;
   document.getElementById('interludeHeadline').textContent = ch.interludeHeadline;
   document.getElementById('interludeBody').textContent = ch.interludeBody;
@@ -4887,12 +4981,23 @@ function _showResultInner() {
   // Radar chart
   drawRadar(scores);
 
+  // ランク判定関数
+  function getScoreRank(val) {
+    if (val >= 88) return { rank: 'S', color: '#b8893a', bg: 'rgba(184,137,58,0.18)' };
+    if (val >= 75) return { rank: 'A', color: '#8a7a3a', bg: 'rgba(138,122,58,0.15)' };
+    if (val >= 60) return { rank: 'B', color: '#5a7a5a', bg: 'rgba(90,122,90,0.15)' };
+    if (val >= 45) return { rank: 'C', color: '#5a6a8a', bg: 'rgba(90,106,138,0.15)' };
+    if (val >= 30) return { rank: 'D', color: 'rgba(15,14,12,0.5)', bg: 'rgba(15,14,12,0.07)' };
+    return              { rank: 'E', color: 'rgba(15,14,12,0.35)', bg: 'rgba(15,14,12,0.05)' };
+  }
+
   // Scores list
   const sl = document.getElementById('scoresList');
   sl.innerHTML = '';
   sorted.forEach((key, i) => {
     const info = INTELLIGENCES[key];
     const val = scores[key];
+    const { rank, color, bg } = getScoreRank(val);
     const item = document.createElement('div');
     item.className = 'score-item';
     item.innerHTML = `
@@ -4901,7 +5006,10 @@ function _showResultInner() {
         <div class="score-name">${info.name} <span class="en">${info.en}</span></div>
         <div class="score-bar"><div class="score-bar-fill" data-val="${val}" style="background:${info.color};"></div></div>
       </div>
-      <span class="score-val">${val}</span>
+      <div class="score-right">
+        <span class="score-grade" style="color:${color}; background:${bg}; border-color:${color};">${rank}</span>
+        <span class="score-val">${val}</span>
+      </div>
     `;
     sl.appendChild(item);
   });
@@ -4922,7 +5030,7 @@ function _showResultInner() {
     const card = document.createElement('div');
     card.className = 'detail-card' + (i === 0 ? ' featured' : '');
     card.innerHTML = `
-      <div class="label">${['Strength I — 主軸の才能', 'Strength II — 補佐の才能', 'Strength III — 隠れた才能'][i]}</div>
+      <div class="label">${[t('result.strength_1'), t('result.strength_2'), t('result.strength_3')][i]}</div>
       <h4>${info.name} <span class="en">${info.en}</span></h4>
       <p>${detail.strength}</p>
     `;
@@ -4934,7 +5042,7 @@ function _showResultInner() {
   const bottomInfo = INTELLIGENCES[bottom];
   ga.innerHTML = `
     <div class="detail-card">
-      <div class="label">Growth Area — もっとも伸びしろのある領域</div>
+      <div class="label">${t('result.growth_label')}</div>
       <h4>${bottomInfo.name} <span class="en">${bottomInfo.en}</span></h4>
       <p>${GROWTH_ADVICE[bottom]}</p>
     </div>
@@ -4955,29 +5063,33 @@ function _showResultInner() {
     careerHTML += '</div>';
 
     card.innerHTML = `
-      <div class="label">${i === 0 ? 'Main — 本職・キャリアの軸に' : 'Sub — 副業・サイドプロジェクトに'}</div>
-      <h4>${info.name}を活かす道 <span class="en">${info.en}</span></h4>
+      <div class="label">${i === 0 ? t('result.career_main') : t('result.career_sub')}</div>
+      <h4>${info.name}${t('result.career_use')} <span class="en">${info.en}</span></h4>
       ${careerHTML}
-      <p style="margin-top:18px;"><strong style="color:${i === 0 ? 'var(--gold-light)' : 'var(--crimson)'}">▎副業のヒント</strong><br>${detail.sideJob}</p>
+      <p style="margin-top:18px;"><strong style="color:${i === 0 ? 'var(--gold-light)' : 'var(--crimson)'}">▎${t('result.side_job_hint')}</strong><br>${detail.sideJob}</p>
     `;
     cs.appendChild(card);
   });
 
   // Advice
   const ad = document.getElementById('adviceSection');
+  const top1Name = INTELLIGENCES[top1].name;
+  const top2ShortName = INTELLIGENCES[top2].name.replace('的知能','').replace(' Intelligence','').replace(' 智能','').replace(' 지능','');
+  const bottomShortName = INTELLIGENCES[bottom].name.replace('的知能','').replace(' Intelligence','').replace(' 智能','').replace(' 지능','');
+  const top1ShortName = INTELLIGENCES[top1].name.replace('的知能','').replace(' Intelligence','').replace(' 智能','').replace(' 지능','');
   ad.innerHTML = `
     <div class="detail-card featured">
-      <div class="label">Advice — ${INTELLIGENCES[top1].name}を磨くために</div>
-      <h4>あなたへの処方箋 <span class="en">For Your Growth</span></h4>
+      <div class="label">${t('result.advice_label').replace('{name}', top1Name)}</div>
+      <h4>${t('result.advice_title')} <span class="en">For Your Growth</span></h4>
       <p>${INTELLIGENCE_DETAILS[top1].advice}</p>
     </div>
     <div class="detail-card">
-      <div class="label">Daily — 才能を日常で開く3つの習慣</div>
-      <h4>明日から始められること <span class="en">Daily Habits</span></h4>
+      <div class="label">${t('result.daily_label')}</div>
+      <h4>${t('result.daily_title')} <span class="en">Daily Habits</span></h4>
       <ul>
-        <li>1日5分、自分の${INTELLIGENCES[top1].name.replace('的知能','')}が活きた瞬間をメモする</li>
-        <li>${INTELLIGENCES[top2].name.replace('的知能','')}の領域に週1回、意識的に時間を割く</li>
-        <li>${INTELLIGENCES[bottom].name.replace('的知能','')}を恐れず、苦手のままにせず、小さく触れ続ける</li>
+        <li>${t('result.daily_1').replace('{name}', top1ShortName)}</li>
+        <li>${t('result.daily_2').replace('{name}', top2ShortName)}</li>
+        <li>${t('result.daily_3').replace('{name}', bottomShortName)}</li>
       </ul>
     </div>
   `;
@@ -4989,7 +5101,7 @@ function _showResultInner() {
 
   document.getElementById('partnerSection').innerHTML = `
     <div class="detail-card featured">
-      <div class="label">Best Partner — あなたを引き上げる相手</div>
+      <div class="label">${t('result.partner_label')}</div>
       <h4>${partnerTalent.character} <span class="en">${partnerTalent.characterEn}</span></h4>
       <div style="display:flex; align-items:center; gap:18px; margin: 14px 0;">
         <div style="width:90px; height:90px; flex-shrink:0;">${partnerSvg}</div>
@@ -4997,9 +5109,9 @@ function _showResultInner() {
       </div>
     </div>
     <div class="detail-card">
-      <div class="label">Watch Out — 衝突しやすい相手</div>
-      <h4>同じ「${TALENT_TYPES[top1].character}」タイプ</h4>
-      <p>同質ゆえに、お互いの強みも弱みも丸見えになるのが、同じタイプ同士の関係。組めば最強ですが、ぶつかると深く対立します。相手も自分と同じ景色を見ているからこそ、譲り合いと「役割の分担」が鍵になります。</p>
+      <div class="label">${t('result.clash_label')}</div>
+      <h4>${t('result.clash_title').replace('{char}', TALENT_TYPES[top1].character)}</h4>
+      <p>${t('result.clash_body')}</p>
     </div>
   `;
 
@@ -5030,7 +5142,7 @@ function renderFamousPeople(key) {
   if (!people) return;
 
   container.innerHTML = `
-    <p class="famous-intro">— あなたと同じ才能の系譜を持つ人たち —</p>
+    <p class="famous-intro">${t('result.famous_intro')}</p>
     <div class="famous-grid" id="famousGrid">
       ${people.map((p, i) => `
         <div class="famous-card" style="transition-delay: ${i * 80}ms;">
@@ -6039,28 +6151,29 @@ function renderMatchResult(myScores, friendScores) {
   // 総合のヘッドライン
   let headline, comment;
   if (score >= 85) {
-    headline = '奇跡の補完関係';
-    comment = `お互いに足りないところを、相手が自然に埋めてくれる関係です。一緒にいると「思考の死角」が見えるようになり、二人で世界の解像度が上がります。`;
+    headline = t('match.headline_s');
+    comment = t('match.comment_s');
   } else if (score >= 70) {
-    headline = '頼れるバランス型';
-    comment = `共通点と違いがちょうど良いバランスで存在する関係。話していて飽きず、でも意外と気が合う。長く付き合える相性です。`;
+    headline = t('match.headline_a');
+    comment = t('match.comment_a');
   } else if (score >= 55) {
-    headline = '学び合える関係';
-    comment = `お互いを理解するのに少し時間がかかるけど、その分、得るものが大きい関係。違いを面白がれれば、二人で大きく成長できます。`;
+    headline = t('match.headline_b');
+    comment = t('match.comment_b');
   } else if (score >= 40) {
-    headline = '違いを楽しむ関係';
-    comment = `見ている景色がかなり違うふたり。だからこそ刺激的ですが、お互いの「言語」を翻訳する努力は必要。役割が明確だと、うまくいきます。`;
+    headline = t('match.headline_c');
+    comment = t('match.comment_c');
   } else {
-    headline = '別世界を生きる二人';
-    comment = `驚くほど対照的な才能の組み合わせ。お互いの行動が理解しがたいこともあるけれど、その差こそが宝です。「説明し合う関係」を意識して。`;
+    headline = t('match.headline_d');
+    comment = t('match.comment_d');
   }
 
   // ===== 共通する強みのHTMLを構築 =====
+  const COMPAT = getCompatLexicon();
   let commonHTML;
   if (common.length > 0) {
     commonHTML = common.map(k => {
-      const name = INTELLIGENCES[k].name.replace('的知能', '');
-      const desc = COMPATIBILITY_LEXICON.common[k];
+      const name = INTELLIGENCES[k].name.replace('的知能', '').replace(' Intelligence','').replace(' 智能','').replace(' 지능','');
+      const desc = COMPAT.common[k];
       return `
         <div class="compat-item">
           <div class="compat-item-label">${name}</div>
@@ -6071,7 +6184,7 @@ function renderMatchResult(myScores, friendScores) {
   } else {
     commonHTML = `
       <div class="compat-item compat-item-empty">
-        <div class="compat-item-desc">TOP3に共通の知能はありません。だからこそ、お互いの違いが新鮮で、補完しあえる関係性です。</div>
+        <div class="compat-item-desc">${t('match.common_empty')}</div>
       </div>
     `;
   }
@@ -6080,8 +6193,8 @@ function renderMatchResult(myScores, friendScores) {
   let coveredHTML;
   if (covered.length > 0) {
     coveredHTML = covered.map(k => {
-      const name = INTELLIGENCES[k].name.replace('的知能', '');
-      const desc = COMPATIBILITY_LEXICON.complement[k];
+      const name = INTELLIGENCES[k].name.replace('的知能', '').replace(' Intelligence','').replace(' 智能','').replace(' 지능','');
+      const desc = COMPAT.complement[k];
       return `
         <div class="compat-item">
           <div class="compat-item-label">${name}</div>
@@ -6092,7 +6205,7 @@ function renderMatchResult(myScores, friendScores) {
   } else {
     coveredHTML = `
       <div class="compat-item compat-item-empty">
-        <div class="compat-item-desc">あなたの弱みを相手のTOP3が直接補う形にはなっていません。ただし、共通の強みで結ばれる関係です。</div>
+        <div class="compat-item-desc">${t('match.covered_empty')}</div>
       </div>
     `;
   }
@@ -6101,8 +6214,8 @@ function renderMatchResult(myScores, friendScores) {
   let givingHTML;
   if (giving.length > 0) {
     givingHTML = giving.map(k => {
-      const name = INTELLIGENCES[k].name.replace('的知能', '');
-      const desc = COMPATIBILITY_LEXICON.complement[k];
+      const name = INTELLIGENCES[k].name.replace('的知能', '').replace(' Intelligence','').replace(' 智能','').replace(' 지능','');
+      const desc = COMPAT.complement[k];
       return `
         <div class="compat-item">
           <div class="compat-item-label">${name}</div>
@@ -6113,32 +6226,32 @@ function renderMatchResult(myScores, friendScores) {
   } else {
     givingHTML = `
       <div class="compat-item compat-item-empty">
-        <div class="compat-item-desc">相手の弱みを直接補う形ではありませんが、共通項を通じて関係を深められます。</div>
+        <div class="compat-item-desc">${t('match.giving_empty')}</div>
       </div>
     `;
   }
 
   // ===== 3カテゴリのコメント =====
   function getBusinessComment(s) {
-    if (s >= 85) return '理想のビジネスパートナー。お互いの強みが噛み合い、二人で一人前ではなく「一人ずつで二人前」の生産性を発揮できます。';
-    if (s >= 70) return '建設的に動けるチーム。役割分担を意識すれば、安定して成果を出せる関係。';
-    if (s >= 55) return '違いを活かせばパートナーになれる関係。コミュニケーションの「翻訳」を意識すると伸びます。';
-    if (s >= 40) return '同じプロジェクトで動く時は、明確な役割分担が必須。中間に潤滑油役がいるとうまくいきます。';
-    return '価値観が大きく異なるため、ビジネスより個別の協力関係がおすすめ。お互いの領域を侵さないように。';
+    if (s >= 85) return t('match.biz_s');
+    if (s >= 70) return t('match.biz_a');
+    if (s >= 55) return t('match.biz_b');
+    if (s >= 40) return t('match.biz_c');
+    return t('match.biz_d');
   }
   function getFriendComment(s) {
-    if (s >= 85) return '何時間でも話していられる、稀有な相性。共通の話題から、深い心情まで自然に共有できる関係。';
-    if (s >= 70) return '気軽に会えて、深い話もできる、バランスの取れた友情。長く続く関係になりやすい。';
-    if (s >= 55) return 'ふとした瞬間に「分かる」と思える友達。共有できるテーマを見つけると、絆が深まります。';
-    if (s >= 40) return '違う世界を覗かせてくれる存在。会うたびに発見がある、刺激的な友人関係。';
-    return 'お互いの世界が違いすぎるけど、それを面白がれれば「飽きない」関係。深い付き合いより、ライトな交友がおすすめ。';
+    if (s >= 85) return t('match.friend_s');
+    if (s >= 70) return t('match.friend_a');
+    if (s >= 55) return t('match.friend_b');
+    if (s >= 40) return t('match.friend_c');
+    return t('match.friend_d');
   }
   function getLoveComment(s) {
-    if (s >= 85) return '深い理解と尊敬で結ばれる関係。お互いを高め合い、長期的に成熟する稀な相性。';
-    if (s >= 70) return '安心感と新鮮さを両立できる関係。日常の中に小さな発見が絶えません。';
-    if (s >= 55) return '時間をかけてお互いを知ることで、深い愛情を育てられる関係。最初の3ヶ月が鍵。';
-    if (s >= 40) return '惹かれあう瞬間と、すれ違う瞬間が交互にやってくる。「相手を変えようとしない」のがコツ。';
-    return '価値観の違いが大きく、深い恋愛関係には努力が必要。友達から始めるのがおすすめ。';
+    if (s >= 85) return t('match.love_s');
+    if (s >= 70) return t('match.love_a');
+    if (s >= 55) return t('match.love_b');
+    if (s >= 40) return t('match.love_c');
+    return t('match.love_d');
   }
 
   // ===== HTML出力 =====
@@ -6176,34 +6289,34 @@ function renderMatchResult(myScores, friendScores) {
 
       <!-- 共通する強み -->
       <div class="compat-section">
-        <div class="compat-section-label">— 共通する強み —</div>
-        <div class="compat-section-title">二人を結ぶ、似た才能</div>
+        <div class="compat-section-label">— Shared Strengths —</div>
+        <div class="compat-section-title">${t('match.common')}</div>
         <div class="compat-list">${commonHTML}</div>
       </div>
 
       <!-- 相手があなたを補ってくれる -->
       <div class="compat-section">
         <div class="compat-section-label">— Complementary · for You —</div>
-        <div class="compat-section-title">相手があなたを補ってくれる</div>
+        <div class="compat-section-title">${t('match.covered')}</div>
         <div class="compat-list">${coveredHTML}</div>
       </div>
 
       <!-- あなたが相手を補う -->
       <div class="compat-section">
         <div class="compat-section-label">— Complementary · for Them —</div>
-        <div class="compat-section-title">あなたが相手に与えるもの</div>
+        <div class="compat-section-title">${t('match.giving')}</div>
         <div class="compat-list">${givingHTML}</div>
       </div>
 
       <!-- 3つの相性 -->
       <div class="compat-categories">
         <div class="compat-categories-label">— Three Dimensions of Connection —</div>
-        <div class="compat-categories-title">三つの関係性で見る</div>
+        <div class="compat-categories-title">${t('match.3dim')}</div>
 
         <div class="compat-cat-item">
           <div class="compat-cat-head">
             <div class="compat-cat-icon">✦</div>
-            <div class="compat-cat-name">ビジネスパートナー</div>
+            <div class="compat-cat-name">${t('match.business')}</div>
             <div class="compat-cat-score">${businessScore}</div>
           </div>
           <div class="compat-cat-bar">
@@ -6215,7 +6328,7 @@ function renderMatchResult(myScores, friendScores) {
         <div class="compat-cat-item">
           <div class="compat-cat-head">
             <div class="compat-cat-icon">♢</div>
-            <div class="compat-cat-name">友達</div>
+            <div class="compat-cat-name">${t('match.friend')}</div>
             <div class="compat-cat-score">${friendScoreVal}</div>
           </div>
           <div class="compat-cat-bar">
@@ -6227,7 +6340,7 @@ function renderMatchResult(myScores, friendScores) {
         <div class="compat-cat-item">
           <div class="compat-cat-head">
             <div class="compat-cat-icon">♡</div>
-            <div class="compat-cat-name">恋愛</div>
+            <div class="compat-cat-name">${t('match.love')}</div>
             <div class="compat-cat-score">${loveScore}</div>
           </div>
           <div class="compat-cat-bar">
@@ -6242,41 +6355,40 @@ function renderMatchResult(myScores, friendScores) {
 }
 
 // ============ MATCH (相性診断) - 知能別の補完・共通解説データ ============
-const COMPATIBILITY_LEXICON = {
-  // 共通する強みとして持つとどうなるか
-  common: {
-    linguistic:    "言葉のセンスが共通。会話の妙味やニュアンスを共有でき、知的な対話で何時間でも盛り上がれます。",
-    logical:       "論理思考が共通。問題の構造をすぐ共有でき、議論が建設的に進みます。「なぜ?」で深掘りできる関係。",
-    spatial:       "視覚的センスが共通。「あの構図、いいよね」が通じる関係。美的感覚で繋がれます。",
-    musical:       "音や雰囲気への感度が共通。場の空気を同じテンポで読めるので、一緒にいて心地よい。",
-    bodily:        "身体感覚が共通。一緒に何かを「やってみる」関係性に強く、行動で結ばれます。",
-    interpersonal: "対人感度が共通。お互いの感情をすぐ察し合えるので、深い共感関係を築けます。",
-    intrapersonal: "内省力が共通。沈黙の時間も心地よく、お互いの内なる世界を尊重し合えます。",
-    naturalist:    "観察力・分類力が共通。細部の違いを語り合うことに尽きない楽しさを感じる関係。"
-  },
-  // 相手が補ってくれるとどう価値があるか
-  complement: {
-    linguistic:    "あなたが言葉にできない感情・思考を、相手が代弁・整理してくれます。「それそれ!」が頻発する関係。",
-    logical:       "あなたが感覚で動く時、相手が構造化して整理してくれる。曖昧さを論理で支えてくれる頼もしさ。",
-    spatial:       "あなたが言葉で説明に詰まった時、相手が図や全体像で見える化してくれる。情報の翻訳者。",
-    musical:       "あなたが見逃す「場の空気」「人の声色」を、相手が察知して教えてくれる繊細なセンサー。",
-    bodily:        "あなたが頭で考えすぎる時、相手が「とりあえずやってみよう」と動かしてくれる行動の起爆剤。",
-    interpersonal: "あなたが見落としがちな人間関係の機微を、相手が拾って関係を整えてくれます。",
-    intrapersonal: "あなたが外に向きすぎる時、相手が「立ち止まろう」と内省の時間をくれる。心の地図役。",
-    naturalist:    "あなたが見落とす細部・違いを、相手が拾い集めて体系化してくれる。情報の整理者。"
-  }
-};
+// COMPATIBILITY_LEXICONはt()で動的に取得する形に変換
+function getCompatLexicon() {
+  return {
+    common: {
+      linguistic:    t('compat.common.linguistic'),
+      logical:       t('compat.common.logical'),
+      spatial:       t('compat.common.spatial'),
+      musical:       t('compat.common.musical'),
+      bodily:        t('compat.common.bodily'),
+      interpersonal: t('compat.common.interpersonal'),
+      intrapersonal: t('compat.common.intrapersonal'),
+      naturalist:    t('compat.common.naturalist')
+    },
+    complement: {
+      linguistic:    t('compat.comp.linguistic'),
+      logical:       t('compat.comp.logical'),
+      spatial:       t('compat.comp.spatial'),
+      musical:       t('compat.comp.musical'),
+      bodily:        t('compat.comp.bodily'),
+      interpersonal: t('compat.comp.interpersonal'),
+      intrapersonal: t('compat.comp.intrapersonal'),
+      naturalist:    t('compat.comp.naturalist')
+    }
+  };
+}
 
 // ============ MATCH関数 ============
 function checkURLHash() {
   const hash = location.hash;
   if (hash.startsWith('#match=')) {
-    // Someone shared their result; show intro with "match this person" hint
     const friendScoreString = hash.replace('#match=', '');
     const friendScores = parseScoresFromString(friendScoreString);
     if (friendScores) {
       state.pendingMatch = friendScores;
-      // Add hint to intro screen
       const hint = document.createElement('div');
       hint.style.cssText = `
         background: var(--ink); color: var(--paper); padding: 18px 22px;
@@ -6285,9 +6397,7 @@ function checkURLHash() {
       `;
       hint.innerHTML = `
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--gold-light); margin-bottom: 8px;">FRIEND IS WAITING</div>
-        友達があなたとの相性を見たがっています。<br>
-        まずは自分も診断してみましょう。<br>
-        診断後、自動で相性が表示されます。
+        ${t('match.waiting_hint')}
       `;
       const intro = document.getElementById('screen-intro');
       intro.insertBefore(hint, intro.firstChild.nextSibling);
@@ -6310,10 +6420,884 @@ function maybeShowPendingMatch() {
   }
 }
 
-// Initialize
+// ===========================================
+// i18n: 言語切り替えシステム
+// ===========================================
+
+let currentLang = localStorage.getItem('jibumato_lang') || 'ja';
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('jibumato_lang', lang);
+  applyLang();
+  // ボタンの見た目更新
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+}
+
+function t(key) {
+  const val = (I18N[currentLang] || I18N.ja)[key];
+  return val !== undefined ? val : (I18N.ja[key] || key);
+}
+
+function applyLang() {
+  // data-i18n属性を持つ要素を一括更新
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    el.textContent = t(key);
+  });
+  // data-i18n-placeholder属性
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    el.placeholder = t(el.dataset.i18nPlaceholder);
+  });
+}
+
+const I18N = {
+  ja: {
+    // タイトル画面
+    'title.hint':       '▼ タップで詳しい解説 ▼',
+    'title.start':      '診断をはじめる',
+    'title.disclaimer': '本診断は、ハワード・ガードナーの多重知能理論（MI理論）を着想源とした、じぶんマトリクス独自のエンターテインメント診断です。学術的・心理学的な診断や評価を行うものではありません。結果は娯楽・自己理解の参考として、楽しくお使いください。',
+    'title.resume.label':   '— Continue Where You Left Off —',
+    'title.resume.btn':     '続きから再開',
+    'title.restart.btn':    '最初からやり直す',
+    // 質問画面
+    'q.inprogress':     'Diagnosis in Progress',
+    'q.next':           '次の質問へ',
+    'q.interlude.next': '次の章へ進む',
+    // 回答ラベル
+    'ans.0': 'とてもよく当てはまる',
+    'ans.1': 'やや当てはまる',
+    'ans.2': 'どちらとも言えない',
+    'ans.3': 'あまり当てはまらない',
+    'ans.4': 'まったく当てはまらない',
+    // 結果画面
+    'result.mi_type':    'あなたのMIタイプは',
+    'result.sec1':       '知能バランス',
+    'result.sec1en':     'Intelligence Map',
+    'result.sec2':       '8つの知能スコア',
+    'result.sec2en':     'Detailed Scores',
+    'result.sec3':       'あなたの武器',
+    'result.sec3en':     'Your Strengths',
+    'result.mission':    '今週のミッション',
+    'result.mission_en': "This Week's Practice",
+    'result.mission_refresh': '▷ 別のミッションに変える',
+    'result.famous':     '同じMIタイプの人物',
+    'result.famous_en':  'People Like You',
+    'result.famous_intro': '— あなたと同じ才能の系譜を持つ人たち —',
+    'result.share_label': '— Share Your Result —',
+    'result.share_img':  '結果カードを画像で保存',
+    'result.share_match':'相性を診断する',
+    'result.share_sns':  'SNSでシェア',
+    'result.back':       'もう一度診断する',
+    // Computing
+    'computing.title':   'あなたの才能を読み解いています...',
+    'computing.body':    '8つの知性のバランスを解析中。あなたが何者であるかが、いま、浮かび上がります。',
+    // 結果画面追加セクション
+    'result.talent_type': '才能タイプ',
+    'result.sec4':       '伸びしろの領域',
+    'result.sec4en':     'Growth Areas',
+    'result.sec5':       '向いている道',
+    'result.sec5en':     'Career & Side Hustle',
+    'result.sec6':       'これからのために',
+    'result.sec6en':     'Advice for You',
+    'result.sec7':       'あなたを補ってくれる人',
+    'result.sec7en':     'Best Partner',
+    // JS動的ラベル
+    'result.growth_label':  'Growth Area — もっとも伸びしろのある領域',
+    'result.career_main':   'Main — 本職・キャリアの軸に',
+    'result.career_sub':    'Sub — 副業・サイドプロジェクトに',
+    'result.career_use':    'を活かす道',
+    'result.side_job_hint': '副業のヒント',
+    'result.advice_label':  'Advice — {name}を磨くために',
+    'result.advice_title':  'あなたへの処方箋',
+    'result.daily_label':   'Daily — 才能を日常で開く3つの習慣',
+    'result.daily_title':   '明日から始められること',
+    'result.daily_1':       '1日5分、自分の{name}が活きた瞬間をメモする',
+    'result.daily_2':       '{name}の領域に週1回、意識的に時間を割く',
+    'result.daily_3':       '{name}を恐れず、苦手のままにせず、小さく触れ続ける',
+    'result.partner_label': 'Best Partner — あなたを引き上げる相手',
+    'result.clash_label':   'Watch Out — 衝突しやすい相手',
+    'result.clash_title':   '同じ「{char}」タイプ',
+    'result.clash_body':    '同質ゆえに、お互いの強みも弱みも丸見えになるのが、同じタイプ同士の関係。組めば最強ですが、ぶつかると深く対立します。相手も自分と同じ景色を見ているからこそ、譲り合いと「役割の分担」が鍵になります。',
+    // 相性診断ヘッドライン
+    'match.headline_s': '奇跡の補完関係',
+    'match.comment_s':  'お互いに足りないところを、相手が自然に埋めてくれる関係です。一緒にいると「思考の死角」が見えるようになり、二人で世界の解像度が上がります。',
+    'match.headline_a': '頼れるバランス型',
+    'match.comment_a':  '共通点と違いがちょうど良いバランスで存在する関係。話していて飽きず、でも意外と気が合う。長く付き合える相性です。',
+    'match.headline_b': '学び合える関係',
+    'match.comment_b':  'お互いを理解するのに少し時間がかかるけど、その分、得るものが大きい関係。違いを面白がれれば、二人で大きく成長できます。',
+    'match.headline_c': '違いを楽しむ関係',
+    'match.comment_c':  '見ている景色がかなり違うふたり。だからこそ刺激的ですが、お互いの「言語」を翻訳する努力は必要。役割が明確だと、うまくいきます。',
+    'match.headline_d': '別世界を生きる二人',
+    'match.comment_d':  '驚くほど対照的な才能の組み合わせ。お互いの行動が理解しがたいこともあるけれど、その差こそが宝です。「説明し合う関係」を意識して。',
+    'match.biz_s':    '理想のビジネスパートナー。お互いの強みが噛み合い、二人で「一人ずつで二人前」の生産性を発揮できます。',
+    'match.biz_a':    '建設的に動けるチーム。役割分担を意識すれば、安定して成果を出せる関係。',
+    'match.biz_b':    '違いを活かせばパートナーになれる関係。コミュニケーションの「翻訳」を意識すると伸びます。',
+    'match.biz_c':    '同じプロジェクトで動く時は、明確な役割分担が必須。中間に潤滑油役がいるとうまくいきます。',
+    'match.biz_d':    '価値観が大きく異なるため、ビジネスより個別の協力関係がおすすめ。',
+    'match.friend_s': '何時間でも話していられる、稀有な相性。共通の話題から、深い心情まで自然に共有できる関係。',
+    'match.friend_a': '気軽に会えて、深い話もできる、バランスの取れた友情。長く続く関係になりやすい。',
+    'match.friend_b': 'ふとした瞬間に「分かる」と思える友達。共有できるテーマを見つけると、絆が深まります。',
+    'match.friend_c': '違う世界を覗かせてくれる存在。会うたびに発見がある、刺激的な友人関係。',
+    'match.friend_d': 'お互いの世界が違いすぎるけど、それを面白がれれば「飽きない」関係。',
+    'match.love_s':   '深い理解と尊敬で結ばれる関係。お互いを高め合い、長期的に成熟する稀な相性。',
+    'match.love_a':   '安心感と新鮮さを両立できる関係。日常の中に小さな発見が絶えません。',
+    'match.love_b':   '時間をかけてお互いを知ることで、深い愛情を育てられる関係。最初の3ヶ月が鍵。',
+    'match.love_c':   '惹かれあう瞬間と、すれ違う瞬間が交互にやってくる。「相手を変えようとしない」のがコツ。',
+    'match.love_d':   '価値観の違いが大きく、深い恋愛関係には努力が必要。友達から始めるのがおすすめ。',
+    // 相性診断未翻訳テキスト（COMPATIBILITY_LEXICONはJSで参照）
+    'match.common_empty':   'TOP3に共通の知能はありません。だからこそ、お互いの違いが新鮮で、補完しあえる関係性です。',
+    'match.covered_empty':  'あなたの弱みを相手のTOP3が直接補う形にはなっていません。ただし、共通の強みで結ばれる関係です。',
+    'match.giving_empty':   '相手の弱みを直接補う形ではありませんが、共通項を通じて関係を深められます。',
+    'match.waiting_hint':   '友達があなたとの相性を見たがっています。<br>まずは自分も診断してみましょう。<br>診断後、自動で相性が表示されます。',
+    // COMPATIBILITY_LEXICON (共通・補完)
+    'compat.common.linguistic':    '言葉のセンスが共通。会話の妙味やニュアンスを共有でき、知的な対話で何時間でも盛り上がれます。',
+    'compat.common.logical':       '論理思考が共通。問題の構造をすぐ共有でき、議論が建設的に進みます。「なぜ?」で深掘りできる関係。',
+    'compat.common.spatial':       '視覚的センスが共通。「あの構図、いいよね」が通じる関係。美的感覚で繋がれます。',
+    'compat.common.musical':       '音や雰囲気への感度が共通。場の空気を同じテンポで読めるので、一緒にいて心地よい。',
+    'compat.common.bodily':        '身体感覚が共通。一緒に何かを「やってみる」関係性に強く、行動で結ばれます。',
+    'compat.common.interpersonal': '対人感度が共通。お互いの感情をすぐ察し合えるので、深い共感関係を築けます。',
+    'compat.common.intrapersonal': '内省力が共通。沈黙の時間も心地よく、お互いの内なる世界を尊重し合えます。',
+    'compat.common.naturalist':    '観察力・分類力が共通。細部の違いを語り合うことに尽きない楽しさを感じる関係。',
+    'compat.comp.linguistic':      'あなたが言葉にできない感情・思考を、相手が代弁・整理してくれます。「それそれ!」が頻発する関係。',
+    'compat.comp.logical':         'あなたが感覚で動く時、相手が構造化して整理してくれる。曖昧さを論理で支えてくれる頼もしさ。',
+    'compat.comp.spatial':         'あなたが言葉で説明に詰まった時、相手が図や全体像で見える化してくれる。情報の翻訳者。',
+    'compat.comp.musical':         'あなたが見逃す「場の空気」「人の声色」を、相手が察知して教えてくれる繊細なセンサー。',
+    'compat.comp.bodily':          'あなたが頭で考えすぎる時、相手が「とりあえずやってみよう」と動かしてくれる行動の起爆剤。',
+    'compat.comp.interpersonal':   'あなたが見落としがちな人間関係の機微を、相手が拾って関係を整えてくれます。',
+    'compat.comp.intrapersonal':   'あなたが外に向きすぎる時、相手が「立ち止まろう」と内省の時間をくれる。心の地図役。',
+    'compat.comp.naturalist':      'あなたが見落とす細部・違いを、相手が拾い集めて体系化してくれる。情報の整理者。',
+    'result.compound':   '— Rare Type · あなたの複合キャラ —',
+    'result.strength_1': 'Strength I — 主軸の才能',
+    'result.strength_2': 'Strength II — 補佐の才能',
+    'result.strength_3': 'Strength III — 隠れた才能',
+    // 相性画面
+    'match.title':       '相性診断',
+    'match.input_label': '相手のコードを入力',
+    'match.input_ph':    'スコアコードをここに貼り付け',
+    'match.run':         '相性を診断する',
+    'match.copy_link':   '相性診断リンクをコピー',
+    'match.back':        '← 結果に戻る',
+    'match.common':      '二人を結ぶ、似た才能',
+    'match.covered':     '相手があなたを補ってくれる',
+    'match.giving':      'あなたが相手に与えるもの',
+    'match.3dim':        '三つの関係性で見る',
+    'match.business':    'ビジネスパートナー',
+    'match.friend':      '友達',
+    'match.love':        '恋愛',
+    // プレミアム
+    'premium.title':     'あなたの才能を、\nもっと深く知る',
+    'premium.sub':       '無料診断は、入り口に過ぎません。\n¥980で、あなただけの「才能の取扱説明書」を解錠できます。',
+    'premium.btn':       'プレミアムレポートを開く',
+    'premium.thanks':    'ご興味ありがとうございます',
+    // 知能名
+    'intel.linguistic':    '言語的知能',
+    'intel.logical':       '論理数学的知能',
+    'intel.spatial':       '空間的知能',
+    'intel.musical':       '音楽的知能',
+    'intel.bodily':        '身体運動的知能',
+    'intel.interpersonal': '対人的知能',
+    'intel.intrapersonal': '内省的知能',
+    'intel.naturalist':    '博物的知能',
+    // 知能セル（タイトル画面グリッド）
+    'cell.linguistic':    '言語',
+    'cell.logical':       '論理数学',
+    'cell.spatial':       '空間',
+    'cell.musical':       '音楽',
+    'cell.bodily':        '身体運動',
+    'cell.interpersonal': '対人',
+    'cell.intrapersonal': '内省',
+    'cell.naturalist':    '博物',
+  },
+  en: {
+    // タイトル画面
+    'title.hint':       '▼ Tap for details ▼',
+    'title.start':      'Start the Assessment',
+    'title.disclaimer': 'This assessment is an original entertainment diagnosis by Jibu-Mato, inspired by Howard Gardner\'s Multiple Intelligences theory. It is not an academic or psychological evaluation. Please enjoy the results as a reference for self-understanding and entertainment.',
+    'title.resume.label':   '— Continue Where You Left Off —',
+    'title.resume.btn':     'Resume',
+    'title.restart.btn':    'Start Over',
+    // 質問画面
+    'q.inprogress':     'Diagnosis in Progress',
+    'q.next':           'Next Question',
+    'q.interlude.next': 'Continue to Next Chapter',
+    // 回答ラベル
+    'ans.0': 'Strongly agree',
+    'ans.1': 'Somewhat agree',
+    'ans.2': 'Neutral',
+    'ans.3': 'Somewhat disagree',
+    'ans.4': 'Strongly disagree',
+    // 結果画面
+    'result.mi_type':    'Your MI Type is',
+    'result.sec1':       'Intelligence Balance',
+    'result.sec1en':     'Intelligence Map',
+    'result.sec2':       '8 Intelligence Scores',
+    'result.sec2en':     'Detailed Scores',
+    'result.sec3':       'Your Strengths',
+    'result.sec3en':     'Top Abilities',
+    'result.mission':    "This Week's Mission",
+    'result.mission_en': "This Week's Practice",
+    'result.mission_refresh': '▷ Try another mission',
+    'result.famous':     'People With Your MI Type',
+    'result.famous_en':  'People Like You',
+    'result.famous_intro': '— Notable figures who share your talent lineage —',
+    'result.share_label': '— Share Your Result —',
+    'result.share_img':  'Save Result Card as Image',
+    'result.share_match':'Check Compatibility',
+    'result.share_sns':  'Share on SNS',
+    'result.back':       'Take the Assessment Again',
+    'computing.title':   'Reading your talents...',
+    'computing.body':    'Analyzing the balance of 8 intelligences. Who you truly are is now surfacing.',
+    'result.talent_type': 'Talent Type',
+    'result.sec4':       'Growth Areas',
+    'result.sec4en':     'Growth Areas',
+    'result.sec5':       'Your Path',
+    'result.sec5en':     'Career & Side Hustle',
+    'result.sec6':       'Looking Ahead',
+    'result.sec6en':     'Advice for You',
+    'result.sec7':       'Who Complements You',
+    'result.sec7en':     'Best Partner',
+    'result.growth_label':  'Growth Area — Most room to grow',
+    'result.career_main':   'Main — Your core career path',
+    'result.career_sub':    'Sub — Side projects & freelance',
+    'result.career_use':    ' in action',
+    'result.side_job_hint': 'Side Hustle Tip',
+    'result.advice_label':  'Advice — Sharpening your {name}',
+    'result.advice_title':  'A Prescription for You',
+    'result.daily_label':   'Daily — 3 habits to unlock your talent',
+    'result.daily_title':   'Start Tomorrow',
+    'result.daily_1':       'Spend 5 minutes daily noting when your {name} shines',
+    'result.daily_2':       'Dedicate one session per week to the {name} domain',
+    'result.daily_3':       'Keep lightly touching {name} — don\'t let it stay a weakness',
+    'result.partner_label': 'Best Partner — Who elevates you',
+    'result.clash_label':   'Watch Out — Likely friction',
+    'result.clash_title':   'Same type as you: "{char}"',
+    'result.clash_body':    'Same type means your strengths and weaknesses are fully visible to each other. Together you\'re unstoppable, but conflict can cut deep. Since they see the world through the same lens, role clarity and mutual respect are the keys.',
+    'match.headline_s': 'A Miraculous Complement',
+    'match.comment_s':  'What each of you lacks, the other naturally fills. Together, you remove each other\'s blind spots and see the world with greater resolution.',
+    'match.headline_a': 'A Reliable Balance',
+    'match.comment_a':  'Just the right mix of similarities and differences. Never boring, yet surprisingly compatible — a pairing that lasts.',
+    'match.headline_b': 'A Learning Partnership',
+    'match.comment_b':  'Understanding each other takes a little time, but the growth you gain makes it worthwhile. Embrace the differences and you\'ll both level up.',
+    'match.headline_c': 'A Stimulating Contrast',
+    'match.comment_c':  'You see quite different worlds. That\'s exactly what makes it exciting — but translating each other\'s "language" takes effort. Clear roles help.',
+    'match.headline_d': 'Two Different Worlds',
+    'match.comment_d':  'A strikingly contrasting pairing. Each other\'s actions may be hard to understand — but that gap is the treasure. Practice explaining yourselves.',
+    'match.biz_s':    'The ideal business duo. Your strengths interlock perfectly — together you produce far more than the sum of your parts.',
+    'match.biz_a':    'A constructive team. With clear roles, you can deliver consistent results.',
+    'match.biz_b':    'You can become partners if you leverage your differences. Focus on "translating" each other.',
+    'match.biz_c':    'Clear role division is essential. A mediator in the middle helps greatly.',
+    'match.biz_d':    'Very different values — individual collaboration works better than tight partnership.',
+    'match.friend_s': 'You could talk for hours. From shared topics to deep feelings — all flow naturally.',
+    'match.friend_a': 'Easy to meet up, yet capable of deep conversation. A balanced friendship that tends to last.',
+    'match.friend_b': 'Those sudden "exactly!" moments. Find a shared theme and the bond deepens.',
+    'match.friend_c': 'A window into a different world. Every meeting brings a new discovery.',
+    'match.friend_d': 'Wildly different worlds — but if you find it fascinating, it\'s endlessly stimulating.',
+    'match.love_s':   'Bound by deep understanding and respect. A rare pairing that matures together over time.',
+    'match.love_a':   'Security and freshness in equal measure. Small discoveries fill everyday life.',
+    'match.love_b':   'Take time to truly know each other, and deep affection can grow. The first 3 months are key.',
+    'match.love_c':   'Moments of attraction and misunderstanding alternate. The key: don\'t try to change each other.',
+    'match.love_d':   'Significant value differences make a deep romance hard work. Starting as friends is recommended.',
+    'match.common_empty':   'No shared TOP3 intelligence. That\'s exactly why your differences feel fresh and you complement each other.',
+    'match.covered_empty':  'Their TOP3 doesn\'t directly fill your weak areas — but you\'re connected through shared strengths.',
+    'match.giving_empty':   'You don\'t directly fill their weak areas, but you can deepen your bond through common ground.',
+    'match.waiting_hint':   'Your friend wants to see your compatibility.<br>Take the assessment first, and your result will appear automatically.',
+    'compat.common.linguistic':    'You share a sense for language. Nuance and wordplay resonate between you — conversation can go on for hours.',
+    'compat.common.logical':       'You share logical thinking. You immediately grasp the structure of problems together — a "why?" relationship that goes deep.',
+    'compat.common.spatial':       'You share visual sensibility. "That composition is great, right?" — you\'re connected through aesthetic sense.',
+    'compat.common.musical':       'You share sensitivity to sound and atmosphere. You read the room at the same tempo — naturally comfortable together.',
+    'compat.common.bodily':        'You share a physical sense. Strong in "let\'s try it" relationships — bonded through action.',
+    'compat.common.interpersonal': 'You share interpersonal sensitivity. You instantly pick up on each other\'s emotions — building deep empathy.',
+    'compat.common.intrapersonal': 'You share introspective depth. Even silence is comfortable, and you respect each other\'s inner world.',
+    'compat.common.naturalist':    'You share observational and classificatory ability. Endless joy in discussing subtle differences together.',
+    'compat.comp.linguistic':      'Emotions and thoughts you can\'t put into words — they articulate and organize them for you. A relationship full of "yes, exactly!"',
+    'compat.comp.logical':         'When you act on intuition, they structure and clarify. The reassurance of logic supporting your ambiguity.',
+    'compat.comp.spatial':         'When words fail you, they visualize it as a diagram or big picture. Your personal information translator.',
+    'compat.comp.musical':         'The "atmosphere" and "vocal tone" you miss — they detect and relay it. A refined sensor for you.',
+    'compat.comp.bodily':          'When you overthink, they say "let\'s just try it" and get you moving. Your action catalyst.',
+    'compat.comp.interpersonal':   'The subtle interpersonal dynamics you tend to overlook — they catch and smooth them out.',
+    'compat.comp.intrapersonal':   'When you focus too much outward, they offer "let\'s pause" and give you time for reflection. Your inner compass.',
+    'compat.comp.naturalist':      'The details and differences you miss — they gather and systematize them. Your information organizer.',
+    'result.compound':   '— Rare Type · Your Compound Character —',
+    'result.strength_1': 'Strength I — Core Talent',
+    'result.strength_2': 'Strength II — Supporting Talent',
+    'result.strength_3': 'Strength III — Hidden Talent',
+    // 相性画面
+    'match.title':       'Compatibility Check',
+    'match.input_label': "Enter your partner's code",
+    'match.input_ph':    'Paste score code here',
+    'match.run':         'Check Compatibility',
+    'match.copy_link':   'Copy Compatibility Link',
+    'match.back':        '← Back to Results',
+    'match.common':      'Shared Strengths',
+    'match.covered':     'How They Complement You',
+    'match.giving':      'What You Give Them',
+    'match.3dim':        'Three Dimensions of Connection',
+    'match.business':    'Business Partner',
+    'match.friend':      'Friendship',
+    'match.love':        'Romance',
+    // プレミアム
+    'premium.title':     'Discover Your Talent\neven Deeper',
+    'premium.sub':       'The free assessment is just the beginning.\nFor ¥980, unlock your personal Talent Manual.',
+    'premium.btn':       'Open Premium Report',
+    'premium.thanks':    'Thank you for your interest',
+    // 知能名
+    'intel.linguistic':    'Linguistic Intelligence',
+    'intel.logical':       'Logical-Mathematical Intelligence',
+    'intel.spatial':       'Spatial Intelligence',
+    'intel.musical':       'Musical Intelligence',
+    'intel.bodily':        'Bodily-Kinesthetic Intelligence',
+    'intel.interpersonal': 'Interpersonal Intelligence',
+    'intel.intrapersonal': 'Intrapersonal Intelligence',
+    'intel.naturalist':    'Naturalist Intelligence',
+    // 知能セル（タイトル画面グリッド）
+    'cell.linguistic':    'Linguistic',
+    'cell.logical':       'Logical',
+    'cell.spatial':       'Spatial',
+    'cell.musical':       'Musical',
+    'cell.bodily':        'Bodily',
+    'cell.interpersonal': 'Interpersonal',
+    'cell.intrapersonal': 'Intrapersonal',
+    'cell.naturalist':    'Naturalist',
+  },
+
+  // ===== 中文（简体）=====
+  zh: {
+    'title.hint':       '▼ 点击查看详细说明 ▼',
+    'title.start':      '开始测评',
+    'title.disclaimer': '本测评是以霍华德·加德纳的多元智能理论（MI理论）为灵感，由じぶんマトリクス独创的娱乐测评。本测评不属于学术或心理学诊断，结果仅供娱乐和自我了解参考。',
+    'title.resume.label':   '— 从上次中断处继续 —',
+    'title.resume.btn':     '继续测评',
+    'title.restart.btn':    '重新开始',
+    'q.inprogress':     '测评进行中',
+    'q.next':           '下一题',
+    'q.interlude.next': '进入下一章',
+    'ans.0': '非常符合',
+    'ans.1': '比较符合',
+    'ans.2': '不确定',
+    'ans.3': '不太符合',
+    'ans.4': '完全不符合',
+    'result.mi_type':    '你的MI类型是',
+    'result.sec1':       '智能平衡图',
+    'result.sec1en':     'Intelligence Map',
+    'result.sec2':       '8项智能得分',
+    'result.sec2en':     'Detailed Scores',
+    'result.sec3':       '你的强项',
+    'result.sec3en':     'Your Strengths',
+    'result.mission':    '本周任务',
+    'result.mission_en': "This Week's Practice",
+    'result.mission_refresh': '▷ 换一个任务',
+    'result.famous':     '同类型的历史人物',
+    'result.famous_en':  'People Like You',
+    'result.famous_intro': '— 与你拥有相同才能谱系的人物 —',
+    'result.share_label': '— 分享你的结果 —',
+    'result.share_img':  '保存结果卡片图片',
+    'result.share_match':'查看与好友的相性',
+    'result.share_sns':  '分享到社交媒体',
+    'result.back':       '再测一次',
+    'computing.title':   '正在解读你的才能...',
+    'computing.body':    '正在分析8项智能的平衡。你是谁，此刻即将浮现。',
+    'result.talent_type': '才能类型',
+    'result.sec4':       '成长空间',
+    'result.sec4en':     'Growth Areas',
+    'result.sec5':       '适合的方向',
+    'result.sec5en':     'Career & Side Hustle',
+    'result.sec6':       '给未来的建议',
+    'result.sec6en':     'Advice for You',
+    'result.sec7':       '能互补你的人',
+    'result.sec7en':     'Best Partner',
+    'result.growth_label':  'Growth Area — 最具成长空间的领域',
+    'result.career_main':   'Main — 主业·职业轴心',
+    'result.career_sub':    'Sub — 副业·边项目',
+    'result.career_use':    '能发挥的方向',
+    'result.side_job_hint': '副业提示',
+    'result.advice_label':  'Advice — 磨砺你的{name}',
+    'result.advice_title':  '写给你的处方',
+    'result.daily_label':   'Daily — 在日常中激活才能的3个习惯',
+    'result.daily_title':   '从明天开始',
+    'result.daily_1':       '每天5分钟，记录自己{name}发光的瞬间',
+    'result.daily_2':       '每周有意识地在{name}领域投入一段时间',
+    'result.daily_3':       '不要回避{name}，保持小幅度地接触，别让它成为永远的弱点',
+    'result.partner_label': 'Best Partner — 能提升你的那个人',
+    'result.clash_label':   'Watch Out — 容易产生摩擦的对象',
+    'result.clash_title':   '与你同类型：「{char}」',
+    'result.clash_body':    '同类型意味着彼此的优势和弱点都一览无遗。合作时威力无穷，冲突时却可能深度对立。因为对方和你看到同样的风景，所以互相谦让、明确分工是关键。',
+    'match.headline_s': '奇迹般的互补关系',
+    'match.comment_s':  '彼此不足的地方，对方会自然地弥补。在一起时，思维的盲点会变得清晰，两人共同提升对世界的感知。',
+    'match.headline_a': '可靠的均衡型',
+    'match.comment_a':  '共同点和差异恰到好处地并存。聊起来不会厌倦，却又出乎意料地合得来。是能长久相处的相性。',
+    'match.headline_b': '互相学习的关系',
+    'match.comment_b':  '相互理解需要一些时间，但收获也因此更大。如果能享受彼此的差异，两人将共同成长。',
+    'match.headline_c': '享受差异的关系',
+    'match.comment_c':  '两人看到的风景相当不同。正因如此而充满刺激，但需要努力"翻译"彼此的语言。角色明确时效果更佳。',
+    'match.headline_d': '生活在不同世界的两人',
+    'match.comment_d':  '才能对比惊人。彼此的行为有时难以理解，但这种差距正是宝藏。要有意识地相互解释和说明。',
+    'match.biz_s':    '理想的商业伙伴。双方优势完美契合，两人的生产力超越各自单打独斗的总和。',
+    'match.biz_a':    '能建设性行动的团队。注重分工，就能稳定出成果。',
+    'match.biz_b':    '善用差异就能成为伙伴。注意彼此沟通的「翻译」会有所突破。',
+    'match.biz_c':    '共同推进项目时，明确分工是必须的。中间有润滑剂角色会更顺畅。',
+    'match.biz_d':    '价值观差异较大，建议以个别协作代替紧密合作关系。',
+    'match.friend_s': '能聊上几个小时的稀有相性。从共同话题到深层情感，都能自然分享。',
+    'match.friend_a': '既能轻松见面，又能深入交流的友情。长久维系的可能性高。',
+    'match.friend_b': '偶尔会有「就是这个！」的共鸣瞬间。找到共同话题，关系会更深。',
+    'match.friend_c': '能让你窥见不同世界的存在。每次见面都有新发现，充满刺激。',
+    'match.friend_d': '彼此世界相差太远，但若能以趣味视之，反而会是「永不无聊」的关系。',
+    'match.love_s':   '以深刻理解和尊重相连。相互提升，是长期成熟的罕见相性。',
+    'match.love_a':   '安全感与新鲜感兼顾的关系。日常中小发现不断。',
+    'match.love_b':   '花时间真正了解彼此，可以培育深厚感情。最初3个月是关键。',
+    'match.love_c':   '相互吸引的瞬间与错过的瞬间交替出现。「不试图改变对方」是诀窍。',
+    'match.love_d':   '价值观差异较大，深入的恋爱关系需要努力。建议从朋友开始。',
+    'match.common_empty':   'TOP3没有共同的智能。正因如此，彼此的差异才显得新鲜，能互补对方。',
+    'match.covered_empty':  '对方的TOP3并不直接弥补你的弱点——但你们通过共同优势相连。',
+    'match.giving_empty':   '你并不直接弥补对方的弱点，但可以通过共同点加深关系。',
+    'match.waiting_hint':   '你的朋友想查看与你的相性。<br>请先完成自己的测评，之后相性将自动显示。',
+    'compat.common.linguistic':    '语言感觉相通。可以共享对话的妙趣和细微差别，在智识交流中聊个几小时不成问题。',
+    'compat.common.logical':       '逻辑思维相通。能立刻共享问题的结构，讨论能建设性地推进。是能以「为什么？」深挖的关系。',
+    'compat.common.spatial':       '视觉感觉相通。「那个构图很棒吧」这样的话能相互理解。以美感相连。',
+    'compat.common.musical':       '对声音和氛围的感受度相通。能以相同节奏读懂现场气氛，在一起很舒服。',
+    'compat.common.bodily':        '身体感觉相通。在「一起试试」的关系中很强，以行动相连。',
+    'compat.common.interpersonal': '对人感受度相通。能立刻察觉对方的情绪，能建立深层共情关系。',
+    'compat.common.intrapersonal': '内省力相通。沉默的时间也很舒适，能相互尊重各自的内在世界。',
+    'compat.common.naturalist':    '观察力和分类能力相通。在谈论细节差异中能感到无尽乐趣的关系。',
+    'compat.comp.linguistic':      '你无法用语言表达的情感和想法，对方会帮你代言和整理。是「对对对！」频发的关系。',
+    'compat.comp.logical':         '你凭感觉行动时，对方会帮你结构化和整理。是以逻辑支撑模糊的可靠存在。',
+    'compat.comp.spatial':         '你用语言解释遇到瓶颈时，对方会以图表或整体图帮你可视化。是信息的翻译者。',
+    'compat.comp.musical':         '你忽略的「现场气氛」和「人的声调」，对方会察觉并告诉你。是精细的传感器。',
+    'compat.comp.bodily':          '你想太多时，对方会说「先试试」并推动你行动。是行动的催化剂。',
+    'compat.comp.interpersonal':   '你容易忽略的人际细节，对方会捕捉并整理关系。',
+    'compat.comp.intrapersonal':   '你过于向外时，对方会给予「先停下来」的内省时间。是心的导航者。',
+    'compat.comp.naturalist':      '你忽略的细节和差异，对方会收集并体系化。是信息的整理者。',
+    'result.compound':   '— 稀有类型 · 你的复合角色 —',
+    'result.strength_1': 'Strength I — 核心才能',
+    'result.strength_2': 'Strength II — 辅助才能',
+    'result.strength_3': 'Strength III — 隐藏才能',
+    'match.title':       '相性诊断',
+    'match.input_label': '输入对方的代码',
+    'match.input_ph':    '在此粘贴得分代码',
+    'match.run':         '查看相性',
+    'match.copy_link':   '复制相性诊断链接',
+    'match.back':        '← 返回结果',
+    'match.common':      '共同的强项',
+    'match.covered':     '对方能弥补你的地方',
+    'match.giving':      '你能给予对方的',
+    'match.3dim':        '三种关系维度',
+    'match.business':    '商业伙伴',
+    'match.friend':      '朋友',
+    'match.love':        '恋爱',
+    'premium.title':     '更深入了解\n你的才能',
+    'premium.sub':       '免费测评只是入口。\n用¥980解锁属于你的「才能使用说明书」。',
+    'premium.btn':       '开启高级报告',
+    'premium.thanks':    '感谢您的关注',
+    'intel.linguistic':    '语言智能',
+    'intel.logical':       '逻辑数学智能',
+    'intel.spatial':       '空间智能',
+    'intel.musical':       '音乐智能',
+    'intel.bodily':        '身体运动智能',
+    'intel.interpersonal': '人际智能',
+    'intel.intrapersonal': '内省智能',
+    'intel.naturalist':    '自然观察智能',
+    'cell.linguistic':    '语言',
+    'cell.logical':       '逻辑数学',
+    'cell.spatial':       '空间',
+    'cell.musical':       '音乐',
+    'cell.bodily':        '身体运动',
+    'cell.interpersonal': '人际',
+    'cell.intrapersonal': '内省',
+    'cell.naturalist':    '自然观察',
+  },
+
+  // ===== 한국어 =====
+  ko: {
+    'title.hint':       '▼ 탭하여 자세한 설명 보기 ▼',
+    'title.start':      '진단 시작하기',
+    'title.disclaimer': '본 진단은 하워드 가드너의 다중지능이론(MI이론)을 바탕으로 한 じぶんマトリクス 독자적인 엔터테인먼트 진단입니다. 학술적·심리학적 진단이 아니며, 결과는 오락 및 자기 이해의 참고로 즐겁게 활용해 주세요.',
+    'title.resume.label':   '— 이어서 계속하기 —',
+    'title.resume.btn':     '이어서 계속하기',
+    'title.restart.btn':    '처음부터 다시하기',
+    'q.inprogress':     '진단 진행 중',
+    'q.next':           '다음 질문으로',
+    'q.interlude.next': '다음 챕터로',
+    'ans.0': '매우 그렇다',
+    'ans.1': '약간 그렇다',
+    'ans.2': '어느 쪽도 아니다',
+    'ans.3': '별로 그렇지 않다',
+    'ans.4': '전혀 그렇지 않다',
+    'result.mi_type':    '나의 MI 유형은',
+    'result.sec1':       '지능 균형 차트',
+    'result.sec1en':     'Intelligence Map',
+    'result.sec2':       '8가지 지능 점수',
+    'result.sec2en':     'Detailed Scores',
+    'result.sec3':       '나의 강점',
+    'result.sec3en':     'Your Strengths',
+    'result.mission':    '이번 주 미션',
+    'result.mission_en': "This Week's Practice",
+    'result.mission_refresh': '▷ 다른 미션으로 바꾸기',
+    'result.famous':     '같은 MI 유형의 인물',
+    'result.famous_en':  'People Like You',
+    'result.famous_intro': '— 당신과 같은 재능의 계보를 가진 인물들 —',
+    'result.share_label': '— 결과 공유하기 —',
+    'result.share_img':  '결과 카드 이미지로 저장',
+    'result.share_match':'친구와의 궁합 보기',
+    'result.share_sns':  'SNS에 공유하기',
+    'result.back':       '다시 진단하기',
+    'computing.title':   '당신의 재능을 분석하고 있습니다...',
+    'computing.body':    '8가지 지능의 균형을 분석 중. 당신이 누구인지, 지금 떠오르고 있습니다.',
+    'result.talent_type': '재능 유형',
+    'result.sec4':       '성장 가능성의 영역',
+    'result.sec4en':     'Growth Areas',
+    'result.sec5':       '어울리는 길',
+    'result.sec5en':     'Career & Side Hustle',
+    'result.sec6':       '앞으로를 위하여',
+    'result.sec6en':     'Advice for You',
+    'result.sec7':       '나를 보완해주는 사람',
+    'result.sec7en':     'Best Partner',
+    'result.growth_label':  'Growth Area — 가장 성장 가능성이 높은 영역',
+    'result.career_main':   'Main — 본업·커리어의 축',
+    'result.career_sub':    'Sub — 부업·사이드 프로젝트',
+    'result.career_use':    '를 활용하는 길',
+    'result.side_job_hint': '부업 힌트',
+    'result.advice_label':  'Advice — 당신의 {name}을 연마하기 위해',
+    'result.advice_title':  '당신을 위한 처방전',
+    'result.daily_label':   'Daily — 재능을 일상에서 여는 3가지 습관',
+    'result.daily_title':   '내일부터 시작할 수 있는 것',
+    'result.daily_1':       '하루 5분, 자신의 {name}이 빛난 순간을 메모하기',
+    'result.daily_2':       '{name} 영역에 주 1회 의식적으로 시간을 할애하기',
+    'result.daily_3':       '{name}을 두려워하지 말고, 약점인 채로 두지 말고, 조금씩 계속 접하기',
+    'result.partner_label': 'Best Partner — 당신을 끌어올려주는 상대',
+    'result.clash_label':   'Watch Out — 충돌하기 쉬운 상대',
+    'result.clash_title':   '나와 같은 유형: 「{char}」',
+    'result.clash_body':    '같은 유형이기에 서로의 강점과 약점이 훤히 보이는 관계. 함께하면 최강이지만, 충돌하면 깊이 대립합니다. 상대도 나와 같은 풍경을 보고 있기에, 서로 양보하고 역할을 분담하는 것이 핵심입니다.',
+    'match.headline_s': '기적의 보완 관계',
+    'match.comment_s':  '서로 부족한 부분을 상대가 자연스럽게 채워줍니다. 함께하면 사각지대가 사라지고, 두 사람이 함께 세상을 더 선명하게 볼 수 있습니다.',
+    'match.headline_a': '믿음직한 균형형',
+    'match.comment_a':  '공통점과 차이가 딱 알맞은 균형으로 존재하는 관계. 이야기해도 지루하지 않고, 의외로 잘 맞는 편. 오래 이어갈 수 있는 궁합입니다.',
+    'match.headline_b': '서로 배우는 관계',
+    'match.comment_b':  '서로를 이해하는 데 조금 시간이 걸리지만, 그만큼 얻는 것도 큰 관계. 차이를 즐길 수 있다면, 둘이서 크게 성장할 수 있습니다.',
+    'match.headline_c': '차이를 즐기는 관계',
+    'match.comment_c':  '보는 풍경이 꽤 다른 두 사람. 그렇기에 자극적이지만, 서로의 언어를 번역하는 노력이 필요합니다. 역할이 명확하면 잘 맞습니다.',
+    'match.headline_d': '다른 세계에 사는 두 사람',
+    'match.comment_d':  '놀라울 만큼 대조적인 재능 조합. 서로의 행동이 이해하기 어려울 때도 있지만, 그 차이야말로 보물입니다. 서로 설명하는 관계를 의식해보세요.',
+    'match.biz_s':    '이상적인 비즈니스 파트너. 서로의 강점이 맞물려, 둘이서 각자 혼자일 때보다 훨씬 큰 생산성을 발휘합니다.',
+    'match.biz_a':    '건설적으로 움직일 수 있는 팀. 역할 분담을 의식하면 안정적으로 성과를 낼 수 있는 관계.',
+    'match.biz_b':    '차이를 살리면 파트너가 될 수 있는 관계. 커뮤니케이션의 「번역」을 의식하면 발전합니다.',
+    'match.biz_c':    '같은 프로젝트로 움직일 때는 명확한 역할 분담이 필수. 중간에 윤활유 역할이 있으면 원활합니다.',
+    'match.biz_d':    '가치관 차이가 크므로, 긴밀한 협력보다 개별 협력 관계를 추천합니다.',
+    'match.friend_s': '몇 시간이고 이야기할 수 있는 드문 궁합. 공통 주제부터 깊은 속마음까지 자연스럽게 나눌 수 있는 관계.',
+    'match.friend_a': '편하게 만날 수 있고 깊은 이야기도 가능한 균형 잡힌 우정. 오래 이어지는 관계가 되기 쉽습니다.',
+    'match.friend_b': '문득 「맞아 맞아!」라고 느끼는 친구. 공유할 수 있는 주제를 찾으면 유대감이 깊어집니다.',
+    'match.friend_c': '다른 세계를 엿보게 해주는 존재. 만날 때마다 새로운 발견이 있는, 자극적인 친구 관계.',
+    'match.friend_d': '서로의 세계가 너무 달라도, 그것을 재미있다고 느끼면 「질리지 않는」 관계가 됩니다.',
+    'match.love_s':   '깊은 이해와 존중으로 맺어지는 관계. 서로를 높이며, 장기적으로 성숙해가는 드문 궁합.',
+    'match.love_a':   '안정감과 신선함을 동시에 누릴 수 있는 관계. 일상 속에서 작은 발견이 끊이지 않습니다.',
+    'match.love_b':   '시간을 들여 서로를 알아가면 깊은 애정을 키울 수 있는 관계. 처음 3개월이 핵심.',
+    'match.love_c':   '서로에게 끌리는 순간과 어긋나는 순간이 교차합니다. 「상대를 바꾸려 하지 않는 것」이 요령.',
+    'match.love_d':   '가치관 차이가 커서 깊은 연애 관계는 노력이 필요합니다. 친구부터 시작하는 것을 추천합니다.',
+    'match.common_empty':   'TOP3에 공통 지능이 없습니다. 그렇기에 서로의 차이가 신선하고, 보완하는 관계가 됩니다.',
+    'match.covered_empty':  '상대의 TOP3이 당신의 약점을 직접 보완하는 형태는 아닙니다. 하지만 공통된 강점으로 연결되는 관계입니다.',
+    'match.giving_empty':   '상대의 약점을 직접 보완하는 형태는 아니지만, 공통점을 통해 관계를 깊게 할 수 있습니다.',
+    'match.waiting_hint':   '친구가 당신과의 궁합을 보고 싶어합니다.<br>먼저 진단을 완료하면 자동으로 궁합이 표시됩니다.',
+    'compat.common.linguistic':    '언어 감각이 공통. 대화의 묘미와 뉘앙스를 공유할 수 있어, 지적인 대화로 몇 시간이고 즐길 수 있습니다.',
+    'compat.common.logical':       '논리적 사고가 공통. 문제의 구조를 즉시 공유할 수 있어, 「왜?」로 깊이 파고들 수 있는 관계.',
+    'compat.common.spatial':       '시각적 감각이 공통. 「저 구도 좋지?」가 통하는 관계. 미적 감각으로 연결됩니다.',
+    'compat.common.musical':       '소리와 분위기에 대한 감수성이 공통. 같은 템포로 공기를 읽을 수 있어 함께 있으면 편안합니다.',
+    'compat.common.bodily':        '신체 감각이 공통. 함께 무언가를 「해보는」 관계에서 강하며, 행동으로 연결됩니다.',
+    'compat.common.interpersonal': '대인 감수성이 공통. 서로의 감정을 즉시 알아챌 수 있어, 깊은 공감 관계를 쌓을 수 있습니다.',
+    'compat.common.intrapersonal': '내성 능력이 공통. 침묵의 시간도 편안하고, 서로의 내면 세계를 존중할 수 있습니다.',
+    'compat.common.naturalist':    '관찰력과 분류 능력이 공통. 세부적인 차이에 대해 이야기하는 것이 끝없이 즐거운 관계.',
+    'compat.comp.linguistic':      '당신이 말로 표현할 수 없는 감정과 생각을 상대가 대신 말하고 정리해줍니다. 「맞아맞아!」가 자주 나오는 관계.',
+    'compat.comp.logical':         '당신이 감각으로 행동할 때 상대가 구조화해서 정리해줍니다. 모호함을 논리로 지탱해주는 든든한 존재.',
+    'compat.comp.spatial':         '당신이 말로 설명하기 어려울 때 상대가 도표나 전체 그림으로 시각화해줍니다. 정보의 번역자.',
+    'compat.comp.musical':         '당신이 놓치는 「현장의 분위기」와 「상대의 말투」를 상대가 감지하고 알려줍니다. 섬세한 센서.',
+    'compat.comp.bodily':          '당신이 너무 많이 생각할 때 상대가 「일단 해보자」고 움직이게 해줍니다. 행동의 촉매제.',
+    'compat.comp.interpersonal':   '당신이 놓치기 쉬운 인간관계의 미묘한 부분을 상대가 포착해서 관계를 정리해줍니다.',
+    'compat.comp.intrapersonal':   '당신이 너무 밖을 향할 때 상대가 「잠깐 멈추자」며 내성의 시간을 줍니다. 마음의 나침반 역할.',
+    'compat.comp.naturalist':      '당신이 놓치는 세부 사항과 차이를 상대가 수집하고 체계화해줍니다. 정보의 정리자.',
+    'result.compound':   '— 희귀 유형 · 나의 복합 캐릭터 —',
+    'result.strength_1': 'Strength I — 핵심 재능',
+    'result.strength_2': 'Strength II — 보조 재능',
+    'result.strength_3': 'Strength III — 숨겨진 재능',
+    'match.title':       '궁합 진단',
+    'match.input_label': '상대방의 코드를 입력하세요',
+    'match.input_ph':    '점수 코드를 여기에 붙여넣기',
+    'match.run':         '궁합 진단하기',
+    'match.copy_link':   '궁합 진단 링크 복사',
+    'match.back':        '← 결과로 돌아가기',
+    'match.common':      '두 사람의 공통 강점',
+    'match.covered':     '상대가 나를 보완해주는 부분',
+    'match.giving':      '내가 상대에게 주는 것',
+    'match.3dim':        '세 가지 관계 차원',
+    'match.business':    '비즈니스 파트너',
+    'match.friend':      '친구',
+    'match.love':        '연애',
+    'premium.title':     '나의 재능을\n더 깊이 알아보기',
+    'premium.sub':       '무료 진단은 시작에 불과합니다.\n¥980으로 나만의 「재능 사용 설명서」를 해제하세요.',
+    'premium.btn':       '프리미엄 리포트 열기',
+    'premium.thanks':    '관심 가져주셔서 감사합니다',
+    'intel.linguistic':    '언어 지능',
+    'intel.logical':       '논리수학 지능',
+    'intel.spatial':       '공간 지능',
+    'intel.musical':       '음악 지능',
+    'intel.bodily':        '신체운동 지능',
+    'intel.interpersonal': '대인관계 지능',
+    'intel.intrapersonal': '자기성찰 지능',
+    'intel.naturalist':    '자연탐구 지능',
+    'cell.linguistic':    '언어',
+    'cell.logical':       '논리수학',
+    'cell.spatial':       '공간',
+    'cell.musical':       '음악',
+    'cell.bodily':        '신체운동',
+    'cell.interpersonal': '대인관계',
+    'cell.intrapersonal': '자기성찰',
+    'cell.naturalist':    '자연탐구',
+  }
+};
+
+// 英語版の質問文
+const QUESTIONS_EN = [
+  { text: "When I read books or text, vivid images form in my mind.", type: 'linguistic' },
+  { text: "I am sensitive to subtle differences in word choice and phrasing.", type: 'linguistic' },
+  { text: "I find it easy to organize my thoughts into written form.", type: 'linguistic' },
+  { text: "I enjoy figuring out the cause-and-effect relationships in things.", type: 'logical' },
+  { text: "I get absorbed in puzzles and logic problems.", type: 'logical' },
+  { text: "I am more drawn to data and evidence than to vague ideas.", type: 'logical' },
+  { text: "I can mentally rotate maps or 3D objects in my head.", type: 'spatial' },
+  { text: "I notice differences in color, design, and layout easily.", type: 'spatial' },
+  { text: "I tend to remember the route back to places I've visited.", type: 'spatial' },
+  { text: "Rhythms or melodies replay in my head on their own.", type: 'musical' },
+  { text: "I easily pick up on subtle differences in pitch, tone, or ambient sound.", type: 'musical' },
+  { text: "Music or sound greatly affects my mood and concentration.", type: 'musical' },
+  { text: "I learn faster by doing things physically than by verbal instruction.", type: 'bodily' },
+  { text: "I genuinely enjoy using my hands or moving my body.", type: 'bodily' },
+  { text: "My thinking becomes clearer when I'm moving rather than sitting still.", type: 'bodily' },
+  { text: "I am good at reading people's moods from their expressions and tone.", type: 'interpersonal' },
+  { text: "I tend to warm up quickly to new people I meet.", type: 'interpersonal' },
+  { text: "I often find myself listening to others' concerns or connecting people.", type: 'interpersonal' },
+  { text: "I have a habit of trying to put my feelings into words.", type: 'intrapersonal' },
+  { text: "Time alone is essential nourishment for me.", type: 'intrapersonal' },
+  { text: "I have a good grasp of my own strengths, weaknesses, and patterns.", type: 'intrapersonal' },
+  { text: "I naturally notice differences and changes in plants, animals, or natural phenomena.", type: 'naturalist' },
+  { text: "I enjoy categorizing things or organizing a collection.", type: 'naturalist' },
+  { text: "Being in nature gives me a strong sense of reset and renewal.", type: 'naturalist' }
+];
+
+// 英語版の章情報
+const CHAPTERS_EN = [
+  {
+    num: 'Chapter I',
+    name: '— Realm of Thought —',
+    range: [0, 6],
+    interludeLabel: '— Chapter I Complete · Realm of Thought —',
+    interludeHeadline: 'Words and Logic — the outline begins to emerge',
+    interludeBody: 'We measured how you decode the world. Whether you think in language or in structure — your outline is slowly coming into view.',
+    interludeHints: [
+      'You showed solid results in the realm of thought.',
+      'A unique pattern in how you use your mind is beginning to surface.',
+      'Your "thinking fingerprint" is already emerging from your answers so far.'
+    ]
+  },
+  {
+    num: 'Chapter II',
+    name: '— Realm of Senses —',
+    range: [6, 12],
+    interludeLabel: '— Chapter II Complete · Realm of Senses —',
+    interludeHeadline: 'Space, Sound, and the Body',
+    interludeBody: 'We measured your visual, auditory, and bodily perception — your power to feel. This is a talent that runs even deeper than thought.',
+    interludeHints: [
+      'Your senses may be more refined than you realize.',
+      'A particularly sharpened sensory domain is beginning to emerge.',
+      'The outline of your capacity to "sense and absorb" has surfaced.'
+    ]
+  },
+  {
+    num: 'Chapter III',
+    name: '— Realm of Self & Others —',
+    range: [12, 21],
+    interludeLabel: '— Chapter III Complete · Inner Voice & Relationships —',
+    interludeHeadline: "We've measured 'People' and 'Self'",
+    interludeBody: 'We measured how you relate to others and how you face yourself — the intelligence of both your inner world and your outer world. An unexpected strength may be sleeping here.',
+    interludeHints: [
+      'Your way of relating to others shows a distinct pattern.',
+      'You may lean strongly toward either reflection or sociability.',
+      'The contrast between your alone-time and social-time will be reflected in your results.'
+    ]
+  },
+  {
+    num: 'Chapter IV',
+    name: '— Realm of the World —',
+    range: [21, 24],
+    interludeLabel: '',
+    interludeHeadline: '',
+    interludeBody: '',
+    interludeHints: []
+  }
+];
+
+// 中文（简体）質問文
+const QUESTIONS_ZH = [
+  { text: "阅读书籍或文章时，脑海中会浮现出生动的画面。", type: 'linguistic' },
+  { text: "我对词语的细微差别和表达方式很敏感。", type: 'linguistic' },
+  { text: "我擅长将自己的想法整理成文字。", type: 'linguistic' },
+  { text: "我喜欢弄清楚事物之间的因果关系和运作机制。", type: 'logical' },
+  { text: "我能沉浸于数字谜题和逻辑推理游戏中。", type: 'logical' },
+  { text: "比起模糊的说法，我更被数据和有依据的论述所吸引。", type: 'logical' },
+  { text: "我能在脑海中旋转立体图形或地图。", type: 'spatial' },
+  { text: "我很容易注意到颜色、设计和布局的差异。", type: 'spatial' },
+  { text: "我能清楚记住去过地方的路线。", type: 'spatial' },
+  { text: "节奏或旋律会在我脑海中自动播放。", type: 'musical' },
+  { text: "我容易察觉音调、音色或环境声音的细微差异。", type: 'musical' },
+  { text: "音乐或声音环境对我的情绪和注意力影响很大。", type: 'musical' },
+  { text: "比起语言说明，我通过亲身实践学得更快。", type: 'bodily' },
+  { text: "我真心享受用双手操作或运动身体。", type: 'bodily' },
+  { text: "活动身体时，比静坐更能让我思维清晰。", type: 'bodily' },
+  { text: "我擅长从他人的表情和语调中读出对方的心情。", type: 'interpersonal' },
+  { text: "我能很快与初次见面的人打成一片。", type: 'interpersonal' },
+  { text: "我经常扮演倾听别人烦恼或连接他人的角色。", type: 'interpersonal' },
+  { text: "我习惯于尝试将自己的感受用语言表达出来。", type: 'intrapersonal' },
+  { text: "独处的时间对我来说是必不可少的滋养。", type: 'intrapersonal' },
+  { text: "我对自己的优缺点和行为模式有清晰的认识。", type: 'intrapersonal' },
+  { text: "我会自然地注意到植物、动物或自然现象的差异和变化。", type: 'naturalist' },
+  { text: "我喜欢对事物进行分类或整理收藏品。", type: 'naturalist' },
+  { text: "置身大自然中，我会有一种强烈的重置和更新感。", type: 'naturalist' }
+];
+
+// 한국어 질문
+const QUESTIONS_KO = [
+  { text: "책이나 글을 읽으면 머릿속에 생생한 장면이 떠오른다.", type: 'linguistic' },
+  { text: "나는 단어 선택과 표현 방식의 미묘한 차이에 민감하다.", type: 'linguistic' },
+  { text: "나는 내 생각을 글로 정리하는 것이 능숙하다.", type: 'linguistic' },
+  { text: "나는 사물의 인과관계와 작동 원리를 파악하는 것을 즐긴다.", type: 'logical' },
+  { text: "나는 퍼즐이나 숫자를 이용한 수수께끼에 빠져든다.", type: 'logical' },
+  { text: "나는 막연한 이야기보다 데이터와 근거 있는 이야기에 더 끌린다.", type: 'logical' },
+  { text: "나는 머릿속에서 입체 도형이나 지도를 회전시켜 생각할 수 있다.", type: 'spatial' },
+  { text: "나는 색상, 디자인, 레이아웃의 차이를 쉽게 알아챈다.", type: 'spatial' },
+  { text: "나는 한번 다녀온 곳의 경로를 잘 기억하는 편이다.", type: 'spatial' },
+  { text: "리듬이나 멜로디가 머릿속에서 저절로 재생되는 경우가 있다.", type: 'musical' },
+  { text: "나는 음정, 음색, 환경음의 미묘한 차이를 쉽게 눈치챈다.", type: 'musical' },
+  { text: "음악이나 소리 환경이 나의 기분과 집중력에 크게 영향을 미친다.", type: 'musical' },
+  { text: "나는 말로 설명 듣는 것보다 직접 몸으로 해보면서 더 빨리 익힌다.", type: 'bodily' },
+  { text: "나는 손을 사용하는 작업이나 몸을 움직이는 것을 진심으로 즐긴다.", type: 'bodily' },
+  { text: "가만히 앉아 있는 것보다 움직이면서 생각할 때 머리가 더 잘 돌아간다.", type: 'bodily' },
+  { text: "나는 상대방의 표정과 말투로 그 사람의 기분을 잘 파악한다.", type: 'interpersonal' },
+  { text: "나는 처음 만나는 사람과도 비교적 빨리 친해지는 편이다.", type: 'interpersonal' },
+  { text: "나는 누군가의 고민을 들어주거나 사람들을 연결하는 역할을 자주 맡는다.", type: 'interpersonal' },
+  { text: "나는 자신이 무엇을 느끼는지 언어화하려는 습관이 있다.", type: 'intrapersonal' },
+  { text: "혼자 보내는 시간이 나에게는 꼭 필요한 영양분이다.", type: 'intrapersonal' },
+  { text: "나는 나 자신의 장단점과 행동 패턴을 잘 파악하고 있는 편이다.", type: 'intrapersonal' },
+  { text: "나는 식물·동물·자연 현상의 차이와 변화를 자연스럽게 알아챈다.", type: 'naturalist' },
+  { text: "나는 사물을 분류하거나 컬렉션을 정리하는 것을 좋아한다.", type: 'naturalist' },
+  { text: "자연 속에 있으면 마음이 리셋되는 느낌이 강하게 든다.", type: 'naturalist' }
+];
+
+// 中文章データ
+const CHAPTERS_ZH = [
+  {
+    num: 'Chapter I',
+    name: '— 思维领域 —',
+    range: [0, 6],
+    interludeLabel: '— Chapter I 完成 · 思维领域 —',
+    interludeHeadline: '语言与逻辑——轮廓开始显现',
+    interludeBody: '我们测量了你如何解读世界。是用语言思考，还是用结构思考——你的轮廓正在慢慢浮现。',
+    interludeHints: [
+      '你在思维领域展现出了扎实的状态。',
+      '你独特的思维方式正开始浮出水面。',
+      '从你目前的回答中，你的「思维指纹」已经开始显现。'
+    ]
+  },
+  {
+    num: 'Chapter II',
+    name: '— 感知领域 —',
+    range: [6, 12],
+    interludeLabel: '— Chapter II 完成 · 感知领域 —',
+    interludeHeadline: '空间、声音与身体的领域',
+    interludeBody: '我们测量了你的视觉、听觉和身体感知——你的感受力。这是比思维更深层的才能。',
+    interludeHints: [
+      '你的感知可能比你想象的更加敏锐。',
+      '一个特别被磨砺的感知领域正开始显现。',
+      '你「感受与吸收」能力的轮廓已经浮现。'
+    ]
+  },
+  {
+    num: 'Chapter III',
+    name: '— 自我与他人领域 —',
+    range: [12, 21],
+    interludeLabel: '— Chapter III 完成 · 内心之声与人际关系 —',
+    interludeHeadline: '「人际」与「自我」的测量已完成',
+    interludeBody: '我们测量了你如何与他人相处，以及如何面对自己——内在世界和外在世界的智能。意想不到的强项可能就沉睡于此。',
+    interludeHints: [
+      '你与他人相处的方式展现出独特的模式。',
+      '你可能强烈偏向内省或外向其中一方。',
+      '你独处时和与人相处时的对比，将反映在结果中。'
+    ]
+  },
+  {
+    num: 'Chapter IV',
+    name: '— 与世界的关系 —',
+    range: [21, 24],
+    interludeLabel: '',
+    interludeHeadline: '',
+    interludeBody: '',
+    interludeHints: []
+  }
+];
+
+// 한국어 챕터 데이터
+const CHAPTERS_KO = [
+  {
+    num: 'Chapter I',
+    name: '— 사고의 영역 —',
+    range: [0, 6],
+    interludeLabel: '— Chapter I 완료 · 사고의 영역 —',
+    interludeHeadline: '언어와 논리, 그 윤곽이 보이기 시작했다',
+    interludeBody: '당신이 세상을 어떻게 해석하는지를 측정했습니다. 언어로 생각하는 타입인지, 구조로 생각하는 타입인지——그 윤곽이 조금씩 보이기 시작하고 있습니다.',
+    interludeHints: [
+      '당신은 사고의 영역에서 탄탄한 면모를 보여주고 있습니다.',
+      '당신만의 독특한 사고 방식이 드러나기 시작하고 있습니다.',
+      '지금까지의 답변에서 이미 당신의 「사고 지문」이 떠오르고 있습니다.'
+    ]
+  },
+  {
+    num: 'Chapter II',
+    name: '— 감각의 영역 —',
+    range: [6, 12],
+    interludeLabel: '— Chapter II 완료 · 감각의 영역 —',
+    interludeHeadline: '공간, 소리, 그리고 신체의 영역으로',
+    interludeBody: '시각·청각·신체 감각——「느끼는 힘」의 윤곽을 측정했습니다. 당신이 세상을 어떻게 지각하는지, 그것은 사고보다 더 깊은 곳에 있는 재능입니다.',
+    interludeHints: [
+      '당신의 감각은 생각보다 더 예민할지도 모릅니다.',
+      '특별히 연마된 감각 영역이 드러나기 시작하고 있습니다.',
+      '말로 표현하기 어려운 「느끼는 힘」의 윤곽이 떠올랐습니다.'
+    ]
+  },
+  {
+    num: 'Chapter III',
+    name: '— 자신과 타인의 영역 —',
+    range: [12, 21],
+    interludeLabel: '— Chapter III 완료 · 내면의 목소리와 인간관계 —',
+    interludeHeadline: '「타인」과 「자신」을 측정했습니다',
+    interludeBody: '당신이 타인과 어떻게 관계 맺는지, 그리고 자신과 어떻게 마주하는지——내면과 외면, 양쪽의 지능을 측정했습니다. 의외의 강점이 여기에 잠들어 있을지도 모릅니다.',
+    interludeHints: [
+      '사람과의 관계 방식에서 당신만의 패턴이 보입니다.',
+      '내성과 사교성 중 어느 한쪽으로 강하게 치우쳐 있을 수도 있습니다.',
+      '혼자 있을 때와 사람들과 있을 때의 차이가 결과에 반영됩니다.'
+    ]
+  },
+  {
+    num: 'Chapter IV',
+    name: '— 세계와의 관계 —',
+    range: [21, 24],
+    interludeLabel: '',
+    interludeHeadline: '',
+    interludeBody: '',
+    interludeHints: []
+  }
+];
 document.getElementById('qTotal').textContent = String(QUESTIONS.length).padStart(2, '0');
 checkURLHash();
 checkResumeBanner();
+// 言語設定を適用
+setLang(currentLang);
 </script>
 
 </body>
