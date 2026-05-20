@@ -1897,6 +1897,129 @@
     font-size: 14px;
   }
 
+  /* ============ BOOK RECOMMENDATION SECTION ============ */
+  .book-section {
+    margin-bottom: 40px;
+  }
+
+  .book-card {
+    background: linear-gradient(135deg, rgba(184,137,58,0.06), rgba(244,237,224,0.4));
+    border: 1px solid rgba(184,137,58,0.35);
+    padding: 26px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .book-card::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px dashed rgba(184,137,58,0.25);
+    pointer-events: none;
+  }
+
+  .book-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .book-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .book-title {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+
+  .book-subtitle {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 14px;
+    color: rgba(15,14,12,0.7);
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+  }
+
+  .book-meta {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--crimson);
+    margin-bottom: 18px;
+    letter-spacing: 0.04em;
+  }
+
+  .book-meta .book-author {
+    font-weight: 600;
+  }
+
+  .book-meta .book-publisher {
+    color: rgba(15,14,12,0.55);
+    margin-left: 8px;
+  }
+
+  .book-note {
+    font-size: 13.5px;
+    line-height: 1.95;
+    color: rgba(15,14,12,0.85);
+    margin-bottom: 22px;
+    padding: 14px 16px;
+    background: rgba(244,237,224,0.6);
+    border-left: 2px solid var(--gold);
+  }
+
+  .book-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    border: 1px solid var(--ink);
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .book-cta:hover {
+    background: var(--crimson);
+    border-color: var(--crimson);
+    letter-spacing: 0.25em;
+  }
+
+  .book-cta-arrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+  }
+
+  .book-disclosure {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: rgba(15,14,12,0.45);
+    margin-top: 14px;
+    text-align: right;
+  }
+
+  @media (max-width: 600px) {
+    .book-card { padding: 22px 18px; }
+    .book-title { font-size: 19px; }
+  }
+
   /* ============ MISSION CARD ============ */
   .mission-card {
     padding: 32px 28px;
@@ -3114,6 +3237,14 @@
     <span class="en" data-i18n="result.sec7en">Best Partner</span>
   </div>
   <div class="detail-cards" id="partnerSection"></div>
+
+  <!-- おすすめの一冊（Amazonアソシエイト） -->
+  <div class="section-title">
+    <span class="num">—</span>
+    <h3 data-i18n="result.book">あなたにおすすめの一冊</h3>
+    <span class="en" data-i18n="result.book_en">Recommended Book</span>
+  </div>
+  <div class="book-section" id="bookSection"></div>
 
   <!-- 今週のミッション -->
   <div class="section-title">
@@ -4675,6 +4806,80 @@ const GROWTH_ADVICE = {
   naturalist: "週に一度、自然のある場所に身を置く。あるいは興味の対象を「分類してみる」ノートを作ってみて。"
 };
 
+// ============ RECOMMENDED BOOKS (Amazon Associate) ============
+// StoreID: jbmt-22
+const RECOMMENDED_BOOKS = {
+  linguistic: {
+    title: "言語化の魔力",
+    subtitle: "言葉にすれば「悩み」は消える",
+    author: "樺沢 紫苑",
+    publisher: "幻冬舎",
+    asin: "434404052X",
+    note: "ものがたりフクロウタイプは「言葉で考える」才能を持っています。この本は、頭の中のもやもやを言語化することで、思考と感情を整理する技法を教えてくれる一冊。あなたの強みをさらに磨きたい人に。"
+  },
+  logical: {
+    title: "イシューからはじめよ",
+    subtitle: "知的生産の「シンプルな本質」",
+    author: "安宅 和人",
+    publisher: "英治出版",
+    asin: "4862760856",
+    note: "ロジカルキツネタイプは「構造を見抜く力」が武器。この本は、解くべき問いを見極め、最短ルートで答えにたどり着く知的生産の本質を説きます。論理思考を仕事の成果に変える定番書。"
+  },
+  spatial: {
+    title: "センスは知識からはじまる",
+    subtitle: "",
+    author: "水野 学",
+    publisher: "朝日新聞出版",
+    asin: "4022511745",
+    note: "デザイン上手なネコタイプは「視覚的センス」が才能。くまモンを手がけたデザイナーが、センスは生まれつきではなく知識の蓄積で磨かれることを説く名著。あなたの感性をもう一段引き上げる一冊。"
+  },
+  musical: {
+    title: "音楽する人間",
+    subtitle: "",
+    author: "河合 隼雄",
+    publisher: "潮出版社",
+    asin: "4267016720",
+    note: "うたうコトリタイプは「音と空気の感度」が才能。臨床心理学の巨匠が、音楽が人の心と魂に何をもたらすのかを語った深い対話集。あなたの繊細な感性に響く一冊。"
+  },
+  bodily: {
+    title: "身体感覚を取り戻す",
+    subtitle: "腰・ハラ文化の再生",
+    author: "齋藤 孝",
+    publisher: "NHK出版",
+    asin: "4140017090",
+    note: "しなやかオオカミタイプは「身体で考える」才能の持ち主。失われつつある身体感覚を取り戻す方法を、日本文化の知恵から探る一冊。あなたの強みを言語化し、深めるために。"
+  },
+  interpersonal: {
+    title: "人を動かす 改訂文庫版",
+    subtitle: "",
+    author: "D・カーネギー",
+    publisher: "創元社",
+    asin: "442210134X",
+    note: "やさしいイルカタイプは「人の感情を読む」才能を持ちます。80年以上読み継がれる人間関係の古典。あなたの対人センスを、人を動かす実践力に変える定番書。"
+  },
+  intrapersonal: {
+    title: "夜と霧",
+    subtitle: "新版",
+    author: "ヴィクトール・E・フランクル",
+    publisher: "みすず書房",
+    asin: "4622039702",
+    note: "もの思うクマタイプは「内面と向き合う」才能を持ちます。極限の状況で人間が見出す意味とは何か——心理学者が自らの体験から綴った、内省の到達点とも言える一冊。"
+  },
+  naturalist: {
+    title: "ソロモンの指環",
+    subtitle: "動物行動学入門",
+    author: "コンラート・ローレンツ",
+    publisher: "早川書房",
+    asin: "4150503397",
+    note: "コレクターゾウタイプは「観察と分類」の才能を持ちます。動物行動学の創始者が、自然と動物への深い愛と観察眼で綴った名著。あなたの好奇心を刺激し、世界を見る目を深めます。"
+  }
+};
+
+// アフィリエイトリンク生成（StoreID: jbmt-22）
+function getAmazonAffiliateLink(asin) {
+  return `https://www.amazon.co.jp/dp/${asin}?tag=jbmt-22`;
+}
+
 // ============ STATE ============
 let state = {
   current: 0,
@@ -5125,6 +5330,9 @@ function _showResultInner() {
   // Famous people
   renderFamousPeople(top1);
 
+  // Recommended book (Amazon Associate)
+  renderRecommendedBook(top1);
+
   // Update URL hash with scores for sharing
   updateShareableURL(scores);
 
@@ -5135,6 +5343,36 @@ function _showResultInner() {
 }
 
 // ============ FAMOUS PEOPLE ============
+// ============ FAMOUS PEOPLE ============
+function renderRecommendedBook(key) {
+  const container = document.getElementById('bookSection');
+  if (!container) return;
+  const book = RECOMMENDED_BOOKS[key];
+  if (!book) return;
+
+  const link = getAmazonAffiliateLink(book.asin);
+
+  container.innerHTML = `
+    <div class="book-card">
+      <div class="book-content">
+        <div class="book-label">${t('result.book_label')}</div>
+        <h4 class="book-title">${book.title}</h4>
+        ${book.subtitle ? `<div class="book-subtitle">${book.subtitle}</div>` : ''}
+        <div class="book-meta">
+          <span class="book-author">${book.author}</span>
+          <span class="book-publisher">／ ${book.publisher}</span>
+        </div>
+        <p class="book-note">${book.note}</p>
+        <a class="book-cta" href="${link}" target="_blank" rel="noopener sponsored">
+          <span>${t('result.book_cta')}</span>
+          <span class="book-cta-arrow">→</span>
+        </a>
+        <div class="book-disclosure">${t('result.book_disclosure')}</div>
+      </div>
+    </div>
+  `;
+}
+
 function renderFamousPeople(key) {
   const container = document.getElementById('famousSection');
   if (!container) return;
@@ -6491,6 +6729,11 @@ const I18N = {
     'result.share_match':'相性を診断する',
     'result.share_sns':  'SNSでシェア',
     'result.back':       'もう一度診断する',
+    'result.book':       'あなたにおすすめの一冊',
+    'result.book_en':    'Recommended Book',
+    'result.book_label': '— FOR YOUR TYPE · 才能を深める一冊 —',
+    'result.book_cta':   'Amazonで詳しく見る',
+    'result.book_disclosure': '※ 当ページのリンクはAmazonアソシエイトを利用しています',
     // Computing
     'computing.title':   'あなたの才能を読み解いています...',
     'computing.body':    '8つの知性のバランスを解析中。あなたが何者であるかが、いま、浮かび上がります。',
@@ -6648,6 +6891,11 @@ const I18N = {
     'result.share_match':'Check Compatibility',
     'result.share_sns':  'Share on SNS',
     'result.back':       'Take the Assessment Again',
+    'result.book':       'A Book for You',
+    'result.book_en':    'Recommended Book',
+    'result.book_label': '— FOR YOUR TYPE · A book to deepen your talent —',
+    'result.book_cta':   'View on Amazon',
+    'result.book_disclosure': '※ Links on this page are part of the Amazon Associates Program',
     'computing.title':   'Reading your talents...',
     'computing.body':    'Analyzing the balance of 8 intelligences. Who you truly are is now surfacing.',
     'result.talent_type': 'Talent Type',
@@ -6797,6 +7045,11 @@ const I18N = {
     'result.share_match':'查看与好友的相性',
     'result.share_sns':  '分享到社交媒体',
     'result.back':       '再测一次',
+    'result.book':       '为你推荐的一本书',
+    'result.book_en':    'Recommended Book',
+    'result.book_label': '— FOR YOUR TYPE · 深化才能的一本书 —',
+    'result.book_cta':   '在Amazon查看',
+    'result.book_disclosure': '※ 本页面链接使用Amazon联盟项目',
     'computing.title':   '正在解读你的才能...',
     'computing.body':    '正在分析8项智能的平衡。你是谁，此刻即将浮现。',
     'result.talent_type': '才能类型',
@@ -6942,6 +7195,11 @@ const I18N = {
     'result.share_match':'친구와의 궁합 보기',
     'result.share_sns':  'SNS에 공유하기',
     'result.back':       '다시 진단하기',
+    'result.book':       '당신에게 추천하는 한 권',
+    'result.book_en':    'Recommended Book',
+    'result.book_label': '— FOR YOUR TYPE · 재능을 깊게 하는 한 권 —',
+    'result.book_cta':   'Amazon에서 보기',
+    'result.book_disclosure': '※ 본 페이지 링크는 Amazon Associates Program을 이용합니다',
     'computing.title':   '당신의 재능을 분석하고 있습니다...',
     'computing.body':    '8가지 지능의 균형을 분석 중. 당신이 누구인지, 지금 떠오르고 있습니다.',
     'result.talent_type': '재능 유형',
