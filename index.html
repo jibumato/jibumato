@@ -3239,12 +3239,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <div class="hero">
-    <div class="hero-eyebrow">— あなたの中に眠る、八つの才能 —</div>
+    <div class="hero-eyebrow" data-i18n="hero.eyebrow">— あなたの中に眠る、八つの才能 —</div>
     <h1>
       じぶんマトリクス
       <span class="accent">JIBU-MATO · The Talent Matrix</span>
     </h1>
-    <p class="hero-sub">
+    <p class="hero-sub" data-i18n="hero.sub">
       ハーバード大学のハワード・ガードナーが提唱した「多重知能理論（MI理論）」をベースに、あなたの中に眠る8種類の知性を測定します。<br>
       性格ではなく、<em>武器</em>を知るための、じぶんの取扱説明書。
     </p>
@@ -3310,7 +3310,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- 章表示 -->
   <div class="chapter-display" id="chapterDisplay">
     <div class="chapter-num" id="chapterNum">Chapter I</div>
-    <div class="chapter-name" id="chapterName">— 思考の領域 —</div>
+    <div class="chapter-name" id="chapterName" data-i18n="chapter.thinking">— 思考の領域 —</div>
   </div>
 
   <div class="progress-wrap">
@@ -3335,8 +3335,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <div class="nav-buttons">
-    <button class="nav-btn" id="backBtn" onclick="goBack()" disabled>← 前の質問へ</button>
-    <span class="progress-num" style="font-size:11px;">回答すると次へ進みます</span>
+    <button class="nav-btn" id="backBtn" onclick="goBack()" disabled data-i18n="q.back">← 前の質問へ</button>
+    <span class="progress-num" style="font-size:11px;" data-i18n="q.tap_to_proceed">回答すると次へ進みます</span>
   </div>
 </section>
 
@@ -3359,7 +3359,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="interlude-body" id="interludeBody">— —</p>
     <div class="interlude-hint" id="interludeHint">— —</div>
     <button class="interlude-continue" id="interludeContinue" onclick="continueFromInterlude()" data-i18n="q.interlude.next">
-      次の章へ進む <span style="margin-left:8px;">→</span>
+      <span data-i18n="q.interlude.next">次の章へ進む</span> <span style="margin-left:8px;">→</span>
     </button>
   </div>
 </section>
@@ -3627,8 +3627,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <h3 class="premium-title" data-i18n="premium.title">あなたの才能を、<br>もっと深く知る</h3>
     <p class="premium-subtitle" data-i18n="premium.sub">
-      無料診断は、入り口に過ぎません。<br>
-      ¥980で、あなただけの「才能の取扱説明書」を解錠できます。
+      <span data-i18n="prem.intro1">無料診断は、入り口に過ぎません。</span><br>
+      <span data-i18n="prem.intro2">¥980で、あなただけの「才能の取扱説明書」を解錠できます。</span>
     </p>
 
     <!-- チラ見せセクション(ぼかし) -->
@@ -3645,7 +3645,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="premium-blur">
           <div class="premium-blur-content">
             <div class="lock-icon">🔒</div>
-            <p>続きはプレミアム会員限定</p>
+            <p data-i18n="prem.locked">続きはプレミアム会員限定</p>
           </div>
         </div>
       </div>
@@ -3653,55 +3653,55 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- 含まれる内容のリスト -->
     <div class="premium-features">
-      <div class="premium-features-label">— Premium Report に含まれるもの —</div>
+      <div class="premium-features-label" data-i18n="prem.features_label">— Premium Report に含まれるもの —</div>
       <ul class="premium-feature-list">
         <li>
           <span class="feature-num">01</span>
           <div>
-            <strong>才能の科学的深掘り</strong>
-            <span>あなたの脳がなぜそう動くのか、神経科学レベルの解説（約2,000字）</span>
+            <strong data-i18n="prem.f.sci.title">才能の科学的深掘り</strong>
+            <span data-i18n="prem.f.sci.desc">あなたの脳がなぜそう動くのか、神経科学レベルの解説（約2,000字）</span>
           </div>
         </li>
         <li>
           <span class="feature-num">02</span>
           <div>
-            <strong>30日間プログラム</strong>
-            <span>才能を日常に組み込むための、毎日5分の具体メニュー</span>
+            <strong data-i18n="prem.f.30days.title">30日間プログラム</strong>
+            <span data-i18n="prem.f.30days.desc">才能を日常に組み込むための、毎日5分の具体メニュー</span>
           </div>
         </li>
         <li>
           <span class="feature-num">03</span>
           <div>
-            <strong>100の職業リスト</strong>
-            <span>あなたの才能が活きる100の職業を10カテゴリで分類して提示</span>
+            <strong data-i18n="prem.f.jobs.title">100の職業リスト</strong>
+            <span data-i18n="prem.f.jobs.desc">あなたの才能が活きる100の職業を10カテゴリで分類して提示</span>
           </div>
         </li>
         <li>
           <span class="feature-num">04</span>
           <div>
-            <strong>副業の始め方ロードマップ</strong>
-            <span>月3〜30万円を稼ぐための、6ステップの実践プラン</span>
+            <strong data-i18n="prem.f.side.title">副業の始め方ロードマップ</strong>
+            <span data-i18n="prem.feat1.desc">月3〜30万円を稼ぐための、6ステップの実践プラン</span>
           </div>
         </li>
         <li>
           <span class="feature-num">05</span>
           <div>
-            <strong>苦手なタイプとの付き合い方</strong>
-            <span>あなたを消耗させる相手の正体と、3つの対応策</span>
+            <strong data-i18n="prem.feat2.title">苦手なタイプとの付き合い方</strong>
+            <span data-i18n="prem.feat2.desc">あなたを消耗させる相手の正体と、3つの対応策</span>
           </div>
         </li>
         <li>
           <span class="feature-num">06</span>
           <div>
-            <strong>PDF版「じぶんの取扱説明書」</strong>
-            <span>全コンテンツをA4 8ページのPDFで保存・印刷可能</span>
+            <strong data-i18n="prem.feat3.title">PDF版「じぶんの取扱説明書」</strong>
+            <span data-i18n="prem.feat3.desc">全コンテンツをA4 8ページのPDFで保存・印刷可能</span>
           </div>
         </li>
         <li>
           <span class="feature-num">07</span>
           <div>
-            <strong>高解像度の結果カード画像</strong>
-            <span>SNSでのシェアにそのまま使える、印刷品質の画像</span>
+            <strong data-i18n="prem.feat4.title">高解像度の結果カード画像</strong>
+            <span data-i18n="prem.feat4.desc">SNSでのシェアにそのまま使える、印刷品質の画像</span>
           </div>
         </li>
       </ul>
@@ -3710,11 +3710,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- 価格＆購入ボタン -->
     <div class="premium-cta">
       <div class="premium-price-row">
-        <div class="premium-price-label">プレミアムレポート</div>
+        <div class="premium-price-label" data-i18n="prem.price.label">プレミアムレポート</div>
         <div class="premium-price">
           <span class="premium-price-currency">¥</span>
           <span class="premium-price-num">980</span>
-          <span class="premium-price-tax">（税込・買い切り）</span>
+          <span class="premium-price-tax" data-i18n="prem.price.tax">（税込・買い切り）</span>
         </div>
       </div>
 
@@ -3723,7 +3723,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span data-i18n="premium.btn">プレミアムレポートを開く</span>
       </button>
 
-      <p class="premium-note">
+      <p class="premium-note" data-i18n="prem.payment_notice">
         ※ お試し公開中につき、現在は決済システムを準備中です。<br>
         「興味あり」のクリック数を集計しています。
       </p>
@@ -3739,7 +3739,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </button>
     <button class="share-btn" onclick="copyMatchLink()">
       <span class="share-btn-icon">⚭</span>
-      <span>友達との相性をみる（URLコピー）</span>
+      <span data-i18n="share.compat">友達との相性をみる（URLコピー）</span>
     </button>
     <button class="share-btn" onclick="shareResult()">
       <span class="share-btn-icon">✦</span>
@@ -3747,7 +3747,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </button>
     <button class="share-btn ghost" onclick="showGallery()">
       <span class="share-btn-icon">◇</span>
-      <span>キャラクター図鑑を見る（全8体）</span>
+      <span data-i18n="share.gallery">キャラクター図鑑を見る（全8体）</span>
     </button>
     <button class="share-btn ghost" onclick="restart()">
       <span class="share-btn-icon">↻</span>
@@ -3756,53 +3756,53 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <p class="disclaimer" data-i18n="title.disclaimer">
-    本診断は、ハワード・ガードナーの多重知能理論（MI理論）を着想源とした、じぶんマトリクス独自のエンターテインメント診断です。学術的・心理学的な診断や評価を行うものではなく、結果は娯楽・自己理解の参考としてお楽しみください。
+    <span data-i18n="result.disclaimer"></span>
   </p>
 
-  <div class="footer-mark">— じぶんマトリクス · Inspired by Howard Gardner's MI Theory —</div>
+  <div class="footer-mark" data-i18n="footer.mark">— じぶんマトリクス · Inspired by Howard Gardner's MI Theory —</div>
   </section>
 
 <!-- ============ GALLERY SCREEN ============ -->
 <section id="screen-gallery" class="screen">
-  <div class="top-mark">Character Gallery · 全8キャラ図鑑</div>
+  <div class="top-mark" data-i18n="gallery.topmark">Character Gallery · 全8キャラ図鑑</div>
 
   <div class="hero" style="padding: 10px 0 20px;">
     <h1 style="font-size: clamp(28px, 6vw, 38px);">
-      キャラクター図鑑
+      <span data-i18n="gallery.title">キャラクター図鑑</span>
       <span class="accent" style="font-size: 0.4em;">All 8 Talents of Jibu-Mato</span>
     </h1>
   </div>
 
   <div class="gallery-grid" id="galleryGrid"></div>
 
-  <button class="share-btn" onclick="goBackFromGallery()">← 戻る</button>
-  <div class="footer-mark" style="margin-top:40px;">— じぶんマトリクス —</div>
+  <button class="share-btn" onclick="goBackFromGallery()" data-i18n="back.btn">← 戻る</button>
+  <div class="footer-mark" style="margin-top:40px;" data-i18n="footer.short">— じぶんマトリクス —</div>
 </section>
 
 <!-- ============ MATCH SCREEN ============ -->
 <section id="screen-match" class="screen">
-  <div class="top-mark">Compatibility · 才能の相性診断</div>
+  <div class="top-mark" data-i18n="match.topmark">Compatibility · 才能の相性診断</div>
 
   <div class="hero" style="padding: 10px 0 20px;">
     <h1 style="font-size: clamp(28px, 6vw, 38px);">
-      相性をみる
+      <span data-i18n="match.title">相性をみる</span>
       <span class="accent" style="font-size: 0.4em;">Talent Compatibility Match</span>
     </h1>
     <p class="hero-sub" style="margin-top: 18px;">
-      もう一人の「じぶマトコード」を入力すると、二人の才能の相性が見られます。
+      <span data-i18n="match.desc">もう一人の「じぶマトコード」を入力すると、二人の才能の相性が見られます。</span>
     </p>
   </div>
 
   <div class="match-input-box">
-    <label>友達のじぶマトコードを入力</label>
+    <label data-i18n="match.input_label">友達のじぶマトコードを入力</label>
     <input type="text" id="matchCodeInput" placeholder="例: LI-IN-SP / 78-65-62-50-48-40-38-25" autocomplete="off">
-    <button class="start-btn" style="margin: 8px 0;" onclick="runMatch()">相性を診断する</button>
+    <button class="start-btn" style="margin: 8px 0;" onclick="runMatch()" data-i18n="match.run">相性を診断する</button>
   </div>
 
   <div id="matchResult"></div>
 
-  <button class="share-btn" onclick="goBackFromMatch()">← 戻る</button>
-  <div class="footer-mark" style="margin-top:40px;">— じぶんマトリクス —</div>
+  <button class="share-btn" onclick="goBackFromMatch()" data-i18n="back.btn">← 戻る</button>
+  <div class="footer-mark" style="margin-top:40px;" data-i18n="footer.short">— じぶんマトリクス —</div>
 </section>
 
 </div>
@@ -3813,7 +3813,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ============ INTELLIGENCE DETAIL MODAL ============ -->
 <div class="modal-backdrop" id="intelModal" onclick="if(event.target===this)closeIntelModal()">
   <div class="modal">
-    <button class="modal-close" onclick="closeIntelModal()" aria-label="閉じる">×</button>
+    <button class="modal-close" onclick="closeIntelModal()" data-i18n-aria="close" aria-label="閉じる">×</button>
     <div class="modal-header">
       <div class="modal-num" id="modalNum">— —</div>
       <span class="modal-symbol" id="modalSymbol">✦</span>
@@ -3825,19 +3825,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="modal-body">
       <div class="modal-section">
-        <div class="modal-section-label">What is it · どんな知性?</div>
+        <div class="modal-section-label" data-i18n="modal.what">What is it · どんな知性?</div>
         <p id="modalDesc">— —</p>
       </div>
       <div class="modal-section">
-        <div class="modal-section-label">Signs · こんな人</div>
+        <div class="modal-section-label" data-i18n="modal.signs">Signs · こんな人</div>
         <div class="modal-traits" id="modalTraits"></div>
       </div>
       <div class="modal-section">
-        <div class="modal-section-label">Activities · 得意なこと</div>
+        <div class="modal-section-label" data-i18n="modal.activities">Activities · 得意なこと</div>
         <div class="modal-examples" id="modalExamples"></div>
       </div>
       <div class="modal-section">
-        <div class="modal-section-label">Icons · この知性が高かった人</div>
+        <div class="modal-section-label" data-i18n="modal.icons">Icons · この知性が高かった人</div>
         <p class="modal-famous" id="modalFamous">— —</p>
       </div>
     </div>
@@ -4035,7 +4035,7 @@ function checkResumeBanner() {
 
   const banner = document.getElementById('resumeBanner');
   const text = document.getElementById('resumeBannerText');
-  text.innerHTML = `前回、<strong style="color:var(--gold-light);">${answered}問</strong> まで回答済みです。<br>続きから再開できます。`;
+  text.innerHTML = t('resume.message').replace('{n}', answered);
   banner.style.display = 'block';
 
   // スタートボタンを「最初からはじめる」に変える
@@ -4063,7 +4063,7 @@ function resumeDiagnosis() {
   document.getElementById('resumeBanner').style.display = 'none';
   showScreen('screen-question');
   renderQuestion();
-  showToast('ようこそ、続きから再開します。');
+  showToast(t('toast.welcome_back'));
 }
 
 function discardSavedAndStart() {
@@ -5581,7 +5581,7 @@ function showResult() {
     console.error('showResult error:', e);
     // 画面を強制的に結果画面に切り替えて、エラー内容を見せる
     try { showScreen('screen-result'); } catch(_){}
-    showToast('エラー: ' + (e && e.message ? e.message : String(e)), 8000);
+    showToast(t('toast.error_prefix') +  (e && e.message ? e.message : String(e)), 8000);
   }
 }
 
@@ -5916,7 +5916,7 @@ function onPremiumInterest() {
 
   // ボタンを「興味あり登録済み」状態に
   btn.classList.add('clicked');
-  btn.innerHTML = '<span class="premium-buy-icon">✓</span><span>ご興味ありがとうございます</span>';
+  btn.innerHTML = '<span class="premium-buy-icon">✓</span><span>' + t('premium.thanks_interest') + '</span>';
 
   // ローカルに記録（需要検証用）
   try {
@@ -5930,13 +5930,13 @@ function onPremiumInterest() {
     localStorage.setItem('jibumato_premium_interest', JSON.stringify(log));
   } catch (e) { /* ignore */ }
 
-  showToast('「興味あり」をカウントしました。サービス開始まで、もう少しお待ちください。', 4000);
+  showToast(t('toast.interest_counted'), 4000);
 
   // 3秒後にメッセージ表示
   setTimeout(() => {
     const note = document.querySelector('.premium-note');
     if (note) {
-      note.innerHTML = '✦ サービス開始時、ご登録のメールアドレスに先行案内をお送りします。<br>準備が整い次第お知らせします。';
+      note.innerHTML = t('premium.notice_after_interest');
       note.style.color = 'rgba(212,173,94,0.85)';
     }
   }, 800);
@@ -6127,9 +6127,9 @@ function shareResult() {
 
 function copyToClipboard(text) {
   navigator.clipboard.writeText(text).then(() => {
-    showToast('結果をコピーしました。SNSにペーストしてください。');
+    showToast(t('toast.result_copied'));
   }).catch(() => {
-    showToast('コピーできませんでした');
+    showToast(t('toast.copy_failed'));
   });
 }
 
@@ -6146,7 +6146,7 @@ function copyMatchLink() {
   }
   const matchUrl = `${baseUrl}#match=${enc}`;
   navigator.clipboard.writeText(matchUrl).then(() => {
-    showToast('相性診断用のURLをコピー!友達に送ってね。');
+    showToast(t('toast.match_url_copied'));
   }).catch(() => {
     prompt('このURLを友達に送ってください:', matchUrl);
   });
@@ -6692,7 +6692,7 @@ function _drawAnimalDirect_legacy(ctx, animal, cx, cy, size) {
 }
 
 function downloadResultCard() {
-  showToast('画像を生成しています...');
+  showToast(t('toast.image_generating'));
   // プリロード後にCanvas描画
   preloadCharImages().then(() => {
     setTimeout(_doDownloadResultCard, 50);
@@ -6819,7 +6819,7 @@ function _doDownloadResultCard() {
         link.click();
         document.body.removeChild(link);
         setTimeout(() => URL.revokeObjectURL(url), 2000);
-        showToast('画像を保存しました!');
+        showToast(t('toast.image_saved'));
       }, 'image/png');
     } else {
       downloadAsDataURL(canvas, talent);
@@ -6840,7 +6840,7 @@ function downloadAsDataURL(canvas, talent) {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    showToast('画像を保存しました!');
+    showToast(t('toast.image_saved'));
   } catch (e) {
     // 最終手段: 新規タブで開いて長押し保存してもらう
     try {
@@ -6849,12 +6849,12 @@ function downloadAsDataURL(canvas, talent) {
       if (w) {
         w.document.write('<img src="' + dataUrl + '" style="width:100%">');
         w.document.title = 'じぶマト結果カード';
-        showToast('画像を長押しして保存してください');
+        showToast(t('toast.image_long_press'));
       } else {
-        showToast('ポップアップがブロックされました');
+        showToast(t('toast.popup_blocked'));
       }
     } catch (e2) {
-      showToast('画像の生成に失敗: ' + e2.message);
+      showToast(t('toast.image_failed_prefix') +  e2.message);
     }
   }
 }
@@ -6932,7 +6932,7 @@ function runMatch() {
   const input = document.getElementById('matchCodeInput').value;
   const friendScores = parseScoresFromString(input);
   if (!friendScores) {
-    showToast('コードが正しくありません。8つの数字を「-」でつないでください。');
+    showToast(t('toast.invalid_code'));
     return;
   }
 
@@ -7296,11 +7296,21 @@ function applyLang() {
   // data-i18n属性を持つ要素を一括更新
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n;
-    el.textContent = t(key);
+    const val = t(key);
+    // HTMLタグを含む翻訳の場合は innerHTML を使用
+    if (val.indexOf('<') !== -1) {
+      el.innerHTML = val;
+    } else {
+      el.textContent = val;
+    }
   });
   // data-i18n-placeholder属性
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     el.placeholder = t(el.dataset.i18nPlaceholder);
+  });
+  // data-i18n-aria属性（aria-label用）
+  document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+    el.setAttribute('aria-label', t(el.dataset.i18nAria));
   });
 }
 
@@ -7466,6 +7476,73 @@ const I18N = {
     'cell.interpersonal': '対人',
     'cell.intrapersonal': '内省',
     'cell.naturalist':    '博物',
+  
+    // 追加翻訳（v2: HTML hardcode fix）
+    'hero.eyebrow': '— あなたの中に眠る、八つの才能 —',
+    'chapter.thinking': '— 思考の領域 —',
+    'q.back': '← 前の質問へ',
+    'q.tap_to_proceed': '回答すると次へ進みます',
+    'prem.feat1.desc': '月3〜30万円を稼ぐための、6ステップの実践プラン',
+    'prem.feat2.title': '苦手なタイプとの付き合い方',
+    'prem.feat2.desc': 'あなたを消耗させる相手の正体と、3つの対応策',
+    'prem.feat3.title': 'PDF版「じぶんの取扱説明書」',
+    'prem.feat3.desc': '全コンテンツをA4 8ページのPDFで保存・印刷可能',
+    'prem.feat4.title': '高解像度の結果カード画像',
+    'prem.feat4.desc': 'SNSでのシェアにそのまま使える、印刷品質の画像',
+    'prem.price.label': 'プレミアムレポート',
+    'prem.price.tax': '（税込・買い切り）',
+    'share.compat': '友達との相性をみる（URLコピー）',
+    'share.gallery': 'キャラクター図鑑を見る（全8体）',
+    'footer.mark': '— じぶんマトリクス · Inspired by Howard Gardner\'s MI Theory —',
+    'gallery.topmark': 'Character Gallery · 全8キャラ図鑑',
+    'back.btn': '← 戻る',
+    'match.topmark': 'Compatibility · 才能の相性診断',
+    'match.input_label': '友達のじぶマトコードを入力',
+    'match.run': '相性を診断する',
+    'modal.what': 'What is it · どんな知性?',
+    'modal.signs': 'Signs · こんな人',
+    'modal.activities': 'Activities · 得意なこと',
+    'modal.icons': 'Icons · この知性が高かった人',
+  
+    // 追加翻訳（v3: JS hardcode fix）
+    'toast.welcome_back': 'ようこそ、続きから再開します。',
+    'toast.interest_counted': '「興味あり」をカウントしました。サービス開始まで、もう少しお待ちください。',
+    'toast.result_copied': '結果をコピーしました。SNSにペーストしてください。',
+    'toast.copy_failed': 'コピーできませんでした',
+    'toast.match_url_copied': '相性診断用のURLをコピー!友達に送ってね。',
+    'toast.image_generating': '画像を生成しています...',
+    'toast.image_saved': '画像を保存しました!',
+    'toast.image_long_press': '画像を長押しして保存してください',
+    'toast.popup_blocked': 'ポップアップがブロックされました',
+    'toast.invalid_code': 'コードが正しくありません。8つの数字を「-」でつないでください。',
+    'toast.error_prefix': 'エラー: ',
+    'toast.image_failed_prefix': '画像の生成に失敗: ',
+    'resume.message': '前回、<strong style="color:var(--gold-light);">{n}問</strong> まで回答済みです。<br>続きから再開できます。',
+    'premium.thanks_interest': 'ご興味ありがとうございます',
+    'premium.notice_after_interest': '✦ サービス開始時、ご登録のメールアドレスに先行案内をお送りします。<br>準備が整い次第お知らせします。',
+  
+    // close button
+    'close': '閉じる',
+  
+    // v4: hero/premium/gallery/match
+    'hero.sub': 'ハーバード大学のハワード・ガードナーが提唱した「多重知能理論（MI理論）」をベースに、あなたの中に眠る8種類の知性を測定します。<br>性格ではなく、<em>武器</em>を知るための、じぶんの取扱説明書。',
+    'prem.intro1': '無料診断は、入り口に過ぎません。',
+    'prem.intro2': '¥980で、あなただけの「才能の取扱説明書」を解錠できます。',
+    'prem.locked': '続きはプレミアム会員限定',
+    'prem.features_label': '— Premium Report に含まれるもの —',
+    'prem.f.sci.title': '才能の科学的深掘り',
+    'prem.f.sci.desc': 'あなたの脳がなぜそう動くのか、神経科学レベルの解説（約2,000字）',
+    'prem.f.30days.title': '30日間プログラム',
+    'prem.f.30days.desc': '才能を日常に組み込むための、毎日5分の具体メニュー',
+    'prem.f.jobs.title': '100の職業リスト',
+    'prem.f.jobs.desc': 'あなたの才能が活きる100の職業を10カテゴリで分類して提示',
+    'prem.f.side.title': '副業の始め方ロードマップ',
+    'prem.payment_notice': '※ お試し公開中につき、現在は決済システムを準備中です。<br>「興味あり」のクリック数を集計しています。',
+    'gallery.title': 'キャラクター図鑑',
+    'match.title': '相性をみる',
+    'match.desc': 'もう一人の「じぶマトコード」を入力すると、二人の才能の相性が見られます。',
+    'result.disclaimer': '本診断は、ハワード・ガードナーの多重知能理論（MI理論）を着想源とした、じぶんマトリクス独自のエンターテインメント診断です。学術的・心理学的な診断や評価を行うものではなく、結果は娯楽・自己理解の参考としてお楽しみください。',
+    'footer.short': '— じぶんマトリクス —',
   },
   en: {
     // タイトル画面
@@ -7622,6 +7699,73 @@ const I18N = {
     'cell.interpersonal': 'Interpersonal',
     'cell.intrapersonal': 'Intrapersonal',
     'cell.naturalist':    'Naturalist',
+  
+    // 追加翻訳（v2: HTML hardcode fix）
+    'hero.eyebrow': '— The eight talents within you —',
+    'chapter.thinking': '— Realm of Thought —',
+    'q.back': '← Previous question',
+    'q.tap_to_proceed': 'Tap an answer to continue',
+    'prem.feat1.desc': 'A 6-step plan to earn ¥30,000–¥300,000/month',
+    'prem.feat2.title': 'How to handle difficult personality types',
+    'prem.feat2.desc': 'Who drains you, and 3 strategies to deal with them',
+    'prem.feat3.title': 'PDF: "Your Personal User Manual"',
+    'prem.feat3.desc': 'All content as an 8-page A4 PDF you can save and print',
+    'prem.feat4.title': 'High-resolution result card image',
+    'prem.feat4.desc': 'Print-quality image, ready to share on social media',
+    'prem.price.label': 'Premium Report',
+    'prem.price.tax': '(Tax incl. · One-time purchase)',
+    'share.compat': 'Check compatibility with a friend (copy URL)',
+    'share.gallery': 'View the character gallery (all 8)',
+    'footer.mark': '— Jibu-Mato · Inspired by Howard Gardner\'s MI Theory —',
+    'gallery.topmark': 'Character Gallery · All 8 Characters',
+    'back.btn': '← Back',
+    'match.topmark': 'Compatibility · Talent Match',
+    'match.input_label': 'Enter your friend\'s Jibu-Mato code',
+    'match.run': 'Check compatibility',
+    'modal.what': 'What is it · About this intelligence',
+    'modal.signs': 'Signs · You might be this type',
+    'modal.activities': 'Activities · What you excel at',
+    'modal.icons': 'Icons · Famous people with this intelligence',
+  
+    // 追加翻訳（v3: JS hardcode fix）
+    'toast.welcome_back': 'Welcome back—resuming where you left off.',
+    'toast.interest_counted': 'Thanks—your interest has been counted. We\'ll launch soon.',
+    'toast.result_copied': 'Result copied. Paste it on social media.',
+    'toast.copy_failed': 'Couldn\'t copy',
+    'toast.match_url_copied': 'Compatibility URL copied! Send it to a friend.',
+    'toast.image_generating': 'Generating image…',
+    'toast.image_saved': 'Image saved!',
+    'toast.image_long_press': 'Long-press the image to save it',
+    'toast.popup_blocked': 'Popup was blocked',
+    'toast.invalid_code': 'Invalid code. Please join 8 numbers with hyphens.',
+    'toast.error_prefix': 'Error: ',
+    'toast.image_failed_prefix': 'Failed to generate image: ',
+    'resume.message': 'Last time you answered up to <strong style="color:var(--gold-light);">question {n}</strong>.<br>You can resume from there.',
+    'premium.thanks_interest': 'Thanks for your interest',
+    'premium.notice_after_interest': '✦ When we launch, we will send an early-access notice to your registered email.<br>We will let you know as soon as everything is ready.',
+  
+    // close button
+    'close': 'Close',
+  
+    // v4: hero/premium/gallery/match
+    'hero.sub': 'Based on Howard Gardner\'s Theory of Multiple Intelligences (Harvard University), we measure the 8 kinds of intelligence that sleep within you.<br>A personal owner\'s manual—not for personality, but for your <em>weapons</em>.',
+    'prem.intro1': 'The free diagnosis is only the beginning.',
+    'prem.intro2': 'For 980 yen, unlock your personal Owner Manual of Talent.',
+    'prem.locked': 'The rest is for premium members',
+    'prem.features_label': '— What is included in the Premium Report —',
+    'prem.f.sci.title': 'Scientific deep-dive into your talents',
+    'prem.f.sci.desc': 'Why your brain works the way it does, explained at a neuroscience level (~2,000 chars)',
+    'prem.f.30days.title': '30-day program',
+    'prem.f.30days.desc': 'A daily 5-minute menu to weave your talent into everyday life',
+    'prem.f.jobs.title': '100 careers list',
+    'prem.f.jobs.desc': '100 careers where your talents thrive, organized into 10 categories',
+    'prem.f.side.title': 'Roadmap to starting a side hustle',
+    'prem.payment_notice': '* Preview launch—payment is being set up.<br>We are tallying Interested clicks for now.',
+    'gallery.title': 'Character Gallery',
+    'match.title': 'Check Compatibility',
+    'match.desc': 'Enter another person\'s Jibu-Mato code to see how your talents match.',
+    'result.disclaimer': 'This diagnosis is an entertainment tool inspired by Howard Gardner\'s Theory of Multiple Intelligences (MI Theory) and is unique to Jibu-Mato. It is not an academic or psychological evaluation—please enjoy the results as a reference for fun and self-understanding.',
+    'footer.short': '— Jibu-Mato —',
   },
 
   // ===== 中文（简体）=====
@@ -7772,6 +7916,73 @@ const I18N = {
     'cell.interpersonal': '人际',
     'cell.intrapersonal': '内省',
     'cell.naturalist':    '自然观察',
+  
+    // 追加翻訳（v2: HTML hardcode fix）
+    'hero.eyebrow': '— 沉睡在你心中的八种才能 —',
+    'chapter.thinking': '— 思维的领域 —',
+    'q.back': '← 上一题',
+    'q.tap_to_proceed': '回答后将自动进入下一题',
+    'prem.feat1.desc': '月入3万至30万日元的6步实战计划',
+    'prem.feat2.title': '与不擅长应对类型的相处之道',
+    'prem.feat2.desc': '让你疲惫的对手是谁，以及三种应对策略',
+    'prem.feat3.title': 'PDF版《自己的使用说明书》',
+    'prem.feat3.desc': '全部内容以A4 8页PDF保存与打印',
+    'prem.feat4.title': '高分辨率结果卡片图像',
+    'prem.feat4.desc': '可直接用于社交分享的印刷品质图像',
+    'prem.price.label': '高级报告',
+    'prem.price.tax': '（含税·一次性购买）',
+    'share.compat': '查看与朋友的契合度（复制URL）',
+    'share.gallery': '查看角色图鉴（全8个）',
+    'footer.mark': '— Jibu-Mato · 灵感来自加德纳的多元智能理论 —',
+    'gallery.topmark': 'Character Gallery · 全8角色图鉴',
+    'back.btn': '← 返回',
+    'match.topmark': 'Compatibility · 才能契合度诊断',
+    'match.input_label': '请输入朋友的Jibu-Mato码',
+    'match.run': '诊断契合度',
+    'modal.what': 'What is it · 这是什么样的智能?',
+    'modal.signs': 'Signs · 这种类型的人',
+    'modal.activities': 'Activities · 擅长的事',
+    'modal.icons': 'Icons · 这种智能突出的人',
+  
+    // 追加翻訳（v3: JS hardcode fix）
+    'toast.welcome_back': '欢迎回来，将从上次中断处继续。',
+    'toast.interest_counted': '已记录您的"感兴趣"。请稍待服务正式开放。',
+    'toast.result_copied': '结果已复制，请粘贴到社交平台。',
+    'toast.copy_failed': '复制失败',
+    'toast.match_url_copied': '已复制契合度诊断URL，发给朋友吧！',
+    'toast.image_generating': '正在生成图像…',
+    'toast.image_saved': '图像已保存！',
+    'toast.image_long_press': '请长按图片保存',
+    'toast.popup_blocked': '弹窗已被屏蔽',
+    'toast.invalid_code': '代码格式错误。请用"-"连接8个数字。',
+    'toast.error_prefix': '错误: ',
+    'toast.image_failed_prefix': '图像生成失败: ',
+    'resume.message': '上次已回答到 <strong style="color:var(--gold-light);">第{n}题</strong>。<br>可继续作答。',
+    'premium.thanks_interest': '感谢您的关注',
+    'premium.notice_after_interest': '✦ 服务开放时，我们将向您注册的邮箱发送优先通知。<br>准备就绪后会立即告知。',
+  
+    // close button
+    'close': '关闭',
+  
+    // v4: hero/premium/gallery/match
+    'hero.sub': '基于哈佛大学加德纳教授提出的"多元智能理论(MI理论)"，测量你心中沉睡的8种智能。<br>这不是关于性格，而是关于<em>武器</em>的——你的专属说明书。',
+    'prem.intro1': '免费诊断只是入口。',
+    'prem.intro2': '只需980日元，即可解锁专属于你的"才能使用说明书"。',
+    'prem.locked': '后续内容仅限高级会员',
+    'prem.features_label': '— 高级报告包含的内容 —',
+    'prem.f.sci.title': '才能的科学深度剖析',
+    'prem.f.sci.desc': '从神经科学层面解释你的大脑为何这样运作（约2,000字）',
+    'prem.f.30days.title': '30天计划',
+    'prem.f.30days.desc': '将才能融入日常的每日5分钟具体方案',
+    'prem.f.jobs.title': '100种职业清单',
+    'prem.f.jobs.desc': '将适合你才能的100种职业分10个类别呈现',
+    'prem.f.side.title': '副业起步路线图',
+    'prem.payment_notice': '※ 试运行期间，结算系统正在准备中。<br>暂时统计"感兴趣"的点击数。',
+    'gallery.title': '角色图鉴',
+    'match.title': '查看契合度',
+    'match.desc': '输入他人的Jibu-Mato码，即可查看你们才能的契合度。',
+    'result.disclaimer': '本诊断借鉴加德纳的多元智能理论(MI理论)，是Jibu-Mato独立设计的娱乐性诊断。并非学术或心理评估，请将结果作为娱乐与自我理解的参考。',
+    'footer.short': '— Jibu-Mato —',
   },
 
   // ===== 한국어 =====
@@ -7922,6 +8133,73 @@ const I18N = {
     'cell.interpersonal': '대인관계',
     'cell.intrapersonal': '자기성찰',
     'cell.naturalist':    '자연탐구',
+  
+    // 追加翻訳（v2: HTML hardcode fix）
+    'hero.eyebrow': '— 당신 안에 잠든 여덟 가지 재능 —',
+    'chapter.thinking': '— 사고의 영역 —',
+    'q.back': '← 이전 질문으로',
+    'q.tap_to_proceed': '답하시면 다음으로 진행됩니다',
+    'prem.feat1.desc': '월 3~30만 엔을 벌기 위한 6단계 실천 플랜',
+    'prem.feat2.title': '맞지 않는 유형과 잘 지내는 법',
+    'prem.feat2.desc': '당신을 지치게 하는 상대의 정체와 3가지 대처법',
+    'prem.feat3.title': 'PDF판 「자신의 취급설명서」',
+    'prem.feat3.desc': '전체 콘텐츠를 A4 8페이지 PDF로 저장·인쇄 가능',
+    'prem.feat4.title': '고해상도 결과 카드 이미지',
+    'prem.feat4.desc': 'SNS 공유에 그대로 사용할 수 있는 인쇄 품질의 이미지',
+    'prem.price.label': '프리미엄 리포트',
+    'prem.price.tax': '(부가세 포함·1회 구매)',
+    'share.compat': '친구와의 궁합 보기 (URL 복사)',
+    'share.gallery': '캐릭터 도감 보기 (전 8체)',
+    'footer.mark': '— Jibu-Mato · 하워드 가드너의 MI 이론에서 영감 —',
+    'gallery.topmark': 'Character Gallery · 전 8 캐릭터 도감',
+    'back.btn': '← 돌아가기',
+    'match.topmark': 'Compatibility · 재능 궁합 진단',
+    'match.input_label': '친구의 Jibu-Mato 코드 입력',
+    'match.run': '궁합 진단하기',
+    'modal.what': 'What is it · 어떤 지능인가?',
+    'modal.signs': 'Signs · 이런 사람',
+    'modal.activities': 'Activities · 잘하는 것',
+    'modal.icons': 'Icons · 이 지능이 뛰어난 사람',
+  
+    // 追加翻訳（v3: JS hardcode fix）
+    'toast.welcome_back': '환영합니다. 이어서 진행합니다.',
+    'toast.interest_counted': '「관심 있음」을 카운트했습니다. 서비스 시작까지 조금만 기다려 주세요.',
+    'toast.result_copied': '결과를 복사했습니다. SNS에 붙여넣어 주세요.',
+    'toast.copy_failed': '복사하지 못했습니다',
+    'toast.match_url_copied': '궁합 진단 URL을 복사했습니다! 친구에게 보내보세요.',
+    'toast.image_generating': '이미지를 생성 중입니다…',
+    'toast.image_saved': '이미지를 저장했습니다!',
+    'toast.image_long_press': '이미지를 길게 눌러 저장해 주세요',
+    'toast.popup_blocked': '팝업이 차단되었습니다',
+    'toast.invalid_code': '코드가 올바르지 않습니다. 8개의 숫자를 「-」로 연결해 주세요.',
+    'toast.error_prefix': '오류: ',
+    'toast.image_failed_prefix': '이미지 생성 실패: ',
+    'resume.message': '지난번에 <strong style="color:var(--gold-light);">{n}번 문항</strong>까지 답변하셨습니다.<br>이어서 진행할 수 있습니다.',
+    'premium.thanks_interest': '관심을 가져주셔서 감사합니다',
+    'premium.notice_after_interest': '✦ 서비스 시작 시, 등록하신 이메일로 사전 안내를 보내드립니다.<br>준비가 되는 대로 알려드리겠습니다.',
+  
+    // close button
+    'close': '닫기',
+  
+    // v4: hero/premium/gallery/match
+    'hero.sub': '하버드 대학의 하워드 가드너가 제창한「다중지능 이론(MI 이론)」을 기반으로, 당신 안에 잠든 8종류의 지능을 측정합니다.<br>성격이 아닌, <em>무기</em>를 알기 위한, 자신의 취급설명서.',
+    'prem.intro1': '무료 진단은 입구에 불과합니다.',
+    'prem.intro2': '980엔으로, 당신만의「재능 취급설명서」를 해제할 수 있습니다.',
+    'prem.locked': '이후 내용은 프리미엄 회원 전용',
+    'prem.features_label': '— Premium Report에 포함된 내용 —',
+    'prem.f.sci.title': '재능의 과학적 심층 분석',
+    'prem.f.sci.desc': '당신의 뇌가 왜 그렇게 작동하는지, 신경과학 수준의 해설 (약 2,000자)',
+    'prem.f.30days.title': '30일간 프로그램',
+    'prem.f.30days.desc': '재능을 일상에 녹여내기 위한, 매일 5분의 구체적 메뉴',
+    'prem.f.jobs.title': '100가지 직업 리스트',
+    'prem.f.jobs.desc': '당신의 재능이 빛나는 100가지 직업을 10개 카테고리로 분류해 제시',
+    'prem.f.side.title': '부업 시작 로드맵',
+    'prem.payment_notice': '※ 시범 공개 중이라 결제 시스템을 준비 중입니다.<br>「관심 있음」 클릭 수를 집계하고 있습니다.',
+    'gallery.title': '캐릭터 도감',
+    'match.title': '궁합 보기',
+    'match.desc': '다른 사람의 Jibu-Mato 코드를 입력하면 두 사람의 재능 궁합을 볼 수 있습니다.',
+    'result.disclaimer': '본 진단은 하워드 가드너의 다중지능 이론(MI 이론)에서 착안한 Jibu-Mato 독자 엔터테인먼트 진단입니다. 학술적·심리학적 평가가 아니며, 결과는 즐거움과 자기 이해의 참고로 즐겨주세요.',
+    'footer.short': '— Jibu-Mato —',
   }
 };
 
