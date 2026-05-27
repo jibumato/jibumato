@@ -3847,15 +3847,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>
 // ============ INTELLIGENCE DEFINITIONS ============
 const INTELLIGENCES = {
-  linguistic: { name: '言語的知能', en: 'Linguistic', symbol: '📜', color: '#8a2922' },
-  logical:    { name: '論理数学的知能', en: 'Logical-Mathematical', symbol: '∞', color: '#2c3e5c' },
-  spatial:    { name: '空間的知能', en: 'Spatial', symbol: '◇', color: '#5a3a4a' },
-  musical:    { name: '音楽的知能', en: 'Musical', symbol: '♪', color: '#b8893a' },
-  bodily:     { name: '身体運動的知能', en: 'Bodily-Kinesthetic', symbol: '✦', color: '#4a5d3a' },
-  interpersonal: { name: '対人的知能', en: 'Interpersonal', symbol: '✧', color: '#a05a3a' },
-  intrapersonal: { name: '内省的知能', en: 'Intrapersonal', symbol: '◯', color: '#3a5a5a' },
-  naturalist: { name: '博物的知能', en: 'Naturalist', symbol: '❋', color: '#5a6a3a' }
+  linguistic: { name: '言語的知能', name_en: 'Linguistic Intelligence', name_zh: '语言智能', name_ko: '언어 지능', en: 'Linguistic', symbol: '📜', color: '#8a2922' },
+  logical:    { name: '論理数学的知能', name_en: 'Logical-Mathematical Intelligence', name_zh: '逻辑数学智能', name_ko: '논리수학 지능', en: 'Logical-Mathematical', symbol: '∞', color: '#2c3e5c' },
+  spatial:    { name: '空間的知能', name_en: 'Spatial Intelligence', name_zh: '空间智能', name_ko: '공간 지능', en: 'Spatial', symbol: '◇', color: '#5a3a4a' },
+  musical:    { name: '音楽的知能', name_en: 'Musical Intelligence', name_zh: '音乐智能', name_ko: '음악 지능', en: 'Musical', symbol: '♪', color: '#b8893a' },
+  bodily:     { name: '身体運動的知能', name_en: 'Bodily-Kinesthetic Intelligence', name_zh: '身体动觉智能', name_ko: '신체운동 지능', en: 'Bodily-Kinesthetic', symbol: '✦', color: '#4a5d3a' },
+  interpersonal: { name: '対人的知能', name_en: 'Interpersonal Intelligence', name_zh: '人际智能', name_ko: '대인관계 지능', en: 'Interpersonal', symbol: '✧', color: '#a05a3a' },
+  intrapersonal: { name: '内省的知能', name_en: 'Intrapersonal Intelligence', name_zh: '内省智能', name_ko: '내적성찰 지능', en: 'Intrapersonal', symbol: '◯', color: '#3a5a5a' },
+  naturalist: { name: '博物的知能', name_en: 'Naturalist Intelligence', name_zh: '自然观察智能', name_ko: '자연친화 지능', en: 'Naturalist', symbol: '❋', color: '#5a6a3a' }
 };
+
+// 言語別の知能名取得
+function getIntName(key) {
+  const info = INTELLIGENCES[key];
+  if (!info) return '';
+  if (currentLang === 'en') return info.name_en || info.name;
+  if (currentLang === 'zh') return info.name_zh || info.name;
+  if (currentLang === 'ko') return info.name_ko || info.name;
+  return info.name;
+}
+
+// 短縮名（「言語的知能」→「言語」など）
+function getIntShortName(key) {
+  return getIntName(key)
+    .replace('的知能', '')
+    .replace(' Intelligence', '')
+    .replace(' 智能', '')
+    .replace(' 지능', '');
+}
 
 // ============ INTELLIGENCE EXPLANATIONS (for modal) ============
 const INTELLIGENCE_INFO = {
@@ -3866,6 +3885,23 @@ const INTELLIGENCE_INFO = {
     traits: ['語彙が豊富', '本や文章が好き', '言葉遊びが得意', '記憶力が良い', '説明が上手', '比喩を使うのが好き'],
     examples: ['文章を書く', 'スピーチをする', '本を読む', '言語学習', '議論する', '物語を語る'],
     famous: '<strong>村上春樹</strong>(作家)・<strong>糸井重里</strong>(コピーライター)・<strong>マヤ・アンジェロウ</strong>(詩人)・<strong>バラク・オバマ</strong>(政治家)'
+  ,
+
+    tagline_en: "Intelligence that treats words as tools to move the world.",
+    tagline_zh: "能将语言当作推动世界之工具的智能。",
+    tagline_ko: "말을, 세상을 움직이기 위한 도구로 다루는 지능.",
+    desc_en: "Intelligence sensitive to meaning, nuance, rhythm, and sound of words, deepening thought through speaking, writing, reading, and listening. Persuasive speeches, memorable one-line copy, building long narratives—all fall in this domain. Your greatest weapon is the translation skill that turns \"the ineffable\" into words.",
+    desc_zh: "对语言的意义、语感、音节、节奏敏感，能通过说·写·读·听来深化思考的智能。无论是说服他人的演讲、令人难忘的一句文案，还是长篇故事的构筑，都在这一智能的领域内。把「无法言喻」之物「化作言语」的翻译力是你最大的武器。",
+    desc_ko: "말의 의미와 뉘앙스, 울림, 리듬에 민감하고, 말하기·쓰기·읽기·듣기를 통해 사고를 깊게 하는 타입의 지능입니다. 누군가를 설득하는 스피치도, 마음에 남는 한 줄의 카피도, 긴 이야기의 구축도, 모두 이 지능의 영역. 「말로 표현할 수 없는」 것을 「말로 표현하는」 번역력이 최대의 무기가 됩니다.",
+    traits_en: ["Rich vocabulary", "Loves books and writing", "Good at wordplay", "Strong memory", "Skilled explainer", "Loves using metaphors"],
+    traits_zh: ["词汇丰富", "喜欢书与文章", "擅长文字游戏", "记忆力好", "善于讲解", "喜欢使用比喻"],
+    traits_ko: ["어휘가 풍부", "책과 글을 좋아함", "말장난을 잘함", "기억력이 좋음", "설명을 잘함", "비유를 자주 사용"],
+    examples_en: ["Writing", "Public speaking", "Reading", "Language learning", "Debating", "Storytelling"],
+    examples_zh: ["写作", "演讲", "阅读", "语言学习", "辩论", "讲故事"],
+    examples_ko: ["글쓰기", "연설하기", "책 읽기", "언어 학습", "토론", "이야기 전하기"],
+    famous_en: "<strong>Haruki Murakami</strong> (novelist) · <strong>Shigesato Itoi</strong> (copywriter) · <strong>Maya Angelou</strong> (poet) · <strong>Barack Obama</strong> (politician)",
+    famous_zh: "<strong>村上春树</strong>(作家) · <strong>糸井重里</strong>(文案大师) · <strong>玛雅·安杰卢</strong>(诗人) · <strong>巴拉克·奥巴马</strong>(政治家)",
+    famous_ko: "<strong>무라카미 하루키</strong>(작가) · <strong>이토이 시게사토</strong>(카피라이터) · <strong>마야 안젤루</strong>(시인) · <strong>버락 오바마</strong>(정치인)"
   },
   logical: {
     num: '02',
@@ -3874,6 +3910,23 @@ const INTELLIGENCE_INFO = {
     traits: ['筋道立てて考える', '数字に強い', '原因と結果を追う', '矛盾に気づく', '分析が好き', 'パズルが好き'],
     examples: ['プログラミング', 'データ分析', '科学実験', 'チェス・将棋', '会計', '戦略を立てる'],
     famous: '<strong>アインシュタイン</strong>(物理学者)・<strong>イーロン・マスク</strong>(実業家)・<strong>羽生善治</strong>(棋士)・<strong>ビル・ゲイツ</strong>(起業家)'
+  ,
+
+    tagline_en: "Intelligence that reads the world through numbers and rules.",
+    tagline_zh: "以「数」与「规则」解读世界的智能。",
+    tagline_ko: "세상을 「숫자」와 「규칙」으로 풀어내는 지능.",
+    desc_en: "Intelligence skilled at perceiving causal relationships, laws, and patterns, enjoying logical reasoning and handling numbers/data. The power to ask \"why does this happen?\", break down complex problems, and handle abstract concepts. It shines in science, math, programming, as well as in strategy and decision-making.",
+    desc_zh: "擅长看清事物的因果关系、规律性、模式，能享受逻辑推理与处理数值·数据的智能。深入思考「为什么会这样?」的能力，分解复杂问题并整理的能力，处理抽象概念的能力。不仅在科学、数学、编程领域，在战略制定和决策场合中也能发挥力量。",
+    desc_ko: "사물의 인과관계와 법칙성·패턴을 꿰뚫는 데 뛰어나고, 논리적 추론이나 수치·데이터를 다루는 것을 즐길 수 있는 타입의 지능입니다. 「왜 그렇게 되는가?」를 끝까지 생각하는 힘, 복잡한 문제를 분해해 정리하는 힘, 추상적 개념을 다루는 힘. 과학·수학·프로그래밍뿐 아니라 전략 수립과 의사결정 장면에서도 힘을 발휘합니다.",
+    traits_en: ["Thinks methodically", "Strong with numbers", "Tracks cause and effect", "Notices contradictions", "Loves analysis", "Enjoys puzzles"],
+    traits_zh: ["有条理地思考", "善于数字", "追踪因果", "察觉矛盾", "喜欢分析", "喜欢谜题"],
+    traits_ko: ["논리정연하게 생각", "숫자에 강함", "원인과 결과를 추적", "모순을 알아챔", "분석을 좋아함", "퍼즐을 좋아함"],
+    examples_en: ["Programming", "Data analysis", "Science experiments", "Chess", "Accounting", "Strategy building"],
+    examples_zh: ["编程", "数据分析", "科学实验", "国际象棋·将棋", "会计", "战略制定"],
+    examples_ko: ["프로그래밍", "데이터 분석", "과학 실험", "체스·장기", "회계", "전략 수립"],
+    famous_en: "<strong>Einstein</strong> (physicist) · <strong>Elon Musk</strong> (entrepreneur) · <strong>Yoshiharu Habu</strong> (shogi master) · <strong>Bill Gates</strong> (entrepreneur)",
+    famous_zh: "<strong>爱因斯坦</strong>(物理学家) · <strong>埃隆·马斯克</strong>(企业家) · <strong>羽生善治</strong>(棋手) · <strong>比尔·盖茨</strong>(创业者)",
+    famous_ko: "<strong>아인슈타인</strong>(물리학자) · <strong>일론 머스크</strong>(기업가) · <strong>하부 요시하루</strong>(쇼기 기사) · <strong>빌 게이츠</strong>(창업가)"
   },
   spatial: {
     num: '03',
@@ -3882,6 +3935,23 @@ const INTELLIGENCE_INFO = {
     traits: ['方向感覚が良い', '絵やデザインが得意', '色やレイアウトに敏感', '頭の中でイメージできる', '映像記憶が強い', '空間把握力が高い'],
     examples: ['絵を描く', 'デザインする', '写真を撮る', '地図を読む', '3Dモデリング', 'インテリア配置'],
     famous: '<strong>ピカソ</strong>(画家)・<strong>安藤忠雄</strong>(建築家)・<strong>宮崎駿</strong>(アニメ監督)・<strong>レオナルド・ダ・ヴィンチ</strong>(芸術家)'
+  ,
+
+    tagline_en: "Intelligence that freely moves images and 3D forms in the mind.",
+    tagline_zh: "能在脑中自由移动「影像」与「立体」的智能。",
+    tagline_ko: "머릿속에서 「영상」과 「입체」를 자유롭게 움직일 수 있는 지능.",
+    desc_en: "Intelligence skilled at visually perceiving shape, color, space, and positional relationships, building and rotating images in the mind. It shines in design, architecture, maps, 3D, photography—any field that composes the visible. Diagrams over text, pictures over explanation—the world is, for you, one grand visual work.",
+    desc_zh: "能视觉化地把握形态·色彩·空间·位置关系，擅长在脑中构筑和旋转影像的智能。在设计·建筑·地图·3D·摄影等构筑可见之物的领域中发挥力量。比起文字更喜欢图，比起说明更喜欢画——对你而言，世界就是一幅巨大的视觉作品。",
+    desc_ko: "형태·색·공간·위치관계를 시각적으로 포착하고, 머릿속에서 이미지를 구축하거나 회전시키는 데 뛰어난 타입의 지능입니다. 디자인·건축·지도·3D·사진 등 보이는 것을 구성하는 분야에서 힘을 발휘합니다. 글보다 그림, 설명보다 그림—당신에게 세상은 하나의 거대한 비주얼 작품입니다.",
+    traits_en: ["Good sense of direction", "Skilled at drawing/design", "Sensitive to color and layout", "Can visualize mentally", "Strong visual memory", "High spatial awareness"],
+    traits_zh: ["方向感好", "擅长绘画和设计", "对色彩和布局敏感", "能在脑中视觉化", "视觉记忆强", "空间把握能力高"],
+    traits_ko: ["방향감각이 좋음", "그림·디자인에 능함", "색·레이아웃에 민감", "머릿속으로 시각화", "영상 기억이 강함", "공간 파악력이 높음"],
+    examples_en: ["Drawing", "Designing", "Photography", "Reading maps", "3D modeling", "Interior arrangement"],
+    examples_zh: ["画画", "设计", "拍照", "看地图", "3D建模", "室内布置"],
+    examples_ko: ["그림 그리기", "디자인하기", "사진 찍기", "지도 읽기", "3D 모델링", "인테리어 배치"],
+    famous_en: "<strong>Picasso</strong> (painter) · <strong>Tadao Ando</strong> (architect) · <strong>Hayao Miyazaki</strong> (animator) · <strong>Leonardo da Vinci</strong> (artist)",
+    famous_zh: "<strong>毕加索</strong>(画家) · <strong>安藤忠雄</strong>(建筑师) · <strong>宫崎骏</strong>(动画导演) · <strong>列奥纳多·达·芬奇</strong>(艺术家)",
+    famous_ko: "<strong>피카소</strong>(화가) · <strong>안도 타다오</strong>(건축가) · <strong>미야자키 하야오</strong>(애니메이션 감독) · <strong>레오나르도 다 빈치</strong>(예술가)"
   },
   musical: {
     num: '04',
@@ -3890,6 +3960,23 @@ const INTELLIGENCE_INFO = {
     traits: ['リズム感がある', '音程を聴き分けられる', '音楽で気分が変わる', '声色に敏感', '替え歌が得意', '雑音に敏感'],
     examples: ['楽器を弾く', '作曲する', '歌う', 'DJをする', 'ポッドキャストを聴く', '音響を整える'],
     famous: '<strong>坂本龍一</strong>(作曲家)・<strong>モーツァルト</strong>(作曲家)・<strong>宇多田ヒカル</strong>(歌手)・<strong>ビヨンセ</strong>(歌手)'
+  ,
+
+    tagline_en: "Intelligence that turns sounds, rhythms, and tones into emotion.",
+    tagline_zh: "把声音·节奏·音色转化为情感的智能。",
+    tagline_ko: "소리·리듬·음색을 감정으로 바꾸는 지능.",
+    desc_en: "Intelligence that grasps the subtle differences in rhythm, pitch, timbre, and silence, and uses them to express emotion. Beyond music itself, it shines in podcasting, voice coaching, atmosphere-reading, audio engineering, and event production. Your essence is the listening of a conductor.",
+    desc_zh: "能把握节奏·音高·音色·静默的细微差异，并用之表达情感的智能。不止音乐本身，在播客、声音指导、读空气、音响工程、活动制作等领域同样耀眼。你的本质，是指挥家的聆听。",
+    desc_ko: "리듬·음높이·음색·침묵의 미묘한 차이를 포착하고, 그것을 통해 감정을 표현하는 지능입니다. 음악 자체뿐 아니라 팟캐스트, 보이스 코칭, 분위기 읽기, 음향 엔지니어링, 이벤트 제작 등에서도 빛납니다. 당신의 본질은 지휘자의 청취입니다.",
+    traits_en: ["Strong rhythm sense", "Detects subtle tone changes", "Loves music", "Mood-sensitive", "Sings or plays instruments", "Reads the atmosphere"],
+    traits_zh: ["节奏感强", "能察觉细微音色变化", "热爱音乐", "对情绪敏感", "唱歌或演奏", "会读空气"],
+    traits_ko: ["리듬감이 강함", "음색 변화 포착", "음악을 좋아함", "분위기에 민감", "노래·악기 연주", "분위기를 읽음"],
+    examples_en: ["Playing instruments", "Composing", "DJ-ing", "Podcasting", "Sound design", "Curating playlists"],
+    examples_zh: ["演奏乐器", "作曲", "当DJ", "播客主持", "声音设计", "策划歌单"],
+    examples_ko: ["악기 연주", "작곡", "DJ 하기", "팟캐스트", "사운드 디자인", "플레이리스트 큐레이션"],
+    famous_en: "<strong>Mozart</strong> (composer) · <strong>Ryuichi Sakamoto</strong> (composer) · <strong>Hikaru Utada</strong> (singer) · <strong>Beyoncé</strong> (singer)",
+    famous_zh: "<strong>莫扎特</strong>(作曲家) · <strong>坂本龙一</strong>(作曲家) · <strong>宇多田光</strong>(歌手) · <strong>碧昂丝</strong>(歌手)",
+    famous_ko: "<strong>모차르트</strong>(작곡가) · <strong>사카모토 류이치</strong>(작곡가) · <strong>우타다 히카루</strong>(가수) · <strong>비욘세</strong>(가수)"
   },
   bodily: {
     num: '05',
@@ -3898,6 +3985,23 @@ const INTELLIGENCE_INFO = {
     traits: ['手先が器用', '運動が得意', '動きながら考える', '体で覚えるのが早い', 'リズム感が良い', 'ものづくりが好き'],
     examples: ['スポーツ', 'ダンス', '料理', '手芸・工作', '楽器演奏', '演技・パフォーマンス'],
     famous: '<strong>イチロー</strong>(野球選手)・<strong>大谷翔平</strong>(野球選手)・<strong>チャップリン</strong>(俳優)・<strong>マイケル・ジョーダン</strong>(バスケ選手)'
+  ,
+
+    tagline_en: "Intelligence that thinks with the body, not the head.",
+    tagline_zh: "用身体思考而非头脑的智能。",
+    tagline_ko: "머리가 아닌 몸으로 생각하는 지능.",
+    desc_en: "Intelligence that perceives the world through bodily sensation, dexterity, balance, and rhythm. Athletes, surgeons, dancers, chefs, craftsmen—anywhere skilled hands or refined movement matter, this intelligence shines. Your body knows answers before your mind can articulate them.",
+    desc_zh: "通过身体感觉、手指灵巧、平衡感、节奏感来感知世界的智能。运动员·外科医生·舞者·厨师·工匠——凡需要灵巧之手或精妙动作之处，这种智能都将闪耀。你的身体在头脑能说明之前，就已经知道答案。",
+    desc_ko: "신체 감각·손재주·균형감·리듬감으로 세상을 지각하는 지능입니다. 운동선수·외과의·댄서·요리사·장인 등, 능숙한 손이나 정련된 동작이 중요한 곳에서 빛납니다. 당신의 몸은 머리가 표현하기 전에 이미 답을 알고 있습니다.",
+    traits_en: ["Athletic ability", "Dexterous hands", "Strong balance", "Likes hands-on activities", "Learns by doing", "Body-aware"],
+    traits_zh: ["有运动能力", "手指灵巧", "平衡感强", "喜欢动手活动", "边做边学", "身体感觉强"],
+    traits_ko: ["운동 능력", "손재주가 좋음", "균형감이 강함", "직접 해보는 활동을 좋아함", "하면서 배움", "신체 감각이 예민"],
+    examples_en: ["Sports", "Dance", "Surgery", "Cooking", "Craftsmanship", "Acting"],
+    examples_zh: ["运动", "舞蹈", "外科手术", "烹饪", "手工艺", "演戏"],
+    examples_ko: ["스포츠", "댄스", "외과 수술", "요리", "장인 기술", "연기"],
+    famous_en: "<strong>Ichiro</strong> (baseball) · <strong>Beyoncé</strong> (dance/performance) · <strong>Cristiano Ronaldo</strong> (footballer) · <strong>Jiro Ono</strong> (sushi master)",
+    famous_zh: "<strong>铃木一朗</strong>(棒球) · <strong>碧昂丝</strong>(舞蹈/表演) · <strong>克里斯蒂亚诺·罗纳尔多</strong>(足球) · <strong>小野二郎</strong>(寿司大师)",
+    famous_ko: "<strong>스즈키 이치로</strong>(야구) · <strong>비욘세</strong>(댄스/퍼포먼스) · <strong>크리스티아누 호날두</strong>(축구) · <strong>오노 지로</strong>(스시 장인)"
   },
   interpersonal: {
     num: '06',
@@ -3906,6 +4010,23 @@ const INTELLIGENCE_INFO = {
     traits: ['空気が読める', '共感力が高い', '人の話を聞ける', '初対面でも打ち解ける', '人をまとめる', '相談されやすい'],
     examples: ['人の相談に乗る', 'チームをまとめる', '営業・接客', '教える・コーチする', 'イベント主催', 'コミュニティ運営'],
     famous: '<strong>オプラ・ウィンフリー</strong>(司会者)・<strong>マザー・テレサ</strong>(修道女)・<strong>明石家さんま</strong>(タレント)・<strong>ダライ・ラマ</strong>(宗教指導者)'
+  ,
+
+    tagline_en: "Intelligence that reads emotions floating between people.",
+    tagline_zh: "能读取流动于人与人之间情感的智能。",
+    tagline_ko: "사람과 사람 사이를 흐르는 감정을 읽어내는 지능.",
+    desc_en: "Intelligence skilled at sensing emotions, atmospheres, and intentions between people. It is the heart of leadership, hospitality, education, sales, counseling, and community-building. Where others see only people, you see relationships, dynamics, and pulses of feeling.",
+    desc_zh: "擅长察觉人与人之间的情感、氛围、意图的智能。是领导、款待、教育、销售、咨询、社群营造的核心。他人只看见人，你却看见关系、动态与情感的脉动。",
+    desc_ko: "사람 사이의 감정·분위기·의도를 감지하는 데 뛰어난 지능입니다. 리더십·접객·교육·영업·상담·커뮤니티 만들기의 핵심입니다. 다른 사람이 사람만을 보는 곳에서, 당신은 관계와 역학과 감정의 맥동을 봅니다.",
+    traits_en: ["Empathetic", "Mediates conflicts", "Loves people", "Reads moods well", "Natural networker", "Trusted by others"],
+    traits_zh: ["富同理心", "会调解纠纷", "喜欢人", "善于读情绪", "天生善于建立人脉", "被信赖"],
+    traits_ko: ["공감 능력이 좋음", "갈등을 중재함", "사람을 좋아함", "분위기를 잘 읽음", "천성적인 네트워커", "신뢰받음"],
+    examples_en: ["Teaching", "Counseling", "Sales", "Leadership", "Event hosting", "Mentoring"],
+    examples_zh: ["教学", "咨询", "销售", "领导", "主持活动", "辅导"],
+    examples_ko: ["가르치기", "상담", "영업", "리더십", "이벤트 주최", "멘토링"],
+    famous_en: "<strong>Oprah Winfrey</strong> (broadcaster) · <strong>Nelson Mandela</strong> (statesman) · <strong>Princess Diana</strong> · <strong>Tetsuko Kuroyanagi</strong> (broadcaster)",
+    famous_zh: "<strong>奥普拉·温芙瑞</strong>(主持人) · <strong>纳尔逊·曼德拉</strong>(政治家) · <strong>戴安娜王妃</strong> · <strong>黑柳彻子</strong>(主持人)",
+    famous_ko: "<strong>오프라 윈프리</strong>(방송인) · <strong>넬슨 만델라</strong>(정치인) · <strong>다이애나 비</strong> · <strong>구로야나기 테츠코</strong>(방송인)"
   },
   intrapersonal: {
     num: '07',
@@ -3914,6 +4035,23 @@ const INTELLIGENCE_INFO = {
     traits: ['自分の感情に気づける', '一人時間が好き', '内省が深い', '自分の軸がある', '日記をつける', '哲学的に考える'],
     examples: ['日記を書く', '瞑想する', '自己分析', '目標を立てる', 'ジャーナリング', '一人旅'],
     famous: '<strong>ヴァージニア・ウルフ</strong>(作家)・<strong>カール・ユング</strong>(心理学者)・<strong>ガンジー</strong>(思想家)・<strong>養老孟司</strong>(解剖学者)'
+  ,
+
+    tagline_en: "Intelligence that journeys deep into oneself.",
+    tagline_zh: "深入自我之深处的智能。",
+    tagline_ko: "자신의 깊은 곳을 향해 여행하는 지능.",
+    desc_en: "Intelligence skilled at self-observation, regulation, and identifying your own values. Anyone can speak about themselves; not everyone can speak honestly. The unshakable axis of your life is created here. It connects directly to writing, philosophy, entrepreneurship, coaching, and the inner work of any profession.",
+    desc_zh: "擅长自我观察·调节·辨识自身价值观的智能。谁都能谈论自己，但并非人人都能诚实地谈论自己。你人生中不可动摇的轴心，正是从这里诞生。它直接连接写作·哲学·创业·教练，以及任何职业中的内在工作。",
+    desc_ko: "자기 관찰·자기 조절·자신의 가치관 식별에 뛰어난 지능입니다. 누구나 자신에 대해 말할 수 있지만, 모두가 솔직하게 말할 수 있는 것은 아닙니다. 당신 삶의 흔들리지 않는 축이, 바로 여기서 만들어집니다. 글쓰기·철학·기업가 정신·코칭, 모든 직업의 내적 작업과 직결됩니다.",
+    traits_en: ["Likes alone time", "Self-reflective", "Knows your values", "Resistant to trends", "Reads books often", "Quiet but firm"],
+    traits_zh: ["喜欢独处时间", "自我反思", "了解自身价值观", "不易随波逐流", "常读书", "安静却坚定"],
+    traits_ko: ["혼자만의 시간을 좋아함", "자기 성찰적", "자신의 가치관을 앎", "유행에 휩쓸리지 않음", "책을 자주 읽음", "조용하지만 단단함"],
+    examples_en: ["Journaling", "Meditation", "Writing essays", "Coaching", "Solo travel", "Philosophy"],
+    examples_zh: ["写日记", "冥想", "写随笔", "教练", "独自旅行", "哲学"],
+    examples_ko: ["저널링", "명상", "에세이 쓰기", "코칭", "혼자 여행", "철학"],
+    famous_en: "<strong>Carl Jung</strong> (psychologist) · <strong>Haruki Murakami</strong> (novelist) · <strong>Marcus Aurelius</strong> (emperor/philosopher) · <strong>Naoki Matayoshi</strong> (writer)",
+    famous_zh: "<strong>荣格</strong>(心理学家) · <strong>村上春树</strong>(作家) · <strong>马可·奥勒留</strong>(皇帝/哲学家) · <strong>又吉直树</strong>(作家)",
+    famous_ko: "<strong>칼 융</strong>(심리학자) · <strong>무라카미 하루키</strong>(작가) · <strong>마르쿠스 아우렐리우스</strong>(황제/철학자) · <strong>마타요시 나오키</strong>(작가)"
   },
   naturalist: {
     num: '08',
@@ -3922,6 +4060,23 @@ const INTELLIGENCE_INFO = {
     traits: ['観察力が鋭い', '整理整頓が好き', '違いに気づく', 'コレクター気質', '自然が好き', 'カタログを読む'],
     examples: ['植物・動物の世話', 'コレクション整理', '料理の素材選び', 'データ分類', 'カメラ・撮影', 'アーカイブ作り'],
     famous: '<strong>ダーウィン</strong>(博物学者)・<strong>ジェーン・グドール</strong>(動物学者)・<strong>牧野富太郎</strong>(植物学者)・<strong>さかなクン</strong>(魚類学者)'
+  ,
+
+    tagline_en: "Intelligence that classifies and connects all things in the world.",
+    tagline_zh: "将世间万物分类并连结的智能。",
+    tagline_ko: "세상 만물을 분류하고 연결하는 지능.",
+    desc_en: "Intelligence skilled at distinguishing, classifying, and connecting things in the world. From plants and animals to data, collections, and information—this intelligence powers researchers, editors, curators, archivists, librarians. You organize the chaos and present the world as a meaningful system.",
+    desc_zh: "擅长辨别·分类·联系世间事物的智能。从动植物到数据·收藏·信息——这种智能赋能研究者·编辑·策展人·档案管理员·图书馆员。你将混沌整理成秩序，把世界以有意义的体系呈现。",
+    desc_ko: "세상의 사물을 식별·분류·연결하는 데 뛰어난 지능입니다. 식물·동물부터 데이터·컬렉션·정보까지—이 지능은 연구자·편집자·큐레이터·아카이비스트·도서관 사서에게 힘을 줍니다. 당신은 혼돈을 정리하고, 세상을 의미 있는 체계로 제시합니다.",
+    traits_en: ["Loves nature", "Sharp observer", "Likes to collect", "Good at classifying", "Sensitive to differences", "Loves data"],
+    traits_zh: ["热爱自然", "观察敏锐", "喜欢收集", "善于分类", "对差异敏感", "热爱数据"],
+    traits_ko: ["자연을 사랑함", "관찰력이 예리", "수집을 좋아함", "분류에 능함", "차이에 민감", "데이터를 좋아함"],
+    examples_en: ["Field research", "Gardening", "Data curation", "Editing", "Cataloging", "Bird-watching"],
+    examples_zh: ["田野调查", "园艺", "数据策展", "编辑", "编目", "观鸟"],
+    examples_ko: ["현장 조사", "가드닝", "데이터 큐레이션", "편집", "카탈로깅", "버드워칭"],
+    famous_en: "<strong>Charles Darwin</strong> (naturalist) · <strong>Jane Goodall</strong> (primatologist) · <strong>David Attenborough</strong> (broadcaster) · <strong>Kumagusu Minakata</strong> (naturalist)",
+    famous_zh: "<strong>查尔斯·达尔文</strong>(博物学家) · <strong>珍·古道尔</strong>(灵长类学家) · <strong>大卫·爱登堡</strong>(主持人) · <strong>南方熊楠</strong>(博物学家)",
+    famous_ko: "<strong>찰스 다윈</strong>(박물학자) · <strong>제인 구달</strong>(영장류학자) · <strong>데이비드 애튼버러</strong>(방송인) · <strong>미나카타 쿠마구스</strong>(박물학자)"
   }
 };
 
@@ -4079,23 +4234,34 @@ function openIntelModal(key) {
   const meta = INTELLIGENCES[key];
   const modal = document.getElementById('intelModal');
 
+  // 言語別フィールド取得
+  const suffix = currentLang === 'en' ? '_en'
+                : currentLang === 'zh' ? '_zh'
+                : currentLang === 'ko' ? '_ko'
+                : '';
+  const tagline = info['tagline' + suffix] || info.tagline;
+  const desc = info['desc' + suffix] || info.desc;
+  const traits = info['traits' + suffix] || info.traits;
+  const examples = info['examples' + suffix] || info.examples;
+  const famous = info['famous' + suffix] || info.famous;
+
   document.getElementById('modalNum').textContent = `Intelligence ${info.num} of 08`;
   document.getElementById('modalSymbol').textContent = meta.symbol;
-  document.getElementById('modalTitleJp').textContent = meta.name;
+  document.getElementById('modalTitleJp').textContent = getIntName(key);
   document.getElementById('modalTitleEn').textContent = meta.en;
-  document.getElementById('modalTagline').textContent = info.tagline;
-  document.getElementById('modalDesc').textContent = info.desc;
+  document.getElementById('modalTagline').textContent = tagline;
+  document.getElementById('modalDesc').textContent = desc;
 
   // Traits
   const traitsEl = document.getElementById('modalTraits');
-  traitsEl.innerHTML = info.traits.map(t => `<span class="modal-trait">${t}</span>`).join('');
+  traitsEl.innerHTML = traits.map(t => `<span class="modal-trait">${t}</span>`).join('');
 
   // Examples
   const examplesEl = document.getElementById('modalExamples');
-  examplesEl.innerHTML = info.examples.map(e => `<div class="modal-example">${e}</div>`).join('');
+  examplesEl.innerHTML = examples.map(e => `<div class="modal-example">${e}</div>`).join('');
 
   // Famous
-  document.getElementById('modalFamous').innerHTML = info.famous;
+  document.getElementById('modalFamous').innerHTML = famous;
 
   // Set theme color for the modal
   modal.querySelector('.modal').style.setProperty('--modal-color', meta.color);
@@ -4119,20 +4285,30 @@ const KEYS = Object.keys(INTELLIGENCES);
 // ============ COMPOUND CHARACTER NAMING (TOP1 × TOP2) ============
 // TOP1の動詞的な才能 × TOP2の修飾語で64パターン命名
 const COMPOUND_MODIFIERS = {
-  // TOP2の知能が与える"色"
-  linguistic:    "言葉巧みな",
-  logical:       "頭脳明晰な",
-  spatial:       "美しき視野を持つ",
-  musical:       "リズムに乗る",
-  bodily:        "しなやかに動く",
-  interpersonal: "ひとに愛される",
-  intrapersonal: "深く内省する",
-  naturalist:    "観察眼鋭い"
+  linguistic: {"ja": "言葉巧みな", "en": "Eloquent", "zh": "善于言辞的", "ko": "말솜씨 좋은"},
+  logical: {"ja": "頭脳明晰な", "en": "Razor-minded", "zh": "头脑明晰的", "ko": "두뇌가 명석한"},
+  spatial: {"ja": "美しき視野を持つ", "en": "With a beautiful eye", "zh": "拥有美的视野的", "ko": "아름다운 시야를 가진"},
+  musical: {"ja": "リズムに乗る", "en": "In tune with rhythm", "zh": "踏着节奏的", "ko": "리듬을 타는"},
+  bodily: {"ja": "しなやかに動く", "en": "Lithe-moving", "zh": "动作灵动的", "ko": "유연하게 움직이는"},
+  interpersonal: {"ja": "ひとに愛される", "en": "Beloved by people", "zh": "受人喜爱的", "ko": "사람에게 사랑받는"},
+  intrapersonal: {"ja": "深く内省する", "en": "Deeply introspective", "zh": "深刻内省的", "ko": "깊이 성찰하는"},
+  naturalist: {"ja": "観察眼鋭い", "en": "Sharp-eyed observer", "zh": "观察敏锐的", "ko": "관찰안이 예리한"}
 };
 
+// COMPOUND_MODIFIERS 多言語取得
+function getCompound(key) {
+  const v = COMPOUND_MODIFIERS[key];
+  if (!v) return "";
+  return v[currentLang] || v.ja || "";
+}
+
 function makeCompoundName(top1Key, top2Key) {
-  const baseChar = TALENT_TYPES[top1Key].character;
-  const modifier = COMPOUND_MODIFIERS[top2Key];
+  const baseChar = getTalent(top1Key).character;
+  const modifier = getCompound(top2Key);
+  // 言語によって結合方法を変える
+  if (currentLang === 'en' || currentLang === 'zh' || currentLang === 'ko') {
+    return modifier + ' ' + baseChar;
+  }
   return modifier + baseChar;
 }
 
@@ -4150,15 +4326,21 @@ const COMPLEMENTARY = {
 };
 
 const PARTNERSHIP_NOTES = {
-  linguistic:    "あなたの言葉に「構造」と「根拠」を足してくれる。感性で動くあなたに、論理の翼を授けてくれる相手。",
-  logical:       "あなたの論理に「人の温度」を足してくれる。正しさだけでは動かない世界を、一緒に動かしてくれる相手。",
-  spatial:       "あなたのビジョンに「言葉」を足してくれる。誰にも伝わらなかったイメージを、ことばで翻訳してくれる相手。",
-  musical:       "あなたの感性に「設計図」を足してくれる。直感で生まれたものを、構造として残してくれる相手。",
-  bodily:        "あなたの行動に「内省の時間」を足してくれる。動き続けるあなたに、止まる勇気をくれる相手。",
-  interpersonal: "あなたの優しさに「自分軸」を足してくれる。人を優先しすぎるあなたを、引き戻してくれる相手。",
-  intrapersonal: "あなたの内なる声に「外への扉」を足してくれる。深く考えるあなたを、世界と繋いでくれる相手。",
-  naturalist:    "あなたの観察に「物語」を足してくれる。集めた知識を、誰かに届く形にしてくれる相手。"
+  linguistic: {"ja": "あなたの言葉に「構造」と「根拠」を足してくれる。感性で動くあなたに、論理の翼を授けてくれる相手。", "en": "Adds 'structure' and 'evidence' to your words. They give wings of logic to someone driven by sensibility.", "zh": "为你的言辞补上「结构」与「根据」。是为以感性行动的你，赋予逻辑之翼的伙伴。", "ko": "당신의 말에 「구조」와 「근거」를 더해줍니다. 감성으로 움직이는 당신에게, 논리의 날개를 선물해 주는 상대."},
+  logical: {"ja": "あなたの論理に「人の温度」を足してくれる。正しさだけでは動かない世界を、一緒に動かしてくれる相手。", "en": "Adds 'human warmth' to your logic. Together you can move the world that won't budge from correctness alone.", "zh": "为你的逻辑补上「人的温度」。是与你一起推动「仅靠正确无法运转之世界」的伙伴。", "ko": "당신의 논리에 「사람의 온도」를 더해줍니다. 옳음만으로는 움직이지 않는 세상을, 함께 움직여 주는 상대."},
+  spatial: {"ja": "あなたのビジョンに「言葉」を足してくれる。誰にも伝わらなかったイメージを、ことばで翻訳してくれる相手。", "en": "Adds 'words' to your vision. They translate the image that no one understood into language.", "zh": "为你的愿景补上「言语」。是把无人能懂的影像，用语言翻译出来的伙伴。", "ko": "당신의 비전에 「언어」를 더해줍니다. 누구에게도 전해지지 않던 이미지를, 말로 번역해 주는 상대."},
+  musical: {"ja": "あなたの感性に「設計図」を足してくれる。直感で生まれたものを、構造として残してくれる相手。", "en": "Adds 'blueprints' to your sensibility. They preserve what was born of intuition as structure.", "zh": "为你的感性补上「设计图」。是把直觉所生之物，作为结构留存下来的伙伴。", "ko": "당신의 감성에 「설계도」를 더해줍니다. 직관으로 태어난 것을, 구조로 남겨 주는 상대."},
+  bodily: {"ja": "あなたの行動に「内省の時間」を足してくれる。動き続けるあなたに、止まる勇気をくれる相手。", "en": "Adds 'introspective time' to your actions. They give the courage to pause to someone who keeps moving.", "zh": "为你的行动补上「内省的时间」。是为不停奔走的你，赠以停下勇气的伙伴。", "ko": "당신의 행동에 「내성의 시간」을 더해줍니다. 계속 움직이는 당신에게, 멈출 용기를 주는 상대."},
+  interpersonal: {"ja": "あなたの優しさに「自分軸」を足してくれる。人を優先しすぎるあなたを、引き戻してくれる相手。", "en": "Adds a 'self-axis' to your kindness. They pull back someone who prioritizes others too much.", "zh": "为你的温柔补上「自我之轴」。是把过分优先他人的你，拉回自身的伙伴。", "ko": "당신의 다정함에 「자기 축」을 더해줍니다. 사람을 너무 우선하는 당신을, 되돌려 주는 상대."},
+  intrapersonal: {"ja": "あなたの内なる声に「外への扉」を足してくれる。深く考えるあなたを、世界と繋いでくれる相手。", "en": "Adds 'a door to the outside' to your inner voice. They connect the deep-thinker to the world.", "zh": "为你的内在之声补上「通向外界的门」。是把深思的你，与世界连接起来的伙伴。", "ko": "당신의 내면의 목소리에 「바깥으로의 문」을 더해줍니다. 깊이 생각하는 당신을, 세상과 이어 주는 상대."},
+  naturalist: {"ja": "あなたの観察に「物語」を足してくれる。集めた知識を、誰かに届く形にしてくれる相手。", "en": "Adds a 'story' to your observations. They shape the knowledge you gather into something that reaches others.", "zh": "为你的观察补上「故事」。是把所收集的知识，塑造为能传递给他人之形的伙伴。", "ko": "당신의 관찰에 「이야기」를 더해줍니다. 모은 지식을, 누군가에게 닿는 형태로 만들어 주는 상대."}
 };
+
+function getPartnership(key) {
+  const v = PARTNERSHIP_NOTES[key];
+  if (!v) return "";
+  return v[currentLang] || v.ja || "";
+}
 
 // 同質で衝突しやすいタイプ
 const CLASH_TYPE = {
@@ -4174,55 +4356,21 @@ const CLASH_TYPE = {
 
 // ============ WEEKLY MISSIONS (才能を伸ばす習慣) ============
 const WEEKLY_MISSIONS = {
-  linguistic: [
-    "150字の日記を週3回書いてみる",
-    "新しい本を1冊、5分だけでも読み始める",
-    "好きなフレーズを3つメモして、誰かに紹介する",
-    "気になる単語の語源を1つ調べてみる"
-  ],
-  logical: [
-    "今週決めたことの「理由」を3つ言語化する",
-    "気になるデータを1つ、自分なりに分析してみる",
-    "解けてない問題を1つ、紙に書き出して整理する",
-    "なぜ?を3回繰り返す習慣を1日試す"
-  ],
-  spatial: [
-    "見たものを1日1枚スケッチしてみる",
-    "好きな部屋・建物の写真を5枚集める",
-    "頭の中のアイデアを、図や矢印で書き出す",
-    "色のパレットを1つ作ってみる"
-  ],
-  musical: [
-    "新しいプレイリストを30分かけて作る",
-    "今週聴いた音楽の感想を3行で記録する",
-    "鼻歌でいいので、1分メロディを録音してみる",
-    "環境音（雨・足音・風）に意識を向ける時間を5分"
-  ],
-  bodily: [
-    "5分のストレッチを毎日続けてみる",
-    "手で何かを作る時間を週1で確保する",
-    "歩きながらアイデアを考えてみる",
-    "新しい体の使い方を1つ試す（楽器・スポーツ・料理など）"
-  ],
-  interpersonal: [
-    "誰か1人に、感謝のメッセージを送る",
-    "相手の話を遮らずに最後まで聞く日を作る",
-    "初対面の人と短くてもいいので話してみる",
-    "チーム/家族の誰かを1人だけ褒める"
-  ],
-  intrapersonal: [
-    "今週の自分の感情を3つ言語化する",
-    "ひとり時間を30分意図的に作る",
-    "「やめたいこと」を1つだけ紙に書いてみる",
-    "自分への手紙を書いてみる（300字でOK）"
-  ],
-  naturalist: [
-    "見たことのある植物を1つ調べてみる",
-    "手持ちのコレクションを整理・分類する",
-    "公園や自然のある場所に30分滞在する",
-    "気になるテーマを1つ、図鑑のように一覧化する"
-  ]
+  linguistic: {"ja": ["150字の日記を週3回書いてみる", "新しい本を1冊、5分だけでも読み始める", "好きなフレーズを3つメモして、誰かに紹介する", "気になる単語の語源を1つ調べてみる"], "en": ["Write a 150-character diary entry 3 times this week", "Start a new book—even just 5 minutes of reading", "Note down 3 favorite phrases and share them with someone", "Look up the etymology of one word that interests you"], "zh": ["每周写3次150字日记", "开始读一本新书，哪怕只读5分钟", "记下3个喜欢的短语，分享给某人", "查阅一个感兴趣单词的词源"], "ko": ["150자 일기를 주 3회 써 보기", "새로운 책 한 권을, 5분만이라도 읽기 시작", "좋아하는 문구 3개를 메모해 누군가에게 소개", "궁금한 단어의 어원을 하나 찾아보기"]},
+  logical: {"ja": ["今週決めたことの「理由」を3つ言語化する", "気になるデータを1つ、自分なりに分析してみる", "解けてない問題を1つ、紙に書き出して整理する", "なぜ?を3回繰り返す習慣を1日試す"], "en": ["Verbalize 3 reasons behind decisions you made this week", "Pick one piece of data and analyze it your own way", "Write down one unsolved problem on paper and organize it", "Try the 'ask why 3 times' habit for one day"], "zh": ["将本周决定的「理由」语言化3条", "选一个感兴趣的数据，按自己的方式分析", "把一个未解决的问题写在纸上整理", "试着实行一天「为什么连问三次」的习惯"], "ko": ["이번 주 결정한 「이유」 3가지를 언어화하기", "궁금한 데이터 하나를 자기 방식으로 분석", "풀리지 않은 문제 하나를 종이에 적어 정리", "「왜?」를 3번 반복하는 습관을 하루 시험"]},
+  spatial: {"ja": ["見たものを1日1枚スケッチしてみる", "好きな部屋・建物の写真を5枚集める", "頭の中のアイデアを、図や矢印で書き出す", "色のパレットを1つ作ってみる"], "en": ["Sketch one thing you see each day", "Collect 5 photos of rooms or buildings you like", "Draw out ideas in your head using diagrams and arrows", "Create one color palette"], "zh": ["每天画1张所见之物的速写", "收集5张你喜欢的房间或建筑照片", "把脑中想法用图与箭头画出来", "试做一组色彩调色板"], "ko": ["본 것을 하루 한 장 스케치해 보기", "좋아하는 방·건물 사진을 5장 모으기", "머릿속 아이디어를 도형과 화살표로 적어내기", "컬러 팔레트 하나를 만들어 보기"]},
+  musical: {"ja": ["新しいプレイリストを30分かけて作る", "今週聴いた音楽の感想を3行で記録する", "鼻歌でいいので、1分メロディを録音してみる", "環境音（雨・足音・風）に意識を向ける時間を5分"], "en": ["Spend 30 minutes building a new playlist", "Record 3-line impressions of music you listened to this week", "Record a 1-minute melody—humming is fine", "Spend 5 minutes consciously listening to ambient sounds (rain, footsteps, wind)"], "zh": ["花30分钟做一个新歌单", "用3行记录本周听过的音乐感想", "用哼唱也好，录一段1分钟旋律", "用5分钟有意识地听环境音（雨声·脚步·风声）"], "ko": ["새 플레이리스트를 30분 들여 만들기", "이번 주 들은 음악의 감상을 3줄로 기록", "콧노래라도 좋으니 1분 멜로디를 녹음", "환경음(비·발소리·바람)에 의식을 두는 시간 5분"]},
+  bodily: {"ja": ["5分のストレッチを毎日続けてみる", "手で何かを作る時間を週1で確保する", "歩きながらアイデアを考えてみる", "新しい体の使い方を1つ試す（楽器・スポーツ・料理など）"], "en": ["Continue 5-minute stretching every day", "Secure weekly time to make something with your hands", "Think of ideas while walking", "Try one new way to use your body (instrument, sports, cooking, etc.)"], "zh": ["每天坚持5分钟伸展", "每周保证一次用手做点什么的时间", "边走边思考创意", "尝试一种新的身体使用方式（乐器·运动·烹饪等）"], "ko": ["5분 스트레칭을 매일 이어 보기", "손으로 무언가 만드는 시간을 주 1회 확보", "걸으면서 아이디어를 생각해 보기", "새로운 신체 사용법을 하나 시도(악기·스포츠·요리 등)"]},
+  interpersonal: {"ja": ["誰か1人に、感謝のメッセージを送る", "相手の話を遮らずに最後まで聞く日を作る", "初対面の人と短くてもいいので話してみる", "チーム/家族の誰かを1人だけ褒める"], "en": ["Send a thank-you message to one person", "Make a day where you listen to others without interrupting", "Talk—even briefly—with someone you've just met", "Praise just one person on your team or family"], "zh": ["向某一个人发送感谢消息", "选一天，听对方说话不打断到最后", "与初次见面的人短暂交谈也好", "对团队/家人中的某一人，给予一句赞美"], "ko": ["누군가 한 사람에게 감사의 메시지 보내기", "상대의 말을 끊지 않고 끝까지 듣는 날 만들기", "처음 만난 사람과 짧게라도 대화해 보기", "팀/가족 중 단 한 사람만 칭찬하기"]},
+  intrapersonal: {"ja": ["今週の自分の感情を3つ言語化する", "ひとり時間を30分意図的に作る", "「やめたいこと」を1つだけ紙に書いてみる", "自分への手紙を書いてみる（300字でOK）"], "en": ["Verbalize 3 of your own emotions this week", "Intentionally create 30 minutes of solo time", "Write down one thing you want to quit on paper", "Try writing a letter to yourself (300 characters is fine)"], "zh": ["将本周自己的情绪语言化3个", "有意识地为自己腾出30分钟的独处时间", "把一件「想戒掉的事」写在纸上", "试写一封给自己的信（300字也行）"], "ko": ["이번 주 자신의 감정 3가지를 언어화", "혼자만의 시간을 30분 의도적으로 만들기", "「그만두고 싶은 것」을 단 하나만 종이에 적기", "자신에게 보내는 편지를 써 보기(300자도 충분)"]},
+  naturalist: {"ja": ["見たことのある植物を1つ調べてみる", "手持ちのコレクションを整理・分類する", "公園や自然のある場所に30分滞在する", "気になるテーマを1つ、図鑑のように一覧化する"], "en": ["Research one plant you've seen", "Organize and classify a collection you own", "Spend 30 minutes in a park or natural setting", "Compile one theme that interests you into a field-guide-style list"], "zh": ["调查一种你见过的植物", "整理并分类手中的收藏", "在公园或自然环境中停留30分钟", "把一个感兴趣的主题，像图鉴一样列表化"], "ko": ["본 적 있는 식물 하나를 조사해 보기", "가진 컬렉션을 정리·분류하기", "공원이나 자연이 있는 곳에서 30분 머무르기", "관심 있는 테마를 하나, 도감처럼 일람화"]}
 };
+
+function getWeeklyMissions(key) {
+  const v = WEEKLY_MISSIONS[key];
+  if (!v) return [];
+  return v[currentLang] || v.ja || [];
+}
 
 // ============ PREMIUM REPORT DATA (¥980 有料レポート) ============
 // 各知能タイプごとに、無料版では出さない深い解説とキャリアを定義
@@ -4232,6 +4380,14 @@ const PREMIUM_REPORT = {
     deepDive: {
       title: "なぜあなたは「言葉」が武器なのか",
       body: "あなたの脳は、世界を「言葉のフィルター」を通して受け取り、再構築するように設計されています。これは単に語彙が豊富というレベルの話ではありません。感情を言語化する速度、語感の繊細さ、文脈を読む力——これら全てが脳内で連動して働き、他人には見えない「ことばの地図」を描いています。\n\nこの才能の本質は、目に見えない感情・思考・関係性を、誰かに伝わる形に翻訳する力です。あなたが書く一行のメッセージ、話す一言の選択、それらは無意識のうちに「相手の心に届く形」へと最適化されています。\n\nただし、注意点もあります。言葉が達者であるがゆえに、「言葉にできないもの」を軽視してしまう傾向があります。沈黙の価値、身体感覚、数字の力——これらを尊重できるかが、あなたの才能をさらに深める鍵です。"
+    ,
+
+      title_en: "Why \"words\" are your weapon",
+      title_zh: "为什么「语言」是你的武器",
+      title_ko: "왜 당신에게는 「말」이 무기인가",
+      body_en: "Your brain is wired to receive and reconstruct the world through a \"language filter.\" This is not merely about a rich vocabulary. The speed at which you verbalize emotions, the delicacy of your linguistic sensitivity, your ability to read context—all of these work together in your brain to draw a \"word map\" that others cannot see.\n\nThe essence of this talent is the power to translate invisible emotions, thoughts, and relationships into a form that reaches others. The one-line message you write, the single word you choose when speaking—they are unconsciously optimized into \"forms that reach the listener's heart.\"\n\nHowever, there is a caveat. Because you are so fluent with words, you may tend to dismiss things that \"cannot be put into words.\" Silence, bodily sensation, the power of numbers—respecting these is the key to deepening your talent further.",
+      body_zh: "你的大脑被设计为通过「语言滤镜」接收并重构世界。这不仅仅是词汇丰富的层面。你将情感语言化的速度、对语感的细腻、读取语境的能力——所有这些在你脑中协同运作，绘制出他人看不见的「语言地图」。\n\n这种才能的本质是：将看不见的情感、思考、关系翻译为能传达给他人的形式的能力。你写下的一行讯息，说话时选择的一个词，都被无意识地优化为「能抵达对方内心的形态」。\n\n但需注意。正因为擅长言语，你可能会轻视「无法言说之物」。沉默的价值、身体感觉、数字的力量——能尊重这些，正是让你的才能更进一步的关键。",
+      body_ko: "당신의 뇌는 세상을 「말의 필터」를 통해 받아들이고 재구성하도록 설계되어 있습니다. 이것은 단순히 어휘가 풍부하다는 수준의 이야기가 아닙니다. 감정을 언어화하는 속도, 어감의 섬세함, 문맥을 읽는 힘—이 모든 것이 뇌 안에서 연동하여 작동하며, 다른 사람에게는 보이지 않는 「말의 지도」를 그리고 있습니다.\n\n이 재능의 본질은, 보이지 않는 감정·사고·관계를 누군가에게 전해지는 형태로 번역하는 힘입니다. 당신이 쓰는 한 줄의 메시지, 말할 때 선택하는 한 단어—그것들은 무의식 중에 「상대의 마음에 닿는 형태」로 최적화되어 있습니다.\n\n다만 주의점도 있습니다. 말이 능숙하기에, 「말로 표현할 수 없는 것」을 경시하는 경향이 있습니다. 침묵의 가치, 신체 감각, 숫자의 힘—이것들을 존중할 수 있는지가, 당신의 재능을 더욱 깊게 만드는 열쇠입니다."
     },
     // 30日プログラム
     program: [
@@ -4277,6 +4433,14 @@ const PREMIUM_REPORT = {
     deepDive: {
       title: "なぜあなたは「構造」を見抜けるのか",
       body: "あなたの脳は、混沌とした情報の中から「パターン」を抽出することに快感を覚えるように設計されています。これは数学が得意かどうかとは別の話で、もっと深いところで世界を「関係性のネットワーク」として認識しているのです。\n\nあなたにとって、誰かの言動の矛盾、システムのバグ、社会の歪み——これらは「気持ち悪さ」として身体的に感じられます。だから他人より早く問題を発見できる。\n\n注意点は、感情を「非論理的なノイズ」として処理してしまうこと。人間関係において、これは時に冷たい印象を与えます。論理と感情は対立するものではなく、別の次元の情報だと理解できると、才能が更に開花します。"
+    ,
+
+      title_en: "Why you can see \"structure\"",
+      title_zh: "为什么你能看透「结构」",
+      title_ko: "왜 당신은 「구조」를 꿰뚫어 볼 수 있는가",
+      body_en: "Your brain is designed to find pleasure in extracting \"patterns\" from chaotic information. This is a separate matter from whether you are good at math—at a deeper level, you perceive the world as a \"network of relationships.\"\n\nTo you, the contradictions in someone's words, bugs in a system, distortions in society—these are physically felt as \"discomfort.\" That is why you can discover problems faster than others.\n\nThe caveat is treating emotions as \"illogical noise.\" In human relationships, this can sometimes give a cold impression. Logic and emotion are not in opposition; they are information of different dimensions. Understanding this lets your talent bloom further.",
+      body_zh: "你的大脑被设计为在混沌信息中提取「模式」时会感到愉悦。这与是否擅长数学是两码事，更深层面，你将世界感知为「关系性的网络」。\n\n对你而言，他人言行的矛盾、系统的bug、社会的扭曲——这些都作为「不适感」在身体上被感知。因此你能比他人更早发现问题。\n\n需要注意的是，将情感当作「非逻辑的噪声」来处理。在人际关系中，这有时会给人冷漠的印象。逻辑与情感并非对立，而是不同维度的信息。理解了这点，才能进一步绽放。",
+      body_ko: "당신의 뇌는 혼돈된 정보 속에서 「패턴」을 추출하는 것에 쾌감을 느끼도록 설계되어 있습니다. 이것은 수학을 잘하는지 여부와는 별개의 이야기이며, 더 깊은 곳에서 세상을 「관계성의 네트워크」로 인식하고 있는 것입니다.\n\n당신에게 누군가의 말의 모순, 시스템의 버그, 사회의 왜곡—이것들은 「불쾌감」으로 신체적으로 느껴집니다. 그래서 남들보다 빨리 문제를 발견할 수 있는 것입니다.\n\n주의점은, 감정을 「비논리적 노이즈」로 처리해 버리는 것입니다. 인간관계에서, 이것은 때로 차가운 인상을 줍니다. 논리와 감정은 대립하는 것이 아니라, 다른 차원의 정보임을 이해할 수 있게 되면, 재능이 더욱 꽃핍니다."
     },
     program: [
       "Day 1-5: 毎日「今日の意思決定3つ」とその理由を記録する",
@@ -4319,6 +4483,14 @@ const PREMIUM_REPORT = {
     deepDive: {
       title: "なぜあなたは「視える」のか",
       body: "あなたの脳には、世界を「3次元の地図」として捉える特別な領域が発達しています。他人が「言葉で説明されないと理解できない」ものを、あなたは一瞥して全体像を掴める。これはMRIで明確に観察できる脳の構造的特徴です。\n\n空間認識・色彩感覚・構図のセンスは、デザインや建築だけでなく、人生のあらゆる場面で「全体俯瞰」の力として働きます。会議の流れ、組織の構造、人間関係の力学——これらを「見える化」できるのがあなたの強みです。\n\n注意点は、言語化が遅いこと。頭の中に完成図があるのに、それを言葉で説明するのに時間がかかる。スケッチや図解の習慣を持つことで、この才能が「他人に伝わる」レベルに引き上がります。"
+    ,
+
+      title_en: "Why you can read \"space\" and \"form\"",
+      title_zh: "为什么你能解读「空间」与「形态」",
+      title_ko: "왜 당신은 「공간」과 「형태」를 읽어낼 수 있는가",
+      body_en: "Your brain has the ability to convert what it sees into \"three-dimensional information,\" and conversely, to convert ideas in your head into \"visible forms.\" Composition, color, the relationship of figure and ground, layout, lighting—you process all of these visual elements in a literal flash.\n\nThis talent enables creativity not only in design and architecture, but also in completely unrelated fields like programming and business. When someone says \"structure,\" you grasp it as a \"diagram\" or \"map,\" and when someone says \"logic,\" you grasp it as \"flow lines.\" Inside your brain, the world is one giant visualization.\n\nThe caveat is the discomfort of having to verbalize. Don't force yourself; getting good at presenting \"sketches\" and \"diagrams\" can become your weapon.",
+      body_zh: "你的大脑具备将所见之物转化为「立体信息」，反之将脑中想法转化为「可见形态」的能力。构图、色彩、图地关系、布局、光线——所有这些视觉元素，你都能在一瞬间处理完毕。\n\n这种才能不仅在设计与建筑领域发挥作用，在编程、商业等完全不同的领域中也能产生创造力。被说「构造」时你会把它当作「图」「地图」来把握，被说「逻辑」时你会把它当作「流动线」来把握。在你的脑中，世界就是一幅巨大的可视化作品。\n\n需要注意的是，被要求语言化时的不适。无需勉强自己，擅长用「草图」「图解」来呈现，反而能成为你的武器。",
+      body_ko: "당신의 뇌는 본 것을 「입체 정보」로 변환하고, 반대로 머릿속의 발상을 「보이는 형태」로 변환하는 능력을 가지고 있습니다. 구도, 색, 도형과 배경의 관계, 레이아웃, 조명—이 모든 시각적 요소를, 당신은 그야말로 한순간에 처리합니다.\n\n이 재능은 디자인이나 건축뿐 아니라, 프로그래밍·비즈니스 등 전혀 다른 분야에서도 창조성을 발휘합니다. 「구조」라는 말을 들으면 「도형」「지도」로 파악하고, 「논리」라는 말을 들으면 「흐름선」으로 파악합니다. 당신의 뇌 속에서, 세상은 하나의 거대한 비주얼라이제이션입니다.\n\n주의점은, 언어화를 강요받는 것에 대한 거부감입니다. 무리하지 말고, 「스케치」나 「도해」로 보여주는 것에 능숙해지면, 그것이 곧 당신의 무기가 됩니다."
     },
     program: [
       "Day 1-5: 毎日1枚、見たものをラフスケッチする（5分でOK）",
@@ -4361,6 +4533,14 @@ const PREMIUM_REPORT = {
     deepDive: {
       title: "なぜあなたは「響き」を感じるのか",
       body: "あなたの脳は、聴覚情報を感情と直結させる特別な経路を持っています。これは音楽だけでなく、人の声のトーン、環境音、会話の「間」——すべてに対する超高感度なセンサーとして機能しています。\n\n単に「耳がいい」のではなく、音から「その場の感情」を抽出する力。これは音楽家・音響エンジニアだけでなく、心理カウンセラー・営業・接客業など、あらゆる「人と関わる仕事」で武器になります。\n\n注意点は、騒がしい環境で疲弊しやすいこと。音情報をすべて拾ってしまうため、人より早く消耗します。意識的に「無音の時間」を確保することで、才能を長く保てます。"
+    ,
+
+      title_en: "Why you can hear \"rhythm\" and \"air\"",
+      title_zh: "为什么你能听见「节奏」与「空气」",
+      title_ko: "왜 당신은 「리듬」과 「공기」를 들을 수 있는가",
+      body_en: "Your brain is \"wired to listen\" the moment it encounters sound. Beyond just music—you read the rhythm of footsteps, intonation of voice, density of silence, even temperature of conversation. People often say you \"read the air well,\" but more accurately, you \"listen to the air.\"\n\nThis sensitivity creates incredible expressive power not only in music, but in podcasts, voice-overs, video editing, and event production. The art of \"pause\" comes naturally to you—and it becomes a powerful asset in business and communication too.\n\nThe caveat: you can be deeply hurt by environments with too much noise or where people don't listen carefully. Securing places where you can be still, with quality sound, is essential maintenance for your talent.",
+      body_zh: "你的大脑在接触声音的瞬间就「进入聆听模式」。不仅是音乐——你能读取脚步声的节奏、声音的语调、沉默的密度、对话的温度。常被人说「会读空气」，但更准确地说，是「在聆听空气」。\n\n这种敏感度不仅在音乐，在播客、配音、影像剪辑、活动制作等各种领域都能产生卓越的表现力。「停顿」的艺术是你的强项——在商业与沟通中，这也成为强大的武器。\n\n需要注意的是，处于噪音过多或他人不认真聆听的环境会让你深受伤害。确保能让自己安静、被好声音环绕的场所，才是维护才能必要的保养。",
+      body_ko: "당신의 뇌는 소리에 접한 순간 「듣는 모드」에 들어가도록 되어 있습니다. 음악만이 아닙니다—발소리의 리듬, 목소리의 억양, 침묵의 밀도, 대화의 온도까지, 당신은 모든 것을 「소리」로 받아들입니다. 「공기를 잘 읽는다」라는 말을 자주 듣지만, 보다 정확하게는 「공기를 듣고 있다」고 표현해야 합니다.\n\n이 감도는 음악뿐 아니라, 팟캐스트·보이스오버·영상 편집·이벤트 제작 등 다양한 분야에서 탁월한 표현력을 만들어냅니다. 「간격」의 예술이 본령—비즈니스와 커뮤니케이션에서도, 그것은 강력한 무기가 됩니다.\n\n주의할 점은, 소음이 많은 환경, 사람이 진지하게 듣지 않는 환경에서 깊이 상처받는 것. 조용히 있을 수 있는 장소, 좋은 소리에 둘러싸일 장소를 확보하는 것이, 재능을 유지하는 필수적인 케어입니다."
     },
     program: [
       "Day 1-5: 毎日30分、新しい音楽を聴き、印象を3行でメモする",
@@ -4403,6 +4583,14 @@ const PREMIUM_REPORT = {
     deepDive: {
       title: "なぜあなたは「動き」で考えるのか",
       body: "あなたの脳は、運動野と前頭前野が他の人より太く繋がっています。これにより、思考と身体の動きが分離せず、「動くこと=考えること」になっています。\n\nこれは単にスポーツが得意というレベルではありません。職人の手仕事、料理、楽器演奏、ダンス、演技——身体を通して「言葉にできない知識」を扱える力。これは現代社会で過小評価されがちですが、AI時代に最も価値が上がる才能の一つです。\n\n注意点は、長時間の座学・会議で消耗すること。じっとしていると思考も止まる。立ち会議・歩きながらの読書・スタンディングデスクなど、身体を動かせる環境を整えることで、本来の能力を発揮できます。"
+    ,
+
+      title_en: "Why your \"body\" thinks faster",
+      title_zh: "为什么你的「身体」思考得更快",
+      title_ko: "왜 당신의 「몸」은 더 빠르게 생각하는가",
+      body_en: "Your brain has built a thought system that links directly with the body. Once you start moving, ideas emerge; while you act, problems get solved. This is not \"physical strength\"—it is the ability to use the body itself as a thinking tool.\n\nThis talent excels not only in sports and crafting, but also in cooking, surgery, performance, dance—and even in fields you would not initially think of, like presentations and meetings. Your \"presence\" and \"way of using your body\" change the atmosphere of a place.\n\nThe caveat is being seen as \"an action-first person without thinking.\" However, your hand and body are already thinking before words come. Mastering the habit of \"verbalizing afterward\" lets you communicate your value to those around you.",
+      body_zh: "你的大脑构建了直接连接身体的思考系统。一旦开始动，想法就涌现；行动过程中，问题就被解决。这并非「体力派」——而是把身体本身当作思考工具的能力。\n\n这种才能不仅在运动、手工艺中，还能在烹饪、外科、表演、舞蹈，甚至演讲、会议等意想不到的场合发挥作用。你的「存在感」与「使用身体的方式」会改变场域的氛围。\n\n需要注意的是，会被看作「不思考就行动的实干派」。但实际上，在言语成形之前，你的手和身体已在思考。掌握「事后语言化」的习惯，便能将自己的价值传达给周围。",
+      body_ko: "당신의 뇌는, 신체와 직결된 사고 시스템을 구축하고 있습니다. 움직이기 시작하면 아이디어가 떠오르고, 행동하는 사이에 문제가 해결됩니다. 이것은 「체력」이 아니라, 「신체 자체를 사고 도구로 사용하는 힘」입니다.\n\n이 재능은 스포츠나 장인 기술뿐 아니라, 요리·외과·퍼포먼스·댄스, 나아가 일반적으로 생각하기 어려운 프레젠테이션·회의 등의 장면에서도 발휘됩니다. 당신의 「존재감」「몸 쓰는 방식」이 그 자리의 분위기를 바꿉니다.\n\n주의점은, 「생각하지 않고 행동하는 실천파」로 보이기 쉽다는 것. 하지만 실제로는, 말이 되기 전에, 당신의 손과 몸은 이미 생각하고 있습니다. 「나중에 언어화하는」 습관을 익히면, 자신의 가치를 주변에 전달할 수 있게 됩니다."
     },
     program: [
       "Day 1-5: 毎朝5分のストレッチ・ヨガを習慣化",
@@ -4445,6 +4633,14 @@ const PREMIUM_REPORT = {
     deepDive: {
       title: "なぜあなたは「人」が読めるのか",
       body: "あなたの脳には、ミラーニューロンと呼ばれる「他人の感情を自分のことのように感じる回路」が、特に発達しています。これは社会的な才能の根源です。\n\nあなたは、相手の表情・声のトーン・姿勢・呼吸の微細な変化を無意識に拾い、その人の感情を瞬時に推測できる。これは営業・教育・カウンセリング・マネジメント、あらゆる「人と関わる仕事」で圧倒的な優位性となります。\n\n注意点は、共感疲労です。他人の感情を吸収しすぎて、自分が空っぽになる。意識的に「他人と切り離す時間」を持つこと、内省的な活動（瞑想・日記）を取り入れることで、長く才能を保てます。"
+    ,
+
+      title_en: "Why you can read others' \"minds\"",
+      title_zh: "为什么你能读懂他人的「心」",
+      title_ko: "왜 당신은 사람의 「마음」을 읽을 수 있는가",
+      body_en: "Your brain has a strong ability to read the unverbalized layer—emotions, intentions, expectations—behind others' facial expressions, gestures, and tones. You catch what others fail to notice in a glance. This is not just being \"good at people\"; it is a high-resolution emotional sensing ability.\n\nThis talent thrives in management, sales, education, counseling, community design—any field where dealing with people is key. Your particular strength: you sense the \"feelings of the entire team and place\" rather than individuals, and you can subtly tune them.\n\nThe caveat is the pattern of over-prioritizing others and exhausting yourself. Consciously securing alone time and clearly understanding your own emotions is the key to sustaining your interpersonal talent for the long term.",
+      body_zh: "你的大脑具备强大的读取「未语言化层」——他人表情、动作、语气背后的情感、意图、期待——的能力。你一眼就能捕捉到他人没察觉的事物。这不只是「善于待人」，而是高分辨率的情感传感器能力。\n\n这种才能在管理、销售、教育、咨询、社群设计等以人为本的所有场合都能发挥作用。你尤其擅长读取「整个团队、整个场域的情感」而非个人，并能微妙地调节它。\n\n需要注意的是，过度优先他人导致自己疲惫的模式。有意识地确保独处时间，明确自身的情感，是让对人才能长期发挥的关键。",
+      body_ko: "당신의 뇌는, 타인의 표정·동작·말투의 배경에 있는 감정·의도·기대를 읽어내는—이른바 「언어화되지 않은 계층」을 읽는 힘이 강하게 작동합니다. 남이 알아차리지 못하는 것을 한눈에 포착합니다. 이것은 단순한 「사람을 잘 다루는 것」이 아니라, 고해상도의 감정 센서 능력입니다.\n\n이 재능은 매니지먼트·영업·교육·상담·커뮤니티 디자인 등 「사람을 다루는」 모든 장면에서 빛을 발합니다. 당신이 특히 강한 것은, 개인이 아닌 「팀 전체·자리 전체의 감정」을 읽고, 그것을 미묘하게 조율할 수 있다는 점입니다.\n\n주의점은, 타인을 너무 우선해서 자기 자신을 소진시키는 패턴입니다. 의식적으로 혼자만의 시간을 확보하고, 자신의 감정을 분명히 파악하는 것이, 대인 재능을 장기적으로 발휘하기 위한 열쇠입니다."
     },
     program: [
       "Day 1-5: 毎日3人の感情を観察し、メモする（推測でOK）",
@@ -4487,6 +4683,14 @@ const PREMIUM_REPORT = {
     deepDive: {
       title: "なぜあなたは「自分」を深く知れるのか",
       body: "あなたの脳は、デフォルト・モード・ネットワーク（自分について考える時に活性化する脳の回路）が他の人より発達しています。これは「自分自身を観察する」能力の生物学的な基盤です。\n\nあなたは、自分の感情・動機・矛盾を客観的に観察できる稀な存在です。SNSの流行、他人の評価、時代の風潮——これらに振り回されず、自分の軸で判断できる。これは現代において、最も希少で価値の高い才能です。\n\n注意点は、「考えすぎて動けなくなる」傾向。内省は強みですが、行動と組み合わせて初めて成果になります。「思考7：行動3」を「思考5：行動5」に寄せることが、才能を世に届ける鍵です。"
+    ,
+
+      title_en: "Why your \"inner\" gaze is sharper",
+      title_zh: "为什么你的「向内」目光更锐利",
+      title_ko: "왜 당신의 「안을 향한」 시선은 더 예리한가",
+      body_en: "Your brain has the rare ability to observe and analyze your own emotions, thoughts, and contradictions in real time. This is what we call \"high resolution toward the self.\" You always view yourself from outside, which makes you unshaken by trends and the noise of social media.\n\nThis talent matters not only in philosophy and writing, but also as the foundation for high-impact roles: entrepreneurship, leadership, coaching—any domain that requires \"the strength of one's axis.\" You're often quiet on the surface but build something significant deeply, over time.\n\nThe caveat: introspection is one-way, and you can easily end up in a \"think-too-much, can't-act\" loop. Consciously moving from \"thought 7 / action 3\" to \"thought 5 / action 5\" lets your talent reach others outside.",
+      body_zh: "你的大脑具备实时观察、分析自身情感·思考·矛盾的稀有能力。这就是所谓的「对自我的高分辨率」。你总是从外部看待自己，因而不被潮流和社交媒体的喧嚣所动摇。\n\n这种才能不仅在哲学、写作上，在创业、领导、教练等需要「自己轴线」的所有领域都成为基础。看似低调，但能在深处长期构筑重要的事物。\n\n需要注意的是，内省具有「单向性」，容易陷入「想太多无法行动」的循环。有意识地从「思七动三」调整为「思五动五」，才能将才能传递给外面的人。",
+      body_ko: "당신의 뇌는, 자신의 감정·사고·모순을 실시간으로 관찰하고 분석하는 희귀한 능력을 가지고 있습니다. 이것이 이른바 「자기에 대한 고해상도」입니다. 당신은 항상 자기 자신을 외부에서 보는 시점을 가지고 있어, 유행이나 SNS의 소음에 흔들리지 않습니다.\n\n이 재능은 철학·집필뿐 아니라, 기업가 정신·리더십·코칭 등, 「자신의 축의 강함」이 요구되는 모든 분야에서 베이스가 됩니다. 겉으로는 조용해 보이지만, 깊은 곳에서 장기적으로 중요한 것을 구축하는 사람입니다.\n\n주의점은, 내성에는 「일방통행성」이 있어, 「너무 생각해서 움직이지 못한다」는 루프에 빠지기 쉽다는 것. 「사고 7할·행동 3할」을 의식적으로 「사고 5할·행동 5할」로 가져가면, 재능이 바깥에 있는 누군가에게 닿게 됩니다."
     },
     program: [
       "Day 1-5: 毎日5分のジャーナリング（手書き推奨）",
@@ -4529,6 +4733,14 @@ const PREMIUM_REPORT = {
     deepDive: {
       title: "なぜあなたは「違い」が見えるのか",
       body: "あなたの脳は、視覚的・分類的な情報処理に特化しています。これはダーウィンやアリストテレスのような博物学者たちの脳と同じ特徴です。\n\nあなたは、似たもの同士の微細な違いを瞬時に見分け、整理し、体系化する才能を持っています。これは自然界の生物だけでなく、データ・商品・情報・コレクション——分類できるあらゆるものに発揮されます。情報過多な現代において、整理する力は最も価値の高いスキルの一つです。\n\n注意点は、「分類すること自体に時間を使いすぎて、アウトプットが遅れる」傾向。8割でも公開する勇気を持つことで、あなたの整理力が世に届きます。"
+    ,
+
+      title_en: "Why you can \"organize\" things",
+      title_zh: "为什么你能「整理」万物",
+      title_ko: "왜 당신은 만물을 「정리」할 수 있는가",
+      body_en: "Your brain is wired to find \"differences\" rather than \"similarities.\" This sensitivity manifests in observing plants and animals, classifying data, organizing collections, and editing information. To you, the world is \"a chaotic library that needs to be sorted out.\"\n\nThis talent goes beyond research and editing—you shine wherever order needs to be created from chaos: data analytics, curation, archival work, content strategy, even quality control in manufacturing. The 21st-century world of information overload needs this talent more than ever.\n\nThe caveat: you can spend so much time \"classifying\" that you slow down outputs. Find the courage to publish at 80% completion—that's when your talent starts reaching others.",
+      body_zh: "你的大脑被设计为发现「差异」而非「相似」。这种敏感性在观察动植物、分类数据、整理收藏、编辑信息等场合都会显现。对你来说，世界是「需要整理的混沌图书馆」。\n\n这种才能超越了研究和编辑——在所有需要从混沌中创造秩序的场合都能发挥作用：数据分析、策展、档案管理、内容策略，乃至制造业的品质管理。21世纪信息过剩的世界比以往任何时候都需要这种才能。\n\n需要注意的是，会因为在「分类」本身上花太多时间而拖慢产出。请鼓起勇气在八分完成时就发布——这时你的才能才开始抵达他人。",
+      body_ko: "당신의 뇌는, 「공통점」이 아닌 「차이」를 발견하도록 설계되어 있습니다. 이 감도는, 식물이나 동물을 관찰하고, 데이터를 분류하고, 컬렉션을 정리하고, 정보를 편집하는 등의 장면에서 발휘됩니다. 당신에게 세상은, 「정리되어야 할 혼돈된 도서관」입니다.\n\n이 재능은 연구나 편집뿐 아니라, 혼돈 속에서 질서를 만들어내야 할 모든 장면에서 빛납니다: 데이터 애널리틱스, 큐레이션, 아카이브 작업, 콘텐츠 전략, 나아가 제조업의 품질관리까지. 정보 과잉의 21세기 세계는, 그 어느 때보다 이 재능을 필요로 합니다.\n\n주의점은, 「분류하는 것」 자체에 너무 시간을 써서 아웃풋이 늦어지기 쉽다는 것. 80%에서 공개할 용기를 가지면, 그때 당신의 재능이 누군가에게 닿기 시작합니다."
     },
     program: [
       "Day 1-5: 毎日1つ、植物・動物・物事を観察し記録する",
@@ -4584,80 +4796,111 @@ const CHARACTER_SYMBOLS = {
 // ============ 同じMIタイプの著名人データ ============
 const FAMOUS_PEOPLE = {
   linguistic: [
-    { name: "夏目漱石",        era: "historic", note: "日本語の繊細さと人間の内面を余すことなく描いた、明治の文豪。" },
-    { name: "シェイクスピア",   era: "historic", note: "人間の感情のすべてを言葉に封じ込めた、史上最大の劇作家。" },
-    { name: "村上春樹",        era: "historic", note: "独自の比喩と文体で世界を魅了し続ける、現代日本を代表する作家。" },
-    { name: "マヤ・アンジェロウ", era: "historic", note: "詩と自伝で人権運動を動かした、20世紀アメリカの声。" },
+    { name: "夏目漱石",        era: "historic", note: "日本語の繊細さと人間の内面を余すことなく描いた、明治の文豪。" , name_en: "Soseki Natsume", name_zh: "夏目漱石", name_ko: "나쓰메 소세키", note_en: "A literary giant of the Meiji era who depicted both the delicacy of Japanese and the depths of the human mind without restraint.", note_zh: "将日语的细腻与人性的内在毫无保留地描绘出来，明治时代的文豪。", note_ko: "일본어의 섬세함과 인간의 내면을 남김없이 그려낸, 메이지 시대의 문호." },
+    { name: "シェイクスピア",   era: "historic", note: "人間の感情のすべてを言葉に封じ込めた、史上最大の劇作家。" , name_en: "William Shakespeare", name_zh: "威廉·莎士比亚", name_ko: "윌리엄 셰익스피어", note_en: "The greatest playwright in history, who sealed every human emotion into language.", note_zh: "将人类所有情感封存于言语之中的史上最伟大剧作家。", note_ko: "인간의 모든 감정을 언어 속에 봉인한, 사상 최대의 극작가." },
+    { name: "村上春樹",        era: "historic", note: "独自の比喩と文体で世界を魅了し続ける、現代日本を代表する作家。" , name_en: "Haruki Murakami", name_zh: "村上春树", name_ko: "무라카미 하루키", note_en: "A writer who continues to captivate the world with his unique metaphors and prose. A leading voice of contemporary Japanese literature.", note_zh: "以独创的比喻与文体持续魅惑世界，代表现代日本的作家。", note_ko: "독자적인 비유와 문체로 세계를 매료시키는, 현대 일본을 대표하는 작가." },
+    { name: "マヤ・アンジェロウ", era: "historic", note: "詩と自伝で人権運動を動かした、20世紀アメリカの声。" , name_en: "Maya Angelou", name_zh: "玛雅·安杰卢", name_ko: "마야 안젤루", note_en: "The voice of 20th-century America who moved the civil rights movement through poetry and autobiography.", note_zh: "以诗与自传推动人权运动的、20世纪美国的声音。", note_ko: "시와 자전으로 인권 운동을 움직인, 20세기 미국의 목소리." },
+    { name: "紫式部",          era: "historic", note: "1000年前に世界初の長編小説「源氏物語」を書いた、日本文学の母。" , name_en: "Murasaki Shikibu", name_zh: "紫式部", name_ko: "무라사키 시키부", note_en: "The mother of Japanese literature, who wrote the world's first long-form novel \"The Tale of Genji\" a thousand years ago.", note_zh: "1000年前写出世界最早长篇小说《源氏物语》的日本文学之母。", note_ko: "1000년 전에 세계 최초의 장편소설 「겐지 이야기」를 쓴, 일본 문학의 어머니." },
+    { name: "ゲーテ",          era: "historic", note: "「ファウスト」で人間の葛藤を描き切った、ドイツ文学最大の巨人。" , name_en: "Johann Wolfgang von Goethe", name_zh: "约翰·沃尔夫冈·冯·歌德", name_ko: "요한 볼프강 폰 괴테", note_en: "The greatest giant of German literature, who fully depicted human conflict in \"Faust.\"", note_zh: "以《浮士德》彻底描绘人性挣扎的德国文学最大巨匠。", note_ko: "「파우스트」로 인간의 갈등을 그려낸, 독일 문학 최대의 거인." },
+    { name: "ヴァージニア・ウルフ", era: "historic", note: "意識の流れの技法で、内面世界を言葉に翻訳したモダニズムの旗手。" , name_en: "Virginia Woolf", name_zh: "弗吉尼亚·伍尔夫", name_ko: "버지니아 울프", note_en: "A modernist standard-bearer who translated the inner world into words through the stream-of-consciousness technique.", note_zh: "以意识流技法将内心世界翻译为言语的现代主义旗手。", note_ko: "의식의 흐름 기법으로 내면 세계를 말로 번역한, 모더니즘의 기수." },
+    { name: "ホメロス",        era: "historic", note: "「イリアス」「オデュッセイア」で西洋文学の原点を築いた古代の吟遊詩人。" , name_en: "Homer", name_zh: "荷马", name_ko: "호메로스", note_en: "The ancient bard who established the origin of Western literature with the \"Iliad\" and \"Odyssey.\"", note_zh: "以《伊利亚特》《奥德赛》奠定西方文学源头的古代吟游诗人。", note_ko: "「일리아드」「오디세이아」로 서양 문학의 원점을 세운 고대의 음유시인." },
     { name: "又吉直樹",        era: "modern",   note: "芥川賞作家にして芸人。日常の言葉を詩にする類稀な才能。" },
     { name: "宇多田ヒカル",    era: "modern",   note: "歌詞の言語感覚が圧倒的。日本語の可能性を広げたアーティスト。" },
     { name: "星野源",          era: "modern",   note: "音楽・文章・演技と多面的に言葉を操るマルチクリエイター。" },
     { name: "ジェイ・Z",       era: "modern",   note: "ラップを詩の領域に引き上げた。言葉で帝国を築いたビジネスマン。" }
   ],
   logical: [
-    { name: "アルベルト・アインシュタイン", era: "historic", note: "相対性理論で宇宙の構造を書き換えた、20世紀最大の物理学者。" },
-    { name: "レオナルド・ダ・ヴィンチ",    era: "historic", note: "芸術と科学を一体で考えた、ルネサンスが生んだ天才。" },
-    { name: "ソクラテス",      era: "historic", note: "問答によって真理を追求した、西洋哲学の父。" },
-    { name: "アダム・スミス",  era: "historic", note: "市場の仕組みを論理的に解き明かし、経済学という学問を創った。" },
+    { name: "アルベルト・アインシュタイン", era: "historic", note: "相対性理論で宇宙の構造を書き換えた、20世紀最大の物理学者。" , name_en: "Albert Einstein", name_zh: "阿尔伯特·爱因斯坦", name_ko: "알베르트 아인슈타인", note_en: "The greatest physicist of the 20th century, who rewrote the structure of the universe with the theory of relativity.", note_zh: "以相对论改写宇宙结构的20世纪最伟大物理学家。", note_ko: "상대성 이론으로 우주의 구조를 다시 쓴, 20세기 최대의 물리학자." },
+    { name: "レオナルド・ダ・ヴィンチ",    era: "historic", note: "芸術と科学を一体で考えた、ルネサンスが生んだ天才。" , name_en: "Leonardo da Vinci", name_zh: "列奥纳多·达·芬奇", name_ko: "레오나르도 다 빈치", note_en: "The genius of the Renaissance who thought of art and science as one inseparable whole.", note_zh: "把艺术与科学视为一体的、文艺复兴诞生的天才。", note_ko: "예술과 과학을 일체로 생각한, 르네상스가 낳은 천재." },
+    { name: "ソクラテス",      era: "historic", note: "問答によって真理を追求した、西洋哲学の父。" , name_en: "Socrates", name_zh: "苏格拉底", name_ko: "소크라테스", note_en: "The father of Western philosophy, who pursued truth through dialogue and questioning.", note_zh: "以问答法追求真理的西方哲学之父。", note_ko: "문답을 통해 진리를 추구한, 서양 철학의 아버지." },
+    { name: "アダム・スミス",  era: "historic", note: "市場の仕組みを論理的に解き明かし、経済学という学問を創った。" , name_en: "Adam Smith", name_zh: "亚当·斯密", name_ko: "애덤 스미스", note_en: "He logically unraveled how markets work and founded the discipline of economics.", note_zh: "逻辑性地阐明市场机制、创立经济学这门学问的人。", note_ko: "시장의 구조를 논리적으로 풀어내, 경제학이라는 학문을 창시한 사람." },
+    { name: "アイザック・ニュートン", era: "historic", note: "万有引力と微積分で近代科学の基礎を築いた、知の巨人。" , name_en: "Isaac Newton", name_zh: "艾萨克·牛顿", name_ko: "아이작 뉴턴", note_en: "A giant of intellect who laid the foundations of modern science with universal gravitation and calculus.", note_zh: "以万有引力与微积分奠定近代科学基础的知识巨人。", note_ko: "만유인력과 미적분으로 근대 과학의 기초를 쌓은, 지식의 거인." },
+    { name: "アリストテレス",  era: "historic", note: "論理学を体系化し、2000年にわたり学問の標準を提供した万学の祖。" , name_en: "Aristotle", name_zh: "亚里士多德", name_ko: "아리스토텔레스", note_en: "The father of all academic disciplines, who systematized logic and set the standard for learning for two millennia.", note_zh: "将逻辑学体系化、为学术提供2000年标准的万学之祖。", note_ko: "논리학을 체계화하고 2000년에 걸쳐 학문의 표준을 제공한, 만학의 시조." },
+    { name: "アラン・チューリング", era: "historic", note: "計算と知性を数学的に定義し、コンピュータ科学を創った先駆者。" , name_en: "Alan Turing", name_zh: "艾伦·图灵", name_ko: "앨런 튜링", note_en: "A pioneer who mathematically defined computation and intelligence, founding computer science.", note_zh: "从数学层面定义计算与智能、创立计算机科学的先驱。", note_ko: "계산과 지성을 수학적으로 정의하고, 컴퓨터 과학을 창시한 선구자." },
+    { name: "アルキメデス",    era: "historic", note: "古代ギリシア最大の数理科学者。物理と幾何を結びつけた天才。" , name_en: "Archimedes", name_zh: "阿基米德", name_ko: "아르키메데스", note_en: "The greatest mathematical scientist of ancient Greece, a genius who connected physics and geometry.", note_zh: "古希腊最伟大的数理科学家、将物理与几何相连结的天才。", note_ko: "고대 그리스 최대의 수리과학자. 물리와 기하를 잇는 천재." },
     { name: "イーロン・マスク", era: "modern",  note: "第一原理思考で電気自動車と宇宙産業を同時に変革した起業家。" },
     { name: "ビル・ゲイツ",    era: "modern",   note: "論理的思考でソフトウェア産業を創造し、慈善活動でも世界を動かす。" },
     { name: "ひろゆき",        era: "modern",   note: "論理と詭弁を駆使して議論を制する、インターネット世代の論客。" },
     { name: "落合陽一",        era: "modern",   note: "デジタルネイチャーを提唱。計算と魔術を架橋する現代の魔法使い。" }
   ],
   spatial: [
-    { name: "パブロ・ピカソ",   era: "historic", note: "キュビズムで視覚の常識を壊した、20世紀最大の美術家。" },
-    { name: "安藤忠雄",        era: "historic", note: "コンクリートと光で空間の詩を書く、世界が認めた日本の建築家。" },
-    { name: "フリーダ・カーロ", era: "historic", note: "鮮烈な色彩と構図で内面世界を可視化した、メキシコの天才画家。" },
-    { name: "レオナルド・ダ・ヴィンチ", era: "historic", note: "解剖学・工学・絵画を統合し、空間を多角的に見抜いた万能人。" },
+    { name: "パブロ・ピカソ",   era: "historic", note: "キュビズムで視覚の常識を壊した、20世紀最大の美術家。" , name_en: "Pablo Picasso", name_zh: "巴勃罗·毕加索", name_ko: "파블로 피카소", note_en: "The greatest artist of the 20th century, who shattered visual conventions with Cubism.", note_zh: "以立体派打破视觉常识的、20世纪最伟大艺术家。", note_ko: "큐비즘으로 시각의 상식을 깨뜨린, 20세기 최대의 미술가." },
+    { name: "安藤忠雄",        era: "historic", note: "コンクリートと光で空間の詩を書く、世界が認めた日本の建築家。" , name_en: "Tadao Ando", name_zh: "安藤忠雄", name_ko: "안도 다다오", note_en: "A Japanese architect recognized worldwide, who writes poetry of space with concrete and light.", note_zh: "以混凝土与光书写空间之诗的、世界公认的日本建筑家。", note_ko: "콘크리트와 빛으로 공간의 시를 쓰는, 세계가 인정한 일본의 건축가." },
+    { name: "フリーダ・カーロ", era: "historic", note: "鮮烈な色彩と構図で内面世界を可視化した、メキシコの天才画家。" , name_en: "Frida Kahlo", name_zh: "弗里达·卡罗", name_ko: "프리다 칼로", note_en: "The genius Mexican painter who visualized her inner world with vivid colors and bold composition.", note_zh: "以鲜烈色彩与构图将内心世界可视化的、墨西哥天才画家。", note_ko: "강렬한 색채와 구도로 내면 세계를 가시화한, 멕시코의 천재 화가." },
+    { name: "レオナルド・ダ・ヴィンチ", era: "historic", note: "解剖学・工学・絵画を統合し、空間を多角的に見抜いた万能人。" , name_en: "Leonardo da Vinci", name_zh: "列奥纳多·达·芬奇", name_ko: "레오나르도 다 빈치", note_en: "A polymath who integrated anatomy, engineering, and painting, perceiving space from every angle.", note_zh: "统合解剖学、工程与绘画，从多角度看透空间的全能者。", note_ko: "해부학·공학·회화를 통합하고, 공간을 다각도로 꿰뚫어 본 만능인." },
+    { name: "葛飾北斎",        era: "historic", note: "「冨嶽三十六景」で構図と空間表現の極致を示した、世界が認める浮世絵師。" , name_en: "Katsushika Hokusai", name_zh: "葛饰北斋", name_ko: "가츠시카 호쿠사이", note_en: "A world-renowned ukiyo-e master who showed the pinnacle of composition and spatial expression in \"Thirty-six Views of Mount Fuji.\"", note_zh: "在《富岳三十六景》展现构图与空间表现极致、世界公认的浮世绘师。", note_ko: "「부악 36경」에서 구도와 공간 표현의 극치를 보여준, 세계가 인정한 우키요에 화가." },
+    { name: "M.C.エッシャー",  era: "historic", note: "不可能な空間を視覚化し続けた、数学と芸術を融合させた版画家。" , name_en: "M.C. Escher", name_zh: "M.C.埃舍尔", name_ko: "M.C. 에셔", note_en: "A printmaker who continued to visualize impossible spaces, fusing mathematics and art.", note_zh: "持续将不可能的空间可视化、融合数学与艺术的版画家。", note_ko: "불가능한 공간을 계속 시각화한, 수학과 예술을 융합한 판화가." },
+    { name: "フランク・ロイド・ライト", era: "historic", note: "落水荘で自然と建築を融合させた、20世紀最大の建築家。" , name_en: "Frank Lloyd Wright", name_zh: "弗兰克·劳埃德·赖特", name_ko: "프랭크 로이드 라이트", note_en: "The greatest architect of the 20th century, who merged nature and architecture at Fallingwater.", note_zh: "在流水别墅中融合自然与建筑、20世纪最伟大的建筑家。", note_ko: "낙수장에서 자연과 건축을 융합시킨, 20세기 최대의 건축가." },
+    { name: "ミケランジェロ",  era: "historic", note: "システィーナ礼拝堂の天井画とダビデ像。空間を彫刻した不世出の芸術家。" , name_en: "Michelangelo", name_zh: "米开朗基罗", name_ko: "미켈란젤로", note_en: "The Sistine Chapel ceiling and the statue of David. An unparalleled artist who sculpted space itself.", note_zh: "西斯廷礼拜堂天顶画与大卫像。雕刻了空间的旷世奇才。", note_ko: "시스티나 예배당 천장화와 다비드상. 공간을 조각한, 불세출의 예술가." },
     { name: "佐藤可士和",      era: "modern",   note: "ユニクロや楽天のブランドを視覚言語で再構築した国民的デザイナー。" },
     { name: "宮崎駿",          era: "modern",   note: "頭の中の映像を手描きで紙に落とす。アニメーションの神様。" },
     { name: "新海誠",          era: "modern",   note: "「光の表現」で日本アニメの映像美を塗り替えた映像作家。" },
     { name: "ヴァージル・アブロー", era: "modern", note: "ファッションと建築を横断し、視覚でカルチャーを動かしたデザイナー。" }
   ],
   musical: [
-    { name: "ルートヴィヒ・ヴァン・ベートーヴェン", era: "historic", note: "聴力を失いながら交響曲第九番を完成させた、不屈の作曲家。" },
-    { name: "モーツァルト",     era: "historic", note: "5歳で作曲を始め、35年の生涯で600曲以上を残した神童。" },
-    { name: "マイルス・デイヴィス", era: "historic", note: "ジャズを5度変革した。音の間（ま）を音楽にした革命家。" },
-    { name: "ボブ・ディラン",   era: "historic", note: "ロックにノーベル文学賞をもたらした、音楽と詩の融合者。" },
+    { name: "ルートヴィヒ・ヴァン・ベートーヴェン", era: "historic", note: "聴力を失いながら交響曲第九番を完成させた、不屈の作曲家。" , name_en: "Ludwig van Beethoven", name_zh: "路德维希·凡·贝多芬", name_ko: "루트비히 판 베토벤", note_en: "An indomitable composer who completed the 9th Symphony while losing his hearing.", note_zh: "在听力丧失的同时完成第九交响曲的、不屈作曲家。", note_ko: "청력을 잃어가면서도 교향곡 제9번을 완성한, 불굴의 작곡가." },
+    { name: "モーツァルト",     era: "historic", note: "5歳で作曲を始め、35年の生涯で600曲以上を残した神童。" , name_en: "Wolfgang Amadeus Mozart", name_zh: "沃尔夫冈·阿马德乌斯·莫扎特", name_ko: "볼프강 아마데우스 모차르트", note_en: "A child prodigy who began composing at five and left more than 600 works in his 35-year life.", note_zh: "5岁开始作曲、在35年生涯中留下600余首作品的神童。", note_ko: "5세에 작곡을 시작해, 35년의 생애에 600곡 이상을 남긴 신동." },
+    { name: "マイルス・デイヴィス", era: "historic", note: "ジャズを5度変革した。音の間（ま）を音楽にした革命家。" , name_en: "Miles Davis", name_zh: "迈尔斯·戴维斯", name_ko: "마일스 데이비스", note_en: "He transformed jazz five times—a revolutionary who turned silence between notes into music.", note_zh: "五度变革爵士乐、把音与音之间的「间」变为音乐的革命家。", note_ko: "재즈를 다섯 번 변혁시킨, 음과 음 사이의 「간격」을 음악으로 만든 혁명가." },
+    { name: "ボブ・ディラン",   era: "historic", note: "ロックにノーベル文学賞をもたらした、音楽と詩の融合者。" , name_en: "Bob Dylan", name_zh: "鲍勃·迪伦", name_ko: "밥 딜런", note_en: "He brought the Nobel Prize in Literature to rock—a fusion of music and poetry.", note_zh: "为摇滚乐带来诺贝尔文学奖、音乐与诗的融合者。", note_ko: "록 음악에 노벨문학상을 가져온, 음악과 시의 융합자." },
+    { name: "ヨハン・セバスティアン・バッハ", era: "historic", note: "音楽の構造美を極めた、西洋音楽の父。後世のあらゆる音楽家の源流。" , name_en: "Johann Sebastian Bach", name_zh: "约翰·塞巴斯蒂安·巴赫", name_ko: "요한 제바스티안 바흐", note_en: "The father of Western music, who perfected the structural beauty of music. The source of every later musician.", note_zh: "将音乐的结构美推向极致、后世所有音乐家的源流。西洋音乐之父。", note_ko: "음악의 구조미를 극한까지 끌어올린, 서양 음악의 아버지. 후세 모든 음악가의 원류." },
+    { name: "ジョン・コルトレーン", era: "historic", note: "魂を解放するサックスで、ジャズに新たな精神的次元を切り開いた巨人。" , name_en: "John Coltrane", name_zh: "约翰·柯川", name_ko: "존 콜트레인", note_en: "A giant whose soul-liberating saxophone opened a new spiritual dimension in jazz.", note_zh: "以释放灵魂的萨克斯，为爵士乐开启崭新精神层面的巨匠。", note_ko: "영혼을 해방시키는 색소폰으로, 재즈에 새로운 정신적 차원을 연 거장." },
+    { name: "美空ひばり",      era: "historic", note: "戦後日本の心を歌で支え続けた、昭和最大の歌姫。" , name_en: "Hibari Misora", name_zh: "美空云雀", name_ko: "미소라 히바리", note_en: "The greatest diva of Showa-era Japan, whose songs supported the heart of postwar Japan.", note_zh: "以歌声支撑战后日本人心的、昭和最大歌后。", note_ko: "전후 일본의 마음을 노래로 지탱해온, 쇼와 시대 최대의 디바." },
+    { name: "フレディ・マーキュリー", era: "historic", note: "ロックとオペラを融合し、4オクターブの声で世界を魅了したQueenの中心。" , name_en: "Freddie Mercury", name_zh: "弗雷迪·墨丘利", name_ko: "프레디 머큐리", note_en: "The heart of Queen, who fused rock and opera and enthralled the world with his four-octave voice.", note_zh: "融合摇滚与歌剧、以四个八度音域魅惑全球的Queen核心。", note_ko: "록과 오페라를 융합하고, 4옥타브의 목소리로 세계를 매료시킨 Queen의 중심." },
     { name: "Ado",             era: "modern",   note: "圧倒的な声域と表現力で顔出しなしに世界を席巻したシンガー。" },
     { name: "坂本龍一",        era: "modern",   note: "音楽・映画・環境活動を横断した、日本が誇る音楽の哲人。" },
-    { name: "ビョーク",        era: "modern",   note: "音の実験と感情表現の極致。音楽の可能性を常に更新するアイスランドの鬼才。" },
-    { name: "藤井聡太(将棋から類推)", era: "modern", note: "直感と論理が音楽的なリズムで合体した思考法の持ち主。" }
+    { name: "ビョーク",        era: "modern",   note: "音の実験と感情表現の極致。音楽の可能性を常に更新するアイスランドの鬼才。" }
   ],
   bodily: [
     { name: "大谷翔平",        era: "modern",   note: "投打二刀流で野球の常識を書き換えた、令和最大のアスリート。" },
-    { name: "ブルース・リー",   era: "historic", note: "武道を哲学と融合し、身体表現で世界を変えたカルチャーアイコン。" },
-    { name: "チャーリー・チャップリン", era: "historic", note: "身体だけで喜びと悲しみを表現した、映画史上最大のパフォーマー。" },
-    { name: "マルセル・マルソー", era: "historic", note: "無言の身体で最も深いドラマを語った、20世紀最高のマイム師。" },
+    { name: "ブルース・リー",   era: "historic", note: "武道を哲学と融合し、身体表現で世界を変えたカルチャーアイコン。" , name_en: "Bruce Lee", name_zh: "李小龙", name_ko: "이소룡", note_en: "A cultural icon who fused martial arts with philosophy and changed the world through bodily expression.", note_zh: "将武道与哲学融合、以身体表现改变世界的文化偶像。", note_ko: "무도와 철학을 융합하고, 신체 표현으로 세상을 바꾼 문화 아이콘." },
+    { name: "チャーリー・チャップリン", era: "historic", note: "身体だけで喜びと悲しみを表現した、映画史上最大のパフォーマー。" , name_en: "Charlie Chaplin", name_zh: "查理·卓别林", name_ko: "찰리 채플린", note_en: "The greatest performer in film history, who conveyed joy and sorrow through the body alone.", note_zh: "仅以身体便能表达喜悦与悲伤的、电影史上最伟大表演者。", note_ko: "몸짓만으로 기쁨과 슬픔을 표현한, 영화사 최대의 퍼포머." },
+    { name: "マルセル・マルソー", era: "historic", note: "無言の身体で最も深いドラマを語った、20世紀最高のマイム師。" , name_en: "Marcel Marceau", name_zh: "马塞尔·马尔索", name_ko: "마르셀 마르소", note_en: "The greatest mime artist of the 20th century, who told the deepest dramas with a silent body.", note_zh: "以无言之身体讲述最深刻戏剧的、20世纪最伟大默剧大师。", note_ko: "말 없는 몸으로 가장 깊은 드라마를 이야기한, 20세기 최고의 마임 아티스트." },
+    { name: "ベーブ・ルース",   era: "historic", note: "野球を国民的スポーツに変えた、20世紀最大のスポーツ・アイコン。" , name_en: "Babe Ruth", name_zh: "贝比·鲁斯", name_ko: "베이브 루스", note_en: "The 20th century's greatest sports icon, who transformed baseball into America's national pastime.", note_zh: "将棒球变为国民运动、20世纪最伟大的运动偶像。", note_ko: "야구를 국민적 스포츠로 바꾼, 20세기 최대의 스포츠 아이콘." },
+    { name: "モハメド・アリ",  era: "historic", note: "ボクシングを芸術に昇華させ、世界を魅了した「蝶のように舞い、蜂のように刺す」王者。" , name_en: "Muhammad Ali", name_zh: "穆罕默德·阿里", name_ko: "무하마드 알리", note_en: "A champion who elevated boxing to art, captivating the world with \"Float like a butterfly, sting like a bee.\"", note_zh: "将拳击升华为艺术、以「翩翩起舞如蝴蝶，狠狠刺出似蜂针」魅惑世界的拳王。", note_ko: "복싱을 예술로 승화시키고, 「나비처럼 날아 벌처럼 쏜다」로 세상을 매료시킨 챔피언." },
+    { name: "ペレ",            era: "historic", note: "三度のW杯優勝。サッカーを世界共通の言語にした「サッカーの王様」。" , name_en: "Pelé", name_zh: "贝利", name_ko: "펠레", note_en: "A three-time World Cup champion. \"The King of Football\" who made the sport a global language.", note_zh: "三度世界杯冠军。把足球变为世界共同语言的「球王」。", note_ko: "월드컵 3회 우승. 축구를 세계 공통 언어로 만든 「축구의 왕」." },
+    { name: "ミハイル・バリシニコフ", era: "historic", note: "20世紀バレエ史最高のダンサー。重力を超えた身体表現の天才。" , name_en: "Mikhail Baryshnikov", name_zh: "米哈伊尔·巴里什尼科夫", name_ko: "미하일 바리시니코프", note_en: "The greatest dancer in 20th-century ballet history. A genius of bodily expression who transcended gravity.", note_zh: "20世纪芭蕾史上最伟大舞者。超越重力的身体表现天才。", note_ko: "20세기 발레사 최고의 댄서. 중력을 초월한 신체 표현의 천재." },
+    { name: "宮本武蔵",        era: "historic", note: "二天一流の創始者。身体と精神を統合した、剣豪にして哲人。" , name_en: "Miyamoto Musashi", name_zh: "宫本武藏", name_ko: "미야모토 무사시", note_en: "The founder of Niten Ichi-ryū. A master swordsman and philosopher who integrated body and spirit.", note_zh: "二天一流的创始者。统合身体与精神的剑豪兼哲人。", note_ko: "니텐 이치류의 창시자. 몸과 정신을 통합한, 검호이자 철인." },
     { name: "羽生結弦",        era: "modern",   note: "氷上で芸術と競技を統合した、フィギュアスケートの最高峰。" },
     { name: "三浦知良",        era: "modern",   note: "57歳でも現役を続ける身体と意志の持ち主。日本サッカーの象徴。" },
     { name: "ジャッキー・チェン", era: "modern", note: "アクションをアートに昇華させた、身体表現の天才。" },
     { name: "白鵬",            era: "modern",   note: "45回の幕内優勝。身体の細部まで制御する、技術と精神の横綱。" }
   ],
   interpersonal: [
-    { name: "マザー・テレサ",   era: "historic", note: "貧者への無償の愛で世界を動かした、20世紀最大の人道主義者。" },
-    { name: "マハトマ・ガンジー", era: "historic", note: "人の心を非暴力で変え、インド独立を成し遂げた精神的指導者。" },
-    { name: "マーティン・ルーサー・キング", era: "historic", note: "言葉と共感で公民権運動を牽引したアメリカの良心。" },
-    { name: "スティーヴ・ジョブズ", era: "historic", note: "人の欲求を先読みし、製品で時代の感情を動かしたカリスマ。" },
+    { name: "マザー・テレサ",   era: "historic", note: "貧者への無償の愛で世界を動かした、20世紀最大の人道主義者。" , name_en: "Mother Teresa", name_zh: "特蕾莎修女", name_ko: "테레사 수녀", note_en: "The greatest humanitarian of the 20th century, who moved the world with unconditional love for the poor.", note_zh: "以对穷人的无偿之爱推动世界的、20世纪最伟大人道主义者。", note_ko: "가난한 사람들에 대한 무상의 사랑으로 세상을 움직인, 20세기 최대의 인도주의자." },
+    { name: "マハトマ・ガンジー", era: "historic", note: "人の心を非暴力で変え、インド独立を成し遂げた精神的指導者。" , name_en: "Mahatma Gandhi", name_zh: "圣雄甘地", name_ko: "마하트마 간디", note_en: "A spiritual leader who changed hearts through nonviolence and achieved Indian independence.", note_zh: "以非暴力改变人心、实现印度独立的精神领袖。", note_ko: "비폭력으로 사람의 마음을 바꾸고 인도 독립을 이룬, 정신적 지도자." },
+    { name: "マーティン・ルーサー・キング", era: "historic", note: "言葉と共感で公民権運動を牽引したアメリカの良心。" , name_en: "Martin Luther King Jr.", name_zh: "马丁·路德·金", name_ko: "마틴 루터 킹", note_en: "America's conscience, who led the civil rights movement with words and empathy.", note_zh: "以言语与共情牵引公民权运动的、美国的良心。", note_ko: "말과 공감으로 시민권 운동을 이끈, 미국의 양심." },
+    { name: "スティーヴ・ジョブズ", era: "historic", note: "人の欲求を先読みし、製品で時代の感情を動かしたカリスマ。" , name_en: "Steve Jobs", name_zh: "史蒂夫·乔布斯", name_ko: "스티브 잡스", note_en: "A charismatic leader who anticipated human desire and moved the emotions of an era through products.", note_zh: "先察人之欲、以产品打动时代情感的领袖。", note_ko: "사람의 욕망을 앞서 읽고, 제품으로 시대의 감정을 움직인 카리스마." },
+    { name: "ネルソン・マンデラ", era: "historic", note: "27年の獄中生活を経て、和解で南アフリカを統合した「赦しのリーダー」。" , name_en: "Nelson Mandela", name_zh: "纳尔逊·曼德拉", name_ko: "넬슨 만델라", note_en: "After 27 years in prison, he unified South Africa through reconciliation. \"The Leader of Forgiveness.\"", note_zh: "历经27年牢狱后以和解统一南非的「宽恕领袖」。", note_ko: "27년의 옥중 생활 끝에, 화해로 남아공을 통합한 「용서의 리더」." },
+    { name: "ダライ・ラマ14世", era: "historic", note: "慈悲と共感を世界に説き続ける、チベット仏教の精神的指導者。" , name_en: "The 14th Dalai Lama", name_zh: "第十四世达赖喇嘛", name_ko: "제14대 달라이 라마", note_en: "A spiritual leader of Tibetan Buddhism, who continues to preach compassion and empathy to the world.", note_zh: "持续向世界宣讲慈悲与共情的西藏佛教精神领袖。", note_ko: "자비와 공감을 세상에 계속 설파하는, 티베트 불교의 정신적 지도자." },
+    { name: "デール・カーネギー", era: "historic", note: "「人を動かす」で対人関係の本質を体系化した、人間関係学の祖。" , name_en: "Dale Carnegie", name_zh: "戴尔·卡耐基", name_ko: "데일 카네기", note_en: "The father of human relations studies, who systematized the essence of human interaction in \"How to Win Friends and Influence People.\"", note_zh: "以《人性的弱点》系统化人际关系本质的、人际关系学之祖。", note_ko: "「인간관계론」으로 대인관계의 본질을 체계화한, 인간관계학의 시조." },
+    { name: "ジョン・F・ケネディ", era: "historic", note: "「国があなたに何をするかではなく」のスピーチで人の心を一つにした大統領。" , name_en: "John F. Kennedy", name_zh: "约翰·F·肯尼迪", name_ko: "존 F. 케네디", note_en: "The president who united hearts with his speech, \"Ask not what your country can do for you...\"", note_zh: "以「不要问国家能为你做什么」演说团结人心的总统。", note_ko: "「국가가 당신에게 무엇을 해줄지가 아니라」 연설로 사람의 마음을 하나로 모은 대통령." },
     { name: "前田裕二",        era: "modern",   note: "SHOWROOMで人のつながりを経済化した、熱狂の設計者。" },
     { name: "オプラ・ウィンフリー", era: "modern", note: "対話の力で世界中の人を癒し、動かしてきたメディアの女王。" },
     { name: "澤穂希",          era: "modern",   note: "チームの感情を読み、一致団結で世界を頂点に導いたキャプテン。" },
     { name: "孫正義",          era: "modern",   note: "ビジョンと情熱で人を巻き込み続ける、日本最大のビジョナリー。" }
   ],
   intrapersonal: [
-    { name: "フリードリヒ・ニーチェ", era: "historic", note: "自己の深淵を見つめ、神の死と超人を問い続けた哲学者。" },
-    { name: "マルクス・アウレリウス", era: "historic", note: "ローマ皇帝でありながら毎朝内省し、「自省録」を残したストア哲学者。" },
-    { name: "河合隼雄",        era: "historic", note: "日本人の無意識を探求した心理学者。内側への旅を案内し続けた。" },
-    { name: "エミリー・ディキンソン", era: "historic", note: "孤独の中で1800篇の詩を書き続けた、内省の詩人。" },
+    { name: "フリードリヒ・ニーチェ", era: "historic", note: "自己の深淵を見つめ、神の死と超人を問い続けた哲学者。" , name_en: "Friedrich Nietzsche", name_zh: "弗里德里希·尼采", name_ko: "프리드리히 니체", note_en: "A philosopher who gazed into his own abyss and continued asking about the death of God and the Übermensch.", note_zh: "凝视自我深渊、不断追问神之死与超人的哲学家。", note_ko: "자신의 심연을 응시하며, 신의 죽음과 초인을 계속 물은 철학자." },
+    { name: "マルクス・アウレリウス", era: "historic", note: "ローマ皇帝でありながら毎朝内省し、「自省録」を残したストア哲学者。" , name_en: "Marcus Aurelius", name_zh: "马可·奥勒留", name_ko: "마르쿠스 아우렐리우스", note_en: "A Stoic philosopher and Roman emperor who introspected each morning and left behind \"Meditations.\"", note_zh: "身为罗马皇帝却每日清晨自省、留下《沉思录》的斯多葛派哲学家。", note_ko: "로마 황제이면서도 매일 아침 성찰하고, 「자성록」을 남긴 스토아 철학자." },
+    { name: "河合隼雄",        era: "historic", note: "日本人の無意識を探求した心理学者。内側への旅を案内し続けた。" , name_en: "Hayao Kawai", name_zh: "河合隼雄", name_ko: "가와이 하야오", note_en: "A psychologist who explored the unconscious of the Japanese and continually guided people's inner journeys.", note_zh: "探究日本人无意识、不断引领内在之旅的心理学家。", note_ko: "일본인의 무의식을 탐구하고, 내면으로의 여행을 계속 안내한 심리학자." },
+    { name: "エミリー・ディキンソン", era: "historic", note: "孤独の中で1800篇の詩を書き続けた、内省の詩人。" , name_en: "Emily Dickinson", name_zh: "艾米莉·狄金森", name_ko: "에밀리 디킨슨", note_en: "A poet of introspection who wrote 1,800 poems in solitude.", note_zh: "在孤独中持续写下1800篇诗作的内省诗人。", note_ko: "고독 속에서 1800편의 시를 계속 쓴, 내성의 시인." },
+    { name: "カール・ユング",  era: "historic", note: "「集合的無意識」を発見し、自己の探求を心理学の中心に据えた巨人。" , name_en: "Carl Jung", name_zh: "卡尔·荣格", name_ko: "칼 융", note_en: "A giant who discovered the \"collective unconscious\" and placed the exploration of self at the heart of psychology.", note_zh: "发现「集体无意识」、将自我探索置于心理学核心的巨人。", note_ko: "「집단 무의식」을 발견하고, 자기 탐구를 심리학의 중심에 둔 거인." },
+    { name: "ヴィクトール・フランクル", era: "historic", note: "強制収容所での体験から「人生の意味」を探求した心理学者・哲学者。" , name_en: "Viktor Frankl", name_zh: "维克多·弗兰克尔", name_ko: "빅터 프랭클", note_en: "A psychologist and philosopher who explored \"the meaning of life\" from his experience in the concentration camps.", note_zh: "从集中营体验出发探究「人生意义」的心理学家、哲学家。", note_ko: "강제수용소에서의 체험을 통해 「인생의 의미」를 탐구한 심리학자·철학자." },
+    { name: "アンネ・フランク", era: "historic", note: "13歳から日記で自分の内面を観察し続けた、内省の象徴。" , name_en: "Anne Frank", name_zh: "安妮·弗兰克", name_ko: "안네 프랑크", note_en: "A symbol of introspection who continued observing her inner life through a diary, starting at age 13.", note_zh: "13岁起就以日记持续观察自我内心的、内省的象征。", note_ko: "13세부터 일기로 자신의 내면을 계속 관찰한, 내성의 상징." },
+    { name: "鴨長明",          era: "historic", note: "「方丈記」で世の無常と自身の心を深く見つめ続けた、日本文学の隠者。" , name_en: "Kamo no Chōmei", name_zh: "鸭长明", name_ko: "가모노 초메이", note_en: "A literary hermit of Japan, who deeply contemplated the impermanence of the world and his own heart in \"Hōjōki.\"", note_zh: "在《方丈记》中深刻凝视世事无常与自我之心的、日本文学隐者。", note_ko: "「방장기」로 세상의 무상과 자신의 마음을 깊이 응시한, 일본 문학의 은자." },
     { name: "梅原猛",          era: "modern",   note: "哲学と日本文化の深層を独自に掘り下げた、日本の知の巨人。" },
     { name: "池田晶子",        era: "modern",   note: "「14歳からの哲学」で自己を問い続けることを説いた哲学エッセイスト。" },
-    { name: "ビル・ゲイツ",    era: "modern",   note: "年2回の「Think Week」に一人こもる、深い自己対話の実践者。" },
-    { name: "嵐の相葉雅紀",    era: "modern",   note: "場の空気を内側で感じ取り、静かに周囲を包む共感の人。" }
+    { name: "ビル・ゲイツ",    era: "modern",   note: "年2回の「Think Week」に一人こもる、深い自己対話の実践者。" }
   ],
   naturalist: [
-    { name: "チャールズ・ダーウィン", era: "historic", note: "自然の細部を観察し続け、進化論で生命の歴史を書き換えた博物学者。" },
-    { name: "ジャン＝アンリ・ファーブル", era: "historic", note: "昆虫の生態を生涯かけて記録した「昆虫記」の著者。観察の哲人。" },
-    { name: "南方熊楠",        era: "historic", note: "粘菌から民俗学まで、森羅万象を蒐集・分類した日本最大の博物学者。" },
-    { name: "レイチェル・カーソン", era: "historic", note: "「沈黙の春」で環境問題に警鐘を鳴らした、自然の語り部。" },
+    { name: "チャールズ・ダーウィン", era: "historic", note: "自然の細部を観察し続け、進化論で生命の歴史を書き換えた博物学者。" , name_en: "Charles Darwin", name_zh: "查尔斯·达尔文", name_ko: "찰스 다윈", note_en: "A naturalist who, by continuously observing the details of nature, rewrote the history of life with the theory of evolution.", note_zh: "持续观察自然细节、以进化论改写生命史的博物学家。", note_ko: "자연의 세부를 계속 관찰하며, 진화론으로 생명의 역사를 다시 쓴 박물학자." },
+    { name: "ジャン＝アンリ・ファーブル", era: "historic", note: "昆虫の生態を生涯かけて記録した「昆虫記」の著者。観察の哲人。" , name_en: "Jean-Henri Fabre", name_zh: "让-亨利·法布尔", name_ko: "장 앙리 파브르", note_en: "The author of \"Souvenirs Entomologiques,\" who spent his entire life recording the lives of insects. A philosopher of observation.", note_zh: "终其一生记录昆虫生态的《昆虫记》作者。观察的哲人。", note_ko: "곤충의 생태를 생애에 걸쳐 기록한 「곤충기」의 저자. 관찰의 철인." },
+    { name: "南方熊楠",        era: "historic", note: "粘菌から民俗学まで、森羅万象を蒐集・分類した日本最大の博物学者。" , name_en: "Kumagusu Minakata", name_zh: "南方熊楠", name_ko: "미나카타 구마구스", note_en: "Japan's greatest naturalist, who collected and classified everything from slime molds to folklore.", note_zh: "从黏菌到民俗学、收集并分类世间万象的日本最伟大博物学家。", note_ko: "점균에서 민속학까지, 삼라만상을 수집·분류한, 일본 최대의 박물학자." },
+    { name: "レイチェル・カーソン", era: "historic", note: "「沈黙の春」で環境問題に警鐘を鳴らした、自然の語り部。" , name_en: "Rachel Carson", name_zh: "蕾切尔·卡森", name_ko: "레이첼 카슨", note_en: "The narrator of nature, who sounded the alarm on environmental issues in \"Silent Spring.\"", note_zh: "以《寂静的春天》对环境问题敲响警钟的自然之述说者。", note_ko: "「침묵의 봄」으로 환경 문제에 경종을 울린, 자연의 이야기꾼." },
+    { name: "カール・フォン・リンネ", era: "historic", note: "全生物に二名法を導入し、自然を体系的に整理した分類学の父。" , name_en: "Carl Linnaeus", name_zh: "卡尔·林奈", name_ko: "칼 폰 린네", note_en: "The father of taxonomy, who introduced binomial nomenclature to all living things and systematically organized nature.", note_zh: "为所有生物引入二名法、系统化整理自然的分类学之父。", note_ko: "모든 생물에 이명법을 도입하고, 자연을 체계적으로 정리한 분류학의 아버지." },
+    { name: "アレクサンダー・フォン・フンボルト", era: "historic", note: "地理・植物・動物を統合した近代博物学の創始者。" , name_en: "Alexander von Humboldt", name_zh: "亚历山大·冯·洪堡", name_ko: "알렉산더 폰 훔볼트", note_en: "The founder of modern natural history, who integrated geography, botany, and zoology.", note_zh: "统合地理、植物与动物的近代博物学创始者。", note_ko: "지리·식물·동물을 통합한, 근대 박물학의 창시자." },
+    { name: "牧野富太郎",      era: "historic", note: "独学で日本の植物約1500種を命名した、日本植物学の父。" , name_en: "Tomitaro Makino", name_zh: "牧野富太郎", name_ko: "마키노 도미타로", note_en: "The father of Japanese botany, who named some 1,500 Japanese plant species through self-study.", note_zh: "独学命名日本植物约1500种的、日本植物学之父。", note_ko: "독학으로 일본의 식물 약 1500종을 명명한, 일본 식물학의 아버지." },
+    { name: "ジョン・ミューア",  era: "historic", note: "アメリカの自然を歩き続け、国立公園制度の創設に尽力した自然主義者。" , name_en: "John Muir", name_zh: "约翰·缪尔", name_ko: "존 뮤어", note_en: "A naturalist who walked across the American wilderness and helped establish the National Parks system.", note_zh: "走遍美国自然、致力于国家公园制度创立的自然主义者。", note_ko: "미국의 자연을 걸으며, 국립공원 제도 창설에 힘쓴 자연주의자." },
     { name: "さかなクン",      era: "modern",   note: "魚への純粋な愛と観察眼で、魚類学者・アーティストとして輝く。" },
     { name: "池上彰",          era: "modern",   note: "複雑な情報を整理・分類し、誰にでも分かる形に変換するプロ。" },
     { name: "デビッド・アッテンボロー", era: "modern", note: "自然界のすべてを敬い、映像で世界に伝え続ける自然の証人。" },
@@ -5038,12 +5281,66 @@ const QUESTIONS = [
 
 // 5段階回答（スコアはこの順番に対応）
 const ANSWERS = [
-  { label: "とてもよく当てはまる", score: 2 },
-  { label: "やや当てはまる", score: 1 },
-  { label: "どちらとも言えない", score: 0 },
-  { label: "あまり当てはまらない", score: -1 },
-  { label: "まったく当てはまらない", score: -2 }
+  { label: "とてもよく当てはまる", label_en: "Strongly applies", label_zh: "非常符合", label_ko: "매우 잘 맞다", score: 2 },
+  { label: "やや当てはまる", label_en: "Somewhat applies", label_zh: "比较符合", label_ko: "조금 맞다", score: 1 },
+  { label: "どちらとも言えない", label_en: "Neither", label_zh: "难以判断", label_ko: "어느 쪽도 아니다", score: 0 },
+  { label: "あまり当てはまらない", label_en: "Not quite", label_zh: "不太符合", label_ko: "별로 맞지 않다", score: -1 },
+  { label: "まったく当てはまらない", label_en: "Doesn't apply at all", label_zh: "完全不符", label_ko: "전혀 맞지 않다", score: -2 }
 ];
+
+// 回答ラベル多言語取得
+function getAnswerLabel(idx) {
+  const a = ANSWERS[idx];
+  if (!a) return '';
+  if (currentLang === 'en') return a.label_en || a.label;
+  if (currentLang === 'zh') return a.label_zh || a.label;
+  if (currentLang === 'ko') return a.label_ko || a.label;
+  return a.label;
+}
+
+// INTELLIGENCE_DETAILS 多言語ヘルパー
+function getDetail(key) {
+  const d = INTELLIGENCE_DETAILS[key];
+  if (!d) return null;
+  const suffix = currentLang === 'en' ? '_en'
+                : currentLang === 'zh' ? '_zh'
+                : currentLang === 'ko' ? '_ko'
+                : '';
+  return {
+    strength: d['strength' + suffix] || d.strength,
+    careers: d['careers' + suffix] || d.careers,
+    sideJob: d['sideJob' + suffix] || d.sideJob,
+    advice: d['advice' + suffix] || d.advice
+  };
+}
+
+// TALENT_TYPES 多言語ヘルパー
+function getTalent(key) {
+  const t = TALENT_TYPES[key];
+  if (!t) return null;
+  const suffix = currentLang === 'en' ? '_en'
+                : currentLang === 'zh' ? '_zh'
+                : currentLang === 'ko' ? '_ko'
+                : '';
+  // baseは日本語、上書きとして言語別フィールドを使う
+  // ENの場合、character_enがなければcharacterEnを使う
+  let charName;
+  if (currentLang === 'en') {
+    charName = t.character_en || t.characterEn || t.character;
+  } else {
+    charName = t['character' + suffix] || t.character;
+  }
+  return {
+    name: t['name' + suffix] || t.name,
+    en: t.en,
+    character: charName,
+    characterEn: t.characterEn,
+    animal: t.animal,
+    bgColor: t.bgColor,
+    catchphrase: t['catchphrase' + suffix] || t.catchphrase,
+    desc: t['desc' + suffix] || t.desc
+  };
+}
 
 // ============ TALENT TYPE NAMES (TOP1 -> TOP3 の組み合わせで命名) ============
 // 主要な知能だけで「型」名を決める
@@ -5057,6 +5354,19 @@ const TALENT_TYPES = {
     bgColor: "#8a2922",
     catchphrase: "言葉ひとつで、世界をやさしく組み替えるひと。",
     desc: "あなたは言葉によって世界を再構築する才能を持っています。頭の中で起こっている複雑な感情や思考を、誰よりも繊細な言語に変換する力。それは、人の心に届く文章を生み、目に見えない感情に輪郭を与え、ときに人を動かします。沈黙の中にも物語を見出し、何気ない会話の中に詩を聴き取る——あなたの本質は、世界を「読む」ことと「書く」ことの間を自由に行き来する翻訳者です。"
+  ,
+
+    name_en: "The Wordweaver",
+    name_zh: "编织文字者",
+    name_ko: "말의 잎을 엮는 자",
+    character_zh: "故事讲述猫头鹰",
+    character_ko: "이야기꾼 부엉이",
+    catchphrase_en: "One who gently rearranges the world through a single word.",
+    catchphrase_zh: "一言一语，便能温柔地重塑世界的人。",
+    catchphrase_ko: "말 하나로 세상을 다정하게 바꿔놓는 사람.",
+    desc_en: "You have the talent to reconstruct the world through language. The power to translate the complex emotions and thoughts in your head into the most delicate words. It creates sentences that reach hearts, gives shape to invisible feelings, and at times moves people. You find stories in silence and hear poetry in casual conversations—your essence is that of a translator who moves freely between \"reading\" and \"writing\" the world.",
+    desc_zh: "你拥有用语言重新构筑世界的才能。将脑中复杂的情感与思考转化为最细腻语言的能力。它能写出打动人心的文字，赋予无形情感以轮廓，有时甚至能驱动他人。在沉默中发现故事，在闲谈中听见诗——你的本质，是在\"阅读\"与\"书写\"之间自由往来的译者。",
+    desc_ko: "당신은 언어로 세상을 재구성하는 재능을 가지고 있습니다. 머릿속의 복잡한 감정과 사고를 누구보다 섬세한 언어로 번역하는 힘. 그것은 사람의 마음에 닿는 글을 만들고, 보이지 않는 감정에 윤곽을 부여하며, 때로는 사람을 움직입니다. 침묵 속에서도 이야기를 발견하고, 사소한 대화 속에서 시를 듣는—당신의 본질은 세상을 \"읽고\" \"쓰는\" 사이를 자유롭게 오가는 번역자입니다."
   },
   logical: {
     name: "理を見抜く者",
@@ -5107,6 +5417,19 @@ const TALENT_TYPES = {
     bgColor: "#a05a3a",
     catchphrase: "ことばにならない感情を、いちばん早く察するひと。",
     desc: "あなたは人と人の間に流れる、目に見えない感情の流れを読み取る才能を持っています。表情、声、間（ま）、空気——その人自身ですら気づいていない感情を、あなたは察知してしまう。それは、人を癒やし、繋ぎ、率いる力です。チームの中で、相談の場で、初対面の場で、あなたは無意識のうちに調停者の役割を引き受けている。あなたの本質は、社会という生き物を読み解く翻訳者です。"
+  ,
+
+    name_en: "The Empath",
+    name_zh: "读心者",
+    name_ko: "마음을 읽는 자",
+    character_zh: "温柔的海豚",
+    character_ko: "다정한 돌고래",
+    catchphrase_en: "The first to sense emotions that have no name.",
+    catchphrase_zh: "最早察觉无以名状之情感的人。",
+    catchphrase_ko: "말이 되지 않는 감정을, 가장 먼저 느끼는 사람.",
+    desc_en: "You have the talent to read the invisible flow of emotion between people. Facial expressions, voices, pauses, atmosphere—you perceive emotions that the person themselves hasn't even noticed. This is the power to heal, connect, and lead people. In teams, in counseling, on first meetings, you unconsciously take on the role of mediator. Your essence is that of a translator who reads society as a living organism.",
+    desc_zh: "你拥有读取人与人之间无形情感流动的才能。表情、声音、停顿、氛围——连本人都未曾察觉的情感，你能察觉到。这是治愈、连接、引领他人的力量。在团队中、在咨询场合、在初次见面时，你不自觉地承担起调停者的角色。你的本质，是把社会这个有机体翻译给世界的译者。",
+    desc_ko: "당신은 사람과 사람 사이를 흐르는 보이지 않는 감정의 흐름을 읽어내는 재능을 가지고 있습니다. 표정, 목소리, 간격, 공기—그 사람 자신조차 알아차리지 못한 감정을, 당신은 감지해버립니다. 그것은 사람을 치유하고, 잇고, 이끄는 힘입니다. 팀에서, 상담의 자리에서, 첫만남에서, 당신은 무의식 중에 조정자의 역할을 맡습니다. 당신의 본질은 사회라는 생물체를 읽어내는 번역자입니다."
   },
   intrapersonal: {
     name: "内なる声を聴く者",
@@ -5117,6 +5440,19 @@ const TALENT_TYPES = {
     bgColor: "#3a5a5a",
     catchphrase: "じぶんという深い森を、ひとりで歩けるひと。",
     desc: "あなたは自分自身という最も理解しがたい存在を、深く見つめ続ける才能を持っています。自分の感情、欲望、矛盾、限界——それらを誤魔化さずに観察できる力。それは、流行や他人の評価に振り回されず、自分の軸で生きるための羅針盤です。一見、地味に見えるこの能力こそが、長期的に最も強い「ぶれない人」を作ります。あなたの本質は、自分の中に深く井戸を掘り続ける哲学者の眼差しです。"
+  ,
+
+    name_en: "The Inner Mystic",
+    name_zh: "聆听内在之声者",
+    name_ko: "내면의 목소리를 듣는 자",
+    character_zh: "沉思的熊",
+    character_ko: "사색하는 곰",
+    catchphrase_en: "Someone who can walk alone in the deep forest of the self.",
+    catchphrase_zh: "能独自走过名为自我之深林的人。",
+    catchphrase_ko: "자신이라는 깊은 숲을, 혼자 걸을 수 있는 사람.",
+    desc_en: "You have the talent to deeply observe yourself—the most difficult being to understand. Your emotions, desires, contradictions, limits—the power to observe them without self-deception. It is the compass that lets you live by your own axis, unswayed by trends or others' evaluations. This seemingly modest ability is what creates \"the most unshakeable person\" over the long term. Your essence is the gaze of a philosopher continuously digging a deep well into themselves.",
+    desc_zh: "你拥有深入观察自我这一最难理解之存在的才能。自己的情绪、欲望、矛盾、极限——能毫不自欺地观察它们的力量。这是不被潮流和他人评价左右、按自己中心生活的罗盘。看似平淡的这项能力，长远来看反而塑造最坚定不移的人。你的本质，是不断在自己内部挖深井的哲学家之眼。",
+    desc_ko: "당신은 자기 자신이라는 가장 이해하기 어려운 존재를, 깊이 바라보는 재능을 가지고 있습니다. 자신의 감정·욕망·모순·한계—그것들을 속이지 않고 관찰할 수 있는 힘. 그것은 유행이나 타인의 평가에 휘둘리지 않고, 자신의 축으로 살아가기 위한 나침반입니다. 언뜻 수수해 보이는 이 능력이야말로, 장기적으로 가장 강한 \"흔들리지 않는 사람\"을 만듭니다. 당신의 본질은 자기 안에 깊은 우물을 계속 파나가는 철학자의 시선입니다."
   },
   naturalist: {
     name: "万物を分類する者",
@@ -5127,6 +5463,19 @@ const TALENT_TYPES = {
     bgColor: "#5a6a3a",
     catchphrase: "混沌を、丁寧に並べ替えてくれるひと。",
     desc: "あなたは世界に存在する膨大な事物を、見分け、分類し、関係づける才能を持っています。植物、動物、データ、コレクション、情報——あなたの目には、それらの「違い」がはっきりと映っている。それは、研究者、編集者、キュレーター、データ分析者など、「秩序を生み出す職業」に直結する力です。混沌を整理し、世界を意味のある体系として提示する。あなたの本質は、博物学者の目を持った司書です。"
+  ,
+
+    name_en: "The Curator",
+    name_zh: "万物分类者",
+    name_ko: "만물을 분류하는 자",
+    character_zh: "收藏家大象",
+    character_ko: "수집가 코끼리",
+    catchphrase_en: "Someone who carefully rearranges the chaos.",
+    catchphrase_zh: "能将混沌细心整理好的人。",
+    catchphrase_ko: "혼돈을 정성스럽게 다시 정리해 주는 사람.",
+    desc_en: "You have the talent to distinguish, classify, and connect the vast array of things that exist in the world. Plants, animals, data, collections, information—the \"differences\" between them appear clearly to your eyes. This power connects directly to professions that \"create order\"—researchers, editors, curators, data analysts. You organize chaos and present the world as a meaningful system. Your essence is that of a librarian with a naturalist's eye.",
+    desc_zh: "你拥有辨别、分类、关联世间庞大事物的才能。植物、动物、数据、收藏、信息——它们的\"差异\"在你眼中清晰可见。这是直接连接研究员、编辑、策展人、数据分析师等\"创造秩序的职业\"的力量。把混沌整理成秩序，把世界以有意义的体系呈现。你的本质，是带着博物学家之眼的图书管理员。",
+    desc_ko: "당신은 세상에 존재하는 방대한 사물을, 식별하고 분류하고 연관 짓는 재능을 가지고 있습니다. 식물·동물·데이터·컬렉션·정보—당신의 눈에는 그것들의 \"차이\"가 또렷이 비쳐 있습니다. 그것은 연구자·편집자·큐레이터·데이터 분석가 등, \"질서를 만들어내는 직업\"에 직결되는 힘입니다. 혼돈을 정리하고, 세상을 의미 있는 체계로 제시한다. 당신의 본질은 박물학자의 눈을 가진 사서입니다."
   }
 };
 
@@ -5212,62 +5561,221 @@ const INTELLIGENCE_DETAILS = {
     careers: ["編集者・ライター", "翻訳家・通訳", "弁護士", "ジャーナリスト", "コピーライター", "脚本家"],
     sideJob: "ブログ・ニュースレター運営、Web記事の執筆、書籍のレビュー、note運営、コピーライティング受託",
     advice: "言葉のインプット量とアウトプット量、両方を意識的に増やしてください。読書だけでなく「書く習慣」を持つことで、才能が一気に開花します。"
+  ,
+
+    strength_en: "Your strength is your ability to verbalize emotions and structures, and to craft messages that move others. You shine especially in fields where the precision of words matters most—books, articles, scripts, copy.",
+    strength_zh: "你的强项在于将情感和结构语言化的能力，以及创作触动人心讯息的能力。在书籍、文章、剧本、文案等对文字精度要求最高的领域最为耀眼。",
+    strength_ko: "당신의 강점은 감정과 구조를 언어화하는 능력과 사람의 마음을 움직이는 메시지를 만드는 능력입니다. 책·기사·각본·카피 등 단어의 정밀도가 가장 중요한 분야에서 빛납니다.",
+    careers_en: ["Editor / Writer", "Translator / Interpreter", "Lawyer", "Journalist", "Copywriter", "Screenwriter"],
+    careers_zh: ["编辑/作家", "翻译/口译", "律师", "记者", "文案撰稿人", "编剧"],
+    careers_ko: ["편집자/작가", "번역가/통역사", "변호사", "저널리스트", "카피라이터", "각본가"],
+    sideJob_en: "Web media writing, social media presence, book translation, blog operation, Note/Substack newsletter publishing.",
+    sideJob_zh: "Web媒体撰稿、社交媒体运营、书籍翻译、博客经营、Note/Substack订阅发布。",
+    sideJob_ko: "웹 매체 집필, SNS 발신, 책 번역, 블로그 운영, Note/Substack 뉴스레터 발행.",
+    advice_en: "If you only refine your words, you risk losing energy. Schedule daily inputs from various fields. Reading widely is your fuel.",
+    advice_zh: "若仅锤炼措辞，会失去能量。请安排每日跨领域的输入。广泛阅读是你的燃料。",
+    advice_ko: "말만 다듬다 보면 에너지가 떨어집니다. 다양한 분야의 인풋을 매일 일정량 확보하세요. 폭넓은 독서가 당신의 연료입니다."
   },
   logical: {
     strength: "複雑な構造を見抜く力、論理的に組み立てる力、データから本質を抽出する力に優れています。意思決定・問題解決・戦略構築など「答えのない問いに答える」場面で力を発揮します。",
     careers: ["エンジニア・データサイエンティスト", "コンサルタント", "研究者・科学者", "アナリスト", "戦略プランナー", "投資家"],
     sideJob: "プログラミング・データ分析の受託、テクニカルライティング、投資・トレーディング、研究レビューの執筆",
     advice: "論理だけで突き進むと「正しいけど人がついてこない」状態に陥りがちです。感情・直感の要素を意識的に取り入れることで、説得力が一段上がります。"
+  ,
+
+    strength_en: "You excel at logical thinking, structural understanding, and problem analysis. Anywhere the question why must be answered with rigor, your abilities take center stage.",
+    strength_zh: "你擅长逻辑思考、结构理解、问题分析。在需要严谨回答「为什么」的场合，你的能力将站上舞台中央。",
+    strength_ko: "당신은 논리적 사고력·구조 이해력·문제 분석력이 뛰어납니다. 「왜?」라는 질문에 엄밀하게 답해야 하는 모든 곳에서 능력이 빛납니다.",
+    careers_en: ["Engineer / Data Scientist", "Consultant", "Researcher / Scientist", "Analyst", "Strategic Planner", "Investor"],
+    careers_zh: ["工程师/数据科学家", "咨询顾问", "研究员/科学家", "分析师", "战略规划师", "投资人"],
+    careers_ko: ["엔지니어/데이터 사이언티스트", "컨설턴트", "연구자/과학자", "애널리스트", "전략 기획자", "투자자"],
+    sideJob_en: "Data analytics gigs, programming education, investment information distribution, paid consulting newsletters.",
+    sideJob_zh: "数据分析承接、编程教育、投资资讯发送、付费咨询通讯。",
+    sideJob_ko: "데이터 분석 의뢰, 프로그래밍 교육, 투자 정보 발신, 유료 컨설팅 뉴스레터.",
+    advice_en: "Pure logic risks being right but unfollowed. Intentionally weave in emotional and intuitive elements—your persuasiveness will rise a level.",
+    advice_zh: "仅靠逻辑前进，容易陷入「正确却无人跟随」的状态。有意识地加入情感与直觉元素，说服力会更上一层楼。",
+    advice_ko: "논리만으로 밀어붙이면 「맞는데 사람이 따라오지 않는」 상태에 빠지기 쉽습니다. 감정·직관 요소를 의식적으로 받아들이면 설득력이 한 단계 올라갑니다."
   },
   spatial: {
     strength: "視覚的な情報処理力、空間把握力、デザインセンスに優れています。デザイン・建築・映像・3D・地図など、「目に見えるものを構成する」分野で才能が爆発します。",
     careers: ["デザイナー（UI/UX・グラフィック）", "建築家", "映像クリエイター", "イラストレーター", "写真家", "プロダクトデザイナー"],
     sideJob: "デザイン受託、写真販売、3Dモデリング、図解コンテンツ制作、ポートフォリオサイト制作",
     advice: "頭の中のイメージを「言語化」する練習をすると、クライアントワークが圧倒的に楽になります。スケッチや図解の習慣を毎日少しずつ。"
+  ,
+
+    strength_en: "You excel in visual information processing, spatial awareness, and design sense. Your talent explodes in fields that compose what can be seen—design, architecture, video, 3D, maps.",
+    strength_zh: "你在视觉信息处理、空间把握、设计感方面出众。在设计、建筑、影像、3D、地图等「构筑可见之物」的领域中，才能将彻底绽放。",
+    strength_ko: "시각 정보 처리 능력, 공간 파악력, 디자인 감각이 뛰어납니다. 디자인·건축·영상·3D·지도 등 「보이는 것을 구성하는」 분야에서 재능이 폭발합니다.",
+    careers_en: ["Designer (UI/UX, Graphic)", "Architect", "Video Creator", "Illustrator", "Photographer", "Product Designer"],
+    careers_zh: ["设计师(UI/UX·平面)", "建筑师", "影像创作者", "插画师", "摄影师", "产品设计师"],
+    careers_ko: ["디자이너 (UI/UX·그래픽)", "건축가", "영상 크리에이터", "일러스트레이터", "사진가", "프로덕트 디자이너"],
+    sideJob_en: "Design commissions, photo licensing, 3D modeling, infographic content, portfolio site creation.",
+    sideJob_zh: "设计接案、照片售卖、3D建模、图解内容制作、作品集网站制作。",
+    sideJob_ko: "디자인 수주, 사진 판매, 3D 모델링, 도해 콘텐츠 제작, 포트폴리오 사이트 제작.",
+    advice_en: "Practicing how to verbalize the images in your head will make client work dramatically easier. Sketch and diagram a little every day.",
+    advice_zh: "练习将脑中影像「语言化」，能让客户对接轻松许多。每天少量地养成画速写和图解的习惯。",
+    advice_ko: "머릿속 이미지를 「언어화」하는 연습을 하면 클라이언트 워크가 훨씬 수월해집니다. 스케치와 도해 습관을 매일 조금씩."
   },
   musical: {
     strength: "音と感情の繊細な紐付け、リズム感、空気を読む感覚に優れています。音楽そのものはもちろん、「場の流れ」や「タイミング」を扱う仕事で本領を発揮します。",
     careers: ["音楽家・作曲家", "音響エンジニア", "DJ・プロデューサー", "ボイストレーナー", "ポッドキャスター", "イベントプロデューサー"],
     sideJob: "BGM制作・音源販売、podcast配信、ボイスオーバー、音楽レッスン、Spotifyプレイリストキュレーション",
     advice: "音楽的知能は「直感の正確さ」に直結します。理屈で動こうとせず、最初の直感を信じる訓練を。録音して聴き直す習慣が才能を磨きます。"
+  ,
+
+    strength_en: "You excel at the delicate linkage between sound and emotion, rhythm, and reading the air. Beyond music itself, you shine in work that handles flow of the moment and timing.",
+    strength_zh: "你在声音与情感的细腻连结、节奏感、读空气的感觉上出众。不仅是音乐本身，在处理「场域流动」与「时机」的工作中也将大显身手。",
+    strength_ko: "소리와 감정의 섬세한 연결, 리듬감, 분위기를 읽는 감각이 뛰어납니다. 음악 자체뿐 아니라 「장소의 흐름」과 「타이밍」을 다루는 일에서 본령을 발휘합니다.",
+    careers_en: ["Musician / Composer", "Sound Engineer", "DJ / Producer", "Voice Coach", "Podcaster", "Event Producer"],
+    careers_zh: ["音乐家/作曲家", "音响工程师", "DJ/制作人", "发声教练", "播客主持", "活动制作人"],
+    careers_ko: ["음악가/작곡가", "음향 엔지니어", "DJ/프로듀서", "보이스 트레이너", "팟캐스터", "이벤트 프로듀서"],
+    sideJob_en: "BGM production / music licensing, podcast distribution, voice over, music lessons, Spotify playlist curation.",
+    sideJob_zh: "BGM制作/音源销售、播客发布、配音、音乐教学、Spotify歌单策划。",
+    sideJob_ko: "BGM 제작·음원 판매, 팟캐스트 송출, 보이스오버, 음악 레슨, Spotify 플레이리스트 큐레이션.",
+    advice_en: "Musical intelligence ties directly to accuracy of intuition. Train yourself to trust your first instinct rather than overthinking. Recording yourself and listening back sharpens your gift.",
+    advice_zh: "音乐型智能直接对应「直觉的精确度」。不要以道理推进，训练自己相信第一直觉。录音回放的习惯能磨砺你的天赋。",
+    advice_ko: "음악적 지능은 「직관의 정확성」과 직결됩니다. 이론으로 움직이려 하지 말고, 첫 직관을 믿는 훈련을. 녹음 후 다시 듣는 습관이 재능을 갈고닦습니다."
   },
   bodily: {
     strength: "身体感覚の鋭さ、手先の器用さ、空間と自分の身体の関係性を瞬時に掴む力に長けています。スポーツ・職人技・パフォーマンスなど、「身体で表現する」場面で最も輝きます。",
     careers: ["アスリート・トレーナー", "職人・クラフトマン", "外科医", "ダンサー・俳優", "理学療法士", "シェフ"],
     sideJob: "ハンドメイド販売、フィットネス指導、料理教室、ものづくりワークショップ、YouTubeでの実演解説",
     advice: "頭で考えすぎず、まず「やってみる」のがあなたの正解ルート。動きながら学ぶスタイルを恥じずに、むしろ強みとして武器化してください。"
+  ,
+
+    strength_en: "You have sharp bodily senses, dexterity, and the ability to instantly grasp the relationship between space and your body. You shine most in moments of physical expression—sports, craftsmanship, performance.",
+    strength_zh: "你具有敏锐的身体感觉、灵巧的手指，以及瞬间掌握空间与自身关系的能力。在运动、手艺、表演等「用身体表达」的场合最为耀眼。",
+    strength_ko: "신체 감각의 예리함, 손재주, 공간과 자신의 신체 관계를 순식간에 파악하는 능력이 뛰어납니다. 스포츠·장인 기술·퍼포먼스 등 「신체로 표현하는」 장면에서 가장 빛납니다.",
+    careers_en: ["Athlete / Trainer", "Craftsman", "Surgeon", "Dancer / Actor", "Physical Therapist", "Chef"],
+    careers_zh: ["运动员/教练", "工匠", "外科医生", "舞者/演员", "物理治疗师", "厨师"],
+    careers_ko: ["운동선수/트레이너", "장인·크래프트맨", "외과의", "댄서/배우", "물리치료사", "셰프"],
+    sideJob_en: "Handmade goods, fitness coaching, cooking classes, craft workshops, hands-on YouTube tutorials.",
+    sideJob_zh: "手工艺品销售、健身指导、烹饪教室、手作工作坊、YouTube实演讲解。",
+    sideJob_ko: "수공예 판매, 피트니스 지도, 요리 교실, 만들기 워크숍, YouTube 실연 해설.",
+    advice_en: "Do not overthink—try it first is your right route. Do not be embarrassed by your learn-by-doing style; weaponize it as your strength.",
+    advice_zh: "别在头脑里想太多，「先做做看」才是你的正确路径。请别为边做边学的风格难为情，反而要把它当作武器。",
+    advice_ko: "머리로 너무 생각하지 말고, 우선 「해보는」 것이 정답 루트. 움직이면서 배우는 스타일을 부끄러워하지 말고 오히려 강점으로 무기화하세요."
   },
   interpersonal: {
     strength: "他者の感情を読み取る力、信頼を築く力、人と人を繋げる力に優れています。チーム・コミュニティ・顧客対応など、「人と人の間」で価値を生む仕事で最強です。",
     careers: ["営業・カスタマーサクセス", "教師・カウンセラー", "人事・組織開発", "プロデューサー", "コミュニティマネージャー", "経営者"],
     sideJob: "コーチング・コンサルティング、SNSコミュニティ運営、メンタリング、イベント主催、人材紹介",
     advice: "他人を優先しすぎて、自分が消耗するパターンに注意。意識的に「ひとりの時間」を確保することで、対人才能はより長く持続します。"
+  ,
+
+    strength_en: "You excel at reading others' emotions, building trust, and connecting people. You're strongest in work that creates value between people—teams, communities, customer interactions.",
+    strength_zh: "你擅长读取他人情感、建立信任、连接人与人。在团队、社区、客户互动等「人与人之间」创造价值的工作中最为强大。",
+    strength_ko: "타인의 감정을 읽는 능력, 신뢰를 쌓는 능력, 사람과 사람을 잇는 능력이 뛰어납니다. 팀·커뮤니티·고객 응대 등 「사람과 사람 사이」에서 가치를 만들어내는 일에 최강입니다.",
+    careers_en: ["Sales / Customer Success", "Teacher / Counselor", "HR / Org Development", "Producer", "Community Manager", "Business Owner"],
+    careers_zh: ["销售/客户成功", "教师/咨询师", "人力/组织开发", "制作人", "社群经理", "经营者"],
+    careers_ko: ["영업/고객성공", "교사/상담사", "인사/조직개발", "프로듀서", "커뮤니티 매니저", "경영자"],
+    sideJob_en: "Coaching / consulting, social media community management, mentoring, event hosting, recruitment matchmaking.",
+    sideJob_zh: "辅导/咨询、SNS社群运营、辅导师、活动主办、人才介绍。",
+    sideJob_ko: "코칭/컨설팅, SNS 커뮤니티 운영, 멘토링, 이벤트 주최, 인재 소개.",
+    advice_en: "Beware the pattern of prioritizing others until you're drained. Consciously securing solo time will sustain your interpersonal gift much longer.",
+    advice_zh: "注意太关注他人导致自己耗竭的模式。有意识地确保「独处时间」，对人才能更持久。",
+    advice_ko: "타인을 우선하다 보면 자신이 소진되는 패턴에 주의. 의식적으로 「혼자의 시간」을 확보하면 대인 재능은 더 오래 지속됩니다."
   },
   intrapersonal: {
     strength: "自己分析力、内省力、自分の感情と思考を客観視する力に優れています。表面的な流行に流されず、自分の軸を保ち続ける——長期戦に強いタイプです。",
     careers: ["カウンセラー・セラピスト", "作家・哲学者", "起業家", "コーチ", "編集者", "プロデューサー"],
     sideJob: "エッセイ・noteの執筆、コーチング、ジャーナリングワークショップ、自伝的コンテンツ、瞑想・マインドフルネス指導",
     advice: "内省は強みである一方、考えすぎて動けなくなる罠もあります。「思考7割・行動3割」を意識的に「思考5割・行動5割」へ寄せると、才能が世に出ます。"
+  ,
+
+    strength_en: "You excel at self-analysis, introspection, and the ability to observe your own emotions and thoughts objectively. You stay anchored to your own axis amidst surface trends—you are strong in the long game.",
+    strength_zh: "你擅长自我分析、内省、客观看待自身情感与思考。不随表面潮流摇摆，长期战中尤其强大。",
+    strength_ko: "자기 분석력, 내적 성찰력, 자신의 감정과 사고를 객관시하는 능력이 뛰어납니다. 표면적인 유행에 휩쓸리지 않고 자신의 축을 유지하는—장기전에 강한 타입입니다.",
+    careers_en: ["Counselor / Therapist", "Writer / Philosopher", "Entrepreneur", "Coach", "Editor", "Producer"],
+    careers_zh: ["咨询师/治疗师", "作家/哲学家", "创业者", "教练", "编辑", "制作人"],
+    careers_ko: ["상담사/치료사", "작가/철학자", "기업가", "코치", "편집자", "프로듀서"],
+    sideJob_en: "Essay / Note writing, coaching, journaling workshops, autobiographical content, meditation / mindfulness guidance.",
+    sideJob_zh: "随笔/Note写作、教练辅导、写日志工作坊、自传式内容、冥想/正念指导。",
+    sideJob_ko: "에세이·Note 집필, 코칭, 저널링 워크숍, 자전적 콘텐츠, 명상·마인드풀니스 지도.",
+    advice_en: "Introspection is a strength, but it carries the trap of thinking too much and not moving. Consciously shift from 70% thought / 30% action to 50/50 and your gift will reach the world.",
+    advice_zh: "内省是强项的同时也潜藏着「想太多无法行动」的陷阱。有意识地从「七分思考·三分行动」调整为「五分思考·五分行动」，才能将才能带给世界。",
+    advice_ko: "내성은 강점이지만, 너무 생각하다 움직이지 못하는 함정도 있습니다. 「사고 7할·행동 3할」을 의식적으로 「사고 5할·행동 5할」로 옮기면 재능이 세상에 나옵니다."
   },
   naturalist: {
     strength: "観察力、分類力、パターン認識力に優れています。自然だけでなく、データ・情報・コレクションなど「世界を整理する」あらゆる場面で力を発揮します。",
     careers: ["研究者・生物学者", "獣医・園芸家", "データキュレーター", "編集者・キュレーター", "アーカイビスト", "図書館員"],
     sideJob: "情報まとめサイト運営、コレクション販売、ガーデニング・植物コンサル、データベース構築、ニッチ分野の解説note",
     advice: "「分類すること」自体に時間を使いすぎて、アウトプットが遅れがち。8割で公開する勇気を持つと、才能が誰かに届きはじめます。"
+  ,
+
+    strength_en: "You excel at observation, classification, and pattern recognition. Beyond nature, you shine wherever organizing the world is required—data, information, collections.",
+    strength_zh: "你具有出色的观察力、分类力、模式识别力。不仅自然，在数据、信息、收藏等所有「整理世界」的场合都能大显身手。",
+    strength_ko: "관찰력, 분류력, 패턴 인식 능력이 뛰어납니다. 자연뿐 아니라 데이터·정보·컬렉션 등 「세상을 정리하는」 모든 장면에서 힘을 발휘합니다.",
+    careers_en: ["Researcher / Biologist", "Veterinarian / Gardener", "Data Curator", "Editor / Curator", "Archivist", "Librarian"],
+    careers_zh: ["研究员/生物学家", "兽医/园艺师", "数据策展人", "编辑/策展人", "档案管理员", "图书馆员"],
+    careers_ko: ["연구자/생물학자", "수의사/원예가", "데이터 큐레이터", "편집자/큐레이터", "아카이비스트", "도서관 사서"],
+    sideJob_en: "Information aggregation site management, collection sales, gardening / plant consulting, database construction, niche-domain explainer Note articles.",
+    sideJob_zh: "信息整理网站运营、收藏品销售、园艺/植物咨询、数据库构建、小众领域解说Note。",
+    sideJob_ko: "정보 정리 사이트 운영, 컬렉션 판매, 가드닝·식물 컨설팅, 데이터베이스 구축, 니치 분야 해설 Note.",
+    advice_en: "You can spend so much time classifying that your output slows. Find the courage to publish at 80%—your talent will begin reaching people.",
+    advice_zh: "在「分类」本身上花太多时间，反而拖慢了产出。请鼓起勇气在八分时就发布——你的才能才会开始抵达他人。",
+    advice_ko: "「분류하는 것」 자체에 너무 시간을 쓰면 아웃풋이 늦어지기 쉽습니다. 80%에서 공개할 용기를 가지면 재능이 누군가에게 닿기 시작합니다."
   }
 };
 
 // 弱点側のアドバイス
 const GROWTH_ADVICE = {
-  linguistic: "言語化を後回しにせず、感じたことを短くてもメモする習慣を。10秒で書ける一行日記から始めてみてください。",
-  logical: "「なぜ?」を3回繰り返すクセをつけると、論理力は伸びます。直感的判断の後に必ず一度立ち止まる時間を。",
-  spatial: "頭の中のイメージを紙にラフスケッチで吐き出す習慣を。プロでなくていい、線でいいので「見える化」を。",
-  musical: "BGMのある環境で過ごす時間を意識的に作り、音の違いに耳を澄ます訓練を。歌詞より「音」に注目してみて。",
-  bodily: "週に2〜3回、短時間でいいので体を動かす習慣を。思考の詰まりは、ほぼ身体の停滞からきています。",
-  interpersonal: "「相手の話を遮らずに最後まで聞く」だけで対人力は伸びます。聞く→共感→質問の順番を意識して。",
-  intrapersonal: "週に一度、自分に問いを立てる時間を。「今、何に一番時間を使っている?」だけで内省は深まります。",
-  naturalist: "週に一度、自然のある場所に身を置く。あるいは興味の対象を「分類してみる」ノートを作ってみて。"
+  linguistic: {
+    ja: "言語化を後回しにせず、感じたことを短くてもメモする習慣を。10秒で書ける一行日記から始めてみてください。",
+    en: "Don't postpone verbalization—even short notes about what you feel are valuable. Start with a one-line diary you can write in 10 seconds.",
+    zh: "不要拖延语言化的习惯，把感受哪怕只是简短地记下来。从10秒就能写完的一行日记开始吧。",
+    ko: "언어화를 미루지 말고, 느낀 것을 짧게라도 메모하는 습관을. 10초로 쓸 수 있는 한 줄 일기부터 시작해 보세요."
+  },
+  logical: {
+    ja: "「なぜ?」を3回繰り返すクセをつけると、論理力は伸びます。直感的判断の後に必ず一度立ち止まる時間を。",
+    en: "Make a habit of asking 'why?' three times—your logical thinking will sharpen. Always pause once after intuitive judgments.",
+    zh: "养成连问三次「为什么?」的习惯，逻辑力会成长。直觉判断之后，请务必停顿一次。",
+    ko: "「왜?」를 세 번 반복하는 습관을 들이면 논리력이 늘어납니다. 직관적 판단 후에는 반드시 한 번 멈추는 시간을."
+  },
+  spatial: {
+    ja: "頭の中のイメージを紙にラフスケッチで吐き出す習慣を。プロでなくていい、線でいいので「見える化」を。",
+    en: "Get into the habit of dumping the images in your head onto paper as rough sketches. You don't need to be a pro—lines are enough to 'make it visible.'",
+    zh: "把脑中影像以草图形式画在纸上吧。不用画得专业，几根线条就够了，重点是「可视化」。",
+    ko: "머릿속 이미지를 종이에 러프 스케치로 토해내는 습관을. 프로일 필요는 없으며, 선만으로도 「가시화」하세요."
+  },
+  musical: {
+    ja: "BGMのある環境で過ごす時間を意識的に作り、音の違いに耳を澄ます訓練を。歌詞より「音」に注目してみて。",
+    en: "Consciously create time in environments with BGM, and train your ear to listen for sonic differences. Pay attention to 'sound' rather than lyrics.",
+    zh: "有意识地为自己创造有BGM的环境，训练耳朵分辨声音差异。请关注「声音」本身，而不是歌词。",
+    ko: "BGM이 있는 환경에서 시간을 보내는 시간을 의식적으로 만들고, 소리의 차이에 귀를 기울이는 훈련을. 가사보다 「소리」에 주목해 보세요."
+  },
+  bodily: {
+    ja: "週に2〜3回、短時間でいいので体を動かす習慣を。思考の詰まりは、ほぼ身体の停滞からきています。",
+    en: "Move your body 2-3 times a week, even briefly. Mental blocks almost always come from physical stagnation.",
+    zh: "一周2~3次，哪怕短时间也好，建立活动身体的习惯。思考的堵塞，几乎都源自身体的停滞。",
+    ko: "주 2~3회, 짧은 시간이라도 좋으니 몸을 움직이는 습관을. 사고의 막힘은 거의 신체의 정체에서 옵니다."
+  },
+  interpersonal: {
+    ja: "「相手の話を遮らずに最後まで聞く」だけで対人力は伸びます。聞く→共感→質問の順番を意識して。",
+    en: "Just 'listening to the other person without interrupting' will grow your interpersonal skills. Be conscious of the order: listen → empathize → question.",
+    zh: "只要做到「不打断对方，听到最后」，对人能力就会成长。请有意识地按「听→共情→提问」的顺序进行。",
+    ko: "「상대의 말을 끊지 않고 끝까지 듣는다」만으로도 대인 능력은 늘어납니다. 듣기 → 공감 → 질문의 순서를 의식하세요."
+  },
+  intrapersonal: {
+    ja: "週に一度、自分に問いを立てる時間を。「今、何に一番時間を使っている?」だけで内省は深まります。",
+    en: "Once a week, set aside time to ask yourself questions. Just 'What am I spending the most time on now?' will deepen your introspection.",
+    zh: "每周给自己留一次提问的时间。仅是「我现在把最多时间花在了什么上?」一问，就能让内省深化。",
+    ko: "주 1회, 자신에게 질문을 던지는 시간을. 「지금 가장 많은 시간을 쓰는 것은 무엇인가?」만으로도 내성은 깊어집니다."
+  },
+  naturalist: {
+    ja: "週に一度、自然のある場所に身を置く。あるいは興味の対象を「分類してみる」ノートを作ってみて。",
+    en: "Once a week, place yourself somewhere with nature. Or try making a notebook that 'classifies' the subjects of your interest.",
+    zh: "每周一次置身有自然的环境。或试着做一本笔记本，把你感兴趣的对象「分类」一下。",
+    ko: "주 1회, 자연이 있는 장소에 몸을 두기. 또는 흥미 대상을 「분류해 보는」 노트를 만들어 보세요."
+  }
 };
+
+// GROWTH_ADVICE 多言語取得
+function getGrowthAdvice(key) {
+  const g = GROWTH_ADVICE[key];
+  if (!g) return '';
+  return g[currentLang] || g.ja || '';
+}
 
 // ============ RECOMMENDED BOOKS (Amazon Associate) ============
 // StoreID: jbmt-22
@@ -5279,6 +5787,23 @@ const RECOMMENDED_BOOKS = {
     publisher: "幻冬舎",
     asin: "434404052X",
     note: "ものがたりフクロウタイプは「言葉で考える」才能を持っています。この本は、頭の中のもやもやを言語化することで、思考と感情を整理する技法を教えてくれる一冊。あなたの強みをさらに磨きたい人に。"
+  ,
+
+    title_en: "The Magic of Verbalization",
+    title_zh: "语言化的魔力",
+    title_ko: "언어화의 마력",
+    subtitle_en: "How putting things into words makes worries disappear",
+    subtitle_zh: "一旦化为言语，「烦恼」便消失",
+    subtitle_ko: "말로 표현하면 「고민」은 사라진다",
+    author_en: "Shion Kabasawa",
+    author_zh: "桦泽紫苑",
+    author_ko: "카바사와 시온",
+    publisher_en: "Gentosha",
+    publisher_zh: "幻冬舍",
+    publisher_ko: "겐토샤",
+    note_en: "The Storyteller Owl type has the talent to \"think in language.\" This book teaches techniques to organize your thoughts and emotions by verbalizing the haze in your head. A great pick if you want to further sharpen your strength. (Japanese-language book)",
+    note_zh: "故事讲述猫头鹰型拥有「用语言思考」的才能。本书教你将脑中的模糊感受语言化，从而整理思绪与情感的技巧。希望进一步磨练自身强项的人推荐。（日文原版书籍）",
+    note_ko: "이야기꾼 부엉이 유형은 「말로 생각하는」 재능을 가지고 있습니다. 이 책은 머릿속의 모호함을 언어화하여 사고와 감정을 정리하는 기법을 가르쳐주는 한 권. 자신의 강점을 더욱 갈고닦고 싶은 사람에게. (일본어 원서)"
   },
   logical: {
     title: "イシューからはじめよ",
@@ -5287,6 +5812,23 @@ const RECOMMENDED_BOOKS = {
     publisher: "英治出版",
     asin: "4862760856",
     note: "ロジカルキツネタイプは「構造を見抜く力」が武器。この本は、解くべき問いを見極め、最短ルートで答えにたどり着く知的生産の本質を説きます。論理思考を仕事の成果に変える定番書。"
+  ,
+
+    title_en: "Issue-Driven (Issue kara Hajimeyo)",
+    title_zh: "从议题开始",
+    title_ko: "이슈에서 시작하라",
+    subtitle_en: "The \"simple essence\" of intellectual production",
+    subtitle_zh: "知性生产的「简单本质」",
+    subtitle_ko: "지적 생산의 「단순한 본질」",
+    author_en: "Kazuto Ataka",
+    author_zh: "安宅和人",
+    author_ko: "아타카 카즈토",
+    publisher_en: "Eiji Press",
+    publisher_zh: "英治出版",
+    publisher_ko: "에이지 출판",
+    note_en: "The Logical Fox type wields \"the ability to see through structure\" as a weapon. This book teaches the essence of intellectual production: identifying the right questions and reaching answers via the shortest path. A definitive work that turns logical thinking into business outcomes. (Japanese-language book)",
+    note_zh: "逻辑狐狸型以「看透结构的能力」为武器。本书阐述了识别该解决的问题、以最短路径抵达答案的知性生产本质。是把逻辑思考转化为工作成果的经典之作。（日文原版书籍）",
+    note_ko: "논리적 여우 유형은 「구조를 꿰뚫어 보는 힘」이 무기. 이 책은 풀어야 할 질문을 식별하고 최단 경로로 답에 도달하는 지적 생산의 본질을 설파합니다. 논리적 사고를 일의 성과로 바꾸는 정평 있는 책. (일본어 원서)"
   },
   spatial: {
     title: "センスは知識からはじまる",
@@ -5295,22 +5837,73 @@ const RECOMMENDED_BOOKS = {
     publisher: "朝日新聞出版",
     asin: "4022511745",
     note: "デザイン上手なネコタイプは「視覚的センス」が才能。くまモンを手がけたデザイナーが、センスは生まれつきではなく知識の蓄積で磨かれることを説く名著。あなたの感性をもう一段引き上げる一冊。"
+  ,
+
+    title_en: "Sense Starts From Knowledge",
+    title_zh: "品味，始于知识",
+    title_ko: "센스는 지식에서 시작된다",
+    subtitle_en: "",
+    subtitle_zh: "",
+    subtitle_ko: "",
+    author_en: "Manabu Mizuno",
+    author_zh: "水野学",
+    author_ko: "미즈노 마나부",
+    publisher_en: "Asahi Shimbun Publications",
+    publisher_zh: "朝日新闻出版",
+    publisher_ko: "아사히신문 출판",
+    note_en: "The Design Cat type has \"visual sense\" as a talent. The designer behind Kumamon explains that sense is not innate but is honed through accumulated knowledge. A book to take your sensitivity one level higher. (Japanese-language book)",
+    note_zh: "设计师猫型以「视觉品味」为才能。打造熊本熊的设计师指出，品味并非天生，而是通过知识的积累而被磨练出来。能将你的感性再提升一级的名著。（日文原版书籍）",
+    note_ko: "디자인 잘하는 고양이 유형은 「시각적 센스」가 재능. 쿠마몬을 만든 디자이너가, 센스는 타고나는 것이 아니라 지식의 축적으로 다듬어지는 것임을 설파한 명저. 당신의 감성을 한 단계 끌어올릴 한 권. (일본어 원서)"
   },
   musical: {
-    title: "音楽する人間",
-    subtitle: "",
-    author: "河合 隼雄",
-    publisher: "潮出版社",
-    asin: "4267016720",
-    note: "うたうコトリタイプは「音と空気の感度」が才能。臨床心理学の巨匠が、音楽が人の心と魂に何をもたらすのかを語った深い対話集。あなたの繊細な感性に響く一冊。"
+    title: "音楽の聴き方",
+    subtitle: "聴く型と趣味を語る言葉",
+    author: "岡田 暁生",
+    publisher: "中公新書",
+    asin: "412102009X",
+    note: "うたうコトリタイプは「音と空気の感度」が才能。音楽学者が、音楽との向き合い方を「聴く型」と「語る言葉」から徹底的に考え抜いた名著。第19回吉田秀和賞受賞作。あなたの繊細な感性に響く一冊。"
+  ,
+
+    title_en: "How to Listen to Music",
+    title_zh: "聆听音乐的方法",
+    title_ko: "음악을 듣는 법",
+    subtitle_en: "Listening modes and the language of taste",
+    subtitle_zh: "聆听的类型与言说品味的语言",
+    subtitle_ko: "듣는 양식과 취향을 말하는 언어",
+    author_en: "Akeo Okada",
+    author_zh: "冈田晓生",
+    author_ko: "오카다 아케오",
+    publisher_en: "Chuko Shinsho",
+    publisher_zh: "中公新书",
+    publisher_ko: "주코신쇼",
+    note_en: "The Singing Bird type has \"sensitivity to sound and air\" as a talent. A musicologist thoroughly examines how to engage with music through \"listening modes\" and \"language of taste.\" Winner of the 19th Yoshida Hidekazu Award. (Japanese-language book)",
+    note_zh: "歌唱小鸟型以「对声音与空气的敏感度」为才能。音乐学者通过「聆听的类型」与「言说品味的语言」彻底思考如何与音乐相处的名著。第19届吉田秀和奖得奖作。（日文原版书籍）",
+    note_ko: "노래하는 새 유형은 「소리와 공기의 감도」가 재능. 음악학자가 「듣는 양식」과 「취향을 말하는 언어」로 음악과의 관계를 철저히 사유한 명저. 제19회 요시다 히데카즈상 수상작. (일본어 원서)"
   },
   bodily: {
     title: "身体感覚を取り戻す",
     subtitle: "腰・ハラ文化の再生",
     author: "齋藤 孝",
     publisher: "NHK出版",
-    asin: "4140017090",
+    asin: "4140018933",
     note: "しなやかオオカミタイプは「身体で考える」才能の持ち主。失われつつある身体感覚を取り戻す方法を、日本文化の知恵から探る一冊。あなたの強みを言語化し、深めるために。"
+  ,
+
+    title_en: "Reclaiming Bodily Sensation",
+    title_zh: "找回身体感觉",
+    title_ko: "신체 감각을 되찾다",
+    subtitle_en: "A revival of \"koshi-hara\" body culture",
+    subtitle_zh: "腰·腹文化的再生",
+    subtitle_ko: "허리·복부 문화의 재생",
+    author_en: "Takashi Saito",
+    author_zh: "斋藤孝",
+    author_ko: "사이토 다카시",
+    publisher_en: "NHK Publishing",
+    publisher_zh: "NHK出版",
+    publisher_ko: "NHK 출판",
+    note_en: "The Lithe Wolf type has \"thinking with the body\" as their talent. This book explores how to reclaim fading bodily sensations through the wisdom of Japanese culture. A way to verbalize and deepen your strengths. (Japanese-language book)",
+    note_zh: "柔韧之狼型是「用身体思考」之才能的拥有者。本书通过日本文化的智慧，探索找回正在消失的身体感觉之法。把你的强项语言化、深化的一本。（日文原版书籍）",
+    note_ko: "유연한 늑대 유형은 「몸으로 생각하는」 재능의 소유자. 사라져가는 신체 감각을 일본 문화의 지혜에서 되찾는 방법을 탐구하는 한 권. 자신의 강점을 언어화하고 심화시키기 위해. (일본어 원서)"
   },
   interpersonal: {
     title: "人を動かす 改訂文庫版",
@@ -5319,6 +5912,23 @@ const RECOMMENDED_BOOKS = {
     publisher: "創元社",
     asin: "442210134X",
     note: "やさしいイルカタイプは「人の感情を読む」才能を持ちます。80年以上読み継がれる人間関係の古典。あなたの対人センスを、人を動かす実践力に変える定番書。"
+  ,
+
+    title_en: "How to Win Friends and Influence People",
+    title_zh: "人性的弱点",
+    title_ko: "인간관계론",
+    subtitle_en: "",
+    subtitle_zh: "",
+    subtitle_ko: "",
+    author_en: "Dale Carnegie",
+    author_zh: "戴尔·卡耐基",
+    author_ko: "데일 카네기",
+    publisher_en: "Simon & Schuster",
+    publisher_zh: "中信出版社",
+    publisher_ko: "리베르",
+    note_en: "The Empathic Dolphin type has the talent to \"read others' emotions.\" A classic of human relations read for over 80 years. A definitive work that turns your interpersonal sense into the practical skill of moving people.",
+    note_zh: "温柔的海豚型拥有「读懂他人情感」的才能。已被阅读80年以上的人际关系经典。把你的对人触觉转化为驱动他人的实践力的经典之作。",
+    note_ko: "다정한 돌고래 유형은 「사람의 감정을 읽는」 재능을 가지고 있습니다. 80년 이상 읽혀온 인간관계의 고전. 당신의 대인 감각을, 사람을 움직이는 실천력으로 바꾸는 정평 있는 책."
   },
   intrapersonal: {
     title: "夜と霧",
@@ -5327,14 +5937,48 @@ const RECOMMENDED_BOOKS = {
     publisher: "みすず書房",
     asin: "4622039702",
     note: "もの思うクマタイプは「内面と向き合う」才能を持ちます。極限の状況で人間が見出す意味とは何か——心理学者が自らの体験から綴った、内省の到達点とも言える一冊。"
+  ,
+
+    title_en: "Man's Search for Meaning",
+    title_zh: "活出生命的意义",
+    title_ko: "죽음의 수용소에서",
+    subtitle_en: "",
+    subtitle_zh: "",
+    subtitle_ko: "",
+    author_en: "Viktor E. Frankl",
+    author_zh: "维克多·弗兰克尔",
+    author_ko: "빅터 프랭클",
+    publisher_en: "Beacon Press",
+    publisher_zh: "华夏出版社",
+    publisher_ko: "청아출판사",
+    note_en: "The Contemplative Bear type has the talent to \"face their own inner world.\" What meaning do humans find in the most extreme situations?—A psychologist's account from his own experience, reaching the pinnacle of introspection.",
+    note_zh: "沉思的熊型拥有「面对内心」的才能。在极限处境中，人能发现什么样的意义？——心理学家从亲身经历出发写就，堪称内省之极致的一部巨作。",
+    note_ko: "사색하는 곰 유형은 「내면과 마주하는」 재능을 가지고 있습니다. 극한의 상황에서 인간이 찾아내는 의미란 무엇인가——심리학자가 자신의 체험에서 써내려간, 내성의 도달점이라 할 한 권."
   },
   naturalist: {
     title: "ソロモンの指環",
     subtitle: "動物行動学入門",
     author: "コンラート・ローレンツ",
     publisher: "早川書房",
-    asin: "4150503397",
+    asin: "4150502226",
     note: "コレクターゾウタイプは「観察と分類」の才能を持ちます。動物行動学の創始者が、自然と動物への深い愛と観察眼で綴った名著。あなたの好奇心を刺激し、世界を見る目を深めます。"
+  ,
+
+    title_en: "King Solomon's Ring",
+    title_zh: "所罗门王的指环",
+    title_ko: "솔로몬의 반지",
+    subtitle_en: "New Light on Animal Ways",
+    subtitle_zh: "与鸟兽和游鱼的对话",
+    subtitle_ko: "동물행동학 입문",
+    author_en: "Konrad Lorenz",
+    author_zh: "康拉德·洛伦兹",
+    author_ko: "콘라트 로렌츠",
+    publisher_en: "Routledge",
+    publisher_zh: "中信出版社",
+    publisher_ko: "사이언스북스",
+    note_en: "The Curator Elephant type has the talent for \"observation and classification.\" A classic by the founder of ethology, written with deep love and observation of nature and animals. It stimulates your curiosity and deepens how you see the world.",
+    note_zh: "收藏家大象型拥有「观察与分类」的才能。动物行为学创始人以对自然与动物的深爱与观察之眼写就的名著。激发你的好奇心，深化你观察世界的视角。",
+    note_ko: "수집가 코끼리 유형은 「관찰과 분류」의 재능을 가지고 있습니다. 동물행동학의 창시자가 자연과 동물에 대한 깊은 사랑과 관찰안으로 써내려간 명저. 당신의 호기심을 자극하고, 세상을 보는 눈을 깊게 합니다."
   }
 };
 
@@ -5602,7 +6246,7 @@ function _showResultInner() {
   state.top3 = top3;
   state.bottom = bottom;
 
-  const talent = TALENT_TYPES[top1];
+  const talent = getTalent(top1);
 
   // header
   const idCode = sorted.slice(0, 3).map(k => k.slice(0, 2).toUpperCase()).join('-');
@@ -5625,7 +6269,7 @@ function _showResultInner() {
   // Compound character (TOP1 × TOP2)
   document.getElementById('compoundName').textContent = makeCompoundName(top1, top2);
   document.getElementById('compoundNote').textContent =
-    `${INTELLIGENCES[top1].name.replace('的知能','')} × ${INTELLIGENCES[top2].name.replace('的知能','')}`;
+    `${getIntShortName(top1)} × ${getIntShortName(top2)}`;
 
   // Apply tinted background to talent card
   const card = document.getElementById('talentCard');
@@ -5633,18 +6277,81 @@ function _showResultInner() {
 
   // Quote
   const quotes = {
-    linguistic:    { q: "Words can be like X-rays if you use them properly.",                  jp: "言葉は、正しく使えばX線のように物事を見透かす力を持つ。",                  a: "ALDOUS HUXLEY" },
-    logical:       { q: "Logic will get you from A to B. Imagination will take you everywhere.", jp: "論理はあなたをAからBへ連れて行く。想像力はあなたをどこへでも連れて行く。",   a: "ALBERT EINSTEIN" },
-    spatial:       { q: "I do not paint things, I paint only the difference between things.",  jp: "私はものを描くのではない。ものとものの「あいだ」を描いているのだ。",         a: "HENRI MATISSE" },
-    musical:       { q: "Music gives a soul to the universe.",                                  jp: "音楽は、宇宙に魂を与える。",                                                  a: "PLATO" },
-    bodily:        { q: "The body says what words cannot.",                                     jp: "身体は、言葉にできないことを語る。",                                          a: "MARTHA GRAHAM" },
-    interpersonal: { q: "Empathy is seeing with the eyes of another.",                          jp: "共感とは、相手の目で世界を見ることだ。",                                      a: "ALFRED ADLER" },
-    intrapersonal: { q: "Knowing yourself is the beginning of all wisdom.",                     jp: "自分自身を知ることは、すべての知恵の始まりである。",                          a: "ARISTOTLE" },
-    naturalist:    { q: "In every walk with nature, one receives far more than one seeks.",     jp: "自然の中を歩くたびに、人は求める以上のものを受け取る。",                      a: "JOHN MUIR" }
+    linguistic: {
+      q: "Words can be like X-rays if you use them properly.",
+      jp: "言葉は、正しく使えばX線のように物事を見透かす力を持つ。",
+      en: "Words can be like X-rays if you use them properly.",
+      zh: "若运用得当，言语便如X光般能洞穿事物。",
+      ko: "말은, 올바르게 쓰면 X선처럼 사물을 꿰뚫어 보는 힘을 가진다.",
+      a: "ALDOUS HUXLEY"
+    },
+    logical: {
+      q: "Logic will get you from A to B. Imagination will take you everywhere.",
+      jp: "論理はあなたをAからBへ連れて行く。想像力はあなたをどこへでも連れて行く。",
+      en: "Logic will get you from A to B. Imagination will take you everywhere.",
+      zh: "逻辑能带你从A到B。想象力却能带你去任何地方。",
+      ko: "논리는 당신을 A에서 B로 데려간다. 상상력은 당신을 어디로든 데려간다.",
+      a: "ALBERT EINSTEIN"
+    },
+    spatial: {
+      q: "I do not paint things, I paint only the difference between things.",
+      jp: "私はものを描くのではない。ものとものの「あいだ」を描いているのだ。",
+      en: "I do not paint things, I paint only the difference between things.",
+      zh: "我并非画事物本身，我画的只是事物之间的差异。",
+      ko: "나는 사물을 그리는 것이 아니다. 사물과 사물 사이의 「차이」를 그리는 것이다.",
+      a: "HENRI MATISSE"
+    },
+    musical: {
+      q: "Music gives a soul to the universe.",
+      jp: "音楽は、宇宙に魂を与える。",
+      en: "Music gives a soul to the universe.",
+      zh: "音乐为宇宙赋予灵魂。",
+      ko: "음악은, 우주에 영혼을 부여한다.",
+      a: "PLATO"
+    },
+    bodily: {
+      q: "The body says what words cannot.",
+      jp: "身体は、言葉にできないことを語る。",
+      en: "The body says what words cannot.",
+      zh: "身体能诉说言语所不能。",
+      ko: "신체는, 말로 표현할 수 없는 것을 말한다.",
+      a: "MARTHA GRAHAM"
+    },
+    interpersonal: {
+      q: "Empathy is seeing with the eyes of another.",
+      jp: "共感とは、相手の目で世界を見ることだ。",
+      en: "Empathy is seeing with the eyes of another.",
+      zh: "共情，是用他人的眼睛看世界。",
+      ko: "공감이란, 상대의 눈으로 세상을 보는 것이다.",
+      a: "ALFRED ADLER"
+    },
+    intrapersonal: {
+      q: "Knowing yourself is the beginning of all wisdom.",
+      jp: "自分自身を知ることは、すべての知恵の始まりである。",
+      en: "Knowing yourself is the beginning of all wisdom.",
+      zh: "认识自己，是一切智慧的起点。",
+      ko: "자기 자신을 아는 것은, 모든 지혜의 시작이다.",
+      a: "ARISTOTLE"
+    },
+    naturalist: {
+      q: "In every walk with nature, one receives far more than one seeks.",
+      jp: "自然の中を歩くたびに、人は求める以上のものを受け取る。",
+      en: "In every walk with nature, one receives far more than one seeks.",
+      zh: "每次与自然同行，人所获得的，远比所追求的更多。",
+      ko: "자연 속을 걸을 때마다, 사람은 구하는 것 이상의 것을 받는다.",
+      a: "JOHN MUIR"
+    }
   };
-  document.getElementById('quoteText').textContent = '"' + quotes[top1].q + '"';
-  document.getElementById('quoteTranslation').textContent = quotes[top1].jp;
-  document.getElementById('quoteAttr').textContent = '— ' + quotes[top1].a + ' —';
+  const quoteData = quotes[top1];
+  // 原文（英語）と翻訳を言語別に表示
+  document.getElementById('quoteText').textContent = '"' + quoteData.q + '"';
+  // 現在言語に応じた訳
+  const transText = currentLang === 'en' ? '' // 英語は原文と同じなので訳は非表示
+                  : currentLang === 'zh' ? quoteData.zh
+                  : currentLang === 'ko' ? quoteData.ko
+                  : quoteData.jp;
+  document.getElementById('quoteTranslation').textContent = transText;
+  document.getElementById('quoteAttr').textContent = '— ' + quoteData.a + ' —';
 
   // Radar chart
   drawRadar(scores);
@@ -5671,7 +6378,7 @@ function _showResultInner() {
     item.innerHTML = `
       <span class="score-rank">${String(i + 1).padStart(2, '0')}</span>
       <div class="score-info">
-        <div class="score-name">${info.name} <span class="en">${info.en}</span></div>
+        <div class="score-name">${getIntName(key)} <span class="en">${info.en}</span></div>
         <div class="score-bar"><div class="score-bar-fill" data-val="${val}" style="background:${info.color};"></div></div>
       </div>
       <div class="score-right">
@@ -5706,14 +6413,14 @@ function _showResultInner() {
   ts.innerHTML = '';
   [top1, top2, top3].forEach((k, i) => {
     const info = INTELLIGENCES[k];
-    const detail = INTELLIGENCE_DETAILS[k];
+    const detail = getDetail(k);
     const symbol = BIG_SYMBOLS[k] || '';
     const card = document.createElement('div');
     card.className = 'detail-card strength-card' + (i === 0 ? ' featured' : '');
     card.innerHTML = `
       <div class="strength-symbol">${symbol}</div>
       <div class="label">${[t('result.strength_1'), t('result.strength_2'), t('result.strength_3')][i]}</div>
-      <h4>${info.name} <span class="en">${info.en}</span></h4>
+      <h4>${getIntName(k)} <span class="en">${info.en}</span></h4>
       <p>${detail.strength}</p>
     `;
     ts.appendChild(card);
@@ -5726,7 +6433,7 @@ function _showResultInner() {
     <div class="detail-card">
       <div class="label">${t('result.growth_label')}</div>
       <h4>${bottomInfo.name} <span class="en">${bottomInfo.en}</span></h4>
-      <p>${GROWTH_ADVICE[bottom]}</p>
+      <p>${getGrowthAdvice(bottom)}</p>
     </div>
   `;
 
@@ -5735,7 +6442,7 @@ function _showResultInner() {
   cs.innerHTML = '';
   [top1, top2].forEach((k, i) => {
     const info = INTELLIGENCES[k];
-    const detail = INTELLIGENCE_DETAILS[k];
+    const detail = getDetail(k);
     const card = document.createElement('div');
     card.className = 'detail-card' + (i === 0 ? ' featured' : '');
 
@@ -5759,7 +6466,7 @@ function _showResultInner() {
 
     card.innerHTML = `
       <div class="label">${i === 0 ? t('result.career_main') : t('result.career_sub')}</div>
-      <h4>${info.name}${t('result.career_use')} <span class="en">${info.en}</span></h4>
+      <h4>${getIntName(k)}${t('result.career_use')} <span class="en">${info.en}</span></h4>
       ${careerHTML}
       <p style="margin-top:22px;"><strong style="color:${i === 0 ? 'var(--gold-light)' : 'var(--crimson)'}">▎${t('result.side_job_hint')}</strong><br>${detail.sideJob}</p>
     `;
@@ -5768,15 +6475,15 @@ function _showResultInner() {
 
   // Advice
   const ad = document.getElementById('adviceSection');
-  const top1Name = INTELLIGENCES[top1].name;
-  const top2ShortName = INTELLIGENCES[top2].name.replace('的知能','').replace(' Intelligence','').replace(' 智能','').replace(' 지능','');
-  const bottomShortName = INTELLIGENCES[bottom].name.replace('的知能','').replace(' Intelligence','').replace(' 智能','').replace(' 지능','');
-  const top1ShortName = INTELLIGENCES[top1].name.replace('的知能','').replace(' Intelligence','').replace(' 智能','').replace(' 지능','');
+  const top1Name = getIntName(top1);
+  const top2ShortName = getIntShortName(top2);
+  const bottomShortName = getIntShortName(bottom);
+  const top1ShortName = getIntShortName(top1);
   ad.innerHTML = `
     <div class="detail-card featured">
       <div class="label">${t('result.advice_label').replace('{name}', top1Name)}</div>
       <h4>${t('result.advice_title')} <span class="en">For Your Growth</span></h4>
-      <p>${INTELLIGENCE_DETAILS[top1].advice}</p>
+      <p>${getDetail(top1).advice}</p>
     </div>
     <div class="detail-card">
       <div class="label">${t('result.daily_label')}</div>
@@ -5791,7 +6498,7 @@ function _showResultInner() {
 
   // Partner section
   const partnerKey = COMPLEMENTARY[top1];
-  const partnerTalent = TALENT_TYPES[partnerKey];
+  const partnerTalent = getTalent(partnerKey);
   const partnerSvg = getCharacterSVG(partnerTalent.animal);
 
   document.getElementById('partnerSection').innerHTML = `
@@ -5800,12 +6507,12 @@ function _showResultInner() {
       <h4>${partnerTalent.character} <span class="en">${partnerTalent.characterEn}</span></h4>
       <div style="display:flex; align-items:center; gap:18px; margin: 14px 0;">
         <div style="width:90px; height:90px; flex-shrink:0;">${partnerSvg}</div>
-        <p style="margin:0; flex:1;">${PARTNERSHIP_NOTES[top1]}</p>
+        <p style="margin:0; flex:1;">${getPartnership(top1)}</p>
       </div>
     </div>
     <div class="detail-card">
       <div class="label">${t('result.clash_label')}</div>
-      <h4>${t('result.clash_title').replace('{char}', TALENT_TYPES[top1].character)}</h4>
+      <h4>${t('result.clash_title').replace('{char}', getTalent(top1).character)}</h4>
       <p>${t('result.clash_body')}</p>
     </div>
   `;
@@ -5840,19 +6547,32 @@ function renderRecommendedBook(key) {
   const book = RECOMMENDED_BOOKS[key];
   if (!book) return;
 
+  // 言語別フィールド取得（フォールバックは日本語）
+  const suffix = currentLang === 'en' ? '_en'
+                : currentLang === 'zh' ? '_zh'
+                : currentLang === 'ko' ? '_ko'
+                : '';
+  const title = book['title' + suffix] || book.title;
+  const subtitle = book['subtitle' + suffix] !== undefined ? book['subtitle' + suffix] : book.subtitle;
+  const author = book['author' + suffix] || book.author;
+  const publisher = book['publisher' + suffix] || book.publisher;
+  const note = book['note' + suffix] || book.note;
+
   const link = getAmazonAffiliateLink(book.asin);
+  // 日本語以外の場合は区切り文字を「/」に
+  const separator = currentLang === 'ja' ? '／' : '/';
 
   container.innerHTML = `
     <div class="book-card">
       <div class="book-content">
         <div class="book-label">${t('result.book_label')}</div>
-        <h4 class="book-title">${book.title}</h4>
-        ${book.subtitle ? `<div class="book-subtitle">${book.subtitle}</div>` : ''}
+        <h4 class="book-title">${title}</h4>
+        ${subtitle ? `<div class="book-subtitle">${subtitle}</div>` : ''}
         <div class="book-meta">
-          <span class="book-author">${book.author}</span>
-          <span class="book-publisher">／ ${book.publisher}</span>
+          <span class="book-author">${author}</span>
+          <span class="book-publisher">${separator} ${publisher}</span>
         </div>
-        <p class="book-note">${book.note}</p>
+        <p class="book-note">${note}</p>
         <a class="book-cta" href="${link}" target="_blank" rel="noopener sponsored">
           <span>${t('result.book_cta')}</span>
           <span class="book-cta-arrow">→</span>
@@ -5866,21 +6586,40 @@ function renderRecommendedBook(key) {
 function renderFamousPeople(key) {
   const container = document.getElementById('famousSection');
   if (!container) return;
-  const people = FAMOUS_PEOPLE[key];
-  if (!people) return;
+  const all = FAMOUS_PEOPLE[key];
+  if (!all) return;
+  // 歴史上の人物（era=historic）から、ランダムに4人を選ぶ
+  const historicAll = all.filter(p => p.era === 'historic');
+  // Fisher-Yatesシャッフル
+  const shuffled = [...historicAll];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  const people = shuffled.slice(0, 4);
+
+  // 言語別フィールド取得
+  const suffix = currentLang === 'en' ? '_en'
+                : currentLang === 'zh' ? '_zh'
+                : currentLang === 'ko' ? '_ko'
+                : '';
 
   container.innerHTML = `
     <p class="famous-intro">${t('result.famous_intro')}</p>
     <div class="famous-grid" id="famousGrid">
-      ${people.map((p, i) => `
-        <div class="famous-card" style="transition-delay: ${i * 80}ms;">
-          <div class="famous-era">${p.era === 'historic' ? '⌛' : '✦'}</div>
-          <div class="famous-body">
-            <div class="famous-name">${p.name}</div>
-            <div class="famous-note">${p.note}</div>
+      ${people.map((p, i) => {
+        const pName = p['name' + suffix] || p.name;
+        const pNote = p['note' + suffix] || p.note;
+        return `
+          <div class="famous-card" style="transition-delay: ${i * 80}ms;">
+            <div class="famous-era">⌛</div>
+            <div class="famous-body">
+              <div class="famous-name">${pName}</div>
+              <div class="famous-note">${pNote}</div>
+            </div>
           </div>
-        </div>
-      `).join('')}
+        `;
+      }).join('')}
     </div>
   `;
 
@@ -5902,12 +6641,18 @@ function renderPremiumPreview(key) {
   const report = PREMIUM_REPORT[key];
   if (!report) return;
 
+  // 言語別フィールド取得
+  const suffix = currentLang === 'en' ? '_en'
+                : currentLang === 'zh' ? '_zh'
+                : currentLang === 'ko' ? '_ko'
+                : '';
+  const title = report.deepDive['title' + suffix] || report.deepDive.title;
+  const body = report.deepDive['body' + suffix] || report.deepDive.body;
+
   document.getElementById('premiumPreviewLabel').textContent =
-    '— Section 01 of 07 · Deep Dive —';
-  document.getElementById('premiumPreviewHeadline').textContent =
-    report.deepDive.title;
-  document.getElementById('premiumPreviewText').textContent =
-    report.deepDive.body;
+    t('premium.section_label');
+  document.getElementById('premiumPreviewHeadline').textContent = title;
+  document.getElementById('premiumPreviewText').textContent = body;
 }
 
 function onPremiumInterest() {
@@ -6032,7 +6777,7 @@ function drawRadar(scores) {
     const x = cx + Math.cos(angle) * labelR;
     const y = cy + Math.sin(angle) * labelR;
     const info = INTELLIGENCES[key];
-    const shortName = info.name.replace('的知能','');
+    const shortName = getIntShortName(key);
     ctx.fillText(shortName, x, y - 8);
 
     ctx.font = 'italic 11px "Cormorant Garamond", serif';
@@ -6058,7 +6803,7 @@ function showToast(message, duration = 2400) {
 
 // ----- Mission -----
 function pickMission(key) {
-  const list = WEEKLY_MISSIONS[key];
+  const list = getWeeklyMissions(key);
   return list[Math.floor(Math.random() * list.length)];
 }
 
@@ -6113,13 +6858,17 @@ function parseScoresFromString(str) {
 
 // ----- Share text -----
 function shareResult() {
-  const talent = TALENT_TYPES[state.top1];
+  const talent = getTalent(state.top1);
   const compound = makeCompoundName(state.top1, state.top2);
   const url = location.href;
-  const text = `わたしの才能キャラは『${talent.character}』でした!\n複合タイプ: ${compound}\n${talent.catchphrase}\n\n#じぶマト #じぶんマトリクス #多重知能診断\n${url}`;
+  const text = t('share.text')
+    .replace('{character}', talent.character)
+    .replace('{compound}', compound)
+    .replace('{catchphrase}', talent.catchphrase)
+    .replace('{url}', url);
 
   if (navigator.share) {
-    navigator.share({ title: 'じぶんマトリクス', text: text, url: url }).catch(() => copyToClipboard(text));
+    navigator.share({ title: t('share.title'), text: text, url: url }).catch(() => copyToClipboard(text));
   } else {
     copyToClipboard(text);
   }
@@ -6707,7 +7456,7 @@ function _doDownloadResultCard() {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  const talent = TALENT_TYPES[state.top1];
+  const talent = getTalent(state.top1);
 
   // ===== Background =====
   const bgGrad = ctx.createLinearGradient(0, 0, W, H);
@@ -6787,7 +7536,7 @@ function _doDownloadResultCard() {
   ctx.fillStyle = '#f4ede0';
   ctx.font = '600 30px "Shippori Mincho", "Hiragino Mincho ProN", serif';
   const top3Names = [state.top1, state.top2, state.top3]
-    .map((k, i) => `${i+1}. ${INTELLIGENCES[k].name.replace('的知能','')} ${state.scores[k]}`).join('   ');
+    .map((k, i) => `${i+1}. ${getIntShortName(k)} ${state.scores[k]}`).join('   ');
   ctx.fillText(top3Names, W/2, 1620);
 
   // ===== Result ID =====
@@ -6848,7 +7597,7 @@ function downloadAsDataURL(canvas, talent) {
       const w = window.open();
       if (w) {
         w.document.write('<img src="' + dataUrl + '" style="width:100%">');
-        w.document.title = 'じぶマト結果カード';
+        w.document.title = t('share.window_title');
         showToast(t('toast.image_long_press'));
       } else {
         showToast(t('toast.popup_blocked'));
@@ -6893,7 +7642,7 @@ function showGallery() {
   const grid = document.getElementById('galleryGrid');
   grid.innerHTML = '';
   KEYS.forEach((k, i) => {
-    const talent = TALENT_TYPES[k];
+    const talent = getTalent(k);
     const card = document.createElement('button');
     card.className = 'gallery-card';
     card.style.background = `linear-gradient(135deg, ${talent.bgColor}22 0%, var(--paper-deep) 100%)`;
@@ -6996,8 +7745,8 @@ function renderMatchResult(myScores, friendScores) {
   loveScore = Math.max(25, Math.min(98, Math.round(loveScore)));
 
   // キャラクター
-  const myTalent = TALENT_TYPES[mySorted[0]];
-  const friendTalent = TALENT_TYPES[friendSorted[0]];
+  const myTalent = getTalent(mySorted[0]);
+  const friendTalent = getTalent(friendSorted[0]);
 
   // 総合のヘッドライン
   let headline, comment;
@@ -7023,7 +7772,7 @@ function renderMatchResult(myScores, friendScores) {
   let commonHTML;
   if (common.length > 0) {
     commonHTML = common.map(k => {
-      const name = INTELLIGENCES[k].name.replace('的知能', '').replace(' Intelligence','').replace(' 智能','').replace(' 지능','');
+      const name = getIntShortName(k).replace(' Intelligence','').replace(' 智能','').replace(' 지능','');
       const desc = COMPAT.common[k];
       return `
         <div class="compat-item">
@@ -7044,7 +7793,7 @@ function renderMatchResult(myScores, friendScores) {
   let coveredHTML;
   if (covered.length > 0) {
     coveredHTML = covered.map(k => {
-      const name = INTELLIGENCES[k].name.replace('的知能', '').replace(' Intelligence','').replace(' 智能','').replace(' 지능','');
+      const name = getIntShortName(k).replace(' Intelligence','').replace(' 智能','').replace(' 지능','');
       const desc = COMPAT.complement[k];
       return `
         <div class="compat-item">
@@ -7065,7 +7814,7 @@ function renderMatchResult(myScores, friendScores) {
   let givingHTML;
   if (giving.length > 0) {
     givingHTML = giving.map(k => {
-      const name = INTELLIGENCES[k].name.replace('的知能', '').replace(' Intelligence','').replace(' 智能','').replace(' 지능','');
+      const name = getIntShortName(k).replace(' Intelligence','').replace(' 智能','').replace(' 지능','');
       const desc = COMPAT.complement[k];
       return `
         <div class="compat-item">
@@ -7543,6 +8292,14 @@ const I18N = {
     'match.desc': 'もう一人の「じぶマトコード」を入力すると、二人の才能の相性が見られます。',
     'result.disclaimer': '本診断は、ハワード・ガードナーの多重知能理論（MI理論）を着想源とした、じぶんマトリクス独自のエンターテインメント診断です。学術的・心理学的な診断や評価を行うものではなく、結果は娯楽・自己理解の参考としてお楽しみください。',
     'footer.short': '— じぶんマトリクス —',
+  
+    // v5: share & dynamic content
+    'share.text': 'わたしの才能キャラは『{character}』でした!\\n複合タイプ: {compound}\\n{catchphrase}\\n\\n#じぶマト #じぶんマトリクス #多重知能診断\\n{url}',
+    'share.title': 'じぶんマトリクス',
+    'share.window_title': 'じぶマト結果カード',
+  
+    // premium section label
+    'premium.section_label': '— Section 01 of 07 · Deep Dive —',
   },
   en: {
     // タイトル画面
@@ -7766,6 +8523,14 @@ const I18N = {
     'match.desc': 'Enter another person\'s Jibu-Mato code to see how your talents match.',
     'result.disclaimer': 'This diagnosis is an entertainment tool inspired by Howard Gardner\'s Theory of Multiple Intelligences (MI Theory) and is unique to Jibu-Mato. It is not an academic or psychological evaluation—please enjoy the results as a reference for fun and self-understanding.',
     'footer.short': '— Jibu-Mato —',
+  
+    // v5: share & dynamic content
+    'share.text': 'My talent character is "{character}"!\\nCompound type: {compound}\\n{catchphrase}\\n\\n#JibuMato #MITheory\\n{url}',
+    'share.title': 'Jibu-Mato · Talent Matrix',
+    'share.window_title': 'Jibu-Mato Result Card',
+  
+    // premium section label
+    'premium.section_label': '— Section 01 of 07 · Deep Dive —',
   },
 
   // ===== 中文（简体）=====
@@ -7983,6 +8748,14 @@ const I18N = {
     'match.desc': '输入他人的Jibu-Mato码，即可查看你们才能的契合度。',
     'result.disclaimer': '本诊断借鉴加德纳的多元智能理论(MI理论)，是Jibu-Mato独立设计的娱乐性诊断。并非学术或心理评估，请将结果作为娱乐与自我理解的参考。',
     'footer.short': '— Jibu-Mato —',
+  
+    // v5: share & dynamic content
+    'share.text': '我的才能角色是『{character}』！\\n复合型: {compound}\\n{catchphrase}\\n\\n#JibuMato #多元智能 #才能诊断\\n{url}',
+    'share.title': 'Jibu-Mato · 才能矩阵',
+    'share.window_title': 'Jibu-Mato 结果卡片',
+  
+    // premium section label
+    'premium.section_label': '— 第 01 节 / 全 07 节 · 深度剖析 —',
   },
 
   // ===== 한국어 =====
@@ -8200,6 +8973,14 @@ const I18N = {
     'match.desc': '다른 사람의 Jibu-Mato 코드를 입력하면 두 사람의 재능 궁합을 볼 수 있습니다.',
     'result.disclaimer': '본 진단은 하워드 가드너의 다중지능 이론(MI 이론)에서 착안한 Jibu-Mato 독자 엔터테인먼트 진단입니다. 학술적·심리학적 평가가 아니며, 결과는 즐거움과 자기 이해의 참고로 즐겨주세요.',
     'footer.short': '— Jibu-Mato —',
+  
+    // v5: share & dynamic content
+    'share.text': '제 재능 캐릭터는 『{character}』였습니다!\\n복합 타입: {compound}\\n{catchphrase}\\n\\n#JibuMato #다중지능 #재능진단\\n{url}',
+    'share.title': 'Jibu-Mato · 재능 매트릭스',
+    'share.window_title': 'Jibu-Mato 결과 카드',
+  
+    // premium section label
+    'premium.section_label': '— Section 01 of 07 · 심층 분석 —',
   }
 };
 
