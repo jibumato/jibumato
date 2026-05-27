@@ -3795,7 +3795,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="match-input-box">
     <label data-i18n="match.input_label">友達のじぶマトコードを入力</label>
-    <input type="text" id="matchCodeInput" placeholder="例: LI-IN-SP / 78-65-62-50-48-40-38-25" autocomplete="off">
+    <input type="text" id="matchCodeInput" data-i18n-placeholder="match.placeholder" placeholder="例: LI-IN-SP / 78-65-62-50-48-40-38-25" autocomplete="off">
     <button class="start-btn" style="margin: 8px 0;" onclick="runMatch()" data-i18n="match.run">相性を診断する</button>
   </div>
 
@@ -6191,10 +6191,10 @@ function compute() {
 
   // Animate computing messages
   const messages = [
-    "あなたの言葉の海を覗いています...",
-    "論理と直感の比率を測っています...",
-    "あなたの中の隠れた強みを探っています...",
-    "8つの知性のバランスを読み解いています..."
+    t('computing.msg1'),
+    t('computing.msg2'),
+    t('computing.msg3'),
+    t('computing.msg4')
   ];
 
   let msgIdx = 0;
@@ -6897,7 +6897,7 @@ function copyMatchLink() {
   navigator.clipboard.writeText(matchUrl).then(() => {
     showToast(t('toast.match_url_copied'));
   }).catch(() => {
-    prompt('このURLを友達に送ってください:', matchUrl);
+    prompt(t('match.url_prompt'), matchUrl);
   });
 }
 
@@ -7481,7 +7481,7 @@ function _doDownloadResultCard() {
   ctx.fillStyle = '#d4ad5e';
   ctx.font = '500 26px monospace';
   ctx.textAlign = 'center';
-  ctx.fillText('JIBU-MATO · じぶんマトリクス', W/2, 160);
+  ctx.fillText(currentLang === 'ja' ? 'JIBU-MATO · じぶんマトリクス' : 'JIBU-MATO · Talent Matrix', W/2, 160);
 
   ctx.strokeStyle = 'rgba(212,173,94,0.3)';
   ctx.beginPath();
@@ -8300,6 +8300,16 @@ const I18N = {
   
     // premium section label
     'premium.section_label': '— Section 01 of 07 · Deep Dive —',
+  
+    // computing messages & match placeholder
+    'computing.msg1': 'あなたの言葉の海を覗いています...',
+    'computing.msg2': '論理と直感の比率を測っています...',
+    'computing.msg3': 'あなたの中の隠れた強みを探っています...',
+    'computing.msg4': '8つの知性のバランスを読み解いています...',
+    'match.placeholder': '例: LI-IN-SP / 78-65-62-50-48-40-38-25',
+  
+    // match url prompt
+    'match.url_prompt': 'このURLを友達に送ってください:',
   },
   en: {
     // タイトル画面
@@ -8531,6 +8541,16 @@ const I18N = {
   
     // premium section label
     'premium.section_label': '— Section 01 of 07 · Deep Dive —',
+  
+    // computing messages & match placeholder
+    'computing.msg1': 'Peering into your sea of words...',
+    'computing.msg2': 'Measuring the ratio of logic and intuition...',
+    'computing.msg3': 'Searching for hidden strengths within you...',
+    'computing.msg4': 'Reading the balance of 8 intelligences...',
+    'match.placeholder': 'e.g.: LI-IN-SP / 78-65-62-50-48-40-38-25',
+  
+    // match url prompt
+    'match.url_prompt': 'Please share this URL with your friend:',
   },
 
   // ===== 中文（简体）=====
@@ -8756,6 +8776,16 @@ const I18N = {
   
     // premium section label
     'premium.section_label': '— 第 01 节 / 全 07 节 · 深度剖析 —',
+  
+    // computing messages & match placeholder
+    'computing.msg1': '正在窥探你的语言之海...',
+    'computing.msg2': '正在测量逻辑与直觉的比例...',
+    'computing.msg3': '正在探寻你心中隐藏的强项...',
+    'computing.msg4': '正在解读8种智能的平衡...',
+    'match.placeholder': '例：LI-IN-SP / 78-65-62-50-48-40-38-25',
+  
+    // match url prompt
+    'match.url_prompt': '请把这个URL发给朋友：',
   },
 
   // ===== 한국어 =====
@@ -8981,6 +9011,16 @@ const I18N = {
   
     // premium section label
     'premium.section_label': '— Section 01 of 07 · 심층 분석 —',
+  
+    // computing messages & match placeholder
+    'computing.msg1': '당신의 말의 바다를 들여다보고 있습니다...',
+    'computing.msg2': '논리와 직관의 비율을 측정하고 있습니다...',
+    'computing.msg3': '당신 안에 숨겨진 강점을 찾고 있습니다...',
+    'computing.msg4': '8가지 지능의 균형을 읽고 있습니다...',
+    'match.placeholder': '예: LI-IN-SP / 78-65-62-50-48-40-38-25',
+  
+    // match url prompt
+    'match.url_prompt': '이 URL을 친구에게 보내주세요:',
   }
 };
 
