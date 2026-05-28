@@ -2539,6 +2539,53 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     text-transform: uppercase;
   }
 
+  /* 30日プログラム & 副業ロードマップのリスト */
+  .premium-preview-secondary {
+    margin-top: 16px;
+  }
+
+  .premium-program-list,
+  .premium-side-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .premium-program-list li,
+  .premium-side-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 12px;
+    background: rgba(212,173,94,0.05);
+    border-left: 2px solid var(--gold);
+    border-radius: 2px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(15,14,12,0.82);
+  }
+
+  .premium-program-list li .day-tag,
+  .premium-side-list li .step-tag {
+    flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--crimson);
+    font-weight: 600;
+    text-transform: uppercase;
+    padding-top: 2px;
+    min-width: 60px;
+  }
+
+  .premium-program-list li .item-body,
+  .premium-side-list li .item-body {
+    flex: 1;
+  }
+
   /* 含まれる内容 */
   .premium-features {
     margin-bottom: 36px;
@@ -3651,6 +3698,44 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
+    <!-- セクション02: 30日プログラム チラ見せ -->
+    <div class="premium-preview premium-preview-secondary">
+      <div class="premium-preview-header">
+        <div class="premium-preview-label" data-i18n="premium.section_label2">— Section 02 of 07 · 30-Day Program —</div>
+        <h4 class="premium-preview-headline" id="premiumProgramTitle" data-i18n="premium.program_title">才能を日常に組み込む、30日の習慣設計</h4>
+      </div>
+
+      <div class="premium-preview-body">
+        <ul class="premium-program-list" id="premiumProgramList"></ul>
+
+        <div class="premium-blur">
+          <div class="premium-blur-content">
+            <div class="lock-icon">🔒</div>
+            <p data-i18n="prem.locked_program">残り Day 11〜30 はプレミアム会員限定</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- セクション03: 副業ロードマップ チラ見せ -->
+    <div class="premium-preview premium-preview-secondary">
+      <div class="premium-preview-header">
+        <div class="premium-preview-label" data-i18n="premium.section_label3">— Section 03 of 07 · Side Hustle —</div>
+        <h4 class="premium-preview-headline" id="premiumSideHustleTitle">— —</h4>
+      </div>
+
+      <div class="premium-preview-body">
+        <ul class="premium-side-list" id="premiumSideHustleList"></ul>
+
+        <div class="premium-blur">
+          <div class="premium-blur-content">
+            <div class="lock-icon">🔒</div>
+            <p data-i18n="prem.locked_side">残り STEP 3〜6 はプレミアム会員限定</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- 含まれる内容のリスト -->
     <div class="premium-features">
       <div class="premium-features-label" data-i18n="prem.features_label">— Premium Report に含まれるもの —</div>
@@ -4427,6 +4512,24 @@ const PREMIUM_REPORT = {
       title: "言語に頼らない相手と、どう関わるか",
       body: "あなたが特に苦手と感じるのは、「身体運動的知能」が高い実践派や、「内省的知能」が高い無口な思想家です。彼らは言葉で説明されることを「冗長」と感じる傾向があります。\n\n対応のコツは3つ。①長文で説明せず、図や実演で見せる ②結論を最初に言う（PREP法を徹底する）③沈黙を埋めようとしない。\n\n逆に彼らはあなたが「言葉にできない真理」に触れた時、強くリスペクトしてくれます。短く、的確に、本質を突く一言を放てるようになると、彼らとも深い関係が築けます。"
     }
+  ,
+
+    // フル多言語化（v6）
+    program_en: ["Day 1-5: Write a 100-character diary every day (any topic)", "Day 6-10: Extract 3 phrases that resonated from one book", "Day 11-15: Write one handwritten letter to a friend or colleague", "Day 16-20: Read one short story, then write 200 characters about a character", "Day 21-25: Share your opinion in 200 characters (SNS or notes are fine)", "Day 26-30: Reflect on the month and compile it into a 500-character essay"],
+    program_zh: ["第1-5天：每天写100字日记（主题自由）", "第6-10天：从一本书中摘录3句触动心灵的语句", "第11-15天：给朋友或同事写一封手写信", "第16-20天：读一本短篇小说，并就一个人物写200字", "第21-25天：用200字发表自己的意见（SNS或笔记均可）", "第26-30天：回顾这一个月，整理成500字随笔"],
+    program_ko: ["Day 1-5: 매일 100자 일기 쓰기 (주제 자유)", "Day 6-10: 책 한 권에서 마음에 와닿은 3구절을 발췌하기", "Day 11-15: 친구나 동료에게 손편지 한 통 쓰기", "Day 16-20: 단편 소설을 한 편 읽고, 등장인물에 대해 200자 쓰기", "Day 21-25: 자신의 의견을 200자로 발신하기 (SNS나 메모도 좋음)", "Day 26-30: 한 달의 자신을 돌아보고 500자 에세이로 정리하기"],
+    sideHustle_title_en: "Shortest route to earning ¥30,000–¥100,000/month with words",
+    sideHustle_title_zh: "用语言月入3万至10万日元的最短路线",
+    sideHustle_title_ko: "말로 월 3~10만 엔을 버는 최단 루트",
+    sideHustle_steps_en: ["STEP 1: Write weekly on Note about your specialty (free first 3 months)", "STEP 2: After 30 posts, release one paid article (¥500+) per month", "STEP 3: Share daily insights on Twitter, aim for 1,000 followers", "STEP 4: Accept beginner writing gigs on CrowdWorks/Lancers", "STEP 5: Deliver 10 articles/month at ¥1–3/character → ¥30,000–100,000 in reach", "STEP 6: With expertise, contract directly with company-owned media (¥200,000+ possible)"],
+    sideHustle_steps_zh: ["STEP 1: 在Note上每周写1篇关于自己专业的文章（前3个月免费公开）", "STEP 2: 累计30篇后，每月发布1篇付费文章（¥500起）", "STEP 3: 在Twitter发布日常感悟，争取关注者1000人", "STEP 4: 在CrowdWorks、Lancers接初学者级写作单", "STEP 5: 单价¥1~3/字，月交10篇 → 月入3~10万日元在射程内", "STEP 6: 专业度提升后，与企业自媒体直接签约（月入20万日元亦有可能）"],
+    sideHustle_steps_ko: ["STEP 1: Note에 주 1회, 자신의 전문 분야에 대해 쓰기 (처음 3개월은 무료 공개)", "STEP 2: 30편 쌓이면 월 1편 유료 기사 (¥500~) 출시", "STEP 3: Twitter에 일상의 깨달음을 발신, 팔로워 1000명 목표", "STEP 4: CrowdWorks·Lancers에서 초보자용 라이팅 안건 수주", "STEP 5: 단가 ¥1~3/자로 월 10편 납품 → 월 3~10만 엔이 현실권", "STEP 6: 전문성이 높아지면 기업 오운드 미디어와 직접 계약 (월 20만 엔도 가능)"],
+    relationship_title_en: "How to engage with those who don't rely on words",
+    relationship_title_zh: "如何与不依赖语言的人相处",
+    relationship_title_ko: "말에 의존하지 않는 상대와 어떻게 관계 맺을까",
+    relationship_body_en: "You particularly struggle with practical types high in \"Bodily-Kinesthetic intelligence\" and quiet thinkers high in \"Intrapersonal intelligence.\" They tend to feel verbal explanations are \"redundant.\"\n\nThree tips for engagement: ①Don't explain in long sentences; show with diagrams and demonstrations ②State the conclusion first (master the PREP method) ③Don't try to fill silence.\n\nConversely, they respect you deeply when you touch on truths that \"can't be put into words.\" Once you can deliver short, accurate words that strike the essence, you can build deep relationships even with them.",
+    relationship_body_zh: "你尤其难以应对的是「身体动觉智能」高的实践派，以及「内省智能」高的沉默思想家。他们倾向于将口头解释视为「冗长」。\n\n应对的3个要点：①不要长篇解释，用图表和实演展示 ②先说结论（彻底掌握PREP法）③不要试图填补沉默。\n\n反过来，当你触及到「无法言说的真理」时，他们会深深尊重你。当你能用简短而精准的一句话击中本质时，便能与他们建立深厚的关系。",
+    relationship_body_ko: "당신이 특히 힘들어하는 것은 「신체운동 지능」이 높은 실천파와 「내적성찰 지능」이 높은 과묵한 사상가입니다. 그들은 말로 설명되는 것을 「장황하다」고 느끼는 경향이 있습니다.\n\n대응의 3가지 요령: ①긴 문장으로 설명하지 말고, 도표나 실연으로 보여주기 ②결론을 먼저 말하기 (PREP법을 철저히) ③침묵을 메우려 하지 않기.\n\n반대로 그들은 당신이 「말로 표현할 수 없는 진리」에 닿았을 때 강하게 존중해 줍니다. 짧고 정확하게 본질을 찌르는 한마디를 던질 수 있게 되면, 그들과도 깊은 관계를 쌓을 수 있습니다."
   },
 
   logical: {
@@ -4477,6 +4580,24 @@ const PREMIUM_REPORT = {
       title: "感情派と、どう関わるか",
       body: "あなたが特に疲れるのは、「対人的知能」「音楽的知能」が高い感性派です。「なぜ?」が通じず、「なんとなく」で物事を決められるのが理解できない。\n\n対応のコツは3つ。①「論破」より「共感の演技」を覚える。②データを出す前に、まず感情を肯定する一言。③相手の直感は、あなたが見えていない情報を捉えている可能性が高いと信じる。\n\n逆にあなたが感情派から学べるのは、「結論より過程を共有する」コミュニケーションの価値。これができると、あなたの論理は「冷たい正論」から「説得力のあるリーダーシップ」に進化します。"
     }
+  ,
+
+    // フル多言語化（v6）
+    program_en: ["Day 1-5: Record \"3 daily decisions\" and your reasoning each day", "Day 6-10: Choose one topic of interest and read one paper/dataset", "Day 11-15: Form a hypothesis and consider 3 ways it could be falsified", "Day 16-20: Spend 30 min/day learning either SQL, Python, or Excel functions", "Day 21-25: List 3 \"why\" questions around you and research each", "Day 26-30: Build a flowchart or matrix of an issue at work or home"],
+    program_zh: ["第1-5天：每天记录「今日3项决策」及其理由", "第6-10天：选一个感兴趣的主题，阅读1篇论文或数据集", "第11-15天：建立自己的假说，并思考3种反证可能性", "第16-20天：每天30分钟学习SQL/Python/Excel函数中的一种", "第21-25天：列出身边3个「为什么?」，逐一调查", "第26-30天：把工作或生活中的一个问题做成流程图或矩阵图"],
+    program_ko: ["Day 1-5: 매일 「오늘의 의사결정 3가지」와 그 이유를 기록", "Day 6-10: 흥미 있는 주제 하나를 골라 논문·데이터 1편 읽기", "Day 11-15: 자신의 가설을 세우고 3가지 반증 가능성을 생각", "Day 16-20: SQL/Python/Excel 함수 중 하나를 매일 30분 학습", "Day 21-25: 주변의 「왜?」를 3가지 적어내고 각각 조사", "Day 26-30: 직장이나 가정의 한 문제를 플로우차트나 매트릭스로 정리"],
+    sideHustle_title_en: "Using logic to earn ¥50,000–¥300,000/month",
+    sideHustle_title_zh: "用逻辑月入5万至30万日元",
+    sideHustle_title_ko: "논리로 월 5~30만 엔을 버는 법",
+    sideHustle_steps_en: ["STEP 1: Master basic SQL/Excel (about 1 month of study)", "STEP 2: Take 3 free data-analysis cases on CrowdWorks for portfolio", "STEP 3: Specialize: choose finance, marketing, or HR domain", "STEP 4: List as data analyst on KAIKOKU or YOUTRUST (¥3,000+/hour)", "STEP 5: Land 5 hours/week of paid work → ¥60,000/month is realistic", "STEP 6: Reach ¥10,000/hour as expert → ¥300,000+/month becomes possible"],
+    sideHustle_steps_zh: ["STEP 1: 掌握SQL与Excel基础（约1个月学习）", "STEP 2: 在CrowdWorks上免费承接3个数据分析案例，制作作品集", "STEP 3: 专精领域：选择金融、营销或人事中的一项", "STEP 4: 在KAIKOKU或YOUTRUST等平台登录为数据分析师（¥3000起/小时）", "STEP 5: 每周5小时付费工作 → 月入6万日元为现实可及", "STEP 6: 成为专家后单价¥1万/小时 → 月入30万日元亦有可能"],
+    sideHustle_steps_ko: ["STEP 1: SQL·Excel 기초 마스터 (약 1개월 학습)", "STEP 2: CrowdWorks에서 무료로 데이터 분석 안건 3건 수주, 포트폴리오 제작", "STEP 3: 전문 분야 설정: 금융·마케팅·HR 중 하나 선택", "STEP 4: KAIKOKU·YOUTRUST 등에 데이터 분석가로 등록 (¥3,000~/시간)", "STEP 5: 주 5시간의 유상 업무 → 월 6만 엔이 현실권", "STEP 6: 전문가화하여 단가 ¥1만/시간 → 월 30만 엔도 가능"],
+    relationship_title_en: "How to engage with those driven by emotion or sensation",
+    relationship_title_zh: "如何与凭感性·情感行动的人相处",
+    relationship_title_ko: "감각·감정으로 움직이는 사람과의 관계",
+    relationship_body_en: "You particularly struggle with emotional, \"Interpersonal-intelligence-high\" types and \"Musical-intelligence-high\" intuitive artists. They tend to feel that \"logical accuracy\" is \"cold.\"\n\nThree tips: ①Don't reject feelings—try to understand them ②Sometimes intentionally choose \"an inefficient option\" ③Use \"I\" statements over \"we\" statements (e.g., \"I think...\" vs. \"Logically...\").\n\nLogic is your tool, but emotion is theirs. Understanding that \"the truths you each perceive run on different operating systems\" leads to good relationships.",
+    relationship_body_zh: "你尤其难以应对的，是「人际智能」高的情绪派和「音乐智能」高的直觉派艺术家。他们倾向于把「逻辑的正确」当作「冷漠」。\n\n应对3要点：①不要否定感情，先去理解 ②有时刻意选择「效率低的选项」 ③用「我语句」而非「我们语句」（如：「我是这样想的…」而非「逻辑上…」）。\n\n逻辑是你的武器，情感是他们的武器。理解到「彼此感知的真理运行在不同的操作系统上」，关系便会改善。",
+    relationship_body_ko: "당신이 특히 힘들어하는 것은 「대인 지능」이 높은 감정파와 「음악 지능」이 높은 직관형 아티스트입니다. 그들은 「논리의 정확함」을 「차가움」으로 느끼는 경향이 있습니다.\n\n대응 3요점: ①감정을 부정하지 말고 우선 이해하기 ②때로는 의식적으로 「효율이 나쁜 선택지」 고르기 ③「우리 화법」이 아닌 「나 화법」 사용 (예: 「내가 보기엔…」 vs 「논리적으로는…」).\n\n논리는 당신의 무기, 감정은 그들의 무기. 「서로가 인식하는 진실이 다른 OS에서 작동하고 있다」는 것을 이해하면 좋은 관계가 됩니다."
   },
 
   spatial: {
@@ -4527,6 +4648,24 @@ const PREMIUM_REPORT = {
       title: "言葉派と、どう関わるか",
       body: "あなたが特に苦労するのは、「言語的知能」「論理数学的知能」が高い言葉派です。彼らは「言葉で正確に説明する」ことを重視し、あなたの「なんとなくこんな感じ」を理解しません。\n\n対応のコツは3つ。①必ずスケッチ・図解と一緒に説明する。②3つのキーワードに絞って言葉にする。③「なぜそう感じるか」を後から言語化する習慣を持つ。\n\n逆にあなたが言葉派から学べるのは、感覚の「再現性」を上げる力。これができると、あなたのクリエイティブは「天才の偶然」から「狙って当てられる職人技」へ進化します。"
     }
+  ,
+
+    // フル多言語化（v6）
+    program_en: ["Day 1-5: Sketch one thing you see (3 minutes is fine)", "Day 6-10: Photograph one cityscape or interior daily, save in a folder", "Day 11-15: Try one Figma/Canva/Photoshop tutorial", "Day 16-20: Make a \"favorites\" board of designs (Pinterest is fine)", "Day 21-25: Visualize one workflow or idea as a diagram", "Day 26-30: Build a small portfolio site or Instagram archive"],
+    program_zh: ["第1-5天：每天画1张所见之物的速写（3分钟即可）", "第6-10天：每天拍摄1张城市景观或室内照片，分类整理", "第11-15天：尝试一个Figma/Canva/Photoshop教程", "第16-20天：建立一个「喜爱的设计」收藏板（Pinterest亦可）", "第21-25天：将一个流程或想法可视化为图表", "第26-30天：制作小型作品集网站或Instagram档案"],
+    program_ko: ["Day 1-5: 본 것을 하루 한 장 스케치 (3분이면 OK)", "Day 6-10: 도시 풍경이나 인테리어 사진을 매일 1장 찍어 폴더에 정리", "Day 11-15: Figma/Canva/Photoshop 튜토리얼 하나 도전", "Day 16-20: 「좋아하는 디자인」 컬렉션 보드 만들기 (Pinterest도 가능)", "Day 21-25: 업무 흐름이나 아이디어 하나를 도표로 시각화", "Day 26-30: 소규모 포트폴리오 사이트나 Instagram 아카이브 제작"],
+    sideHustle_title_en: "Using visual skills to earn ¥50,000–¥200,000/month",
+    sideHustle_title_zh: "用视觉技能月入5万至20万日元",
+    sideHustle_title_ko: "시각 기술로 월 5~20만 엔을 버는 법",
+    sideHustle_steps_en: ["STEP 1: Choose a tool (Figma is recommended) and master basics in 2 weeks", "STEP 2: Create 5 fictional design samples (logos, business cards, banners)", "STEP 3: Register as a designer on Coconala or SKIMA", "STEP 4: Start with low-priced logo/banner work (¥3,000–10,000)", "STEP 5: After 5 reviews, gradually raise prices", "STEP 6: For corporate clients, charge ¥50,000–200,000 per project"],
+    sideHustle_steps_zh: ["STEP 1: 选择工具（推荐Figma），2周内掌握基础", "STEP 2: 制作5个虚构的设计样品（Logo·名片·横幅）", "STEP 3: 在Coconala或SKIMA注册为设计师", "STEP 4: 从低价Logo·横幅开始接单（¥3000~¥1万）", "STEP 5: 获得5个好评后，逐步提高单价", "STEP 6: 接受企业方案，单件¥5万~¥20万"],
+    sideHustle_steps_ko: ["STEP 1: 도구 선택 (Figma 권장), 2주 안에 기초 마스터", "STEP 2: 가상의 디자인 샘플 5개 제작 (로고·명함·배너)", "STEP 3: Coconala·SKIMA에 디자이너로 등록", "STEP 4: 저렴한 로고·배너부터 시작 (¥3,000~¥1만)", "STEP 5: 후기 5개 받은 뒤 단가를 점진적으로 인상", "STEP 6: 기업 안건 수주 시, 건당 ¥5만~¥20만"],
+    relationship_title_en: "How to engage with those who can't see images",
+    relationship_title_zh: "如何与「无法在脑中看见影像」的人相处",
+    relationship_title_ko: "머릿속에 영상을 볼 수 없는 사람과의 관계",
+    relationship_body_en: "You particularly struggle with logic-only types and word-oriented thinkers. They tend to find your \"show with images\" style frustrating.\n\nThree tips: ①Always pair sketches with explanations in words ②Don't skip steps in showing the process ③Practice describing one image in five sentences.\n\nYour gift becomes invincible when your visual sense meets the power of words. Treat language as a complement, not a competitor.",
+    relationship_body_zh: "你尤其难以应对的是纯逻辑派与重视语言的思想家。他们倾向于把你「以图说话」的风格视为不耐烦的来源。\n\n应对3要点：①画速写时务必同时用语言说明 ②不要省略过程的步骤 ③练习把一张图用5句话描述。\n\n视觉感性遇上语言的力量时，你的才能将无可阻挡。把语言视为伙伴，而非对手。",
+    relationship_body_ko: "당신이 특히 힘들어하는 것은 순수 논리파와 언어 중심의 사상가입니다. 그들은 당신의 「이미지로 보여주는」 스타일을 답답하게 느끼는 경향이 있습니다.\n\n대응 3요점: ①스케치할 때 반드시 말로 설명을 곁들이기 ②과정의 단계를 생략하지 않기 ③한 장의 이미지를 5문장으로 설명하는 연습.\n\n시각 감성에 언어의 힘이 더해지면 당신의 재능은 무적이 됩니다. 언어를 경쟁자가 아닌 파트너로 여기세요."
   },
 
   musical: {
@@ -4577,6 +4716,24 @@ const PREMIUM_REPORT = {
       title: "音に鈍感な相手と、どう関わるか",
       body: "あなたが特に違和感を持つのは、「論理数学的知能」が高く、「音」「空気」「間」に鈍感な人です。彼らは正論を言いますが、場の温度を下げます。\n\n対応のコツは3つ。①あなたが察した「空気」を、相手にも言葉で共有する。②BGM・場所選びを意識的に提案する。③相手の鈍感さを「悪意」ではなく「気づけない」と理解する。\n\n逆にあなたが論理派から学べるのは、「感じたこと」を構造化する力。空気の悪さを「3つの要因」に分解できると、ただの感性派から、組織を動かせる感性派へ進化します。"
     }
+  ,
+
+    // フル多言語化（v6）
+    program_en: ["Day 1-5: Build one playlist daily, themed (work, sleep, etc.)", "Day 6-10: Listen to one song carefully, write 3 lines of impression", "Day 11-15: Hum, then record, one melody (just 1 minute is fine)", "Day 16-20: Listen to one podcast and break down the sound design", "Day 21-25: Listen 5 min daily to ambient sound (rain, footsteps, wind)", "Day 26-30: Try 30 min of GarageBand or BandLab for free music creation"],
+    program_zh: ["第1-5天：每天制作一个主题歌单（工作用·睡前用等）", "第6-10天：仔细听1首歌，用3行写感想", "第11-15天：哼唱并录下一段旋律（只需1分钟亦可）", "第16-20天：听一个播客，分析其声音设计", "第21-25天：每天5分钟用心聆听环境音（雨声·脚步·风声）", "第26-30天：用GarageBand或BandLab尝试30分钟免费音乐制作"],
+    program_ko: ["Day 1-5: 매일 테마별 플레이리스트 하나 만들기 (작업용·취침용 등)", "Day 6-10: 한 곡을 꼼꼼히 듣고 3줄 감상 쓰기", "Day 11-15: 콧노래로 멜로디를 만들어 녹음 (1분이면 OK)", "Day 16-20: 팟캐스트 하나를 듣고, 사운드 디자인을 분석", "Day 21-25: 환경음(비·발소리·바람)에 매일 5분 의식적으로 귀 기울이기", "Day 26-30: GarageBand·BandLab으로 30분 무료 음악 제작 시도"],
+    sideHustle_title_en: "Using sound to earn ¥30,000–¥150,000/month",
+    sideHustle_title_zh: "用声音月入3万至15万日元",
+    sideHustle_title_ko: "소리로 월 3~15만 엔을 버는 법",
+    sideHustle_steps_en: ["STEP 1: Choose your axis (BGM creator, voice over, podcaster)", "STEP 2: Create 5 sample works (3-min BGM × 5 or 5-min podcast × 5)", "STEP 3: For BGM, sell on AudioStock or AudioJungle (¥500–5,000 each)", "STEP 4: For voice, register on Coconala for voice-over (¥3,000+/min)", "STEP 5: Build subscribers on Anchor/Spotify and monetize via sponsors", "STEP 6: At ¥30,000–150,000/month, consider event production work"],
+    sideHustle_steps_zh: ["STEP 1: 选择主轴（BGM制作·配音·播客）", "STEP 2: 制作5个样品作品（3分钟BGM×5 或 5分钟播客×5）", "STEP 3: BGM类在AudioStock或AudioJungle出售（每首¥500~¥5000）", "STEP 4: 配音类在Coconala登录为配音员（每分钟¥3000起）", "STEP 5: 在Anchor·Spotify积累订阅者，通过广告主获利", "STEP 6: 月入达3~15万日元后，考虑活动制作类工作"],
+    sideHustle_steps_ko: ["STEP 1: 축 선택 (BGM 제작·보이스오버·팟캐스트)", "STEP 2: 샘플 작품 5개 제작 (3분 BGM×5 또는 5분 팟캐스트×5)", "STEP 3: BGM이면 AudioStock·AudioJungle에서 판매 (1곡 ¥500~5,000)", "STEP 4: 보이스라면 Coconala에 성우로 등록 (분당 ¥3,000~)", "STEP 5: Anchor·Spotify에서 구독자를 모아 스폰서로 수익화", "STEP 6: 월 3~15만 엔이 되면 이벤트 제작 업무도 검토"],
+    relationship_title_en: "How to engage with those who can't hear the \"atmosphere\"",
+    relationship_title_zh: "如何与「听不到氛围」的人相处",
+    relationship_title_ko: "분위기를 「듣지 못하는」 사람과의 관계",
+    relationship_body_en: "You particularly struggle with pure logic types and verbal-thinking writers. They are insensitive to \"atmosphere\" and \"the unspoken,\" and tend to feel your \"sense\" is incomprehensible.\n\nThree tips: ①Verbalize feelings instead of just feeling them ②Show concrete examples (\"Like this Beethoven piece...\") ③Don't demand they \"feel\"—provide an \"experience.\"\n\nLeading them to \"the world heard by sound\" by your hand—that's the gift of the Resonator. Don't give up; what they need most is exactly your sensitivity.",
+    relationship_body_zh: "你尤其难以应对的，是纯逻辑派与重视言语的写作者。他们对「氛围」「言外之意」不敏感，倾向于把你的「感觉」视为不可理解。\n\n应对3要点：①感觉不要止于感觉，而要语言化 ②具体举例（如「就像贝多芬这首…」）③不要求对方「感受」，而是提供「体验」。\n\n用你的手把他们带入「以声音聆听的世界」——这就是聆听共鸣者的赠予。别放弃，他们最需要的，正是你的敏感度。",
+    relationship_body_ko: "당신이 특히 힘들어하는 것은 순수 논리파와 언어 중심의 작가입니다. 그들은 「분위기」나 「행간」에 둔감하고, 당신의 「감각」을 이해할 수 없다고 느끼는 경향이 있습니다.\n\n대응 3요점: ①느끼는 데서 그치지 말고 언어화하기 ②구체적 예시 (「베토벤의 이 곡처럼…」) ③상대에게 「느끼기」를 요구하지 말고 「체험」을 제공.\n\n당신의 손으로 그들을 「소리로 듣는 세계」로 이끌어 가는—그것이 울림을 듣는 자의 선물. 포기하지 마세요. 그들에게 가장 필요한 것은 바로 당신의 감도입니다."
   },
 
   bodily: {
@@ -4627,6 +4784,24 @@ const PREMIUM_REPORT = {
       title: "頭でっかちな相手と、どう関わるか",
       body: "あなたが特にイライラするのは、「言語的知能」「論理数学的知能」が高すぎる頭でっかちタイプ。彼らは「動く前に考える」を徹底し、あなたの「動きながら考える」を否定します。\n\n対応のコツは3つ。①「やってみてから話す」を堂々と主張する。②彼らの言葉に対し、行動と結果で応える。③自分の身体感覚を、後から言葉で説明する習慣を持つ。\n\n逆にあなたが頭脳派から学べるのは、「事前準備」の価値。直感だけで動くと再現性が下がるので、計画と振り返りを取り入れると、職人の腕が「教えられる技術」に進化します。"
     }
+  ,
+
+    // フル多言語化（v6）
+    program_en: ["Day 1-5: 5-minute stretch daily; finish with a posture check", "Day 6-10: Make something with your hands once a week (cooking, crafts, gardening)", "Day 11-15: Try a new way to use your body (yoga, climbing, dance)", "Day 16-20: Think while walking; record 3 ideas per session", "Day 21-25: Record yourself once for posture/gesture analysis", "Day 26-30: Engage in a learning-by-doing skill (instrument, sports, craft)"],
+    program_zh: ["第1-5天：每天5分钟伸展运动，最后做姿势检查", "第6-10天：每周一次用手做点东西（烹饪·手工·园艺）", "第11-15天：尝试一种新的身体使用方式（瑜伽·攀岩·舞蹈）", "第16-20天：边走边思考，每次记录3个想法", "第21-25天：录一次自己的视频，分析姿态和动作", "第26-30天：通过身体学习一项技能（乐器·运动·手工）"],
+    program_ko: ["Day 1-5: 매일 5분 스트레칭, 마지막에 자세 점검", "Day 6-10: 주 1회 손으로 무언가 만들기 (요리·공예·원예)", "Day 11-15: 새로운 신체 사용법 도전 (요가·클라이밍·댄스)", "Day 16-20: 걸으면서 생각하고, 회당 3개의 아이디어 기록", "Day 21-25: 자신을 한 번 영상으로 찍어 자세·동작 분석", "Day 26-30: 몸으로 배우는 기술 하나에 도전 (악기·스포츠·공예)"],
+    sideHustle_title_en: "Earning ¥30,000–¥200,000/month with your body",
+    sideHustle_title_zh: "用身体月入3万至20万日元",
+    sideHustle_title_ko: "몸으로 월 3~20만 엔을 버는 법",
+    sideHustle_steps_en: ["STEP 1: Pick a specialty (yoga, training, cooking, crafting)", "STEP 2: Earn relevant credentials (e.g. RYT200, NSCA, etc.)", "STEP 3: Build 10 followers in real life or 100 on Instagram", "STEP 4: Run online lessons or coaching (¥3,000–10,000/session)", "STEP 5: Sell physical products or take on group classes", "STEP 6: Combine YouTube + Instagram + lessons for ¥200,000+/month"],
+    sideHustle_steps_zh: ["STEP 1: 选定专业方向（瑜伽·训练·烹饪·手工艺）", "STEP 2: 取得相关资格证（如RYT200、NSCA等）", "STEP 3: 在现实中积累10名学员，或Instagram关注者100人", "STEP 4: 开展线上课程或一对一辅导（每节¥3000~¥1万）", "STEP 5: 销售实物产品，或开设团体课", "STEP 6: YouTube+Instagram+课程组合可达月入20万日元以上"],
+    sideHustle_steps_ko: ["STEP 1: 전문 분야 선택 (요가·트레이닝·요리·공예)", "STEP 2: 관련 자격증 취득 (RYT200, NSCA 등)", "STEP 3: 실생활에서 10명의 수강생 또는 Instagram 팔로워 100명 확보", "STEP 4: 온라인 레슨이나 1:1 코칭 운영 (회당 ¥3,000~¥1만)", "STEP 5: 실물 상품 판매, 또는 그룹 클래스 개설", "STEP 6: YouTube+Instagram+레슨 조합으로 월 20만 엔 이상도 가능"],
+    relationship_title_en: "How to engage with those who only think in their head",
+    relationship_title_zh: "如何与「只用头脑思考」的人相处",
+    relationship_title_ko: "머리만으로 생각하는 사람과의 관계",
+    relationship_body_en: "You particularly struggle with verbal-thinking, logical types and introspective thinkers. They tend to misunderstand your \"act-first\" style as \"thoughtless.\"\n\nThree tips: ①Sometimes pause and say \"let me think\" out loud ②Speak in numbers: not \"I can do it\" but \"I can do it 80%\" ③Acknowledge their \"thinking time\" without pushing.\n\nIf you marry your action with their thinking, your team becomes unstoppable. Your body is the engine; their thinking is the steering wheel.",
+    relationship_body_zh: "你尤其难以应对的，是重视语言的逻辑派和内省型思想家。他们倾向于把你的「先行动派」误解为「不思考」。\n\n应对3要点：①时不时按一下暂停按钮，说出「让我想想」 ②用数字交流：不是「能做到」而是「能做到八成」 ③肯定对方的「思考时间」，不要催促。\n\n你的行动与他们的思考结合时，团队将变得不可阻挡。你的身体是引擎，他们的思考是方向盘。",
+    relationship_body_ko: "당신이 특히 힘들어하는 것은 언어 중심의 논리파와 내성형 사상가입니다. 그들은 당신의 「먼저 행동하는」 스타일을 「생각이 부족하다」고 오해하는 경향이 있습니다.\n\n대응 3요점: ①가끔은 일시정지 버튼을 눌러 「잠시 생각해 볼게요」라고 말하기 ②숫자로 말하기: 「할 수 있어요」가 아니라 「80% 할 수 있어요」 ③상대의 「사고 시간」을 인정하고 재촉하지 않기.\n\n당신의 행동과 그들의 사고가 결합하면 팀은 무적이 됩니다. 당신의 몸은 엔진, 그들의 사고는 핸들."
   },
 
   interpersonal: {
@@ -4677,6 +4852,24 @@ const PREMIUM_REPORT = {
       title: "感情に冷たい相手と、どう関わるか",
       body: "あなたが特に傷つくのは、「論理数学的知能」「内省的知能」が高く、対人コミュニケーションに無関心なタイプ。彼らは悪気なく、あなたの感情を「ノイズ」として扱います。\n\n対応のコツは3つ。①彼らの「冷たさ」を「敵意」と勘違いしない。②感情ではなく、データと事実で会話する練習。③彼らはあなたを尊敬していても、それを表現しないだけと信じる。\n\n逆にあなたが内省派から学べるのは、「他人ではなく自分と向き合う時間」の価値。共感疲労を防ぐためにも、内省的な習慣はあなたの長期的な健康に必須です。"
     }
+  ,
+
+    // フル多言語化（v6）
+    program_en: ["Day 1-5: Send a thank-you message to one person daily", "Day 6-10: Practice listening to one person without interrupting", "Day 11-15: Praise one team or family member", "Day 16-20: Talk briefly with someone you just met", "Day 21-25: Connect two different people who don't know each other", "Day 26-30: Host a small gathering (3 people is fine)"],
+    program_zh: ["第1-5天：每天给一个人发送感谢消息", "第6-10天：练习不打断他人，听一个人讲到最后", "第11-15天：赞美团队或家庭中的某一个人", "第16-20天：与初次见面的人短暂交谈", "第21-25天：连接两个互不相识的人", "第26-30天：主办小型聚会（3人即可）"],
+    program_ko: ["Day 1-5: 매일 한 사람에게 감사 메시지 보내기", "Day 6-10: 한 사람의 말을 끊지 않고 끝까지 듣는 연습", "Day 11-15: 팀이나 가족 중 한 사람을 칭찬하기", "Day 16-20: 처음 만나는 사람과 짧게라도 대화", "Day 21-25: 서로 모르는 두 사람을 연결", "Day 26-30: 소규모 모임 주최 (3명도 충분)"],
+    sideHustle_title_en: "Earning ¥50,000–¥300,000/month through people",
+    sideHustle_title_zh: "通过人月入5万至30万日元",
+    sideHustle_title_ko: "사람을 통해 월 5~30만 엔을 버는 법",
+    sideHustle_steps_en: ["STEP 1: Identify your strength: counseling, coaching, or matching", "STEP 2: Earn relevant credentials (NLP, coaching, career advisor)", "STEP 3: Build trust with 10 clients in a community or workplace", "STEP 4: Provide paid sessions on Coconala or MENTA (¥5,000+/hour)", "STEP 5: 5 hours/week → ¥100,000/month is realistic", "STEP 6: Lead group programs (¥30,000+/person × 10 people = ¥300,000)"],
+    sideHustle_steps_zh: ["STEP 1: 明确强项：咨询、辅导或人才匹配", "STEP 2: 取得相关资格（NLP、教练、职业咨询师）", "STEP 3: 在社群或职场积累10名客户建立信任", "STEP 4: 在Coconala或MENTA上提供付费咨询（每小时¥5000起）", "STEP 5: 每周5小时 → 月入10万日元为现实可及", "STEP 6: 开设团体课（每人¥3万×10人=¥30万）"],
+    sideHustle_steps_ko: ["STEP 1: 강점 명확화: 상담·코칭·매칭 중 하나", "STEP 2: 관련 자격 취득 (NLP, 코칭, 커리어 어드바이저)", "STEP 3: 커뮤니티나 직장에서 10명 고객과 신뢰 구축", "STEP 4: Coconala·MENTA에서 유료 상담 제공 (시간당 ¥5,000~)", "STEP 5: 주 5시간 → 월 10만 엔이 현실권", "STEP 6: 그룹 프로그램 개최 (1인 ¥3만 × 10명 = ¥30만)"],
+    relationship_title_en: "How to engage with the cold-logic type",
+    relationship_title_zh: "如何与「冷静逻辑派」相处",
+    relationship_title_ko: "냉정한 논리파와의 관계",
+    relationship_body_en: "You particularly struggle with logic-only types and emotionally restrained thinkers. They tend to feel your \"emotion-first\" style is \"noisy.\"\n\nThree tips: ①Speak with structure (PREP, 3 bullet points) ②Don't require them to read emotions ③Respect their need for alone time.\n\nYour emotional perception saves them at critical moments. They'll always respect you for it—patiently. Empathy isn't one-size-fits-all; sometimes the deepest care is leaving them alone.",
+    relationship_body_zh: "你尤其难以应对的，是纯逻辑派与情感克制的思想家。他们倾向于把你的「情感优先」视为「吵闹」。\n\n应对3要点：①以结构化方式表达（PREP法、3点要点） ②不要求对方读情绪 ③尊重他们的独处时间。\n\n你对情感的感知，在关键时刻能拯救他们。他们一定会以耐心回报这份尊重。共情并非千篇一律，有时最深的关心是让对方独处。",
+    relationship_body_ko: "당신이 특히 힘들어하는 것은 순수 논리파와 감정을 절제하는 사상가입니다. 그들은 당신의 「감정 우선」 스타일을 「시끄럽다」고 느끼는 경향이 있습니다.\n\n대응 3요점: ①구조적으로 말하기 (PREP·요점 3개) ②상대에게 감정을 읽기를 요구하지 않기 ③상대의 「혼자만의 시간」을 존중하기.\n\n당신의 감정에 대한 감도는, 중요한 순간 그들을 구해냅니다. 그들은 그 가치를 인내심으로 보답해 줍니다. 공감은 천편일률이 아닙니다. 때로는 가장 깊은 배려가 「혼자 두기」이기도 합니다."
   },
 
   intrapersonal: {
@@ -4727,6 +4920,24 @@ const PREMIUM_REPORT = {
       title: "賑やかな相手と、どう関わるか",
       body: "あなたが特に消耗するのは、「対人的知能」「身体運動的知能」が高い行動派・賑やか派。彼らは「今すぐ動く」「みんなで話そう」を好み、あなたの「ひとりで考えたい」を理解しません。\n\n対応のコツは3つ。①あなたの「ひとり時間」を堂々と確保し、説明する。②彼らとは深い1対1の対話で繋がる（飲み会・大人数は避ける）。③彼らの「行動の速さ」を、あなたの「思考の深さ」と組み合わせると無敵。\n\n逆にあなたが行動派から学べるのは、「考える前にやってみる」スピード感。思考7行動3を行動5にできれば、内省的な才能が世界に届きます。"
     }
+  ,
+
+    // フル多言語化（v6）
+    program_en: ["Day 1-5: Verbalize 3 emotions daily", "Day 6-10: Intentionally create 30 minutes of solo time", "Day 11-15: Write one thing you want to quit on paper", "Day 16-20: Write a 300-character letter to yourself", "Day 21-25: Solo travel: spend a half day alone in an unfamiliar place", "Day 26-30: Compile your inner journey into a 1,000-character essay"],
+    program_zh: ["第1-5天：每天将自己的情绪用3个词语言化", "第6-10天：有意识地为自己腾出30分钟的独处时间", "第11-15天：把一件「想戒掉的事」写在纸上", "第16-20天：写一封300字的信给自己", "第21-25天：独自旅行：在陌生的地方独自度过半天", "第26-30天：把内心的旅程整理成1000字随笔"],
+    program_ko: ["Day 1-5: 매일 자신의 감정 3가지를 언어화", "Day 6-10: 의식적으로 30분의 혼자만의 시간 만들기", "Day 11-15: 「그만두고 싶은 것」을 종이에 적기", "Day 16-20: 자신에게 300자 편지 쓰기", "Day 21-25: 혼자 여행: 낯선 곳에서 반나절을 혼자 보내기", "Day 26-30: 내면의 여정을 1000자 에세이로 정리"],
+    sideHustle_title_en: "Turning depth into income (¥30,000–¥200,000/month)",
+    sideHustle_title_zh: "把深度转化为收入（月入3~20万日元）",
+    sideHustle_title_ko: "깊이를 수입으로 (월 3~20만 엔)",
+    sideHustle_steps_en: ["STEP 1: Choose your medium (essay, podcast, online course)", "STEP 2: Set a theme (your unique inner experience)", "STEP 3: Distribute weekly for 3 months (Note, Substack, podcast)", "STEP 4: Build a paid newsletter or membership (¥500–2,000/month)", "STEP 5: 100 subscribers × ¥500 = ¥50,000/month, growing", "STEP 6: With expertise, offer 1-on-1 coaching (¥30,000+/session)"],
+    sideHustle_steps_zh: ["STEP 1: 选择媒介（随笔·播客·线上课程）", "STEP 2: 确定主题（你独特的内心体验）", "STEP 3: 持续3个月每周发布（Note·Substack·播客）", "STEP 4: 开设付费通讯或会员（每月¥500~¥2000）", "STEP 5: 100位订阅者×¥500=月入5万日元，并持续增长", "STEP 6: 凭专业性提供1对1辅导（每节¥3万起）"],
+    sideHustle_steps_ko: ["STEP 1: 매체 선택 (에세이·팟캐스트·온라인 강좌)", "STEP 2: 주제 설정 (당신만의 내면 체험)", "STEP 3: 3개월간 주 1회 발신 (Note·Substack·팟캐스트)", "STEP 4: 유료 뉴스레터·멤버십 개설 (월 ¥500~¥2,000)", "STEP 5: 구독자 100명 × ¥500 = 월 5만 엔, 점차 증가", "STEP 6: 전문성이 쌓이면 1:1 코칭 (회당 ¥3만~)"],
+    relationship_title_en: "How to engage with the always-active extrovert",
+    relationship_title_zh: "如何与「总是行动派」的外向者相处",
+    relationship_title_ko: "항상 활동적인 외향형과의 관계",
+    relationship_body_en: "You particularly struggle with energetic action types and emotional people pleasers. They tend to misunderstand your \"thinking time\" as \"indifferent.\"\n\nThree tips: ①Verbalize \"I'm thinking; give me time\" ②Sometimes deliver short, definitive opinions ③Don't avoid them—maintain \"minimum connection.\"\n\nYour depth balances their action. The combination of \"solitary deep thinker × extrovert-action person\" yields the strongest team in history. Don't avoid them; engage on your own terms.",
+    relationship_body_zh: "你尤其难以应对的，是充满能量的行动派与情感丰富的取悦型人。他们倾向于把你的「思考时间」误解为「冷漠」。\n\n应对3要点：①把「我在思考中，请给我时间」语言化 ②偶尔用简短而明确的意见表态 ③不要回避，保持「最低限度的连接」。\n\n你的深度，能为他们的行动带来平衡。「孤独的深思者×外向的行动派」组合，是历史上最强的搭档。不要回避，按自己的节奏建立关系。",
+    relationship_body_ko: "당신이 특히 힘들어하는 것은 에너지 넘치는 행동파와 정이 많은 사람을 좋아하는 타입입니다. 그들은 당신의 「사고 시간」을 「냉담함」으로 오해하는 경향이 있습니다.\n\n대응 3요점: ①「생각하는 중이니 시간이 필요해」를 언어화 ②가끔 짧고 분명한 의견 내놓기 ③피하지 말고, 「최소한의 연결」 유지.\n\n당신의 깊이는, 그들의 행동에 균형을 제공합니다. 「고독한 깊은 사상가 × 외향형 행동파」 조합은 사상 최강의 팀. 피하지 말고, 자신의 페이스로 관계를 맺으세요."
   },
 
   naturalist: {
@@ -4777,6 +4988,24 @@ const PREMIUM_REPORT = {
       title: "ざっくり派と、どう関わるか",
       body: "あなたが特にストレスを感じるのは、「身体運動的知能」「対人的知能」が高い、勢いとノリで動くタイプ。彼らは細かな違いに無頓着で、あなたの「分類してから決める」を「めんどくさい」と感じます。\n\n対応のコツは3つ。①最初に「結論3択」を提示する。②全パターンを説明せず、相手に必要な情報だけ絞る。③彼らの「ざっくり判断のスピード」を学ぶ。\n\n逆にあなたが勢い派から学べるのは、「とりあえずやってみる」軽やかさ。整理が完璧になるまで動かない癖を直すと、あなたのコレクション・分類が、世の中の役に立ち始めます。"
     }
+  ,
+
+    // フル多言語化（v6）
+    program_en: ["Day 1-5: Photograph one plant or animal daily", "Day 6-10: Organize and classify a collection you already own", "Day 11-15: Spend 30 min/week in a park or nature setting", "Day 16-20: Compile a theme of interest into a field-guide-style list", "Day 21-25: Research one species deeply (one paper or book)", "Day 26-30: Document your observations as a small archive"],
+    program_zh: ["第1-5天：每天拍摄1种植物或动物", "第6-10天：整理并分类已经拥有的收藏", "第11-15天：每周30分钟到公园或自然环境中", "第16-20天：把感兴趣的主题做成图鉴风格的列表", "第21-25天：深度调查一个物种（1篇论文或1本书）", "第26-30天：把观察记录成一个小型档案"],
+    program_ko: ["Day 1-5: 매일 식물이나 동물 1종 사진 찍기", "Day 6-10: 가지고 있는 컬렉션을 정리·분류", "Day 11-15: 주 30분 공원이나 자연이 있는 곳에서 시간 보내기", "Day 16-20: 관심 있는 테마를 도감 스타일 리스트로 정리", "Day 21-25: 한 종을 깊이 조사 (논문 1편 또는 책 1권)", "Day 26-30: 관찰을 소규모 아카이브로 문서화"],
+    sideHustle_title_en: "Turning curation into income (¥30,000–¥150,000/month)",
+    sideHustle_title_zh: "把策展转化为收入（月入3~15万日元）",
+    sideHustle_title_ko: "큐레이션을 수입으로 (월 3~15만 엔)",
+    sideHustle_steps_en: ["STEP 1: Pick a niche (rare books, plants, vintage gear, etc.)", "STEP 2: Run a curation media site/blog (3 articles/week for 3 months)", "STEP 3: Affiliate income from Amazon Associates (¥10,000–30,000/month)", "STEP 4: Sell physical or digital items (e.g. via Mercari, Etsy)", "STEP 5: Offer paid consultancy in your niche (¥5,000+/hour)", "STEP 6: Build a paid newsletter/database (¥1,000/month × 100 = ¥100,000)"],
+    sideHustle_steps_zh: ["STEP 1: 选定小众领域（古籍·植物·复古器材等）", "STEP 2: 经营策展型媒体/博客（3个月内每周3篇）", "STEP 3: 通过亚马逊联盟获得佣金（月入1万~3万日元）", "STEP 4: 销售实物或数字商品（如Mercari、Etsy等）", "STEP 5: 在自己专业领域提供付费咨询（每小时¥5000起）", "STEP 6: 开设付费通讯/数据库（每月¥1000×100人=¥10万）"],
+    sideHustle_steps_ko: ["STEP 1: 니치 영역 선택 (희귀서·식물·빈티지 기어 등)", "STEP 2: 큐레이션 미디어·블로그 운영 (3개월간 주 3편)", "STEP 3: Amazon Associates 등 제휴 수익 (월 ¥1만~3만)", "STEP 4: 실물 또는 디지털 상품 판매 (Mercari, Etsy 등)", "STEP 5: 자신의 니치에서 유료 컨설팅 제공 (시간당 ¥5,000~)", "STEP 6: 유료 뉴스레터·데이터베이스 개설 (월 ¥1,000 × 100명 = ¥10만)"],
+    relationship_title_en: "How to engage with those uninterested in classification",
+    relationship_title_zh: "如何与「不在意分类」的人相处",
+    relationship_title_ko: "분류에 무관심한 사람과의 관계",
+    relationship_body_en: "You particularly struggle with intuitive types high in \"Musical intelligence\" and verbal-thinking writers. They tend to view your \"I want to classify it\" as \"obsessive.\"\n\nThree tips: ①Show classification as a story, not a table ②Don't require detail-level conversation ③Embrace their \"intuitive shortcut\" rather than challenging it.\n\nYour curation skills are needed by intuitive types. They can't organize what their intuition produces—but you can. Pair up to create extraordinary work.",
+    relationship_body_zh: "你尤其难以应对的，是「音乐智能」高的直觉派和重视语言的写作者。他们倾向于把你「想分类」的倾向视为「执着」。\n\n应对3要点：①把分类以故事方式呈现，而非表格 ②不要求细节层面的对话 ③拥抱他们的「直觉捷径」，而非挑战之。\n\n你的策展能力，正是直觉派所需要的。他们无法整理直觉所产出的成果，但你可以。两者结合，可以创造非凡的作品。",
+    relationship_body_ko: "당신이 특히 힘들어하는 것은 「음악 지능」이 높은 직관파와 언어 중심의 작가입니다. 그들은 당신의 「분류하고 싶다」를 「집착」으로 보는 경향이 있습니다.\n\n대응 3요점: ①분류를 표가 아닌 이야기로 보여주기 ②세부 수준의 대화를 요구하지 않기 ③상대의 「직관적 지름길」에 도전하지 말고 포용.\n\n당신의 큐레이션 능력은, 직관파에게 꼭 필요합니다. 그들은 직관이 만들어낸 것을 정리할 수 없지만, 당신은 할 수 있다. 손잡으면 탁월한 작품을 만들 수 있습니다."
   }
 };
 
@@ -6484,7 +6713,7 @@ function _showResultInner() {
   ga.innerHTML = `
     <div class="detail-card">
       <div class="label">${t('result.growth_label')}</div>
-      <h4>${bottomInfo.name} <span class="en">${bottomInfo.en}</span></h4>
+      <h4>${getIntName(bottom)} <span class="en">${bottomInfo.en}</span></h4>
       <p>${getGrowthAdvice(bottom)}</p>
     </div>
   `;
@@ -6705,6 +6934,56 @@ function renderPremiumPreview(key) {
     t('premium.section_label');
   document.getElementById('premiumPreviewHeadline').textContent = title;
   document.getElementById('premiumPreviewText').textContent = body;
+
+  // ===== Section 02: 30日プログラム（最初の3項目だけ表示） =====
+  const programList = report['program' + suffix] || report.program;
+  if (programList) {
+    const programEl = document.getElementById('premiumProgramList');
+    if (programEl) {
+      // 最初の3項目だけ表示（Day 1-15相当）
+      const previewItems = programList.slice(0, 3);
+      programEl.innerHTML = previewItems.map((item, idx) => {
+        // "Day 1-5: ..." のような形式から、タグ部分と本文に分割
+        const match = item.match(/^([^:]+):\s*(.+)$/);
+        if (match) {
+          return `
+            <li>
+              <span class="day-tag">${match[1].trim()}</span>
+              <span class="item-body">${match[2].trim()}</span>
+            </li>
+          `;
+        }
+        return `<li><span class="item-body">${item}</span></li>`;
+      }).join('');
+    }
+  }
+
+  // ===== Section 03: 副業ロードマップ（最初の2ステップだけ表示） =====
+  const sideHustleTitle = report['sideHustle_title' + suffix] || report.sideHustle?.title;
+  const sideHustleSteps = report['sideHustle_steps' + suffix] || report.sideHustle?.steps;
+  if (sideHustleTitle) {
+    const titleEl = document.getElementById('premiumSideHustleTitle');
+    if (titleEl) titleEl.textContent = sideHustleTitle;
+  }
+  if (sideHustleSteps) {
+    const sideEl = document.getElementById('premiumSideHustleList');
+    if (sideEl) {
+      // 最初の2ステップだけ表示
+      const previewSteps = sideHustleSteps.slice(0, 2);
+      sideEl.innerHTML = previewSteps.map((step, idx) => {
+        const match = step.match(/^([^:]+):\s*(.+)$/);
+        if (match) {
+          return `
+            <li>
+              <span class="step-tag">${match[1].trim()}</span>
+              <span class="item-body">${match[2].trim()}</span>
+            </li>
+          `;
+        }
+        return `<li><span class="item-body">${step}</span></li>`;
+      }).join('');
+    }
+  }
 }
 
 function onPremiumInterest() {
@@ -8076,7 +8355,28 @@ function maybeShowPendingMatch() {
 // i18n: 言語切り替えシステム
 // ===========================================
 
-let currentLang = localStorage.getItem('jibumato_lang') || 'ja';
+// ブラウザの言語設定から、対応言語を判定する
+function detectBrowserLang() {
+  // navigator.languages（優先順位リスト）を先に見て、なければ navigator.language
+  const candidates = (navigator.languages && navigator.languages.length)
+    ? navigator.languages
+    : [navigator.language || navigator.userLanguage || 'ja'];
+
+  for (const raw of candidates) {
+    if (!raw) continue;
+    const lower = raw.toLowerCase();
+    // 言語コードの先頭2文字で判定
+    if (lower.startsWith('ja')) return 'ja';
+    if (lower.startsWith('zh')) return 'zh';  // zh-CN, zh-TW, zh-HK すべて中国語へ
+    if (lower.startsWith('ko')) return 'ko';
+    if (lower.startsWith('en')) return 'en';
+  }
+  // 対応外の言語（仏・独・西など）は英語をデフォルトに
+  return 'en';
+}
+
+// 言語の決定: ①ユーザーが手動で選んだ保存値 → ②ブラウザ言語 → ③英語
+let currentLang = localStorage.getItem('jibumato_lang') || detectBrowserLang();
 
 function setLang(lang) {
   currentLang = lang;
@@ -8362,6 +8662,13 @@ const I18N = {
   
     // match url prompt
     'match.url_prompt': 'このURLを友達に送ってください:',
+  
+    // premium preview extension
+    'premium.section_label2': '— Section 02 of 07 · 30日プログラム —',
+    'premium.section_label3': '— Section 03 of 07 · 副業ロードマップ —',
+    'premium.program_title': '才能を日常に組み込む、30日の習慣設計',
+    'prem.locked_program': '残り Day 11〜30 はプレミアム会員限定',
+    'prem.locked_side': '残り STEP 3〜6 はプレミアム会員限定',
   },
   en: {
     // タイトル画面
@@ -8603,6 +8910,13 @@ const I18N = {
   
     // match url prompt
     'match.url_prompt': 'Please share this URL with your friend:',
+  
+    // premium preview extension
+    'premium.section_label2': '— Section 02 of 07 · 30-Day Program —',
+    'premium.section_label3': '— Section 03 of 07 · Side Hustle Roadmap —',
+    'premium.program_title': '30-day habit design to embed your talent into everyday life',
+    'prem.locked_program': 'Days 11–30 are for premium members',
+    'prem.locked_side': 'Steps 3–6 are for premium members',
   },
 
   // ===== 中文（简体）=====
@@ -8838,6 +9152,13 @@ const I18N = {
   
     // match url prompt
     'match.url_prompt': '请把这个URL发给朋友：',
+  
+    // premium preview extension
+    'premium.section_label2': '— 第 02 节 / 全 07 节 · 30天计划 —',
+    'premium.section_label3': '— 第 03 节 / 全 07 节 · 副业路线图 —',
+    'premium.program_title': '将才能融入日常的30天习惯设计',
+    'prem.locked_program': '剩余 Day 11~30 仅限高级会员',
+    'prem.locked_side': '剩余 STEP 3~6 仅限高级会员',
   },
 
   // ===== 한국어 =====
@@ -9073,6 +9394,13 @@ const I18N = {
   
     // match url prompt
     'match.url_prompt': '이 URL을 친구에게 보내주세요:',
+  
+    // premium preview extension
+    'premium.section_label2': '— Section 02 of 07 · 30일 프로그램 —',
+    'premium.section_label3': '— Section 03 of 07 · 부업 로드맵 —',
+    'premium.program_title': '재능을 일상에 녹여내는, 30일 습관 설계',
+    'prem.locked_program': '나머지 Day 11~30은 프리미엄 회원 전용',
+    'prem.locked_side': '나머지 STEP 3~6은 프리미엄 회원 전용',
   }
 };
 
