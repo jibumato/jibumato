@@ -1238,6 +1238,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     opacity: 0.55;
   }
 
+  /* ===== 広告枠 ===== */
+  .ad-container {
+    margin: 40px auto;
+    max-width: 100%;
+    text-align: center;
+    min-height: 100px;
+  }
+
+  .ad-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: rgba(15,14,12,0.35);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .ad-container .adsbygoogle {
+    display: block;
+    margin: 0 auto;
+  }
+
   .section-divider::before,
   .section-divider::after {
     content: '';
@@ -1618,37 +1641,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   /* ============ TAROT-STYLE CAREER CARDS ============ */
   .career-tarot-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
   }
 
   .career-tarot-card {
     position: relative;
-    aspect-ratio: 3 / 4.2;
+    flex: 1 1 calc(50% - 4px);
+    min-width: 0;
     background: linear-gradient(160deg,
       #f9f1de 0%,
       #f0e5cb 100%);
-    border: 1.5px solid var(--gold);
-    padding: 12px 6px 10px;
+    border: 1px solid var(--gold);
+    padding: 9px 12px 9px 38px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
     overflow: hidden;
-    box-shadow: 0 2px 6px rgba(15,14,12,0.08);
-  }
-
-  /* タロットカードの内枠 */
-  .career-tarot-card::before {
-    content: '';
-    position: absolute;
-    inset: 5px;
-    border: 1px solid rgba(184,137,58,0.4);
-    pointer-events: none;
+    box-shadow: 0 1px 3px rgba(15,14,12,0.06);
+    border-radius: 2px;
+    min-height: 38px;
   }
 
   /* featured(主軸)はさらに少し濃く */
@@ -1660,78 +1675,60 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
 
   .career-tarot-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(15,14,12,0.12);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(15,14,12,0.1);
   }
 
-  /* 四隅の小さな装飾（クリミゾンで存在感UP） */
+  /* 四隅の小さな装飾は控えめに（左右の2点のみ） */
   .tarot-corner {
     position: absolute;
-    width: 9px;
-    height: 9px;
+    width: 5px;
+    height: 5px;
     border-color: var(--crimson);
     border-style: solid;
     z-index: 2;
   }
-  .tarot-corner.tl { top: 6px; left: 6px; border-width: 1.5px 0 0 1.5px; }
-  .tarot-corner.tr { top: 6px; right: 6px; border-width: 1.5px 1.5px 0 0; }
-  .tarot-corner.bl { bottom: 6px; left: 6px; border-width: 0 0 1.5px 1.5px; }
-  .tarot-corner.br { bottom: 6px; right: 6px; border-width: 0 1.5px 1.5px 0; }
+  .tarot-corner.tl { top: 3px; left: 3px; border-width: 1px 0 0 1px; }
+  .tarot-corner.tr { display: none; }
+  .tarot-corner.bl { display: none; }
+  .tarot-corner.br { bottom: 3px; right: 3px; border-width: 0 1px 1px 0; }
 
   .tarot-num {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 12px;
+    font-size: 11px;
     color: var(--crimson);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     line-height: 1;
-    margin-top: 4px;
-    position: relative;
     z-index: 2;
+    opacity: 0.7;
   }
 
   .tarot-icon {
-    width: 46px;
-    height: 46px;
-    color: #7a1f1a;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 4px 0;
-    position: relative;
-    z-index: 2;
-  }
-
-  .tarot-icon svg {
-    width: 100%;
-    height: 100%;
-    stroke: currentColor;
-    fill: none;
-    stroke-width: 1.6;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+    display: none;
   }
 
   .tarot-name {
     font-family: 'Shippori Mincho', serif;
     font-weight: 700;
-    font-size: 11px;
-    line-height: 1.35;
+    font-size: 12px;
+    line-height: 1.3;
     color: var(--ink);
     letter-spacing: 0.02em;
     position: relative;
     z-index: 2;
-    word-break: keep-all;
-    overflow-wrap: break-word;
+    flex: 1;
   }
 
   @media (max-width: 480px) {
-    .career-tarot-grid { gap: 7px; }
-    .career-tarot-card { padding: 10px 4px 8px; }
-    .tarot-icon { width: 38px; height: 38px; }
-    .tarot-name { font-size: 10px; }
-    .tarot-num { font-size: 10.5px; }
+    .career-tarot-grid { gap: 6px; }
+    .career-tarot-card { padding: 8px 10px 8px 34px; min-height: 34px; }
+    .tarot-name { font-size: 11.5px; }
+    .tarot-num { font-size: 10px; left: 8px; }
   }
 
   /* Quote */
@@ -3565,6 +3562,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="en" data-i18n="result.sec2en">Detailed Scores</span>
   </div>
   <div class="scores-list" id="scoresList"></div>
+
+  <!-- ===== 広告枠（候補1：スコアリストとTOP3武器の間） ===== -->
+  <div class="ad-container">
+    <span class="ad-label" data-i18n="ad.label">Sponsored</span>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-9187493483642692"
+         data-ad-slot="9987726722"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+  </div>
 
   <!-- ── 区切り ── -->
   <div class="section-divider"><svg viewBox="0 0 28 28"><circle cx="14" cy="14" r="11"/><path d="M14,4 L17,11 L24,14 L17,17 L14,24 L11,17 L4,14 L11,11 Z"/></svg></div>
@@ -6816,8 +6824,27 @@ function _showResultInner() {
 
   showScreen('screen-result');
 
+  // AdSense: 結果ページ表示時に広告を読み込む
+  loadResultAds();
+
   // If user came in via match link, automatically show match result
   maybeShowPendingMatch();
+}
+
+// AdSense広告を読み込む（重複読み込みを防ぐ）
+let _adsLoaded = false;
+function loadResultAds() {
+  if (_adsLoaded) return;
+  try {
+    // ページ内の未読み込みの広告枠を読み込む
+    const ads = document.querySelectorAll('.adsbygoogle');
+    ads.forEach(() => {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    });
+    _adsLoaded = true;
+  } catch (e) {
+    console.warn('AdSense load skipped:', e);
+  }
 }
 
 // ============ FAMOUS PEOPLE ============
@@ -8669,6 +8696,9 @@ const I18N = {
     'premium.program_title': '才能を日常に組み込む、30日の習慣設計',
     'prem.locked_program': '残り Day 11〜30 はプレミアム会員限定',
     'prem.locked_side': '残り STEP 3〜6 はプレミアム会員限定',
+  
+    // ad label
+    'ad.label': 'スポンサーリンク',
   },
   en: {
     // タイトル画面
@@ -8917,6 +8947,9 @@ const I18N = {
     'premium.program_title': '30-day habit design to embed your talent into everyday life',
     'prem.locked_program': 'Days 11–30 are for premium members',
     'prem.locked_side': 'Steps 3–6 are for premium members',
+  
+    // ad label
+    'ad.label': 'Sponsored',
   },
 
   // ===== 中文（简体）=====
@@ -9159,6 +9192,9 @@ const I18N = {
     'premium.program_title': '将才能融入日常的30天习惯设计',
     'prem.locked_program': '剩余 Day 11~30 仅限高级会员',
     'prem.locked_side': '剩余 STEP 3~6 仅限高级会员',
+  
+    // ad label
+    'ad.label': '赞助商链接',
   },
 
   // ===== 한국어 =====
@@ -9401,6 +9437,9 @@ const I18N = {
     'premium.program_title': '재능을 일상에 녹여내는, 30일 습관 설계',
     'prem.locked_program': '나머지 Day 11~30은 프리미엄 회원 전용',
     'prem.locked_side': '나머지 STEP 3~6은 프리미엄 회원 전용',
+  
+    // ad label
+    'ad.label': '스폰서 링크',
   }
 };
 
