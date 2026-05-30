@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>運営者情報 | じぶんマトリクス</title>
+<meta name="description" content="じぶんマトリクス(Mymatrix)の運営者情報・連絡先・運営方針について。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #0f0e0c;
+    --paper: #f4ede0;
+    --paper-deep: #e8dcc4;
+    --gold: #b8893a;
+    --gold-light: #d4ad5e;
+    --crimson: #8a2922;
+  }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Shippori Mincho', 'Cormorant Garamond', serif;
+    min-height: 100vh;
+    line-height: 1.8;
+    padding: 0;
+  }
+  /* 和紙テクスチャ */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 25% 25%, rgba(184,137,58,0.04) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(138,41,34,0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+  /* ヘッダー */
+  .page-header {
+    text-align: center;
+    margin-bottom: 60px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(184,137,58,0.3);
+  }
+  .breadcrumb {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .breadcrumb a {
+    color: var(--gold);
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .breadcrumb a:hover { opacity: 0.7; }
+  .page-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  .page-title-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--crimson);
+    letter-spacing: 0.1em;
+  }
+  /* メインコンテンツ */
+  .content {
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(184,137,58,0.2);
+    padding: 40px 32px;
+    border-radius: 2px;
+  }
+  .content h2 {
+    font-size: 20px;
+    color: var(--ink);
+    margin-top: 36px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(184,137,58,0.4);
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+  .content h2:first-child { margin-top: 0; }
+  .content p {
+    font-size: 15px;
+    color: rgba(15,14,12,0.85);
+    margin-bottom: 16px;
+    line-height: 1.9;
+  }
+  .content ul {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+  }
+  .content ul li {
+    font-size: 15px;
+    padding: 10px 0;
+    border-bottom: 1px dotted rgba(184,137,58,0.2);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .content ul li:last-child { border-bottom: none; }
+  .content ul li .label {
+    min-width: 100px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--crimson);
+    text-transform: uppercase;
+    padding-top: 4px;
+  }
+  .content ul li .value {
+    flex: 1;
+    color: var(--ink);
+  }
+  .content a {
+    color: var(--crimson);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(138,41,34,0.4);
+  }
+  .content a:hover { text-decoration-color: var(--crimson); }
+  /* フッター */
+  .page-footer {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(184,137,58,0.3);
+  }
+  .page-footer .links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .page-footer .links a {
+    font-size: 12px;
+    color: rgba(15,14,12,0.6);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    padding: 4px 8px;
+    transition: color 0.2s;
+  }
+  .page-footer .links a:hover { color: var(--crimson); }
+  .page-footer .copyright {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: rgba(15,14,12,0.4);
+    text-transform: uppercase;
+  }
+  /* レスポンシブ */
+  @media (max-width: 480px) {
+    .container { padding: 40px 16px 60px; }
+    .content { padding: 28px 20px; }
+    .page-title { font-size: 24px; }
+    .content h2 { font-size: 17px; }
+    .content ul li .label { min-width: 80px; font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="page-header">
+    <div class="breadcrumb"><a href="/">じぶんマトリクス</a> · ABOUT</div>
+    <h1 class="page-title">運営者情報</h1>
+    <div class="page-title-en">About Us</div>
+  </header>
+
+  <main class="content">
+    <h2>サイト概要</h2>
+    <p>
+      「じぶんマトリクス」は、ハーバード大学のハワード・ガードナー博士が提唱した
+      <strong>多重知能理論（Multiple Intelligences Theory / MI理論）</strong>
+      にもとづく才能診断ツールを軸に、自己理解とキャリアを深めるための情報を発信するサイトです。
+    </p>
+    <p>
+      24問の質問に答えることで、あなたの中に眠る8つの知能のバランスを可視化し、
+      強みを活かすための具体的なヒントを提供します。診断は無料・登録不要で、
+      日本語のほか英語・中国語・韓国語にも対応しています。
+    </p>
+
+    <h2>運営者情報</h2>
+    <ul>
+      <li>
+        <span class="label">屋 号</span>
+        <span class="value">Mymatrix</span>
+      </li>
+      <li>
+        <span class="label">運営形態</span>
+        <span class="value">個人運営</span>
+      </li>
+      <li>
+        <span class="label">サイトURL</span>
+        <span class="value"><a href="https://www.jibunmatrix.com/">https://www.jibunmatrix.com/</a></span>
+      </li>
+      <li>
+        <span class="label">連絡先</span>
+        <span class="value"><a href="mailto:jbnmatrix@gmail.com">jbnmatrix@gmail.com</a></span>
+      </li>
+      <li>
+        <span class="label">開設日</span>
+        <span class="value">2026年</span>
+      </li>
+    </ul>
+
+    <h2>運営理念</h2>
+    <p>
+      現代の教育やビジネスでは、ともすれば「論理」や「言語」など限られた能力ばかりが評価されがちです。
+      しかし、人の才能はもっと多様で、もっと豊かなはず——。
+    </p>
+    <p>
+      じぶんマトリクスは、ガードナー博士のMI理論を通して、
+      「自分にはこんな才能があったのか」という発見と、
+      「自分の生き方をデザインする」きっかけをお届けすることを目指しています。
+    </p>
+
+    <h2>収益について</h2>
+    <p>
+      当サイトは無料でご利用いただくため、以下の方法で運営費用をまかなっています：
+    </p>
+    <ul>
+      <li>
+        <span class="label">広告</span>
+        <span class="value">Google AdSense によるディスプレイ広告</span>
+      </li>
+      <li>
+        <span class="label">アフィリエイト</span>
+        <span class="value">Amazon アソシエイト・プログラムによる書籍紹介</span>
+      </li>
+      <li>
+        <span class="label">プレミアム</span>
+        <span class="value">将来的にプレミアムレポート（有料）を提供予定</span>
+      </li>
+    </ul>
+    <p>
+      Amazonのアソシエイトとして、Mymatrixは適格販売により収入を得ています。
+    </p>
+
+    <h2>お問い合わせ</h2>
+    <p>
+      ご感想・ご質問・取材依頼・広告掲載のご相談など、すべて
+      <a href="mailto:jbnmatrix@gmail.com">jbnmatrix@gmail.com</a>
+      までメールにてお寄せください。3営業日以内にご返信いたします。
+    </p>
+  </main>
+
+  <footer class="page-footer">
+    <div class="links">
+      <a href="/">トップへ戻る</a>
+      <a href="/about.html">運営者情報</a>
+      <a href="/privacy.html">プライバシーポリシー</a>
+      <a href="/disclaimer.html">免責事項</a>
+      <a href="/contact.html">お問い合わせ</a>
+    </div>
+    <div class="copyright">© Mymatrix · じぶんマトリクス</div>
+  </footer>
+</div>
+</body>
+</html>

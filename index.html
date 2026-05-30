@@ -1805,6 +1805,42 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     text-transform: uppercase;
   }
 
+  /* ポリシー・運営者情報リンク */
+  .footer-links {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 11px;
+    color: rgba(15,14,12,0.5);
+    letter-spacing: 0.05em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .footer-links a {
+    color: rgba(15,14,12,0.55);
+    text-decoration: none;
+    padding: 4px 8px;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover {
+    color: var(--crimson);
+  }
+  .footer-links .sep {
+    color: rgba(15,14,12,0.3);
+    font-size: 10px;
+  }
+  .footer-copyright {
+    text-align: center;
+    margin-top: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: rgba(15,14,12,0.35);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
   /* 免責事項：目立たないがちゃんと読める */
   .disclaimer {
     max-width: 480px;
@@ -3853,6 +3889,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </p>
 
   <div class="footer-mark" data-i18n="footer.mark">— じぶんマトリクス · Inspired by Howard Gardner's MI Theory —</div>
+
+  <!-- ポリシー・運営者情報リンク -->
+  <div class="footer-links">
+    <a href="/about.html" data-i18n="footer.about">運営者情報</a>
+    <span class="sep">·</span>
+    <a href="/privacy.html" data-i18n="footer.privacy">プライバシーポリシー</a>
+    <span class="sep">·</span>
+    <a href="/disclaimer.html" data-i18n="footer.disclaimer">免責事項</a>
+    <span class="sep">·</span>
+    <a href="/contact.html" data-i18n="footer.contact">お問い合わせ</a>
+  </div>
+  <div class="footer-copyright">© Mymatrix</div>
   </section>
 
 <!-- ============ GALLERY SCREEN ============ -->
@@ -6093,6 +6141,27 @@ const RECOMMENDED_BOOKS = {
     note_en: "The Storyteller Owl type has the talent to \"think in language.\" This book teaches techniques to organize your thoughts and emotions by verbalizing the haze in your head. A great pick if you want to further sharpen your strength. (Japanese-language book)",
     note_zh: "故事讲述猫头鹰型拥有「用语言思考」的才能。本书教你将脑中的模糊感受语言化，从而整理思绪与情感的技巧。希望进一步磨练自身强项的人推荐。（日文原版书籍）",
     note_ko: "이야기꾼 부엉이 유형은 「말로 생각하는」 재능을 가지고 있습니다. 이 책은 머릿속의 모호함을 언어화하여 사고와 감정을 정리하는 기법을 가르쳐주는 한 권. 자신의 강점을 더욱 갈고닦고 싶은 사람에게. (일본어 원서)"
+  ,
+
+    // 海外用書籍（日本語以外で使用）
+    international: {
+          "asin_us": "1982159375",
+          "title_en": "On Writing: A Memoir of the Craft",
+          "subtitle_en": "",
+          "author_en": "Stephen King",
+          "publisher_en": "Scribner",
+          "note_en": "The Storyteller Owl type has the talent to 'think in language.' This book is part memoir, part masterclass by one of the best-selling authors of all time. King's vivid prose teaches you the basic tools of the writer's craft. A TIME Top 100 Nonfiction Book of All Time.",
+          "title_zh": "写作论：回忆录与技艺",
+          "subtitle_zh": "",
+          "author_zh": "斯蒂芬·金",
+          "publisher_zh": "Scribner",
+          "note_zh": "故事讲述猫头鹰型拥有「用语言思考」的才能。本书是史上销量最高作家之一斯蒂芬·金的半自传半大师课，以生动的笔触传授写作的基本工具。被《时代》杂志评为「史上100本最佳非虚构作品」之一。",
+          "title_ko": "유혹하는 글쓰기",
+          "subtitle_ko": "",
+          "author_ko": "스티븐 킹",
+          "publisher_ko": "Scribner",
+          "note_ko": "이야기꾼 부엉이 유형은 「말로 생각하는」 재능을 가지고 있습니다. 이 책은 사상 최고 베스트셀러 작가 중 한 명인 스티븐 킹의 자전적 회고이자 마스터클래스. 생생한 문체로 작가의 기본 도구를 전합니다. TIME지 선정 「사상 100대 논픽션」."
+    }
   },
   logical: {
     title: "イシューからはじめよ",
@@ -6118,6 +6187,27 @@ const RECOMMENDED_BOOKS = {
     note_en: "The Logical Fox type wields \"the ability to see through structure\" as a weapon. This book teaches the essence of intellectual production: identifying the right questions and reaching answers via the shortest path. A definitive work that turns logical thinking into business outcomes. (Japanese-language book)",
     note_zh: "逻辑狐狸型以「看透结构的能力」为武器。本书阐述了识别该解决的问题、以最短路径抵达答案的知性生产本质。是把逻辑思考转化为工作成果的经典之作。（日文原版书籍）",
     note_ko: "논리적 여우 유형은 「구조를 꿰뚫어 보는 힘」이 무기. 이 책은 풀어야 할 질문을 식별하고 최단 경로로 답에 도달하는 지적 생산의 본질을 설파합니다. 논리적 사고를 일의 성과로 바꾸는 정평 있는 책. (일본어 원서)"
+  ,
+
+    // 海外用書籍（日本語以外で使用）
+    international: {
+          "asin_us": "0374533555",
+          "title_en": "Thinking, Fast and Slow",
+          "subtitle_en": "",
+          "author_en": "Daniel Kahneman",
+          "publisher_en": "Farrar, Straus and Giroux",
+          "note_en": "The Logical Fox type has 'the ability to see through structure' as a weapon. Nobel Prize-winning psychologist Daniel Kahneman reveals the two systems that drive thought: one fast and intuitive, the other slow and deliberative. A definitive work on logic, cognition, and human decision-making.",
+          "title_zh": "思考，快与慢",
+          "subtitle_zh": "",
+          "author_zh": "丹尼尔·卡尼曼",
+          "publisher_zh": "Farrar, Straus and Giroux",
+          "note_zh": "逻辑狐狸型以「看透结构的能力」为武器。诺贝尔经济学奖得主丹尼尔·卡尼曼揭示驱动思维的两套系统：一套快速直觉，一套缓慢深思。是关于逻辑、认知与人类决策的经典之作。",
+          "title_ko": "생각에 관한 생각",
+          "subtitle_ko": "",
+          "author_ko": "대니얼 카너먼",
+          "publisher_ko": "Farrar, Straus and Giroux",
+          "note_ko": "논리적 여우 유형은 「구조를 꿰뚫어 보는 힘」이 무기. 노벨 경제학상 수상자 대니얼 카너먼이, 사고를 움직이는 두 가지 시스템—빠르고 직관적인 것과 느리고 숙고적인 것—을 밝힙니다. 논리·인지·인간 의사결정에 관한 정평 있는 책."
+    }
   },
   spatial: {
     title: "センスは知識からはじまる",
@@ -6143,6 +6233,27 @@ const RECOMMENDED_BOOKS = {
     note_en: "The Design Cat type has \"visual sense\" as a talent. The designer behind Kumamon explains that sense is not innate but is honed through accumulated knowledge. A book to take your sensitivity one level higher. (Japanese-language book)",
     note_zh: "设计师猫型以「视觉品味」为才能。打造熊本熊的设计师指出，品味并非天生，而是通过知识的积累而被磨练出来。能将你的感性再提升一级的名著。（日文原版书籍）",
     note_ko: "디자인 잘하는 고양이 유형은 「시각적 센스」가 재능. 쿠마몬을 만든 디자이너가, 센스는 타고나는 것이 아니라 지식의 축적으로 다듬어지는 것임을 설파한 명저. 당신의 감성을 한 단계 끌어올릴 한 권. (일본어 원서)"
+  ,
+
+    // 海外用書籍（日本語以外で使用）
+    international: {
+          "asin_us": "0465050654",
+          "title_en": "The Design of Everyday Things",
+          "subtitle_en": "Revised and Expanded Edition",
+          "author_en": "Don Norman",
+          "publisher_en": "Basic Books",
+          "note_en": "The Design Cat type has 'visual sense' as a talent. Cognitive scientist Don Norman pioneered the application of psychology to design. This classic teaches the principles of human-centered design—how good design makes objects intuitive, while bad design frustrates. Essential reading for anyone who shapes how the world looks.",
+          "title_zh": "设计心理学",
+          "subtitle_zh": "增订版",
+          "author_zh": "唐纳德·诺曼",
+          "publisher_zh": "Basic Books",
+          "note_zh": "设计师猫型以「视觉品味」为才能。认知科学家唐纳德·诺曼开创了将心理学应用于设计的领域。本书讲述以人为本的设计原则：好设计让物品直观可用，差设计让人沮丧。是塑造世界外观者的必读经典。",
+          "title_ko": "디자인과 인간 심리",
+          "subtitle_ko": "개정증보판",
+          "author_ko": "도널드 노먼",
+          "publisher_ko": "Basic Books",
+          "note_ko": "디자인 잘하는 고양이 유형은 「시각적 센스」가 재능. 인지과학자 도널드 노먼이, 심리학을 디자인에 적용한 선구적 명저. 인간 중심 디자인의 원칙을 설파합니다—좋은 디자인은 사물을 직관적으로 만들고, 나쁜 디자인은 사람을 좌절시킵니다."
+    }
   },
   musical: {
     title: "音楽の聴き方",
@@ -6168,6 +6279,27 @@ const RECOMMENDED_BOOKS = {
     note_en: "The Singing Bird type has \"sensitivity to sound and air\" as a talent. A musicologist thoroughly examines how to engage with music through \"listening modes\" and \"language of taste.\" Winner of the 19th Yoshida Hidekazu Award. (Japanese-language book)",
     note_zh: "歌唱小鸟型以「对声音与空气的敏感度」为才能。音乐学者通过「聆听的类型」与「言说品味的语言」彻底思考如何与音乐相处的名著。第19届吉田秀和奖得奖作。（日文原版书籍）",
     note_ko: "노래하는 새 유형은 「소리와 공기의 감도」가 재능. 음악학자가 「듣는 양식」과 「취향을 말하는 언어」로 음악과의 관계를 철저히 사유한 명저. 제19회 요시다 히데카즈상 수상작. (일본어 원서)"
+  ,
+
+    // 海外用書籍（日本語以外で使用）
+    international: {
+          "asin_us": "0452288525",
+          "title_en": "This Is Your Brain on Music",
+          "subtitle_en": "The Science of a Human Obsession",
+          "author_en": "Daniel J. Levitin",
+          "publisher_en": "Plume",
+          "note_en": "The Singing Bird type has 'sensitivity to sound and air' as a talent. Rocker-turned-neuroscientist Daniel Levitin explores the connection between music and the brain. Why are we so moved by certain songs? How do composers exploit our cognitive patterns? A LA Times Book Award finalist that bridges art and science.",
+          "title_zh": "迷恋音乐的脑",
+          "subtitle_zh": "人类对音乐着迷的科学",
+          "author_zh": "丹尼尔·列维廷",
+          "publisher_zh": "Plume",
+          "note_zh": "歌唱小鸟型以「对声音与空气的敏感度」为才能。摇滚乐手出身的神经科学家丹尼尔·列维廷探究音乐与大脑的连结。我们为何被某些歌曲深深打动？作曲家如何运用我们的认知模式？洛杉矶时报图书奖入围作，融合艺术与科学的名著。",
+          "title_ko": "뇌의 왈츠",
+          "subtitle_ko": "음악에 빠진 우리 뇌의 과학",
+          "author_ko": "대니얼 J. 레비틴",
+          "publisher_ko": "Plume",
+          "note_ko": "노래하는 새 유형은 「소리와 공기의 감도」가 재능. 록 뮤지션 출신 신경과학자 대니얼 레비틴이 음악과 뇌의 연결을 탐구. 우리는 왜 어떤 곡에 깊이 감동하는가? 작곡가는 우리의 인지 패턴을 어떻게 활용하는가? LA Times 도서상 최종 후보작, 예술과 과학을 잇는 명저."
+    }
   },
   bodily: {
     title: "身体感覚を取り戻す",
@@ -6193,6 +6325,27 @@ const RECOMMENDED_BOOKS = {
     note_en: "The Lithe Wolf type has \"thinking with the body\" as their talent. This book explores how to reclaim fading bodily sensations through the wisdom of Japanese culture. A way to verbalize and deepen your strengths. (Japanese-language book)",
     note_zh: "柔韧之狼型是「用身体思考」之才能的拥有者。本书通过日本文化的智慧，探索找回正在消失的身体感觉之法。把你的强项语言化、深化的一本。（日文原版书籍）",
     note_ko: "유연한 늑대 유형은 「몸으로 생각하는」 재능의 소유자. 사라져가는 신체 감각을 일본 문화의 지혜에서 되찾는 방법을 탐구하는 한 권. 자신의 강점을 언어화하고 심화시키기 위해. (일본어 원서)"
+  ,
+
+    // 海外用書籍（日本語以外で使用）
+    international: {
+          "asin_us": "0679778314",
+          "title_en": "The Inner Game of Tennis",
+          "subtitle_en": "The Classic Guide to the Mental Side of Peak Performance",
+          "author_en": "W. Timothy Gallwey",
+          "publisher_en": "Random House Trade Paperbacks",
+          "note_en": "The Lithe Wolf type is 'thinking with the body.' Tim Gallwey's revolutionary work transcends tennis—it's a Zen classic for anyone striving for peak performance. Learn to trust your body's wisdom, quiet the inner critic, and achieve 'relaxed concentration.' Used by athletes, musicians, and CEOs worldwide.",
+          "title_zh": "比赛，从心开始",
+          "subtitle_zh": "颠峰表现的内在赛局",
+          "author_zh": "W·提摩西·盖洛韦",
+          "publisher_zh": "Random House",
+          "note_zh": "柔韧之狼型是「用身体思考」之人。提摩西·盖洛韦的革命性作品超越网球本身——是任何追求颠峰表现者的禅之经典。学习信任身体的智慧、静默内心评判者、达成「放松的专注」。全球运动员、音乐家、CEO都在使用此书。",
+          "title_ko": "이너 게임",
+          "subtitle_ko": "최고의 성과를 위한 내면의 게임",
+          "author_ko": "W. 티모시 갤웨이",
+          "publisher_ko": "Random House",
+          "note_ko": "유연한 늑대 유형은 「몸으로 생각하는」 사람. 티모시 갤웨이의 혁명적 저작은 테니스를 넘어, 최고의 성과를 추구하는 모든 이에게 선(禪)의 고전입니다. 몸의 지혜를 믿고, 내면의 비판자를 잠재우며, 「이완된 집중」에 이르는 법. 세계의 운동선수, 음악가, CEO가 활용 중."
+    }
   },
   interpersonal: {
     title: "人を動かす 改訂文庫版",
@@ -6218,6 +6371,27 @@ const RECOMMENDED_BOOKS = {
     note_en: "The Empathic Dolphin type has the talent to \"read others' emotions.\" A classic of human relations read for over 80 years. A definitive work that turns your interpersonal sense into the practical skill of moving people.",
     note_zh: "温柔的海豚型拥有「读懂他人情感」的才能。已被阅读80年以上的人际关系经典。把你的对人触觉转化为驱动他人的实践力的经典之作。",
     note_ko: "다정한 돌고래 유형은 「사람의 감정을 읽는」 재능을 가지고 있습니다. 80년 이상 읽혀온 인간관계의 고전. 당신의 대인 감각을, 사람을 움직이는 실천력으로 바꾸는 정평 있는 책."
+  ,
+
+    // 海外用書籍（日本語以外で使用）
+    international: {
+          "asin_us": "0671027034",
+          "title_en": "How to Win Friends and Influence People",
+          "subtitle_en": "",
+          "author_en": "Dale Carnegie",
+          "publisher_en": "Simon & Schuster",
+          "note_en": "The Empathic Dolphin type has the talent to 'read others' emotions.' Read for over 80 years, this is the definitive classic on human relations. Carnegie's timeless principles teach how to make friends, win cooperation, and become a more effective leader.",
+          "title_zh": "人性的弱点",
+          "subtitle_zh": "",
+          "author_zh": "戴尔·卡耐基",
+          "publisher_zh": "Simon & Schuster",
+          "note_zh": "温柔的海豚型拥有「读懂他人情感」的才能。这本被阅读了80年以上的人际关系经典中的经典。卡耐基的永恒原则教你如何交友、赢得合作，成为更有效的领导者。",
+          "title_ko": "인간관계론",
+          "subtitle_ko": "",
+          "author_ko": "데일 카네기",
+          "publisher_ko": "Simon & Schuster",
+          "note_ko": "다정한 돌고래 유형은 「사람의 감정을 읽는」 재능을 가지고 있습니다. 80년 이상 읽혀온 인간관계의 결정판. 카네기의 시대를 초월한 원칙이, 친구를 사귀고 협력을 얻으며 더 효과적인 리더가 되는 법을 가르쳐줍니다."
+    }
   },
   intrapersonal: {
     title: "夜と霧",
@@ -6243,6 +6417,27 @@ const RECOMMENDED_BOOKS = {
     note_en: "The Contemplative Bear type has the talent to \"face their own inner world.\" What meaning do humans find in the most extreme situations?—A psychologist's account from his own experience, reaching the pinnacle of introspection.",
     note_zh: "沉思的熊型拥有「面对内心」的才能。在极限处境中，人能发现什么样的意义？——心理学家从亲身经历出发写就，堪称内省之极致的一部巨作。",
     note_ko: "사색하는 곰 유형은 「내면과 마주하는」 재능을 가지고 있습니다. 극한의 상황에서 인간이 찾아내는 의미란 무엇인가——심리학자가 자신의 체험에서 써내려간, 내성의 도달점이라 할 한 권."
+  ,
+
+    // 海外用書籍（日本語以外で使用）
+    international: {
+          "asin_us": "0807014273",
+          "title_en": "Man's Search for Meaning",
+          "subtitle_en": "",
+          "author_en": "Viktor E. Frankl",
+          "publisher_en": "Beacon Press",
+          "note_en": "The Contemplative Bear type has the talent to 'face their own inner world.' What meaning do humans find in the most extreme situations?—A psychologist's account from his concentration camp experience, reaching the pinnacle of introspection. Over 16 million copies sold worldwide.",
+          "title_zh": "活出生命的意义",
+          "subtitle_zh": "",
+          "author_zh": "维克多·弗兰克尔",
+          "publisher_zh": "Beacon Press",
+          "note_zh": "沉思的熊型拥有「面对内心」的才能。在极限处境中，人能发现什么样的意义？心理学家从集中营亲身经历出发写就，堪称内省之极致。全球销量超过1600万册。",
+          "title_ko": "죽음의 수용소에서",
+          "subtitle_ko": "",
+          "author_ko": "빅터 프랭클",
+          "publisher_ko": "Beacon Press",
+          "note_ko": "사색하는 곰 유형은 「내면과 마주하는」 재능을 가지고 있습니다. 극한의 상황에서 인간이 찾아내는 의미란 무엇인가——심리학자가 강제수용소 체험에서 써내려간, 내성의 도달점이라 할 한 권. 전 세계 1,600만 부 이상 판매."
+    }
   },
   naturalist: {
     title: "ソロモンの指環",
@@ -6268,12 +6463,38 @@ const RECOMMENDED_BOOKS = {
     note_en: "The Curator Elephant type has the talent for \"observation and classification.\" A classic by the founder of ethology, written with deep love and observation of nature and animals. It stimulates your curiosity and deepens how you see the world.",
     note_zh: "收藏家大象型拥有「观察与分类」的才能。动物行为学创始人以对自然与动物的深爱与观察之眼写就的名著。激发你的好奇心，深化你观察世界的视角。",
     note_ko: "수집가 코끼리 유형은 「관찰과 분류」의 재능을 가지고 있습니다. 동물행동학의 창시자가 자연과 동물에 대한 깊은 사랑과 관찰안으로 써내려간 명저. 당신의 호기심을 자극하고, 세상을 보는 눈을 깊게 합니다."
+  ,
+
+    // 海外用書籍（日本語以外で使用）
+    international: {
+          "asin_us": "0415267463",
+          "title_en": "King Solomon's Ring",
+          "subtitle_en": "New Light on Animal Ways",
+          "author_en": "Konrad Lorenz",
+          "publisher_en": "Routledge",
+          "note_en": "The Curator Elephant type has the talent for 'observation and classification.' Nobel laureate Konrad Lorenz, the founder of ethology, shares delightful observations on animal behavior with deep love and a writer's eye. A classic that stimulates curiosity and deepens how you see the natural world.",
+          "title_zh": "所罗门王的指环",
+          "subtitle_zh": "与鸟兽和游鱼的对话",
+          "author_zh": "康拉德·洛伦兹",
+          "publisher_zh": "Routledge",
+          "note_zh": "收藏家大象型拥有「观察与分类」的才能。诺贝尔奖得主、动物行为学创始人康拉德·洛伦兹以对自然与动物的深爱与观察之眼，分享了动物行为的迷人观察记录。激发你的好奇心，深化你观察世界的视角。",
+          "title_ko": "솔로몬의 반지",
+          "subtitle_ko": "동물행동학 입문",
+          "author_ko": "콘라트 로렌츠",
+          "publisher_ko": "Routledge",
+          "note_ko": "수집가 코끼리 유형은 「관찰과 분류」의 재능을 가지고 있습니다. 노벨상 수상자, 동물행동학의 창시자 콘라트 로렌츠가 자연과 동물에 대한 깊은 사랑과 관찰안으로 동물 행동에 관한 즐거운 관찰 기록을 전합니다. 호기심을 자극하고 세상을 보는 눈을 깊게 합니다."
+    }
   }
 };
 
 // アフィリエイトリンク生成（StoreID: jbmt-22）
 function getAmazonAffiliateLink(asin) {
-  return `https://www.amazon.co.jp/dp/${asin}?tag=jbmt-22`;
+  // 日本語版: amazon.co.jp + jbmt-22
+  // 日本語以外: amazon.com + jbmt06-20
+  if (currentLang === 'ja') {
+    return `https://www.amazon.co.jp/dp/${asin}?tag=jbmt-22`;
+  }
+  return `https://www.amazon.com/dp/${asin}?tag=jbmt06-20`;
 }
 
 // ============ STATE ============
@@ -6855,18 +7076,44 @@ function renderRecommendedBook(key) {
   const book = RECOMMENDED_BOOKS[key];
   if (!book) return;
 
-  // 言語別フィールド取得（フォールバックは日本語）
-  const suffix = currentLang === 'en' ? '_en'
-                : currentLang === 'zh' ? '_zh'
-                : currentLang === 'ko' ? '_ko'
-                : '';
-  const title = book['title' + suffix] || book.title;
-  const subtitle = book['subtitle' + suffix] !== undefined ? book['subtitle' + suffix] : book.subtitle;
-  const author = book['author' + suffix] || book.author;
-  const publisher = book['publisher' + suffix] || book.publisher;
-  const note = book['note' + suffix] || book.note;
+  // 日本語以外: 海外用書籍データを使う
+  // 日本語: 日本書籍データを使う
+  let title, subtitle, author, publisher, note, asin;
+  
+  if (currentLang === 'ja') {
+    // 日本語版: 既存の日本書籍
+    title = book.title;
+    subtitle = book.subtitle;
+    author = book.author;
+    publisher = book.publisher;
+    note = book.note;
+    asin = book.asin;
+  } else {
+    // 海外版: international フィールドから取得
+    const intl = book.international;
+    if (!intl) {
+      // フォールバック（万一intlがない場合）
+      title = book.title;
+      subtitle = book.subtitle;
+      author = book.author;
+      publisher = book.publisher;
+      note = book.note;
+      asin = book.asin;
+    } else {
+      const suffix = currentLang === 'en' ? '_en'
+                    : currentLang === 'zh' ? '_zh'
+                    : currentLang === 'ko' ? '_ko'
+                    : '_en';
+      title = intl['title' + suffix] || intl.title_en;
+      subtitle = intl['subtitle' + suffix] !== undefined ? intl['subtitle' + suffix] : intl.subtitle_en;
+      author = intl['author' + suffix] || intl.author_en;
+      publisher = intl['publisher' + suffix] || intl.publisher_en;
+      note = intl['note' + suffix] || intl.note_en;
+      asin = intl.asin_us;
+    }
+  }
 
-  const link = getAmazonAffiliateLink(book.asin);
+  const link = getAmazonAffiliateLink(asin);
   // 日本語以外の場合は区切り文字を「/」に
   const separator = currentLang === 'ja' ? '／' : '/';
 
@@ -8699,6 +8946,12 @@ const I18N = {
   
     // ad label
     'ad.label': 'スポンサーリンク',
+  
+    // footer policy links
+    'footer.about': '運営者情報',
+    'footer.privacy': 'プライバシーポリシー',
+    'footer.disclaimer': '免責事項',
+    'footer.contact': 'お問い合わせ',
   },
   en: {
     // タイトル画面
@@ -8950,6 +9203,12 @@ const I18N = {
   
     // ad label
     'ad.label': 'Sponsored',
+  
+    // footer policy links
+    'footer.about': 'About',
+    'footer.privacy': 'Privacy Policy',
+    'footer.disclaimer': 'Disclaimer',
+    'footer.contact': 'Contact',
   },
 
   // ===== 中文（简体）=====
@@ -9195,6 +9454,12 @@ const I18N = {
   
     // ad label
     'ad.label': '赞助商链接',
+  
+    // footer policy links
+    'footer.about': '关于我们',
+    'footer.privacy': '隐私政策',
+    'footer.disclaimer': '免责声明',
+    'footer.contact': '联系我们',
   },
 
   // ===== 한국어 =====
@@ -9440,6 +9705,12 @@ const I18N = {
   
     // ad label
     'ad.label': '스폰서 링크',
+  
+    // footer policy links
+    'footer.about': '운영자 정보',
+    'footer.privacy': '개인정보처리방침',
+    'footer.disclaimer': '면책 사항',
+    'footer.contact': '문의하기',
   }
 };
 

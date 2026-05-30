@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>免責事項 | じぶんマトリクス</title>
+<meta name="description" content="じぶんマトリクスの免責事項。診断結果の責任範囲、リンク先の免責、著作権について。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #0f0e0c;
+    --paper: #f4ede0;
+    --paper-deep: #e8dcc4;
+    --gold: #b8893a;
+    --gold-light: #d4ad5e;
+    --crimson: #8a2922;
+  }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Shippori Mincho', 'Cormorant Garamond', serif;
+    min-height: 100vh;
+    line-height: 1.8;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 25% 25%, rgba(184,137,58,0.04) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(138,41,34,0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+  .page-header {
+    text-align: center;
+    margin-bottom: 60px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(184,137,58,0.3);
+  }
+  .breadcrumb {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .breadcrumb a { color: var(--gold); text-decoration: none; }
+  .breadcrumb a:hover { opacity: 0.7; }
+  .page-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  .page-title-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--crimson);
+    letter-spacing: 0.1em;
+  }
+  .content {
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(184,137,58,0.2);
+    padding: 40px 32px;
+    border-radius: 2px;
+  }
+  .content h2 {
+    font-size: 19px;
+    color: var(--ink);
+    margin-top: 36px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(184,137,58,0.4);
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+  .content h2:first-child { margin-top: 0; }
+  .content p {
+    font-size: 14px;
+    color: rgba(15,14,12,0.85);
+    margin-bottom: 14px;
+    line-height: 1.85;
+  }
+  .content ul {
+    margin-left: 20px;
+    margin-bottom: 14px;
+  }
+  .content li {
+    font-size: 14px;
+    color: rgba(15,14,12,0.85);
+    margin-bottom: 8px;
+    line-height: 1.8;
+  }
+  .content a {
+    color: var(--crimson);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(138,41,34,0.4);
+  }
+  .content a:hover { text-decoration-color: var(--crimson); }
+  .updated {
+    text-align: right;
+    margin-bottom: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: rgba(15,14,12,0.5);
+    text-transform: uppercase;
+  }
+  .page-footer {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(184,137,58,0.3);
+  }
+  .page-footer .links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .page-footer .links a {
+    font-size: 12px;
+    color: rgba(15,14,12,0.6);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    padding: 4px 8px;
+  }
+  .page-footer .links a:hover { color: var(--crimson); }
+  .page-footer .copyright {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: rgba(15,14,12,0.4);
+    text-transform: uppercase;
+  }
+  @media (max-width: 480px) {
+    .container { padding: 40px 16px 60px; }
+    .content { padding: 28px 20px; }
+    .page-title { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="page-header">
+    <div class="breadcrumb"><a href="/">じぶんマトリクス</a> · DISCLAIMER</div>
+    <h1 class="page-title">免責事項</h1>
+    <div class="page-title-en">Disclaimer</div>
+  </header>
+
+  <main class="content">
+    <div class="updated">最終更新日: 2026年5月30日</div>
+
+    <h2>1. 診断結果について</h2>
+    <p>
+      当サイトで提供する「じぶんマトリクス」診断は、ハーバード大学のハワード・ガードナー博士が提唱した
+      多重知能理論（MI理論）を参考に、Mymatrixが独自に作成した自己理解のためのツールです。
+    </p>
+    <p>
+      診断結果は、ユーザー自身による自己分析を助けることを目的としており、
+      心理学的・医学的・職業適性的な診断ではありません。
+      診断結果に基づいて何らかの意思決定や行動を行う場合は、ユーザーご自身の責任にて行ってください。
+    </p>
+
+    <h2>2. 情報の正確性について</h2>
+    <p>
+      当サイトに掲載されている情報には万全を期しておりますが、その正確性・完全性・有用性を保証するものではありません。
+      情報は予告なく変更または削除されることがあります。
+    </p>
+    <p>
+      当サイトに掲載されている情報を利用したことによって発生した、いかなる損害についても、
+      当方は一切の責任を負いかねますのでご了承ください。
+    </p>
+
+    <h2>3. 外部リンクについて</h2>
+    <p>
+      当サイトからリンクやバナーなどによって他のサイトに移動された場合、
+      移動先サイトで提供される情報、サービス等について一切の責任を負いません。
+    </p>
+    <p>
+      また、当サイトのコンテンツ・情報につきまして、できる限り正確な情報を提供するように努めておりますが、
+      正確性や安全性を保証するものではありません。
+    </p>
+
+    <h2>4. 著作権について</h2>
+    <p>
+      当サイトに掲載されている文章、画像、デザイン、ロゴ、診断結果のフォーマット等の著作権は、
+      Mymatrixまたは正当な権利を有する第三者に帰属します。
+    </p>
+    <p>
+      引用の範囲を超えた無断転載・複製・改変・再配布を禁じます。
+      引用を行う際は、出典として「じぶんマトリクス（https://www.jibunmatrix.com/）」を明記してください。
+    </p>
+    <p>
+      なお、診断の元となる「多重知能理論」自体は、Howard Gardner博士の学術的な業績であり、
+      当サイトはその理論を参考にしたツールを提供するものです。
+    </p>
+
+    <h2>5. 広告・アフィリエイトについて</h2>
+    <p>
+      当サイトでは、Google AdSenseによる広告配信、ならびにAmazonアソシエイト・プログラムを利用した書籍の紹介を行っています。
+      紹介する書籍は、運営者の判断により、各知能タイプの理解を深めるのに有益と考えられるものを掲載していますが、
+      購入後の満足度を保証するものではありません。
+    </p>
+    <p>
+      Amazonのアソシエイトとして、Mymatrixは適格販売により収入を得ています。
+    </p>
+
+    <h2>6. サービスの中断・終了について</h2>
+    <p>
+      当方は、ユーザーへの予告なく当サイトのサービス内容を変更、中断、終了することができるものとします。
+      これによってユーザーまたは第三者に生じた損害について、一切の責任を負わないものとします。
+    </p>
+
+    <h2>7. 準拠法・裁判管轄</h2>
+    <p>
+      本免責事項の解釈にあたっては、日本法を準拠法とします。
+      当サイトに関して紛争が生じた場合には、当方の所在地を管轄する裁判所を専属管轄とします。
+    </p>
+
+    <h2>8. お問い合わせ</h2>
+    <p>
+      本免責事項に関するお問い合わせは、以下のメールアドレスまでお願いいたします。
+    </p>
+    <p>
+      <strong>メールアドレス:</strong> <a href="mailto:jbnmatrix@gmail.com">jbnmatrix@gmail.com</a>
+    </p>
+  </main>
+
+  <footer class="page-footer">
+    <div class="links">
+      <a href="/">トップへ戻る</a>
+      <a href="/about.html">運営者情報</a>
+      <a href="/privacy.html">プライバシーポリシー</a>
+      <a href="/disclaimer.html">免責事項</a>
+      <a href="/contact.html">お問い合わせ</a>
+    </div>
+    <div class="copyright">© Mymatrix · じぶんマトリクス</div>
+  </footer>
+</div>
+</body>
+</html>
