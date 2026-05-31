@@ -390,6 +390,36 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .start-btn:hover { background: var(--crimson); letter-spacing: 0.4em; }
   .start-btn:hover::before { inset: 3px; }
 
+  /* 前回の結果を見るバナー */
+  .last-result-banner {
+    margin: 14px auto 0;
+    max-width: 320px;
+    padding: 11px 18px;
+    text-align: center;
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(184,137,58,0.4);
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 13px;
+    color: rgba(15,14,12,0.75);
+    letter-spacing: 0.08em;
+    transition: background 0.2s, border-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .last-result-banner:hover {
+    background: rgba(255,255,255,0.65);
+    border-color: var(--gold);
+    color: var(--crimson);
+  }
+  .last-result-icon {
+    font-size: 14px;
+    color: var(--gold);
+  }
+
   .meta-info {
     display: flex;
     justify-content: space-between;
@@ -3457,6 +3487,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <button class="start-btn" id="startButton" onclick="startDiagnosis()" data-i18n="title.start">診断をはじめる</button>
 
+  <!-- 前回の結果を見る（過去に診断済みの人のみ表示） -->
+  <div class="last-result-banner" id="lastResultBanner" style="display:none;">
+    <span class="last-result-icon">↩</span>
+    <span data-i18n="title.last_result">前回の診断結果を見る</span>
+  </div>
+
   <p style="text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; color:rgba(15,14,12,0.5); margin-top:20px;">
     "Each of us has a unique blend of intelligences."<br>— Howard Gardner
   </p>
@@ -4408,6 +4444,47 @@ function loadProgress() {
 
 function clearProgress() {
   try { localStorage.removeItem(SAVE_KEY); } catch(e){}
+}
+
+// ===== 完了した診断結果の保存・復元 =====
+const LAST_RESULT_KEY = 'jibumato_lastResult';
+
+function saveLastResult(scores) {
+  try {
+    const data = { scores: scores, timestamp: Date.now() };
+    localStorage.setItem(LAST_RESULT_KEY, JSON.stringify(data));
+  } catch (e) { /* noop */ }
+}
+
+function loadLastResult() {
+  try {
+    const raw = localStorage.getItem(LAST_RESULT_KEY);
+    if (!raw) return null;
+    const data = JSON.parse(raw);
+    // 90日以上前のものは破棄
+    if (Date.now() - data.timestamp > 90 * 24 * 60 * 60 * 1000) {
+      localStorage.removeItem(LAST_RESULT_KEY);
+      return null;
+    }
+    return data;
+  } catch (e) { return null; }
+}
+
+// トップ画面に「前回の結果を見る」ボタンを表示
+function showLastResultButton() {
+  const last = loadLastResult();
+  const container = document.getElementById('lastResultBanner');
+  if (!container) return;
+  if (!last || !last.scores) {
+    container.style.display = 'none';
+    return;
+  }
+  container.style.display = 'block';
+  container.onclick = function() {
+    state.scores = last.scores;
+    state.answers = state.answers && state.answers.length ? state.answers : new Array(QUESTIONS.length).fill(2);
+    showResult();
+  };
 }
 
 function checkResumeBanner() {
@@ -7139,6 +7216,9 @@ function _showResultInner() {
   // Update URL hash with scores for sharing
   updateShareableURL(scores);
 
+  // 完了した結果を保存（次回トップで「前回の結果を見る」用）
+  saveLastResult(scores);
+
   showScreen('screen-result');
 
   // AdSense: 結果ページ表示時に広告を読み込む
@@ -9056,6 +9136,8 @@ const I18N = {
     'articles.promo_title': '才能についての読み物',
     'articles.promo_desc': '多重知能理論の基礎から、キャリア・副業・子育てへの活かし方まで。',
     'articles.promo_btn': '記事一覧を読む',
+  
+    'title.last_result': '前回の診断結果を見る',
   },
   en: {
     // タイトル画面
@@ -9321,6 +9403,8 @@ const I18N = {
     'articles.promo_title': 'Articles on Talent & MI Theory',
     'articles.promo_desc': 'From the basics of MI Theory to career, side hustle, and parenting.',
     'articles.promo_btn': 'Browse Articles',
+  
+    'title.last_result': 'View your previous result',
   },
 
   // ===== 中文（简体）=====
@@ -9580,6 +9664,8 @@ const I18N = {
     'articles.promo_title': '关于才能的读物',
     'articles.promo_desc': '从多元智能理论基础，到职业、副业、育儿的应用方法。',
     'articles.promo_btn': '查看文章列表',
+  
+    'title.last_result': '查看上次的诊断结果',
   },
 
   // ===== 한국어 =====
@@ -9839,6 +9925,8 @@ const I18N = {
     'articles.promo_title': '재능에 관한 읽을거리',
     'articles.promo_desc': '다중지능이론의 기초부터, 커리어·부업·육아에 활용하는 법까지.',
     'articles.promo_btn': '글 목록 보기',
+  
+    'title.last_result': '지난 진단 결과 보기',
   }
 };
 
@@ -10084,6 +10172,7 @@ const CHAPTERS_KO = [
 document.getElementById('qTotal').textContent = String(QUESTIONS.length).padStart(2, '0');
 checkURLHash();
 checkResumeBanner();
+showLastResultButton();
 // 言語設定を適用
 setLang(currentLang);
 </script>

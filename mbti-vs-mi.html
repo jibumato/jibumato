@@ -7,6 +7,13 @@
 <meta name="description" content="MBTI（16タイプ）・StrengthsFinder（クリフトンストレングス）・MI理論（多重知能）の3大自己診断を、目的・仕組み・活かし方の観点から図解で徹底比較。あなたに合うツールが分かります。">
 <meta property="og:title" content="MBTI・StrengthsFinder・MI理論の違いを徹底比較">
 <meta property="og:type" content="article">
+<meta property="og:image" content="https://www.jibunmatrix.com/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="じぶんマトリクス">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.jibunmatrix.com/ogp.png">
 <link rel="canonical" href="https://www.jibunmatrix.com/articles/mbti-vs-mi.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -328,9 +335,81 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
   .compare-table th,.compare-table td { padding:8px 10px; }
   .usecase-row { flex-direction:column; }
 }
+
+  /* ===== 読了プログレスバー ===== */
+  .reading-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--crimson) 100%);
+    z-index: 200;
+    transition: width 0.1s ease-out;
+  }
+  /* ===== トップに戻るボタン ===== */
+  .back-to-top {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: #faf3e1;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s, transform 0.2s;
+    z-index: 150;
+    box-shadow: 0 4px 12px rgba(15,14,12,0.2);
+  }
+  .back-to-top.visible { opacity: 0.9; visibility: visible; }
+  .back-to-top:hover { transform: translateY(-3px); opacity: 1; }
+  @media (max-width: 600px) {
+    .back-to-top { bottom: 18px; right: 18px; width: 42px; height: 42px; }
+  }
 </style>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "MBTI・StrengthsFinder・MI理論の違いを徹底比較",
+  "description": "MBTI（16タイプ）・StrengthsFinder（クリフトンストレングス）・MI理論（多重知能）の3大自己診断を、目的・仕組み・活かし方の観点から図解で徹底比較。あなたに合うツールが分かります。",
+  "image": "https://www.jibunmatrix.com/ogp.png",
+  "datePublished": "2026-05-31",
+  "dateModified": "2026-05-31",
+  "author": {
+    "@type": "Organization",
+    "name": "Mymatrix"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "じぶんマトリクス",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.jibunmatrix.com/android-chrome-512x512.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.jibunmatrix.com/articles/mbti-vs-mi.html"
+  },
+  "articleSection": "比較解説",
+  "inLanguage": "ja"
+}
+</script>
 </head>
 <body>
+<div class="reading-progress" id="readingProgress"></div>
+
 
 <header class="site-header">
   <a href="/" class="site-logo">じぶんマトリクス</a>
@@ -776,5 +855,30 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
     <div class="copyright">© Mymatrix · じぶんマトリクス</div>
   </footer>
 </div>
+<button class="back-to-top" id="backToTop" aria-label="トップに戻る">↑</button>
+<script>
+(function() {
+  var progress = document.getElementById('readingProgress');
+  var backBtn = document.getElementById('backToTop');
+  function onScroll() {
+    var h = document.documentElement;
+    var scrolled = h.scrollTop;
+    var height = h.scrollHeight - h.clientHeight;
+    var pct = height > 0 ? (scrolled / height) * 100 : 0;
+    if (progress) progress.style.width = pct + '%';
+    if (backBtn) {
+      if (scrolled > 600) backBtn.classList.add('visible');
+      else backBtn.classList.remove('visible');
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  if (backBtn) {
+    backBtn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+  onScroll();
+})();
+</script>
 </body>
 </html>
