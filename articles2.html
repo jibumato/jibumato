@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>読み物 — MI理論と才能の記事一覧 | じぶんマトリクス</title>
+<meta name="description" content="多重知能理論（MI理論）と才能の活かし方に関する記事一覧。自己理解・キャリア・子育て・副業など、じぶんマトリクスのコンテンツをまとめています。">
+<link rel="canonical" href="https://www.jibunmatrix.com/articles.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #0f0e0c;
+  --paper: #f4ede0;
+  --paper-deep: #e8dcc4;
+  --gold: #b8893a;
+  --gold-light: #d4ad5e;
+  --crimson: #8a2922;
+}
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Shippori Mincho', 'Cormorant Garamond', serif;
+  min-height: 100vh;
+  line-height: 1.8;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(184,137,58,0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(138,41,34,0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+.site-header {
+  border-bottom: 1px solid rgba(184,137,58,0.25);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: rgba(244,237,224,0.95);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+}
+.site-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--crimson);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+}
+.header-nav {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.header-nav a {
+  font-size: 11px;
+  color: rgba(15,14,12,0.6);
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  transition: color 0.2s;
+}
+.header-nav a:hover { color: var(--crimson); }
+.header-cta {
+  background: var(--crimson);
+  color: #faf3e1 !important;
+  padding: 6px 14px;
+  font-size: 10px !important;
+}
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+  position: relative;
+  z-index: 1;
+}
+.page-header {
+  text-align: center;
+  margin-bottom: 56px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(184,137,58,0.25);
+}
+.page-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: 0.06em;
+}
+.page-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--crimson);
+  margin-bottom: 14px;
+}
+.page-desc {
+  font-size: 14px;
+  color: rgba(15,14,12,0.65);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.85;
+}
+
+/* ===== 記事カード ===== */
+.articles-section {
+  margin-bottom: 48px;
+}
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(184,137,58,0.25);
+}
+
+/* 1枚目のフィーチャーカード */
+.article-featured {
+  background: var(--ink);
+  color: #faf3e1;
+  padding: 32px 28px;
+  margin-bottom: 16px;
+  border-radius: 2px;
+  text-decoration: none;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  transition: opacity 0.2s;
+}
+.article-featured:hover { opacity: 0.9; }
+.article-featured::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 50%, rgba(184,137,58,0.1) 0%, transparent 60%);
+}
+.article-featured-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.article-featured-title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #faf3e1;
+  margin-bottom: 10px;
+  letter-spacing: 0.03em;
+}
+.article-featured-desc {
+  font-size: 13px;
+  color: rgba(250,243,225,0.72);
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
+.article-featured-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: rgba(250,243,225,0.45);
+}
+.new-badge {
+  display: inline-block;
+  background: var(--crimson);
+  color: #faf3e1;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  padding: 2px 8px;
+  margin-right: 8px;
+  text-transform: uppercase;
+}
+
+/* 記事グリッド */
+.articles-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.article-card {
+  background: rgba(255,255,255,0.45);
+  border: 1px solid rgba(184,137,58,0.2);
+  padding: 20px;
+  text-decoration: none;
+  color: var(--ink);
+  border-radius: 2px;
+  transition: background 0.2s, transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+.article-card:hover {
+  background: rgba(255,255,255,0.7);
+  transform: translateY(-2px);
+}
+/* 近日公開カード */
+.article-card.coming-soon {
+  opacity: 0.55;
+  cursor: default;
+  pointer-events: none;
+}
+.article-card-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--crimson);
+  text-transform: uppercase;
+}
+.article-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.article-card-desc {
+  font-size: 12px;
+  color: rgba(15,14,12,0.6);
+  line-height: 1.7;
+  flex: 1;
+}
+.article-card-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: rgba(15,14,12,0.4);
+}
+.soon-badge {
+  position: absolute;
+  top: 12px; right: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  color: rgba(15,14,12,0.35);
+  text-transform: uppercase;
+  border: 1px solid rgba(15,14,12,0.2);
+  padding: 2px 6px;
+}
+
+/* ===== 診断CTA ===== */
+.diagnosis-cta {
+  background: linear-gradient(160deg, #faf3e1 0%, #ecddc0 100%);
+  border: 1px solid rgba(184,137,58,0.35);
+  padding: 32px 28px;
+  text-align: center;
+  margin: 48px 0;
+  border-radius: 2px;
+}
+.diagnosis-cta-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.diagnosis-cta h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.diagnosis-cta p {
+  font-size: 13px;
+  color: rgba(15,14,12,0.7);
+  margin-bottom: 20px;
+  line-height: 1.75;
+}
+.diagnosis-cta a {
+  display: inline-block;
+  background: var(--ink);
+  color: #faf3e1;
+  text-decoration: none;
+  padding: 13px 32px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  border-radius: 1px;
+  transition: opacity 0.2s;
+}
+.diagnosis-cta a:hover { opacity: 0.85; }
+
+/* フッター */
+.page-footer {
+  text-align: center;
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(184,137,58,0.25);
+}
+.page-footer .links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.page-footer .links a {
+  font-size: 11px;
+  color: rgba(15,14,12,0.55);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  padding: 4px 6px;
+}
+.page-footer .links a:hover { color: var(--crimson); }
+.page-footer .copyright {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: rgba(15,14,12,0.35);
+  text-transform: uppercase;
+}
+@media (max-width: 600px) {
+  .articles-grid { grid-template-columns: 1fr; }
+  .container { padding: 36px 16px 60px; }
+  .page-title { font-size: 22px; }
+  .header-nav a:not(.header-cta) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="site-logo">じぶんマトリクス</a>
+  <nav class="header-nav">
+    <a href="/articles.html">読み物</a>
+    <a href="/about.html">運営者情報</a>
+    <a href="/" class="header-cta">無料診断を受ける</a>
+  </nav>
+</header>
+
+<div class="container">
+  <header class="page-header">
+    <div class="page-label">Articles · 読み物</div>
+    <h1 class="page-title">才能と自己理解の読み物</h1>
+    <div class="page-subtitle">Exploring Multiple Intelligences</div>
+    <p class="page-desc">
+      多重知能理論（MI理論）をベースに、自己理解・キャリア・子育て・副業など、
+      あなたの才能を活かすためのコンテンツをお届けします。
+    </p>
+  </header>
+
+  <!-- ===== MI理論・基礎知識 ===== -->
+  <section class="articles-section">
+    <div class="section-label">MI理論・基礎知識</div>
+
+    <!-- フィーチャー記事 -->
+    <a href="/articles/mi-theory.html" class="article-featured">
+      <div class="article-featured-tag"><span class="new-badge">New</span>MI理論・基礎知識</div>
+      <div class="article-featured-title">多重知能理論（MI理論）とは？<br>ハーバード教授が提唱した8つの才能をわかりやすく解説</div>
+      <div class="article-featured-desc">IQでは測れない才能の多様性。ガードナー博士が提唱したMI理論の8つの知能タイプを、具体的な事例や歴史上の人物とともに徹底解説します。自分の才能を知るための最初の一歩に。</div>
+      <div class="article-featured-meta">約5分で読める · 2026年5月</div>
+    </a>
+
+    <div class="articles-grid">
+      <a href="/articles/8-intelligences-guide.html" class="article-card">
+        <div class="article-card-tag">MI理論</div>
+        <div class="article-card-title">8つの知能タイプ完全ガイド — 特徴・強み・有名人まとめ</div>
+        <div class="article-card-desc">8タイプそれぞれの詳細な特徴、強み・弱み、代表的な職業と歴史上の人物を図解で徹底網羅。</div>
+        <div class="article-card-meta">約10分で読める · 2026年5月</div>
+      </a>
+      <a href="/articles/mbti-vs-mi.html" class="article-card">
+        <div class="article-card-tag">比較解説</div>
+        <div class="article-card-title">MBTI・StrengthsFinder・MI理論の違いを徹底比較</div>
+        <div class="article-card-desc">代表的な自己診断ツール3つを図解で比較。目的・精度・活かし方の違いを整理します。</div>
+        <div class="article-card-meta">約8分で読める · 2026年5月</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== キャリア・副業 ===== -->
+  <section class="articles-section">
+    <div class="section-label">キャリア・副業</div>
+    <div class="articles-grid">
+      <a href="/articles/careers-by-type.html" class="article-card">
+        <div class="article-card-tag">キャリア</div>
+        <div class="article-card-title">知能タイプ別・向いている職業と副業の見つけ方</div>
+        <div class="article-card-desc">8タイプ別に、向いている職業と副業を図解で具体的に解説。収入の目安も掲載。</div>
+        <div class="article-card-meta">約10分で読める · 2026年5月</div>
+      </a>
+      <a href="/articles/before-changing-jobs.html" class="article-card coming-soon">
+        <div class="soon-badge">近日公開</div>
+        <div class="article-card-tag">キャリア</div>
+        <div class="article-card-title">「向いていない仕事」をしている人へ — 転職前の自己診断</div>
+        <div class="article-card-desc">仕事が合わない、消耗している——そう感じる前に、MI理論で自分の強みを確認しましょう。</div>
+        <div class="article-card-meta">近日公開</div>
+      </a>
+      <a href="/articles/30-day-talent-habit.html" class="article-card coming-soon">
+        <div class="soon-badge">近日公開</div>
+        <div class="article-card-tag">習慣・成長</div>
+        <div class="article-card-title">30日でじぶんを変える「才能習慣」の作り方</div>
+        <div class="article-card-desc">知能タイプ別の30日間プログラム。才能を日常に落とし込む具体的な習慣設計。</div>
+        <div class="article-card-meta">近日公開</div>
+      </a>
+      <a href="/articles/side-hustle-by-type.html" class="article-card coming-soon">
+        <div class="soon-badge">近日公開</div>
+        <div class="article-card-tag">副業</div>
+        <div class="article-card-title">才能タイプ別・副業で月3〜30万円を稼ぐロードマップ</div>
+        <div class="article-card-desc">言語タイプはライター、論理タイプはデータ分析……タイプ別に最速の副業ルートを解説。</div>
+        <div class="article-card-meta">近日公開</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== 子育て・教育 ===== -->
+  <section class="articles-section">
+    <div class="section-label">子育て・教育</div>
+    <div class="articles-grid">
+      <a href="/articles/parenting-mi-theory.html" class="article-card">
+        <div class="article-card-tag">子育て</div>
+        <div class="article-card-title">子どもの才能を伸ばす親の関わり方 — MI理論の視点から</div>
+        <div class="article-card-desc">「うちの子、勉強が苦手で…」その才能、別の形で開花するかもしれません。</div>
+        <div class="article-card-meta">約9分で読める · 2026年5月</div>
+      </a>
+      <a href="/articles/study-by-type.html" class="article-card coming-soon">
+        <div class="soon-badge">近日公開</div>
+        <div class="article-card-tag">学習</div>
+        <div class="article-card-title">知能タイプ別の最強の勉強法 — 自分に合った学び方を選ぶ</div>
+        <div class="article-card-desc">身体タイプは動きながら、音楽タイプはリズムで——タイプ別の効果的な学習スタイル。</div>
+        <div class="article-card-meta">近日公開</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== 診断CTA ===== -->
+  <div class="diagnosis-cta">
+    <div class="diagnosis-cta-label">Free Assessment · 無料診断</div>
+    <h2>まずは、じぶんを知ることから</h2>
+    <p>
+      24問に答えるだけで、あなたの8知能のバランスと<br>
+      才能タイプが分かります。登録不要・完全無料。
+    </p>
+    <a href="/">無料診断を受ける →</a>
+  </div>
+
+  <footer class="page-footer">
+    <div class="links">
+      <a href="/">トップ</a>
+      <a href="/articles.html">読み物</a>
+      <a href="/about.html">運営者情報</a>
+      <a href="/privacy.html">プライバシーポリシー</a>
+      <a href="/disclaimer.html">免責事項</a>
+      <a href="/contact.html">お問い合わせ</a>
+    </div>
+    <div class="copyright">© Mymatrix · じぶんマトリクス</div>
+  </footer>
+</div>
+</body>
+</html>

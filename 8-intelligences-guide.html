@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8つの知能タイプ完全ガイド — 特徴・強み・職業・有名人まとめ | じぶんマトリクス</title>
+<meta name="description" content="MI理論の8知能タイプ（言語・論理・空間・音楽・身体・対人・内省・博物）を図解で徹底解説。各タイプの特徴・強み・弱み・向いている職業・歴史上の有名人まで完全網羅。">
+<meta property="og:title" content="8つの知能タイプ完全ガイド — 特徴・強み・職業・有名人まとめ">
+<meta property="og:type" content="article">
+<link rel="canonical" href="https://www.jibunmatrix.com/articles/8-intelligences-guide.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #0f0e0c; --paper: #f4ede0; --paper-deep: #e8dcc4;
+  --gold: #b8893a; --gold-light: #d4ad5e; --crimson: #8a2922; --moss: #4a5d3a;
+  --c1: #2c3e5c; --c2: #1a3a1a; --c3: #5a3a4a; --c4: #8a2922;
+  --c5: #3a2a1a; --c6: #4a5d3a; --c7: #2a2a4a; --c8: #1a4a2a;
+}
+body { background: var(--paper); color: var(--ink); font-family: 'Shippori Mincho','Cormorant Garamond',serif; line-height: 1.85; }
+body::before { content:''; position:fixed; inset:0; background-image: radial-gradient(circle at 20% 20%, rgba(184,137,58,.05) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(138,41,34,.03) 0%, transparent 50%); pointer-events:none; z-index:0; }
+
+/* ヘッダー */
+.site-header { border-bottom:1px solid rgba(184,137,58,.25); padding:16px 24px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; background:rgba(244,237,224,.95); backdrop-filter:blur(8px); z-index:100; }
+.site-logo { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:16px; color:var(--crimson); text-decoration:none; letter-spacing:.06em; }
+.header-nav { display:flex; gap:16px; align-items:center; }
+.header-nav a { font-size:11px; color:rgba(15,14,12,.6); text-decoration:none; letter-spacing:.1em; transition:color .2s; }
+.header-nav a:hover { color:var(--crimson); }
+.header-cta { background:var(--crimson); color:#faf3e1 !important; padding:6px 14px; font-size:10px !important; }
+
+/* レイアウト */
+.container { max-width:760px; margin:0 auto; padding:48px 24px 80px; position:relative; z-index:1; }
+.breadcrumb { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; color:rgba(15,14,12,.5); margin-bottom:28px; display:flex; align-items:center; gap:8px; }
+.breadcrumb a { color:var(--gold); text-decoration:none; }
+.breadcrumb span { color:rgba(15,14,12,.3); }
+
+/* 記事ヘッダー */
+.article-header { margin-bottom:40px; padding-bottom:32px; border-bottom:1px solid rgba(184,137,58,.25); }
+.article-category { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.3em; color:var(--crimson); text-transform:uppercase; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+.article-category::before { content:''; display:inline-block; width:20px; height:1px; background:var(--crimson); opacity:.6; }
+.article-title { font-size:26px; font-weight:700; line-height:1.5; letter-spacing:.04em; margin-bottom:16px; }
+.article-meta { display:flex; gap:20px; flex-wrap:wrap; font-size:11px; color:rgba(15,14,12,.5); font-family:'JetBrains Mono',monospace; letter-spacing:.1em; margin-bottom:20px; }
+.article-lead { font-size:15px; line-height:1.85; color:rgba(15,14,12,.82); padding:20px; background:rgba(184,137,58,.06); border-left:3px solid var(--gold); }
+
+/* 目次 */
+.toc { background:rgba(255,255,255,.45); border:1px solid rgba(184,137,58,.2); padding:24px 28px; margin:36px 0; }
+.toc-title { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.25em; color:var(--gold); text-transform:uppercase; margin-bottom:14px; }
+.toc ol { margin-left:20px; } .toc li { margin-bottom:8px; font-size:13px; }
+.toc a { color:rgba(15,14,12,.75); text-decoration:none; } .toc a:hover { color:var(--crimson); }
+
+/* 本文 */
+.article-body h2 { font-size:22px; font-weight:700; margin-top:56px; margin-bottom:20px; padding-bottom:10px; border-bottom:2px solid rgba(184,137,58,.35); letter-spacing:.05em; scroll-margin-top:80px; }
+.article-body h3 { font-size:17px; font-weight:600; margin-top:32px; margin-bottom:14px; color:var(--crimson); letter-spacing:.04em; }
+.article-body p { font-size:15px; line-height:1.95; margin-bottom:18px; color:rgba(15,14,12,.88); }
+.article-body ul, .article-body ol { margin:14px 0 18px 24px; }
+.article-body li { font-size:15px; line-height:1.8; margin-bottom:8px; color:rgba(15,14,12,.88); }
+.article-body strong { color:var(--ink); font-weight:700; }
+
+/* ===== 図解コンポーネント ===== */
+
+/* 1. 8知能オクタゴン概観図 */
+.intel-overview {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 28px 0;
+}
+.intel-chip {
+  padding: 14px 10px;
+  text-align: center;
+  border-radius: 3px;
+  border: 1px solid rgba(255,255,255,.3);
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
+.intel-chip-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 10px;
+  color: rgba(255,255,255,.6);
+  display: block;
+  margin-bottom: 4px;
+}
+.intel-chip-icon { font-size: 22px; display: block; margin-bottom: 6px; }
+.intel-chip-name { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.95); letter-spacing: .03em; display: block; }
+.intel-chip.c1 { background: var(--c1); }
+.intel-chip.c2 { background: var(--c2); }
+.intel-chip.c3 { background: var(--c3); }
+.intel-chip.c4 { background: var(--c4); }
+.intel-chip.c5 { background: var(--c5); }
+.intel-chip.c6 { background: var(--c6); }
+.intel-chip.c7 { background: var(--c7); }
+.intel-chip.c8 { background: var(--c8); }
+
+/* 2. 各タイプの詳細カード（大） */
+.type-section {
+  margin: 48px 0;
+  border: 1px solid rgba(184,137,58,.2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.type-header {
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+}
+.type-num-badge {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: rgba(255,255,255,.9);
+  flex-shrink: 0;
+}
+.type-header-text {}
+.type-title-ja { font-size: 20px; font-weight: 700; color: #faf3e1; display: block; margin-bottom: 2px; }
+.type-title-en { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px; color: rgba(250,243,225,.65); }
+.type-body { padding: 24px; background: rgba(255,255,255,.4); }
+
+/* 特徴リスト（✓ ✗） */
+.pros-cons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+.pros, .cons {
+  padding: 14px 16px;
+  border-radius: 2px;
+}
+.pros { background: rgba(74,93,58,.07); border: 1px solid rgba(74,93,58,.25); }
+.cons { background: rgba(138,41,34,.05); border: 1px solid rgba(138,41,34,.2); }
+.pros-title, .cons-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.pros-title { color: var(--moss); }
+.cons-title { color: var(--crimson); }
+.pros ul, .cons ul { list-style: none; padding: 0; margin: 0; }
+.pros li, .cons li { font-size: 13px; line-height: 1.65; margin-bottom: 6px; padding-left: 16px; position: relative; color: rgba(15,14,12,.82); }
+.pros li::before { content: '✓'; position: absolute; left: 0; color: var(--moss); font-size: 11px; }
+.cons li::before { content: '△'; position: absolute; left: 0; color: var(--crimson); font-size: 11px; }
+
+/* 職業バッジ */
+.job-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 14px 0;
+}
+.job-badge {
+  background: var(--ink);
+  color: #faf3e1;
+  font-size: 11px;
+  padding: 5px 11px;
+  border-radius: 2px;
+  letter-spacing: .04em;
+}
+.job-badge.light {
+  background: rgba(15,14,12,.08);
+  color: rgba(15,14,12,.75);
+}
+
+/* 有名人ライン */
+.famous-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 12px 0;
+}
+.famous-badge {
+  background: linear-gradient(160deg, #faf3e1 0%, #ecddc0 100%);
+  border: 1px solid rgba(184,137,58,.35);
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 2px;
+  color: var(--ink);
+}
+
+/* 特徴レーティング */
+.rating-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.rating-label { font-size: 12px; color: rgba(15,14,12,.7); min-width: 80px; }
+.rating-bar-bg { flex: 1; height: 6px; background: rgba(15,14,12,.1); border-radius: 3px; }
+.rating-bar-fill { height: 100%; border-radius: 3px; }
+
+/* 3. 「どんな場面で輝くか」フロー図 */
+.flow-diagram {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.flow-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  background: rgba(255,255,255,.45);
+  border: 1px solid rgba(184,137,58,.18);
+  border-radius: 2px;
+  position: relative;
+}
+.flow-step-num {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #faf3e1;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.flow-step-text { font-size: 13px; line-height: 1.65; color: rgba(15,14,12,.85); }
+.flow-arrow {
+  text-align: center;
+  color: rgba(184,137,58,.6);
+  font-size: 16px;
+  line-height: 1;
+  margin: 0;
+}
+
+/* 4. 比較バーチャート（全8タイプを比較） */
+.bar-chart {
+  margin: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.bar-type { font-size: 12px; min-width: 80px; color: rgba(15,14,12,.7); text-align: right; }
+.bar-track { flex: 1; height: 22px; background: rgba(15,14,12,.07); border-radius: 2px; position: relative; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 2px; display: flex; align-items: center; padding-left: 8px; }
+.bar-fill span { font-size: 10px; color: rgba(255,255,255,.85); font-family: 'JetBrains Mono', monospace; letter-spacing: .1em; }
+
+/* 5. ポイントボックス */
+.point-box { background: rgba(138,41,34,.05); border:1px dashed rgba(138,41,34,.35); padding:18px 22px; margin:24px 0; border-radius:2px; }
+.point-box-title { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.25em; color:var(--crimson); text-transform:uppercase; margin-bottom:10px; }
+.point-box p, .point-box li { font-size:14px; color:rgba(15,14,12,.85); }
+
+/* 6. タイプ別「学習スタイル」テーブル */
+.style-table { width:100%; border-collapse:collapse; margin:20px 0; font-size:13px; }
+.style-table th { background:var(--ink); color:#faf3e1; padding:10px 14px; text-align:left; font-size:11px; letter-spacing:.06em; }
+.style-table td { padding:10px 14px; border-bottom:1px solid rgba(184,137,58,.15); line-height:1.6; }
+.style-table tr:nth-child(even) td { background:rgba(255,255,255,.35); }
+.style-table td:first-child { font-weight:700; font-size:12px; }
+
+/* CTA */
+.article-cta { margin-top:60px; padding:36px 28px; background:var(--ink); color:#faf3e1; text-align:center; border-radius:2px; position:relative; overflow:hidden; }
+.article-cta::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 50%, rgba(184,137,58,.12) 0%, transparent 70%); pointer-events:none; }
+.article-cta-label { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.35em; color:var(--gold-light); text-transform:uppercase; margin-bottom:12px; }
+.article-cta h3 { font-size:22px; font-weight:700; margin-bottom:12px; color:#faf3e1; }
+.article-cta p { font-size:14px; color:rgba(250,243,225,.75); margin-bottom:24px; line-height:1.8; }
+.article-cta a { display:inline-block; background:var(--gold); color:var(--ink); text-decoration:none; padding:14px 36px; font-size:14px; font-weight:700; letter-spacing:.1em; border-radius:1px; transition:opacity .2s; }
+.article-cta a:hover { opacity:.88; }
+
+/* 関連記事 */
+.related-articles { margin-top:56px; padding-top:32px; border-top:1px solid rgba(184,137,58,.25); }
+.related-title { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.3em; color:var(--gold); text-transform:uppercase; margin-bottom:20px; }
+.related-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.related-card { background:rgba(255,255,255,.45); border:1px solid rgba(184,137,58,.2); padding:16px 18px; text-decoration:none; color:var(--ink); border-radius:2px; transition:background .2s, transform .2s; }
+.related-card:hover { background:rgba(255,255,255,.7); transform:translateY(-1px); }
+.related-card-tag { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.2em; color:var(--crimson); text-transform:uppercase; margin-bottom:6px; }
+.related-card-title { font-size:13px; font-weight:600; line-height:1.5; }
+
+/* フッター */
+.page-footer { text-align:center; margin-top:60px; padding-top:30px; border-top:1px solid rgba(184,137,58,.25); }
+.page-footer .links { display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-bottom:16px; }
+.page-footer .links a { font-size:11px; color:rgba(15,14,12,.55); text-decoration:none; letter-spacing:.08em; padding:4px 6px; }
+.page-footer .links a:hover { color:var(--crimson); }
+.page-footer .copyright { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.25em; color:rgba(15,14,12,.35); text-transform:uppercase; }
+
+/* レスポンシブ */
+@media (max-width: 600px) {
+  .article-title { font-size:20px; }
+  .intel-overview { grid-template-columns:repeat(4,1fr); gap:6px; }
+  .intel-chip-icon { font-size:18px; }
+  .intel-chip-name { font-size:10px; }
+  .pros-cons { grid-template-columns:1fr; }
+  .related-grid { grid-template-columns:1fr; }
+  .container { padding:36px 16px 60px; }
+  .header-nav a:not(.header-cta) { display:none; }
+  .bar-type { min-width:60px; font-size:11px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="site-logo">じぶんマトリクス</a>
+  <nav class="header-nav">
+    <a href="/articles.html">読み物</a>
+    <a href="/about.html">運営者情報</a>
+    <a href="/" class="header-cta">無料診断を受ける</a>
+  </nav>
+</header>
+
+<div class="container">
+  <nav class="breadcrumb">
+    <a href="/">ホーム</a><span>›</span>
+    <a href="/articles.html">読み物</a><span>›</span>
+    8つの知能タイプ完全ガイド
+  </nav>
+
+  <header class="article-header">
+    <div class="article-category">MI理論・タイプ解説</div>
+    <h1 class="article-title">8つの知能タイプ完全ガイド<br>— 特徴・強み・向いている職業・有名人まとめ</h1>
+    <div class="article-meta">
+      <span>2026年5月</span>
+      <span>Mymatrix</span>
+      <span>約10分で読める</span>
+    </div>
+    <p class="article-lead">
+      MI理論（多重知能理論）の8タイプを、図解とともに徹底解説します。
+      自分はどのタイプかを知るのはもちろん、<strong>それぞれの強み・弱み・向いている仕事・有名人</strong>をまとめました。
+      家族や友人のタイプを理解するための参考にもなります。
+    </p>
+  </header>
+
+  <nav class="toc">
+    <div class="toc-title">目次</div>
+    <ol>
+      <li><a href="#overview">8つの知能タイプ 一覧図</a></li>
+      <li><a href="#linguistic">① 言語的知能 — ことば</a></li>
+      <li><a href="#logical">② 論理数学的知能 — 論理</a></li>
+      <li><a href="#spatial">③ 空間的知能 — 視覚</a></li>
+      <li><a href="#musical">④ 音楽的知能 — 音</a></li>
+      <li><a href="#bodily">⑤ 身体運動的知能 — 身体</a></li>
+      <li><a href="#interpersonal">⑥ 対人的知能 — 共感</a></li>
+      <li><a href="#intrapersonal">⑦ 内省的知能 — 内側</a></li>
+      <li><a href="#naturalist">⑧ 博物学的知能 — 観察</a></li>
+      <li><a href="#learning-style">タイプ別 最適な学習スタイル一覧</a></li>
+    </ol>
+  </nav>
+
+  <article class="article-body">
+
+    <!-- ===== 概観図 ===== -->
+    <h2 id="overview">8つの知能タイプ 一覧図</h2>
+    <p>まず全体像を把握しましょう。MI理論の8タイプをひとつの図でまとめました。</p>
+
+    <div class="intel-overview">
+      <div class="intel-chip c1">
+        <span class="intel-chip-num">01</span>
+        <span class="intel-chip-icon">✍️</span>
+        <span class="intel-chip-name">言語的知能</span>
+      </div>
+      <div class="intel-chip c2">
+        <span class="intel-chip-num">02</span>
+        <span class="intel-chip-icon">🔢</span>
+        <span class="intel-chip-name">論理数学的知能</span>
+      </div>
+      <div class="intel-chip c3">
+        <span class="intel-chip-num">03</span>
+        <span class="intel-chip-icon">🎨</span>
+        <span class="intel-chip-name">空間的知能</span>
+      </div>
+      <div class="intel-chip c4">
+        <span class="intel-chip-num">04</span>
+        <span class="intel-chip-icon">🎵</span>
+        <span class="intel-chip-name">音楽的知能</span>
+      </div>
+      <div class="intel-chip c5">
+        <span class="intel-chip-num">05</span>
+        <span class="intel-chip-icon">🤸</span>
+        <span class="intel-chip-name">身体運動的知能</span>
+      </div>
+      <div class="intel-chip c6">
+        <span class="intel-chip-num">06</span>
+        <span class="intel-chip-icon">🤝</span>
+        <span class="intel-chip-name">対人的知能</span>
+      </div>
+      <div class="intel-chip c7">
+        <span class="intel-chip-num">07</span>
+        <span class="intel-chip-icon">🔍</span>
+        <span class="intel-chip-name">内省的知能</span>
+      </div>
+      <div class="intel-chip c8">
+        <span class="intel-chip-num">08</span>
+        <span class="intel-chip-icon">🌿</span>
+        <span class="intel-chip-name">博物学的知能</span>
+      </div>
+    </div>
+
+    <div class="point-box">
+      <div class="point-box-title">読み方のコツ</div>
+      <p>誰もが8つの知能すべてを持っています。ただし強さのバランスが人によって違うだけです。「私はこのタイプ」と決めつけず、「今の自分はここが強い」という見方をしてください。</p>
+    </div>
+
+    <!-- ===== Type 01: Linguistic ===== -->
+    <h2 id="linguistic">① 言語的知能（Linguistic Intelligence）</h2>
+
+    <div class="type-section">
+      <div class="type-header" style="background: var(--c1);">
+        <div class="type-num-badge">01</div>
+        <div class="type-header-text">
+          <span class="type-title-ja">✍️ 言語的知能</span>
+          <span class="type-title-en">Linguistic Intelligence</span>
+        </div>
+      </div>
+      <div class="type-body">
+        <p style="font-size:14px; color:rgba(15,14,12,.8); margin-bottom:16px;">
+          <strong>「言葉で考え、言葉で表現し、言葉から意味を取り出す力」</strong>。語彙力・文章力・外国語習得のスピードなど、言語に関わるあらゆる能力の高さを指します。
+        </p>
+
+        <!-- 強み・弱みの図解 -->
+        <h3 style="margin-top:0; margin-bottom:12px;">強みと注意点</h3>
+        <div class="pros-cons">
+          <div class="pros">
+            <div class="pros-title">✓ 強み</div>
+            <ul>
+              <li>言葉を選ぶスピードが速い</li>
+              <li>複雑な概念を簡単に説明できる</li>
+              <li>外国語・専門用語の習得が早い</li>
+              <li>聞いた内容をすぐに文章化できる</li>
+              <li>メールや企画書の質が高い</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <div class="cons-title">△ 注意点</div>
+            <ul>
+              <li>言語化できないものを過小評価しがち</li>
+              <li>説明が長くなりすぎることがある</li>
+              <li>数字・データより言葉を優先する</li>
+              <li>議論になるとしゃべりすぎる</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 職業 -->
+        <h3>向いている職業</h3>
+        <div class="job-grid">
+          <span class="job-badge">小説家・作家</span>
+          <span class="job-badge">ジャーナリスト</span>
+          <span class="job-badge">コピーライター</span>
+          <span class="job-badge">弁護士</span>
+          <span class="job-badge">通訳・翻訳</span>
+          <span class="job-badge">脚本家</span>
+          <span class="job-badge light">PR・広報</span>
+          <span class="job-badge light">教師・教授</span>
+          <span class="job-badge light">政治家</span>
+          <span class="job-badge light">ライター</span>
+        </div>
+
+        <!-- 有名人 -->
+        <h3>同じタイプの歴史上の人物</h3>
+        <div class="famous-line">
+          <span class="famous-badge">📖 シェイクスピア</span>
+          <span class="famous-badge">📖 夏目漱石</span>
+          <span class="famous-badge">📖 マヤ・アンジェロウ</span>
+          <span class="famous-badge">📖 村上春樹</span>
+          <span class="famous-badge">📖 ホメロス</span>
+        </div>
+
+        <!-- どんな場面で輝くかフロー -->
+        <h3>どんな場面で最も輝くか</h3>
+        <div class="flow-diagram">
+          <div class="flow-step">
+            <div class="flow-step-num">1</div>
+            <div class="flow-step-text"><strong>誰かの思いを言語化する場面</strong> — 「言いたいことは分かるけど言葉にできない」人のサポートで圧倒的な力を発揮</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">
+            <div class="flow-step-num">2</div>
+            <div class="flow-step-text"><strong>複雑な情報を分かりやすく伝える場面</strong> — 専門的な内容を一般向けに翻訳するとき</div>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step">
+            <div class="flow-step-num">3</div>
+            <div class="flow-step-text"><strong>文章・コンテンツで影響を与える場面</strong> — ブログ・SNS・書籍・メールなど、書かれた言葉で動かすとき</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Type 02: Logical ===== -->
+    <h2 id="logical">② 論理数学的知能（Logical-Mathematical Intelligence）</h2>
+
+    <div class="type-section">
+      <div class="type-header" style="background: var(--c2);">
+        <div class="type-num-badge">02</div>
+        <div class="type-header-text">
+          <span class="type-title-ja">🔢 論理数学的知能</span>
+          <span class="type-title-en">Logical-Mathematical Intelligence</span>
+        </div>
+      </div>
+      <div class="type-body">
+        <p style="font-size:14px; color:rgba(15,14,12,.8); margin-bottom:16px;">
+          <strong>「パターンを見つけ、論理的に考え、数字で世界を解釈する力」</strong>。IQテストが最も得意とするタイプですが、それはあくまで8つの知能のひとつに過ぎません。
+        </p>
+        <div class="pros-cons">
+          <div class="pros">
+            <div class="pros-title">✓ 強み</div>
+            <ul>
+              <li>複雑な問題を体系的に整理できる</li>
+              <li>データや根拠から結論を出せる</li>
+              <li>矛盾・論理のほころびに気づく</li>
+              <li>抽象的な概念を扱うのが得意</li>
+              <li>プログラミングや数式が苦にならない</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <div class="cons-title">△ 注意点</div>
+            <ul>
+              <li>感情・直感を「非論理的」と切り捨てる</li>
+              <li>完璧主義で判断が遅くなる</li>
+              <li>人間関係を論理で説明しようとする</li>
+              <li>細部の分析に没入しすぎる</li>
+            </ul>
+          </div>
+        </div>
+        <h3>向いている職業</h3>
+        <div class="job-grid">
+          <span class="job-badge">プログラマー</span>
+          <span class="job-badge">データサイエンティスト</span>
+          <span class="job-badge">数学者・統計家</span>
+          <span class="job-badge">科学者・研究者</span>
+          <span class="job-badge">哲学者</span>
+          <span class="job-badge light">会計士・税理士</span>
+          <span class="job-badge light">戦略コンサルタント</span>
+          <span class="job-badge light">エンジニア</span>
+        </div>
+        <h3>同じタイプの歴史上の人物</h3>
+        <div class="famous-line">
+          <span class="famous-badge">🔬 アインシュタイン</span>
+          <span class="famous-badge">🔬 ニュートン</span>
+          <span class="famous-badge">🔬 アリストテレス</span>
+          <span class="famous-badge">🔬 アラン・チューリング</span>
+          <span class="famous-badge">🔬 アルキメデス</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Type 03: Spatial ===== -->
+    <h2 id="spatial">③ 空間的知能（Spatial Intelligence）</h2>
+
+    <div class="type-section">
+      <div class="type-header" style="background: var(--c3);">
+        <div class="type-num-badge">03</div>
+        <div class="type-header-text">
+          <span class="type-title-ja">🎨 空間的知能</span>
+          <span class="type-title-en">Spatial Intelligence</span>
+        </div>
+      </div>
+      <div class="type-body">
+        <p style="font-size:14px; color:rgba(15,14,12,.8); margin-bottom:16px;">
+          <strong>「頭の中で3Dモデルを動かし、見えないものを形として捉える力」</strong>。地図が得意・組み立て家具が説明書なしで作れる・絵や写真の構図が直感的に分かる、という人はこのタイプが高い傾向があります。
+        </p>
+        <div class="pros-cons">
+          <div class="pros">
+            <div class="pros-title">✓ 強み</div>
+            <ul>
+              <li>説明しにくいことを図解で伝えられる</li>
+              <li>地図・設計図を直感的に理解する</li>
+              <li>デザインの善し悪しが瞬時に分かる</li>
+              <li>空間の使い方・レイアウトのセンスが良い</li>
+              <li>映像や絵からの情報処理が速い</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <div class="cons-title">△ 注意点</div>
+            <ul>
+              <li>頭の中のイメージを言葉にするのが苦手</li>
+              <li>「見れば分かる」が通じない相手に苦労する</li>
+              <li>テキストだけの説明が退屈に感じる</li>
+            </ul>
+          </div>
+        </div>
+        <h3>向いている職業</h3>
+        <div class="job-grid">
+          <span class="job-badge">建築家・インテリアデザイナー</span>
+          <span class="job-badge">グラフィックデザイナー</span>
+          <span class="job-badge">映像クリエイター</span>
+          <span class="job-badge">UI/UXデザイナー</span>
+          <span class="job-badge light">航空士・航海士</span>
+          <span class="job-badge light">外科医</span>
+          <span class="job-badge light">漫画家・イラストレーター</span>
+        </div>
+        <h3>同じタイプの歴史上の人物</h3>
+        <div class="famous-line">
+          <span class="famous-badge">🎨 ピカソ</span>
+          <span class="famous-badge">🎨 ミケランジェロ</span>
+          <span class="famous-badge">🎨 葛飾北斎</span>
+          <span class="famous-badge">🎨 M.C.エッシャー</span>
+          <span class="famous-badge">🎨 ダ・ヴィンチ</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Type 04: Musical ===== -->
+    <h2 id="musical">④ 音楽的知能（Musical Intelligence）</h2>
+
+    <div class="type-section">
+      <div class="type-header" style="background: var(--c4);">
+        <div class="type-num-badge">04</div>
+        <div class="type-header-text">
+          <span class="type-title-ja">🎵 音楽的知能</span>
+          <span class="type-title-en">Musical Intelligence</span>
+        </div>
+      </div>
+      <div class="type-body">
+        <p style="font-size:14px; color:rgba(15,14,12,.8); margin-bottom:16px;">
+          <strong>「音・リズム・音程の変化から、感情と意味を受け取り、発信する力」</strong>。楽器が弾けるかどうかよりも、「音から情報を得る感度」の高さがこの知能のポイントです。
+        </p>
+        <div class="pros-cons">
+          <div class="pros">
+            <div class="pros-title">✓ 強み</div>
+            <ul>
+              <li>場の雰囲気（空気）を音で感じ取る</li>
+              <li>声のトーンから相手の感情を読む</li>
+              <li>プレゼンや話し方に自然なリズムがある</li>
+              <li>BGMや効果音の選択センスが抜群</li>
+              <li>語学の習得が耳から入りやすい</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <div class="cons-title">△ 注意点</div>
+            <ul>
+              <li>騒がしい環境でのパフォーマンスが下がる</li>
+              <li>感情的な波に乗りやすく集中が乱れる</li>
+              <li>「音楽以外での才能」を自覚しにくい</li>
+            </ul>
+          </div>
+        </div>
+        <h3>向いている職業</h3>
+        <div class="job-grid">
+          <span class="job-badge">作曲家・編曲家</span>
+          <span class="job-badge">音楽プロデューサー</span>
+          <span class="job-badge">声優・ナレーター</span>
+          <span class="job-badge">サウンドデザイナー</span>
+          <span class="job-badge light">ポッドキャスター</span>
+          <span class="job-badge light">イベント演出家</span>
+          <span class="job-badge light">言語療法士</span>
+        </div>
+        <h3>同じタイプの歴史上の人物</h3>
+        <div class="famous-line">
+          <span class="famous-badge">🎼 ベートーヴェン</span>
+          <span class="famous-badge">🎼 モーツァルト</span>
+          <span class="famous-badge">🎼 バッハ</span>
+          <span class="famous-badge">🎼 マイルス・デイヴィス</span>
+          <span class="famous-badge">🎼 美空ひばり</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Type 05: Bodily ===== -->
+    <h2 id="bodily">⑤ 身体運動的知能（Bodily-Kinesthetic Intelligence）</h2>
+
+    <div class="type-section">
+      <div class="type-header" style="background: var(--c5);">
+        <div class="type-num-badge">05</div>
+        <div class="type-header-text">
+          <span class="type-title-ja">🤸 身体運動的知能</span>
+          <span class="type-title-en">Bodily-Kinesthetic Intelligence</span>
+        </div>
+      </div>
+      <div class="type-body">
+        <p style="font-size:14px; color:rgba(15,14,12,.8); margin-bottom:16px;">
+          <strong>「身体を道具として巧みに使い、体で考える力」</strong>。スポーツだけでなく、料理・外科手術・ダンス・演技・ものづくりなど、あらゆる「手と体を動かす場面」で発揮されます。
+        </p>
+        <div class="pros-cons">
+          <div class="pros">
+            <div class="pros-title">✓ 強み</div>
+            <ul>
+              <li>動いてみると答えが出てくる（考えながら動く）</li>
+              <li>手作業・工作・料理が直感的に上手い</li>
+              <li>身体のコントロール精度が高い</li>
+              <li>存在感・オーラが自然と出る</li>
+              <li>スポーツや武道の習得が速い</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <div class="cons-title">△ 注意点</div>
+            <ul>
+              <li>座って考えるだけの仕事が苦痛になる</li>
+              <li>「まず考えてから動く」が難しい</li>
+              <li>言語化するより先に体が動く</li>
+            </ul>
+          </div>
+        </div>
+        <h3>向いている職業</h3>
+        <div class="job-grid">
+          <span class="job-badge">プロスポーツ選手</span>
+          <span class="job-badge">ダンサー・振付師</span>
+          <span class="job-badge">外科医・歯科医</span>
+          <span class="job-badge">職人・工芸家</span>
+          <span class="job-badge">シェフ・料理人</span>
+          <span class="job-badge light">パーソナルトレーナー</span>
+          <span class="job-badge light">俳優・パフォーマー</span>
+        </div>
+        <h3>同じタイプの歴史上の人物</h3>
+        <div class="famous-line">
+          <span class="famous-badge">🥊 モハメド・アリ</span>
+          <span class="famous-badge">🥊 ブルース・リー</span>
+          <span class="famous-badge">🥊 ペレ</span>
+          <span class="famous-badge">🥊 チャップリン</span>
+          <span class="famous-badge">🥊 宮本武蔵</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Type 06: Interpersonal ===== -->
+    <h2 id="interpersonal">⑥ 対人的知能（Interpersonal Intelligence）</h2>
+
+    <div class="type-section">
+      <div class="type-header" style="background: var(--c6);">
+        <div class="type-num-badge">06</div>
+        <div class="type-header-text">
+          <span class="type-title-ja">🤝 対人的知能</span>
+          <span class="type-title-en">Interpersonal Intelligence</span>
+        </div>
+      </div>
+      <div class="type-body">
+        <p style="font-size:14px; color:rgba(15,14,12,.8); margin-bottom:16px;">
+          <strong>「他者の感情・意図・モチベーションを読み取り、適切に関わる力」</strong>。「空気を読む」を超えた、高解像度の感情センサーです。チームや組織の中で特に力を発揮します。
+        </p>
+        <div class="pros-cons">
+          <div class="pros">
+            <div class="pros-title">✓ 強み</div>
+            <ul>
+              <li>相手が本当に言いたいことを察する</li>
+              <li>チームの空気を読んで自然に調整する</li>
+              <li>初対面の人と素早く信頼関係を築く</li>
+              <li>交渉・説得・調停が得意</li>
+              <li>複数の人の立場を同時に理解できる</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <div class="cons-title">△ 注意点</div>
+            <ul>
+              <li>他人の感情に引きずられて疲弊する</li>
+              <li>断るのが苦手で仕事を抱えすぎる</li>
+              <li>自分の意見を後回しにしやすい</li>
+            </ul>
+          </div>
+        </div>
+        <h3>向いている職業</h3>
+        <div class="job-grid">
+          <span class="job-badge">教師・講師</span>
+          <span class="job-badge">コーチ・カウンセラー</span>
+          <span class="job-badge">営業・セールス</span>
+          <span class="job-badge">政治家・リーダー</span>
+          <span class="job-badge light">人事・採用担当</span>
+          <span class="job-badge light">ファシリテーター</span>
+          <span class="job-badge light">コミュニティマネージャー</span>
+        </div>
+        <h3>同じタイプの歴史上の人物</h3>
+        <div class="famous-line">
+          <span class="famous-badge">🤝 ガンジー</span>
+          <span class="famous-badge">🤝 マンデラ</span>
+          <span class="famous-badge">🤝 マザー・テレサ</span>
+          <span class="famous-badge">🤝 カーネギー</span>
+          <span class="famous-badge">🤝 キング牧師</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Type 07: Intrapersonal ===== -->
+    <h2 id="intrapersonal">⑦ 内省的知能（Intrapersonal Intelligence）</h2>
+
+    <div class="type-section">
+      <div class="type-header" style="background: var(--c7);">
+        <div class="type-num-badge">07</div>
+        <div class="type-header-text">
+          <span class="type-title-ja">🔍 内省的知能</span>
+          <span class="type-title-en">Intrapersonal Intelligence</span>
+        </div>
+      </div>
+      <div class="type-body">
+        <p style="font-size:14px; color:rgba(15,14,12,.8); margin-bottom:16px;">
+          <strong>「自分の感情・強み・弱み・価値観をリアルタイムで観察し続ける力」</strong>。メタ認知の高さとも言い換えられます。人と比べず、自分の軸から動ける人です。
+        </p>
+        <div class="pros-cons">
+          <div class="pros">
+            <div class="pros-title">✓ 強み</div>
+            <ul>
+              <li>自分の感情と行動の関係を冷静に分析する</li>
+              <li>流行りや他人の評価に流されない</li>
+              <li>長期的な目標設定と自己管理が得意</li>
+              <li>深く考えた意見・思想を持っている</li>
+              <li>作家・哲学者・起業家に多いタイプ</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <div class="cons-title">△ 注意点</div>
+            <ul>
+              <li>内省しすぎて行動が遅れる</li>
+              <li>一人でいる時間が好きで孤立しやすい</li>
+              <li>「自分の世界」が強すぎると伝わりにくい</li>
+            </ul>
+          </div>
+        </div>
+        <h3>向いている職業</h3>
+        <div class="job-grid">
+          <span class="job-badge">哲学者・思想家</span>
+          <span class="job-badge">起業家・CEO</span>
+          <span class="job-badge">作家・エッセイスト</span>
+          <span class="job-badge">心理療法士</span>
+          <span class="job-badge light">ライフコーチ</span>
+          <span class="job-badge light">僧侶・宗教者</span>
+          <span class="job-badge light">研究者</span>
+        </div>
+        <h3>同じタイプの歴史上の人物</h3>
+        <div class="famous-line">
+          <span class="famous-badge">📿 マルクス・アウレリウス</span>
+          <span class="famous-badge">📿 ユング</span>
+          <span class="famous-badge">📿 ニーチェ</span>
+          <span class="famous-badge">📿 ヴィクトール・フランクル</span>
+          <span class="famous-badge">📿 アンネ・フランク</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Type 08: Naturalist ===== -->
+    <h2 id="naturalist">⑧ 博物学的知能（Naturalist Intelligence）</h2>
+
+    <div class="type-section">
+      <div class="type-header" style="background: var(--c8);">
+        <div class="type-num-badge">08</div>
+        <div class="type-header-text">
+          <span class="type-title-ja">🌿 博物学的知能</span>
+          <span class="type-title-en">Naturalist Intelligence</span>
+        </div>
+      </div>
+      <div class="type-body">
+        <p style="font-size:14px; color:rgba(15,14,12,.8); margin-bottom:16px;">
+          <strong>「物事の共通点・差異を見抜き、パターンに分類する力」</strong>。元々は自然界の観察から来た知能ですが、現代ではデータ分類・コレクション・情報キュレーションなど幅広い場面で活かされます。
+        </p>
+        <div class="pros-cons">
+          <div class="pros">
+            <div class="pros-title">✓ 強み</div>
+            <ul>
+              <li>大量の情報を整理・分類するのが得意</li>
+              <li>細かい違いに気づく観察力がある</li>
+              <li>コレクション・アーカイブ作りが楽しい</li>
+              <li>生き物・自然への共感と愛着が深い</li>
+              <li>体系的な知識を積み重ねるのが好き</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <div class="cons-title">△ 注意点</div>
+            <ul>
+              <li>完全に分類できないことへの不快感</li>
+              <li>収集・整理に時間をかけすぎる</li>
+              <li>「完璧な分類」を待って発信が遅れる</li>
+            </ul>
+          </div>
+        </div>
+        <h3>向いている職業</h3>
+        <div class="job-grid">
+          <span class="job-badge">生物学者・研究者</span>
+          <span class="job-badge">データアナリスト</span>
+          <span class="job-badge">図書館司書・アーキビスト</span>
+          <span class="job-badge">農家・環境活動家</span>
+          <span class="job-badge light">料理研究家</span>
+          <span class="job-badge light">コンテンツキュレーター</span>
+          <span class="job-badge light">品質管理</span>
+        </div>
+        <h3>同じタイプの歴史上の人物</h3>
+        <div class="famous-line">
+          <span class="famous-badge">🌱 ダーウィン</span>
+          <span class="famous-badge">🌱 ファーブル</span>
+          <span class="famous-badge">🌱 リンネ</span>
+          <span class="famous-badge">🌱 牧野富太郎</span>
+          <span class="famous-badge">🌱 レイチェル・カーソン</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 学習スタイル一覧 ===== -->
+    <h2 id="learning-style">タイプ別 最適な学習スタイル一覧</h2>
+    <p>それぞれの知能タイプには「最も吸収しやすい学習スタイル」があります。自分のタイプに合った方法を選ぶだけで、学習効率が大きく変わります。</p>
+
+    <table class="style-table">
+      <thead>
+        <tr>
+          <th>タイプ</th>
+          <th>最も効果的な学習法</th>
+          <th>避けるべき方法</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>✍️ 言語</td>
+          <td>読む・書く・声に出す。日記や要約ノートが特に有効</td>
+          <td>図だけ・動画だけで終わらせる</td>
+        </tr>
+        <tr>
+          <td>🔢 論理</td>
+          <td>体系的な教科書を順番に。「なぜ？」を追究する学習</td>
+          <td>暗記中心・根拠なし詰め込み</td>
+        </tr>
+        <tr>
+          <td>🎨 空間</td>
+          <td>図・マインドマップ・動画。頭の中に絵を描く</td>
+          <td>文字だけのテキスト</td>
+        </tr>
+        <tr>
+          <td>🎵 音楽</td>
+          <td>リズム・歌・音声教材。ポッドキャストや語学テープ</td>
+          <td>無音の机上学習</td>
+        </tr>
+        <tr>
+          <td>🤸 身体</td>
+          <td>動きながら・作りながら・声に出しながら</td>
+          <td>座って読むだけ</td>
+        </tr>
+        <tr>
+          <td>🤝 対人</td>
+          <td>グループ学習・教え合い・ディスカッション</td>
+          <td>完全に一人での孤独な学習</td>
+        </tr>
+        <tr>
+          <td>🔍 内省</td>
+          <td>一人の静かな時間で深く考える。日記・瞑想と組み合わせる</td>
+          <td>大人数での強制参加型授業</td>
+        </tr>
+        <tr>
+          <td>🌿 博物</td>
+          <td>分類・整理しながら学ぶ。フィールドワーク・実物観察</td>
+          <td>抽象的な理論だけ</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="point-box">
+      <div class="point-box-title">まとめ</div>
+      <p>8つの知能タイプは「優劣」ではなく「個性」です。自分のタイプを知ることは、強みを伸ばすための出発点。ぜひ無料診断で、あなたの8知能のバランスを確認してみてください。</p>
+    </div>
+
+  </article>
+
+  <!-- CTA -->
+  <div class="article-cta">
+    <div class="article-cta-label">Free Assessment · 無料診断</div>
+    <h3>自分のMIタイプを診断してみる</h3>
+    <p>24問に答えるだけ。あなたの8知能のバランスと<br>才能タイプが無料で分かります。</p>
+    <a href="/">無料診断を受ける →</a>
+  </div>
+
+  <!-- 関連記事 -->
+  <div class="related-articles">
+    <div class="related-title">Related Articles · 関連記事</div>
+    <div class="related-grid">
+      <a href="/articles/mi-theory.html" class="related-card">
+        <div class="related-card-tag">MI理論・基礎</div>
+        <div class="related-card-title">多重知能理論（MI理論）とは？ガードナー博士の理論を解説</div>
+      </a>
+      <a href="/articles/mbti-vs-mi.html" class="related-card">
+        <div class="related-card-tag">比較解説</div>
+        <div class="related-card-title">MBTI・StrengthsFinder・MI理論の違いを徹底比較</div>
+      </a>
+      <a href="/articles/careers-by-type.html" class="related-card">
+        <div class="related-card-tag">キャリア</div>
+        <div class="related-card-title">知能タイプ別・向いている職業と副業の見つけ方</div>
+      </a>
+      <a href="/articles/parenting-mi-theory.html" class="related-card">
+        <div class="related-card-tag">子育て</div>
+        <div class="related-card-title">子どもの才能を伸ばす親の関わり方</div>
+      </a>
+    </div>
+  </div>
+
+  <footer class="page-footer">
+    <div class="links">
+      <a href="/">トップ</a>
+      <a href="/articles.html">読み物一覧</a>
+      <a href="/about.html">運営者情報</a>
+      <a href="/privacy.html">プライバシーポリシー</a>
+      <a href="/disclaimer.html">免責事項</a>
+      <a href="/contact.html">お問い合わせ</a>
+    </div>
+    <div class="copyright">© Mymatrix · じぶんマトリクス</div>
+  </footer>
+</div>
+</body>
+</html>
