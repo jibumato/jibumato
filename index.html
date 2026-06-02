@@ -2251,11 +2251,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
 
   .compound-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 6px;
+    padding: 10px 22px;
+    background: rgba(212,173,94,0.10);
+    border: 1px solid rgba(212,173,94,0.4);
+    border-radius: 40px;
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    font-size: 19px;
+    font-style: normal;
+    color: var(--gold-light);
+    letter-spacing: 0.08em;
+  }
+  .compound-note .cross {
     font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 12px;
-    color: rgba(244,237,224,0.6);
-    letter-spacing: 0.05em;
+    font-size: 24px;
+    color: var(--paper);
+    font-weight: 400;
+    line-height: 1;
+    opacity: 0.9;
   }
 
   /* ============ FAMOUS PEOPLE SECTION ============ */
@@ -3838,7 +3855,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h3 class="premium-title" data-i18n="premium.title">あなたの才能を、<br>もっと深く知る</h3>
     <p class="premium-subtitle" data-i18n="premium.sub">
       <span data-i18n="prem.intro1">無料診断は、入り口に過ぎません。</span><br>
-      <span data-i18n="prem.intro2">¥980で、あなただけの「才能の取扱説明書」を解錠できます。</span>
+      <span data-i18n="prem.intro2">¥980で、あなたのタイプの「才能の取扱説明書」（書き込み式ワークブック付き）を解錠できます。</span>
     </p>
 
     <!-- チラ見せセクション(ぼかし) -->
@@ -3855,7 +3872,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="premium-blur">
           <div class="premium-blur-content">
             <div class="lock-icon">🔒</div>
-            <p data-i18n="prem.locked">続きはプレミアム会員限定</p>
+            <p data-i18n="prem.locked">続きは購入者限定</p>
           </div>
         </div>
       </div>
@@ -3864,7 +3881,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- セクション02: 30日プログラム チラ見せ -->
     <div class="premium-preview premium-preview-secondary">
       <div class="premium-preview-header">
-        <div class="premium-preview-label" data-i18n="premium.section_label2">— Section 02 of 07 · 30-Day Program —</div>
+        <div class="premium-preview-label" data-i18n="premium.section_label2">— Section 06 of 06 · 30-Day Program —</div>
         <h4 class="premium-preview-headline" id="premiumProgramTitle" data-i18n="premium.program_title">才能を日常に組み込む、30日の習慣設計</h4>
       </div>
 
@@ -3874,7 +3891,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="premium-blur">
           <div class="premium-blur-content">
             <div class="lock-icon">🔒</div>
-            <p data-i18n="prem.locked_program">残り Day 11〜30 はプレミアム会員限定</p>
+            <p data-i18n="prem.locked_program">残りのフェーズは購入者限定</p>
           </div>
         </div>
       </div>
@@ -3883,7 +3900,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- セクション03: 副業ロードマップ チラ見せ -->
     <div class="premium-preview premium-preview-secondary">
       <div class="premium-preview-header">
-        <div class="premium-preview-label" data-i18n="premium.section_label3">— Section 03 of 07 · Side Hustle —</div>
+        <div class="premium-preview-label" data-i18n="premium.section_label3">— Section 04 of 06 · 才能を活かす道 —</div>
         <h4 class="premium-preview-headline" id="premiumSideHustleTitle">— —</h4>
       </div>
 
@@ -3893,7 +3910,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="premium-blur">
           <div class="premium-blur-content">
             <div class="lock-icon">🔒</div>
-            <p data-i18n="prem.locked_side">残り STEP 3〜6 はプレミアム会員限定</p>
+            <p data-i18n="prem.locked_side">続きは購入者限定</p>
           </div>
         </div>
       </div>
@@ -3901,55 +3918,55 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- 含まれる内容のリスト -->
     <div class="premium-features">
-      <div class="premium-features-label" data-i18n="prem.features_label">— Premium Report に含まれるもの —</div>
+      <div class="premium-features-label" data-i18n="prem.features_label">— このレポートに含まれるもの —</div>
       <ul class="premium-feature-list">
         <li>
           <span class="feature-num">01</span>
           <div>
-            <strong data-i18n="prem.f.sci.title">才能の科学的深掘り</strong>
-            <span data-i18n="prem.f.sci.desc">あなたの脳がなぜそう動くのか、神経科学レベルの解説（約2,000字）</span>
+            <strong data-i18n="prem.f.sci.title">才能の深掘り</strong>
+            <span data-i18n="prem.f.sci.desc">あなたの強み・伸びしろ・思考の罠、そして才能が見せる「四つの顔」</span>
           </div>
         </li>
         <li>
           <span class="feature-num">02</span>
           <div>
-            <strong data-i18n="prem.f.30days.title">30日間プログラム</strong>
-            <span data-i18n="prem.f.30days.desc">才能を日常に組み込むための、毎日5分の具体メニュー</span>
+            <strong data-i18n="prem.f.30days.title">才能を磨く30日プログラム</strong>
+            <span data-i18n="prem.f.30days.desc">1日10分、思考を鍛える6フェーズの実践トレーニング</span>
           </div>
         </li>
         <li>
           <span class="feature-num">03</span>
           <div>
-            <strong data-i18n="prem.f.jobs.title">100の職業リスト</strong>
-            <span data-i18n="prem.f.jobs.desc">あなたの才能が活きる100の職業を10カテゴリで分類して提示</span>
+            <strong data-i18n="prem.f.jobs.title">強みの掛け算</strong>
+            <span data-i18n="prem.f.jobs.desc">2位・3位の知能と組み合わせて生まれる、あなた固有の才能</span>
           </div>
         </li>
         <li>
           <span class="feature-num">04</span>
           <div>
-            <strong data-i18n="prem.f.side.title">副業の始め方ロードマップ</strong>
-            <span data-i18n="prem.feat1.desc">月3〜30万円を稼ぐための、6ステップの実践プラン</span>
+            <strong data-i18n="prem.f.side.title">才能を活かす道（仕事・副業・お金）</strong>
+            <span data-i18n="prem.feat1.desc">公的統計に基づく年収データと、タイプ別の働き方・副業戦略</span>
           </div>
         </li>
         <li>
           <span class="feature-num">05</span>
           <div>
-            <strong data-i18n="prem.feat2.title">苦手なタイプとの付き合い方</strong>
-            <span data-i18n="prem.feat2.desc">あなたを消耗させる相手の正体と、3つの対応策</span>
+            <strong data-i18n="prem.feat2.title">人間関係と相性</strong>
+            <span data-i18n="prem.feat2.desc">8タイプ相性図と、苦手な相手との関わり方・最高の相棒</span>
           </div>
         </li>
         <li>
           <span class="feature-num">06</span>
           <div>
-            <strong data-i18n="prem.feat3.title">PDF版「じぶんの取扱説明書」</strong>
-            <span data-i18n="prem.feat3.desc">全コンテンツをA4 8ページのPDFで保存・印刷可能</span>
+            <strong data-i18n="prem.feat3.title">書き込み式ワークブック</strong>
+            <span data-i18n="prem.feat3.desc">自分のスコアを記入し、レーダーを描く——読んで終わりにしない仕掛け</span>
           </div>
         </li>
         <li>
           <span class="feature-num">07</span>
           <div>
-            <strong data-i18n="prem.feat4.title">高解像度の結果カード画像</strong>
-            <span data-i18n="prem.feat4.desc">SNSでのシェアにそのまま使える、印刷品質の画像</span>
+            <strong data-i18n="prem.feat4.title">A4・9ページのPDF</strong>
+            <span data-i18n="prem.feat4.desc">和モダンデザインの全9ページ。保存・印刷していつでも見返せます</span>
           </div>
         </li>
       </ul>
@@ -3958,7 +3975,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- 価格＆購入ボタン -->
     <div class="premium-cta">
       <div class="premium-price-row">
-        <div class="premium-price-label" data-i18n="prem.price.label">プレミアムレポート</div>
+        <div class="premium-price-label" data-i18n="prem.price.label">タイプ別診断レポート（ワークブック付き）</div>
         <div class="premium-price">
           <span class="premium-price-currency">¥</span>
           <span class="premium-price-num">980</span>
@@ -3968,7 +3985,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <button class="premium-buy-btn" onclick="onPremiumInterest()">
         <span class="premium-buy-icon">✦</span>
-        <span data-i18n="premium.btn">プレミアムレポートを開く</span>
+        <span data-i18n="premium.btn">タイプ別診断レポートを開く</span>
       </button>
 
       <p class="premium-note" data-i18n="prem.payment_notice">
@@ -6951,8 +6968,8 @@ function _showResultInner() {
 
   // Compound character (TOP1 × TOP2)
   document.getElementById('compoundName').textContent = makeCompoundName(top1, top2);
-  document.getElementById('compoundNote').textContent =
-    `${getIntShortName(top1)} × ${getIntShortName(top2)}`;
+  document.getElementById('compoundNote').innerHTML =
+    `<span class="combo-a">${getIntShortName(top1)}</span><span class="cross">×</span><span class="combo-b">${getIntShortName(top2)}</span>`;
 
   // Apply tinted background to talent card
   const card = document.getElementById('talentCard');
@@ -9007,8 +9024,8 @@ const I18N = {
     'match.love':        '恋愛',
     // プレミアム
     'premium.title':     'あなたの才能を、\nもっと深く知る',
-    'premium.sub':       '無料診断は、入り口に過ぎません。\n¥980で、あなただけの「才能の取扱説明書」を解錠できます。',
-    'premium.btn':       'プレミアムレポートを開く',
+    'premium.sub':       '無料診断は、入り口に過ぎません。\n¥980で、あなたのタイプの「才能の取扱説明書」（書き込み式ワークブック付き）を解錠できます。',
+    'premium.btn':       'タイプ別診断レポートを開く',
     'premium.thanks':    'ご興味ありがとうございます',
     // 知能名
     'intel.linguistic':    '言語的知能',
@@ -9034,14 +9051,14 @@ const I18N = {
     'chapter.thinking': '— 思考の領域 —',
     'q.back': '← 前の質問へ',
     'q.tap_to_proceed': '回答すると次へ進みます',
-    'prem.feat1.desc': '月3〜30万円を稼ぐための、6ステップの実践プラン',
-    'prem.feat2.title': '苦手なタイプとの付き合い方',
-    'prem.feat2.desc': 'あなたを消耗させる相手の正体と、3つの対応策',
-    'prem.feat3.title': 'PDF版「じぶんの取扱説明書」',
-    'prem.feat3.desc': '全コンテンツをA4 8ページのPDFで保存・印刷可能',
-    'prem.feat4.title': '高解像度の結果カード画像',
-    'prem.feat4.desc': 'SNSでのシェアにそのまま使える、印刷品質の画像',
-    'prem.price.label': 'プレミアムレポート',
+    'prem.feat1.desc': '公的統計に基づく年収データと、タイプ別の働き方・副業戦略',
+    'prem.feat2.title': '人間関係と相性',
+    'prem.feat2.desc': '8タイプ相性図と、苦手な相手との関わり方・最高の相棒',
+    'prem.feat3.title': '書き込み式ワークブック',
+    'prem.feat3.desc': '自分のスコアを記入し、レーダーを描く——読んで終わりにしない仕掛け',
+    'prem.feat4.title': 'A4・9ページのPDF',
+    'prem.feat4.desc': '和モダンデザインの全9ページ。保存・印刷していつでも見返せます',
+    'prem.price.label': 'タイプ別診断レポート（ワークブック付き）',
     'prem.price.tax': '（税込・買い切り）',
     'share.compat': '友達との相性をみる（URLコピー）',
     'share.gallery': 'キャラクター図鑑を見る（全8体）',
@@ -9079,16 +9096,16 @@ const I18N = {
     // v4: hero/premium/gallery/match
     'hero.sub': 'ハーバード大学のハワード・ガードナーが提唱した「多重知能理論（MI理論）」をベースに、あなたの中に眠る8種類の知性を測定します。<br>性格ではなく、<em>武器</em>を知るための、じぶんの取扱説明書。',
     'prem.intro1': '無料診断は、入り口に過ぎません。',
-    'prem.intro2': '¥980で、あなただけの「才能の取扱説明書」を解錠できます。',
-    'prem.locked': '続きはプレミアム会員限定',
-    'prem.features_label': '— Premium Report に含まれるもの —',
-    'prem.f.sci.title': '才能の科学的深掘り',
-    'prem.f.sci.desc': 'あなたの脳がなぜそう動くのか、神経科学レベルの解説（約2,000字）',
-    'prem.f.30days.title': '30日間プログラム',
-    'prem.f.30days.desc': '才能を日常に組み込むための、毎日5分の具体メニュー',
-    'prem.f.jobs.title': '100の職業リスト',
-    'prem.f.jobs.desc': 'あなたの才能が活きる100の職業を10カテゴリで分類して提示',
-    'prem.f.side.title': '副業の始め方ロードマップ',
+    'prem.intro2': '¥980で、あなたのタイプの「才能の取扱説明書」（書き込み式ワークブック付き）を解錠できます。',
+    'prem.locked': '続きは購入者限定',
+    'prem.features_label': '— このレポートに含まれるもの —',
+    'prem.f.sci.title': '才能の深掘り',
+    'prem.f.sci.desc': 'あなたの強み・伸びしろ・思考の罠、そして才能が見せる「四つの顔」',
+    'prem.f.30days.title': '才能を磨く30日プログラム',
+    'prem.f.30days.desc': '1日10分、思考を鍛える6フェーズの実践トレーニング',
+    'prem.f.jobs.title': '強みの掛け算',
+    'prem.f.jobs.desc': '2位・3位の知能と組み合わせて生まれる、あなた固有の才能',
+    'prem.f.side.title': '才能を活かす道（仕事・副業・お金）',
     'prem.payment_notice': '※ お試し公開中につき、現在は決済システムを準備中です。<br>「興味あり」のクリック数を集計しています。',
     'gallery.title': 'キャラクター図鑑',
     'match.title': '相性をみる',
@@ -9102,7 +9119,7 @@ const I18N = {
     'share.window_title': 'じぶマト結果カード',
   
     // premium section label
-    'premium.section_label': '— Section 01 of 07 · Deep Dive —',
+    'premium.section_label': '— Section 02 of 06 · Deep Dive —',
   
     // computing messages & match placeholder
     'computing.msg1': 'あなたの言葉の海を覗いています...',
@@ -9115,11 +9132,11 @@ const I18N = {
     'match.url_prompt': 'このURLを友達に送ってください:',
   
     // premium preview extension
-    'premium.section_label2': '— Section 02 of 07 · 30日プログラム —',
-    'premium.section_label3': '— Section 03 of 07 · 副業ロードマップ —',
+    'premium.section_label2': '— Section 06 of 06 · 30日プログラム —',
+    'premium.section_label3': '— Section 04 of 06 · 才能を活かす道 —',
     'premium.program_title': '才能を日常に組み込む、30日の習慣設計',
-    'prem.locked_program': '残り Day 11〜30 はプレミアム会員限定',
-    'prem.locked_side': '残り STEP 3〜6 はプレミアム会員限定',
+    'prem.locked_program': '残りのフェーズは購入者限定',
+    'prem.locked_side': '続きは購入者限定',
   
     // ad label
     'ad.label': 'スポンサーリンク',
@@ -9275,7 +9292,7 @@ const I18N = {
     // プレミアム
     'premium.title':     'Discover Your Talent\neven Deeper',
     'premium.sub':       'The free assessment is just the beginning.\nFor ¥980, unlock your personal Talent Manual.',
-    'premium.btn':       'Open Premium Report',
+    'premium.btn':       'Open Your Type Report',
     'premium.thanks':    'Thank you for your interest',
     // 知能名
     'intel.linguistic':    'Linguistic Intelligence',
@@ -9301,14 +9318,14 @@ const I18N = {
     'chapter.thinking': '— Realm of Thought —',
     'q.back': '← Previous question',
     'q.tap_to_proceed': 'Tap an answer to continue',
-    'prem.feat1.desc': 'A 6-step plan to earn ¥30,000–¥300,000/month',
-    'prem.feat2.title': 'How to handle difficult personality types',
-    'prem.feat2.desc': 'Who drains you, and 3 strategies to deal with them',
-    'prem.feat3.title': 'PDF: "Your Personal User Manual"',
-    'prem.feat3.desc': 'All content as an 8-page A4 PDF you can save and print',
-    'prem.feat4.title': 'High-resolution result card image',
-    'prem.feat4.desc': 'Print-quality image, ready to share on social media',
-    'prem.price.label': 'Premium Report',
+    'prem.feat1.desc': 'Salary data from official statistics, plus work and side-hustle strategy by type',
+    'prem.feat2.title': 'Relationships & compatibility',
+    'prem.feat2.desc': 'An 8-type compatibility map, how to handle difficult people, and your ideal partner',
+    'prem.feat3.title': 'Fill-in workbook',
+    'prem.feat3.desc': 'Write in your scores and draw your radar—not just a read-and-forget report',
+    'prem.feat4.title': '9-page A4 PDF',
+    'prem.feat4.desc': 'All 9 pages in a refined Japanese-modern design—save and print anytime',
+    'prem.price.label': 'Type-Based Report (with Workbook)',
     'prem.price.tax': '(Tax incl. · One-time purchase)',
     'share.compat': 'Check compatibility with a friend (copy URL)',
     'share.gallery': 'View the character gallery (all 8)',
@@ -9346,16 +9363,16 @@ const I18N = {
     // v4: hero/premium/gallery/match
     'hero.sub': 'Based on Howard Gardner\'s Theory of Multiple Intelligences (Harvard University), we measure the 8 kinds of intelligence that sleep within you.<br>A personal owner\'s manual—not for personality, but for your <em>weapons</em>.',
     'prem.intro1': 'The free diagnosis is only the beginning.',
-    'prem.intro2': 'For 980 yen, unlock your personal Owner Manual of Talent.',
-    'prem.locked': 'The rest is for premium members',
-    'prem.features_label': '— What is included in the Premium Report —',
-    'prem.f.sci.title': 'Scientific deep-dive into your talents',
-    'prem.f.sci.desc': 'Why your brain works the way it does, explained at a neuroscience level (~2,000 chars)',
-    'prem.f.30days.title': '30-day program',
-    'prem.f.30days.desc': 'A daily 5-minute menu to weave your talent into everyday life',
-    'prem.f.jobs.title': '100 careers list',
-    'prem.f.jobs.desc': '100 careers where your talents thrive, organized into 10 categories',
-    'prem.f.side.title': 'Roadmap to starting a side hustle',
+    'prem.intro2': 'For 980 yen, unlock the Owner Manual of Talent for your type — with a fill-in workbook.',
+    'prem.locked': 'The rest is for buyers only',
+    'prem.features_label': '— What is included in this report —',
+    'prem.f.sci.title': 'A deep dive into your talents',
+    'prem.f.sci.desc': 'Your strengths, growth areas, thinking traps, and the "four faces" of your talent',
+    'prem.f.30days.title': '30-day talent training',
+    'prem.f.30days.desc': 'A 6-phase practice, 10 minutes a day, to train your thinking',
+    'prem.f.jobs.title': 'The power of combination',
+    'prem.f.jobs.desc': 'The unique talent born from combining your 2nd and 3rd intelligences',
+    'prem.f.side.title': 'Putting talent to work (career, side hustle, money)',
     'prem.payment_notice': '* Preview launch—payment is being set up.<br>We are tallying Interested clicks for now.',
     'gallery.title': 'Character Gallery',
     'match.title': 'Check Compatibility',
@@ -9369,7 +9386,7 @@ const I18N = {
     'share.window_title': 'Jibu-Mato Result Card',
   
     // premium section label
-    'premium.section_label': '— Section 01 of 07 · Deep Dive —',
+    'premium.section_label': '— Section 02 of 06 · Deep Dive —',
   
     // computing messages & match placeholder
     'computing.msg1': 'Peering into your sea of words...',
@@ -9382,11 +9399,11 @@ const I18N = {
     'match.url_prompt': 'Please share this URL with your friend:',
   
     // premium preview extension
-    'premium.section_label2': '— Section 02 of 07 · 30-Day Program —',
-    'premium.section_label3': '— Section 03 of 07 · Side Hustle Roadmap —',
+    'premium.section_label2': '— Section 06 of 06 · 30-Day Program —',
+    'premium.section_label3': '— Section 04 of 06 · Putting Talent to Work —',
     'premium.program_title': '30-day habit design to embed your talent into everyday life',
-    'prem.locked_program': 'Days 11–30 are for premium members',
-    'prem.locked_side': 'Steps 3–6 are for premium members',
+    'prem.locked_program': 'The remaining phases are for buyers only',
+    'prem.locked_side': 'The rest is for buyers only',
   
     // ad label
     'ad.label': 'Sponsored',
@@ -9538,7 +9555,7 @@ const I18N = {
     'match.love':        '恋爱',
     'premium.title':     '更深入了解\n你的才能',
     'premium.sub':       '免费测评只是入口。\n用¥980解锁属于你的「才能使用说明书」。',
-    'premium.btn':       '开启高级报告',
+    'premium.btn':       '开启类型诊断报告',
     'premium.thanks':    '感谢您的关注',
     'intel.linguistic':    '语言智能',
     'intel.logical':       '逻辑数学智能',
@@ -9562,14 +9579,14 @@ const I18N = {
     'chapter.thinking': '— 思维的领域 —',
     'q.back': '← 上一题',
     'q.tap_to_proceed': '回答后将自动进入下一题',
-    'prem.feat1.desc': '月入3万至30万日元的6步实战计划',
-    'prem.feat2.title': '与不擅长应对类型的相处之道',
-    'prem.feat2.desc': '让你疲惫的对手是谁，以及三种应对策略',
-    'prem.feat3.title': 'PDF版《自己的使用说明书》',
-    'prem.feat3.desc': '全部内容以A4 8页PDF保存与打印',
-    'prem.feat4.title': '高分辨率结果卡片图像',
-    'prem.feat4.desc': '可直接用于社交分享的印刷品质图像',
-    'prem.price.label': '高级报告',
+    'prem.feat1.desc': '基于官方统计的年收入数据，以及按类型的工作与副业策略',
+    'prem.feat2.title': '人际关系与契合度',
+    'prem.feat2.desc': '8种类型契合图，以及与难处之人的相处方式、最佳搭档',
+    'prem.feat3.title': '可填写工作簿',
+    'prem.feat3.desc': '填入自己的分数、绘制雷达图——不止于读完即忘',
+    'prem.feat4.title': 'A4·9页PDF',
+    'prem.feat4.desc': '和风现代设计全9页，可随时保存·打印查阅',
+    'prem.price.label': '类型诊断报告（含工作簿）',
     'prem.price.tax': '（含税·一次性购买）',
     'share.compat': '查看与朋友的契合度（复制URL）',
     'share.gallery': '查看角色图鉴（全8个）',
@@ -9607,16 +9624,16 @@ const I18N = {
     // v4: hero/premium/gallery/match
     'hero.sub': '基于哈佛大学加德纳教授提出的"多元智能理论(MI理论)"，测量你心中沉睡的8种智能。<br>这不是关于性格，而是关于<em>武器</em>的——你的专属说明书。',
     'prem.intro1': '免费诊断只是入口。',
-    'prem.intro2': '只需980日元，即可解锁专属于你的"才能使用说明书"。',
-    'prem.locked': '后续内容仅限高级会员',
-    'prem.features_label': '— 高级报告包含的内容 —',
-    'prem.f.sci.title': '才能的科学深度剖析',
-    'prem.f.sci.desc': '从神经科学层面解释你的大脑为何这样运作（约2,000字）',
-    'prem.f.30days.title': '30天计划',
-    'prem.f.30days.desc': '将才能融入日常的每日5分钟具体方案',
-    'prem.f.jobs.title': '100种职业清单',
-    'prem.f.jobs.desc': '将适合你才能的100种职业分10个类别呈现',
-    'prem.f.side.title': '副业起步路线图',
+    'prem.intro2': '只需980日元，即可解锁你所属类型的"才能使用说明书"（附可填写工作簿）。',
+    'prem.locked': '后续内容仅限购买者',
+    'prem.features_label': '— 本报告包含的内容 —',
+    'prem.f.sci.title': '才能的深度剖析',
+    'prem.f.sci.desc': '你的优势、成长空间、思维陷阱，以及才能展现的「四种面貌」',
+    'prem.f.30days.title': '磨练才能的30天计划',
+    'prem.f.30days.desc': '每天10分钟、6个阶段锻炼思维的实践训练',
+    'prem.f.jobs.title': '优势的乘法',
+    'prem.f.jobs.desc': '与第2、第3位智能组合而生的、专属于你的才能',
+    'prem.f.side.title': '发挥才能之道（工作·副业·金钱）',
     'prem.payment_notice': '※ 试运行期间，结算系统正在准备中。<br>暂时统计"感兴趣"的点击数。',
     'gallery.title': '角色图鉴',
     'match.title': '查看契合度',
@@ -9630,7 +9647,7 @@ const I18N = {
     'share.window_title': 'Jibu-Mato 结果卡片',
   
     // premium section label
-    'premium.section_label': '— 第 01 节 / 全 07 节 · 深度剖析 —',
+    'premium.section_label': '— 第 02 节 / 全 06 节 · 深度剖析 —',
   
     // computing messages & match placeholder
     'computing.msg1': '正在窥探你的语言之海...',
@@ -9643,11 +9660,11 @@ const I18N = {
     'match.url_prompt': '请把这个URL发给朋友：',
   
     // premium preview extension
-    'premium.section_label2': '— 第 02 节 / 全 07 节 · 30天计划 —',
-    'premium.section_label3': '— 第 03 节 / 全 07 节 · 副业路线图 —',
+    'premium.section_label2': '— 第 06 节 / 全 06 节 · 30天计划 —',
+    'premium.section_label3': '— 第 04 节 / 全 06 节 · 发挥才能之道 —',
     'premium.program_title': '将才能融入日常的30天习惯设计',
-    'prem.locked_program': '剩余 Day 11~30 仅限高级会员',
-    'prem.locked_side': '剩余 STEP 3~6 仅限高级会员',
+    'prem.locked_program': '其余阶段仅限购买者',
+    'prem.locked_side': '后续内容仅限购买者',
   
     // ad label
     'ad.label': '赞助商链接',
@@ -9799,7 +9816,7 @@ const I18N = {
     'match.love':        '연애',
     'premium.title':     '나의 재능을\n더 깊이 알아보기',
     'premium.sub':       '무료 진단은 시작에 불과합니다.\n¥980으로 나만의 「재능 사용 설명서」를 해제하세요.',
-    'premium.btn':       '프리미엄 리포트 열기',
+    'premium.btn':       '유형별 진단 리포트 열기',
     'premium.thanks':    '관심 가져주셔서 감사합니다',
     'intel.linguistic':    '언어 지능',
     'intel.logical':       '논리수학 지능',
@@ -9823,14 +9840,14 @@ const I18N = {
     'chapter.thinking': '— 사고의 영역 —',
     'q.back': '← 이전 질문으로',
     'q.tap_to_proceed': '답하시면 다음으로 진행됩니다',
-    'prem.feat1.desc': '월 3~30만 엔을 벌기 위한 6단계 실천 플랜',
-    'prem.feat2.title': '맞지 않는 유형과 잘 지내는 법',
-    'prem.feat2.desc': '당신을 지치게 하는 상대의 정체와 3가지 대처법',
-    'prem.feat3.title': 'PDF판 「자신의 취급설명서」',
-    'prem.feat3.desc': '전체 콘텐츠를 A4 8페이지 PDF로 저장·인쇄 가능',
-    'prem.feat4.title': '고해상도 결과 카드 이미지',
-    'prem.feat4.desc': 'SNS 공유에 그대로 사용할 수 있는 인쇄 품질의 이미지',
-    'prem.price.label': '프리미엄 리포트',
+    'prem.feat1.desc': '공적 통계에 기반한 연봉 데이터와, 유형별 일하는 방식·부업 전략',
+    'prem.feat2.title': '인간관계와 궁합',
+    'prem.feat2.desc': '8유형 궁합도와, 어려운 상대와의 관계·최고의 파트너',
+    'prem.feat3.title': '작성형 워크북',
+    'prem.feat3.desc': '자신의 점수를 적고 레이더를 그린다——읽고 끝내지 않는 장치',
+    'prem.feat4.title': 'A4·9페이지 PDF',
+    'prem.feat4.desc': '일본풍 모던 디자인 전 9페이지. 저장·인쇄해 언제든 다시 볼 수 있습니다',
+    'prem.price.label': '유형별 진단 리포트 (워크북 포함)',
     'prem.price.tax': '(부가세 포함·1회 구매)',
     'share.compat': '친구와의 궁합 보기 (URL 복사)',
     'share.gallery': '캐릭터 도감 보기 (전 8체)',
@@ -9868,16 +9885,16 @@ const I18N = {
     // v4: hero/premium/gallery/match
     'hero.sub': '하버드 대학의 하워드 가드너가 제창한「다중지능 이론(MI 이론)」을 기반으로, 당신 안에 잠든 8종류의 지능을 측정합니다.<br>성격이 아닌, <em>무기</em>를 알기 위한, 자신의 취급설명서.',
     'prem.intro1': '무료 진단은 입구에 불과합니다.',
-    'prem.intro2': '980엔으로, 당신만의「재능 취급설명서」를 해제할 수 있습니다.',
-    'prem.locked': '이후 내용은 프리미엄 회원 전용',
-    'prem.features_label': '— Premium Report에 포함된 내용 —',
-    'prem.f.sci.title': '재능의 과학적 심층 분석',
-    'prem.f.sci.desc': '당신의 뇌가 왜 그렇게 작동하는지, 신경과학 수준의 해설 (약 2,000자)',
-    'prem.f.30days.title': '30일간 프로그램',
-    'prem.f.30days.desc': '재능을 일상에 녹여내기 위한, 매일 5분의 구체적 메뉴',
-    'prem.f.jobs.title': '100가지 직업 리스트',
-    'prem.f.jobs.desc': '당신의 재능이 빛나는 100가지 직업을 10개 카테고리로 분류해 제시',
-    'prem.f.side.title': '부업 시작 로드맵',
+    'prem.intro2': '980엔으로, 당신 유형의「재능 취급설명서」(작성형 워크북 포함)를 해제할 수 있습니다.',
+    'prem.locked': '이후 내용은 구매자 전용',
+    'prem.features_label': '— 이 리포트에 포함된 내용 —',
+    'prem.f.sci.title': '재능의 심층 분석',
+    'prem.f.sci.desc': '당신의 강점·성장 여지·사고의 함정, 그리고 재능이 보이는 「네 가지 얼굴」',
+    'prem.f.30days.title': '재능을 갈고닦는 30일 프로그램',
+    'prem.f.30days.desc': '하루 10분, 사고를 단련하는 6단계 실천 트레이닝',
+    'prem.f.jobs.title': '강점의 곱셈',
+    'prem.f.jobs.desc': '2위·3위 지능과 조합되어 생기는, 당신만의 고유한 재능',
+    'prem.f.side.title': '재능을 살리는 길 (일·부업·돈)',
     'prem.payment_notice': '※ 시범 공개 중이라 결제 시스템을 준비 중입니다.<br>「관심 있음」 클릭 수를 집계하고 있습니다.',
     'gallery.title': '캐릭터 도감',
     'match.title': '궁합 보기',
@@ -9891,7 +9908,7 @@ const I18N = {
     'share.window_title': 'Jibu-Mato 결과 카드',
   
     // premium section label
-    'premium.section_label': '— Section 01 of 07 · 심층 분석 —',
+    'premium.section_label': '— Section 02 of 06 · 심층 분석 —',
   
     // computing messages & match placeholder
     'computing.msg1': '당신의 말의 바다를 들여다보고 있습니다...',
@@ -9904,11 +9921,11 @@ const I18N = {
     'match.url_prompt': '이 URL을 친구에게 보내주세요:',
   
     // premium preview extension
-    'premium.section_label2': '— Section 02 of 07 · 30일 프로그램 —',
-    'premium.section_label3': '— Section 03 of 07 · 부업 로드맵 —',
+    'premium.section_label2': '— Section 06 of 06 · 30일 프로그램 —',
+    'premium.section_label3': '— Section 04 of 06 · 재능을 살리는 길 —',
     'premium.program_title': '재능을 일상에 녹여내는, 30일 습관 설계',
-    'prem.locked_program': '나머지 Day 11~30은 프리미엄 회원 전용',
-    'prem.locked_side': '나머지 STEP 3~6은 프리미엄 회원 전용',
+    'prem.locked_program': '나머지 단계는 구매자 전용',
+    'prem.locked_side': '이후 내용은 구매자 전용',
   
     // ad label
     'ad.label': '스폰서 링크',
