@@ -1362,11 +1362,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
 
   .radar-container {
-    background: var(--paper-deep);
-    padding: 30px 20px;
+    background:
+      radial-gradient(ellipse at 50% 38%, rgba(184,137,58,0.10), transparent 62%),
+      linear-gradient(160deg, var(--paper-deep) 0%, #e2d4b8 100%);
+    padding: 30px 20px 22px;
     margin-bottom: 30px;
-    border: 1px solid rgba(15,14,12,0.15);
+    border: 1px solid rgba(184,137,58,0.35);
     position: relative;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.4),
+      0 6px 24px rgba(15,14,12,0.10);
   }
 
   .radar-container::before {
@@ -1377,10 +1382,42 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     pointer-events: none;
   }
 
+  /* 四隅のコーナー装飾 */
+  .radar-container::after {
+    content: '';
+    position: absolute;
+    inset: 14px;
+    pointer-events: none;
+    background:
+      linear-gradient(var(--gold), var(--gold)) left top / 14px 1px no-repeat,
+      linear-gradient(var(--gold), var(--gold)) left top / 1px 14px no-repeat,
+      linear-gradient(var(--gold), var(--gold)) right top / 14px 1px no-repeat,
+      linear-gradient(var(--gold), var(--gold)) right top / 1px 14px no-repeat,
+      linear-gradient(var(--gold), var(--gold)) left bottom / 14px 1px no-repeat,
+      linear-gradient(var(--gold), var(--gold)) left bottom / 1px 14px no-repeat,
+      linear-gradient(var(--gold), var(--gold)) right bottom / 14px 1px no-repeat,
+      linear-gradient(var(--gold), var(--gold)) right bottom / 1px 14px no-repeat;
+    opacity: 0.55;
+  }
+
+  .radar-caption {
+    text-align: center;
+    margin-top: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: rgba(15,14,12,0.4);
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+  }
+
   #radarChart {
     width: 100%;
     height: auto;
     display: block;
+    position: relative;
+    z-index: 2;
   }
 
   /* Score Bars */
@@ -2674,15 +2711,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     inset: 0;
     background: linear-gradient(180deg,
       rgba(244,237,224,0) 0%,
-      rgba(244,237,224,0.4) 30%,
-      rgba(244,237,224,0.95) 70%,
+      rgba(244,237,224,0) 36%,
+      rgba(244,237,224,0.55) 58%,
+      rgba(244,237,224,0.97) 81%,
       rgba(244,237,224,1) 100%);
     display: flex;
     align-items: flex-end;
     justify-content: center;
     padding-bottom: 12px;
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, transparent 34%, #000 58%);
+    mask-image: linear-gradient(180deg, transparent 0%, transparent 34%, #000 58%);
+    backdrop-filter: blur(2.5px);
+    -webkit-backdrop-filter: blur(2.5px);
   }
 
   .premium-blur-content {
@@ -3724,6 +3764,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <div class="radar-container">
     <canvas id="radarChart" width="600" height="600"></canvas>
+    <div class="radar-caption" data-i18n="radar.caption">YOUR 8 INTELLIGENCES · MI BALANCE</div>
   </div>
 
   <!-- スコアリスト -->
@@ -3931,7 +3972,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="feature-num">02</span>
           <div>
             <strong data-i18n="prem.f.30days.title">才能を磨く30日プログラム</strong>
-            <span data-i18n="prem.f.30days.desc">1日10分、思考を鍛える6フェーズの実践トレーニング</span>
+            <span data-i18n="prem.f.30days.desc">1日10分、前半・後半に分かれた30日間の実践トレーニング</span>
           </div>
         </li>
         <li>
@@ -3945,14 +3986,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="feature-num">04</span>
           <div>
             <strong data-i18n="prem.f.side.title">才能を活かす道（仕事・副業・お金）</strong>
-            <span data-i18n="prem.feat1.desc">公的統計に基づく年収データと、タイプ別の働き方・副業戦略</span>
+            <span data-i18n="prem.f.side.desc">副業ロードマップ＋あなたのタイプに合う100の職業リスト</span>
           </div>
         </li>
         <li>
           <span class="feature-num">05</span>
           <div>
             <strong data-i18n="prem.feat2.title">人間関係と相性</strong>
-            <span data-i18n="prem.feat2.desc">8タイプ相性図と、苦手な相手との関わり方・最高の相棒</span>
+            <span data-i18n="prem.feat2.desc">苦手なタイプとの関わり方と、あなたの才能を引き出す相手の見つけ方</span>
           </div>
         </li>
         <li>
@@ -3965,8 +4006,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li>
           <span class="feature-num">07</span>
           <div>
-            <strong data-i18n="prem.feat4.title">A4・9ページのPDF</strong>
-            <span data-i18n="prem.feat4.desc">和モダンデザインの全9ページ。保存・印刷していつでも見返せます</span>
+            <strong data-i18n="prem.feat4.title">A4・26ページのPDF</strong>
+            <span data-i18n="prem.feat4.desc">和モダンデザインの全26ページ。保存・印刷していつでも見返せます</span>
           </div>
         </li>
       </ul>
@@ -4720,7 +4761,7 @@ const PREMIUM_REPORT = {
       body_zh: "你的大脑被设计为通过「语言滤镜」接收并重构世界。这不仅仅是词汇丰富的层面。你将情感语言化的速度、对语感的细腻、读取语境的能力——所有这些在你脑中协同运作，绘制出他人看不见的「语言地图」。\n\n这种才能的本质是：将看不见的情感、思考、关系翻译为能传达给他人的形式的能力。你写下的一行讯息，说话时选择的一个词，都被无意识地优化为「能抵达对方内心的形态」。\n\n但需注意。正因为擅长言语，你可能会轻视「无法言说之物」。沉默的价值、身体感觉、数字的力量——能尊重这些，正是让你的才能更进一步的关键。",
       body_ko: "당신의 뇌는 세상을 「말의 필터」를 통해 받아들이고 재구성하도록 설계되어 있습니다. 이것은 단순히 어휘가 풍부하다는 수준의 이야기가 아닙니다. 감정을 언어화하는 속도, 어감의 섬세함, 문맥을 읽는 힘—이 모든 것이 뇌 안에서 연동하여 작동하며, 다른 사람에게는 보이지 않는 「말의 지도」를 그리고 있습니다.\n\n이 재능의 본질은, 보이지 않는 감정·사고·관계를 누군가에게 전해지는 형태로 번역하는 힘입니다. 당신이 쓰는 한 줄의 메시지, 말할 때 선택하는 한 단어—그것들은 무의식 중에 「상대의 마음에 닿는 형태」로 최적화되어 있습니다.\n\n다만 주의점도 있습니다. 말이 능숙하기에, 「말로 표현할 수 없는 것」을 경시하는 경향이 있습니다. 침묵의 가치, 신체 감각, 숫자의 힘—이것들을 존중할 수 있는지가, 당신의 재능을 더욱 깊게 만드는 열쇠입니다."
     },
-    // 30日プログラム
+    // 30日プログラム（PDFのDay1〜30）
     program: [
       "Day 1-5: 毎日100字の日記を書く（テーマ自由）",
       "Day 6-10: 1冊の本から、心に響いた3フレーズを抜き書きする",
@@ -4729,19 +4770,7 @@ const PREMIUM_REPORT = {
       "Day 21-25: 自分の意見を200字で発信する（SNSでもメモでも）",
       "Day 26-30: 1ヶ月の自分を振り返り、500字のエッセイにまとめる"
     ],
-    // 100の職業（カテゴリ別）
-    careers: {
-      "創作・表現系": ["小説家", "脚本家", "詩人", "ライター", "コピーライター", "作詞家", "エッセイスト", "翻訳家", "通訳", "コラムニスト"],
-      "メディア・出版系": ["編集者", "ジャーナリスト", "記者", "校正者", "出版プロデューサー", "Webメディア運営", "podcasterの脚本担当", "ドキュメンタリー制作", "ノンフィクション作家", "リサーチャー"],
-      "教育・伝達系": ["国語教師", "塾講師", "言語療法士", "日本語教師", "司書", "図書館員", "アナウンサー", "ナレーター", "MC・司会者", "ボイスコーチ"],
-      "ビジネス系": ["広報・PR", "マーケター（コンテンツ寄り）", "セールスコピー作家", "プレゼン資料作成", "営業企画", "ブランドマネージャー", "広告代理店プランナー", "スピーチライター", "渉外担当", "プロダクトマーケター"],
-      "対人・支援系": ["カウンセラー", "コーチ", "メンター", "セラピスト", "司法書士", "弁護士", "行政書士", "キャリアコンサルタント", "クレーム対応", "対話型ファシリテーター"],
-      "メディア・芸能系": ["放送作家", "TVプロデューサー", "演出家", "舞台脚本家", "声優", "朗読家", "落語家", "漫才作家", "ラジオパーソナリティ", "YouTube脚本"],
-      "新興職業": ["プロンプトエンジニア", "AI調教師（RLHF担当）", "Note・ブログでの発信業", "オンラインサロン主宰", "ニュースレター作家", "電子書籍著者", "ストーリーテラー（ブランド向け）", "音声配信者", "オーディオブック朗読", "対話型AIシナリオ作家"],
-      "副業向き": ["Webライター", "ブログ運営", "メルマガ発行", "添削サービス", "命名・ネーミング", "リライト業", "校正業", "プロフィール文作成", "推敲サービス", "電子書籍販売"],
-      "意外な適性": ["占い師（言葉で運命を編む）", "結婚式の司会", "葬儀の語り部", "美術館の解説員", "観光ガイド", "ツアーコンダクター", "クルーズ船のホスト", "ホテルのコンシェルジュ", "高級ブランドの接客", "刑事の聴取担当"]
-    },
-    // 副業の始め方
+    // 副業の始め方（PDFのp.17-18より）
     sideHustle: {
       title: "言葉で月3〜10万円を稼ぐ最短ルート",
       steps: [
@@ -4761,15 +4790,15 @@ const PREMIUM_REPORT = {
   ,
 
     // フル多言語化（v6）
-    program_en: ["Day 1-5: Write a 100-character diary every day (any topic)", "Day 6-10: Extract 3 phrases that resonated from one book", "Day 11-15: Write one handwritten letter to a friend or colleague", "Day 16-20: Read one short story, then write 200 characters about a character", "Day 21-25: Share your opinion in 200 characters (SNS or notes are fine)", "Day 26-30: Reflect on the month and compile it into a 500-character essay"],
-    program_zh: ["第1-5天：每天写100字日记（主题自由）", "第6-10天：从一本书中摘录3句触动心灵的语句", "第11-15天：给朋友或同事写一封手写信", "第16-20天：读一本短篇小说，并就一个人物写200字", "第21-25天：用200字发表自己的意见（SNS或笔记均可）", "第26-30天：回顾这一个月，整理成500字随笔"],
-    program_ko: ["Day 1-5: 매일 100자 일기 쓰기 (주제 자유)", "Day 6-10: 책 한 권에서 마음에 와닿은 3구절을 발췌하기", "Day 11-15: 친구나 동료에게 손편지 한 통 쓰기", "Day 16-20: 단편 소설을 한 편 읽고, 등장인물에 대해 200자 쓰기", "Day 21-25: 자신의 의견을 200자로 발신하기 (SNS나 메모도 좋음)", "Day 26-30: 한 달의 자신을 돌아보고 500자 에세이로 정리하기"],
-    sideHustle_title_en: "Shortest route to earning ¥30,000–¥100,000/month with words",
-    sideHustle_title_zh: "用语言月入3万至10万日元的最短路线",
-    sideHustle_title_ko: "말로 월 3~10만 엔을 버는 최단 루트",
-    sideHustle_steps_en: ["STEP 1: Write weekly on Note about your specialty (free first 3 months)", "STEP 2: After 30 posts, release one paid article (¥500+) per month", "STEP 3: Share daily insights on Twitter, aim for 1,000 followers", "STEP 4: Accept beginner writing gigs on CrowdWorks/Lancers", "STEP 5: Deliver 10 articles/month at ¥1–3/character → ¥30,000–100,000 in reach", "STEP 6: With expertise, contract directly with company-owned media (¥200,000+ possible)"],
-    sideHustle_steps_zh: ["STEP 1: 在Note上每周写1篇关于自己专业的文章（前3个月免费公开）", "STEP 2: 累计30篇后，每月发布1篇付费文章（¥500起）", "STEP 3: 在Twitter发布日常感悟，争取关注者1000人", "STEP 4: 在CrowdWorks、Lancers接初学者级写作单", "STEP 5: 单价¥1~3/字，月交10篇 → 月入3~10万日元在射程内", "STEP 6: 专业度提升后，与企业自媒体直接签约（月入20万日元亦有可能）"],
-    sideHustle_steps_ko: ["STEP 1: Note에 주 1회, 자신의 전문 분야에 대해 쓰기 (처음 3개월은 무료 공개)", "STEP 2: 30편 쌓이면 월 1편 유료 기사 (¥500~) 출시", "STEP 3: Twitter에 일상의 깨달음을 발신, 팔로워 1000명 목표", "STEP 4: CrowdWorks·Lancers에서 초보자용 라이팅 안건 수주", "STEP 5: 단가 ¥1~3/자로 월 10편 납품 → 월 3~10만 엔이 현실권", "STEP 6: 전문성이 높아지면 기업 오운드 미디어와 직접 계약 (월 20만 엔도 가능)"],
+    program_en: ["Day 1-3: Photograph one place you use often; write 3 pain points", "Day 4-7: Tidy your desk, bag, or phone screen; turn an article into one diagram", "Day 8-10: Redo a layout with more whitespace; collect 3 designs you love", "Day 11-14: Turn someone's explanation into a flowchart; show a rough to one person", "Day 15: Summarize first-half insights in 3 lines", "Day 16-19: Watch where someone looks first; soften a visual critique", "Day 20-23: Tell someone what is good about their layout; share an unfinished rough", "Day 24-27: Turn FAQs into a visual diagram; make a before/after on one page", "Day 28-30: Describe your strength in one sentence plus a diagram; pick one visual domain to grow next month"],
+    program_zh: ["第1-3天：拍下一个常用场所，写出3个不便之处", "第4-7天：整理桌面·包·手机屏幕之一，把读过的文章做成一张图", "第8-10天：用更多留白重新排版，收集3个喜欢的设计", "第11-14天：把别人的说明变成流程图，把草稿展示给一个人看", "第15天：用3行总结前半段的收获", "第16-19天：观察对方最先看哪里，把尖锐的视觉指摘柔化", "第20-23天：具体告诉某人其排版好在哪里，分享未完成的草稿", "第24-27天：把常见问题做成图解FAQ，把前后对比整合成一页", "第28-30天：用一句话加一张图说明自己的强项，选出下个月想提升的表现领域"],
+    program_ko: ["Day 1-3: 자주 쓰는 장소를 사진으로 기록하고 불편한 점 3가지 쓰기", "Day 4-7: 책상·가방·스마트폰 화면 중 하나 정리, 읽은 기사를 한 장 도형으로", "Day 8-10: 같은 내용을 여백 많은 레이아웃으로 고치고, 좋아하는 디자인 3개 수집", "Day 11-14: 누군가의 설명을 흐름도로 만들어 확인, 러프를 한 사람에게 보이기", "Day 15: 전반의 깨달음을 3줄로 정리", "Day 16-19: 상대가 제일 먼저 어디를 보는지 관찰, 날카로운 지적을 부드럽게 변환", "Day 20-23: 누군가의 자료에서 좋은 배치를 구체적으로 전달, 미완성 러프 공유", "Day 24-27: 자주 받는 질문을 도해 FAQ로, 비포·애프터를 한 장에 정리", "Day 28-30: 나의 강점을 한 문장과 도형으로 설명, 다음 30일에 키울 표현 영역 선택"],
+    sideHustle_title_en: "Using visual skills to earn ¥30,000–¥200,000/month",
+    sideHustle_title_zh: "用视觉技能月入3万至20万日元",
+    sideHustle_title_ko: "시각 기술로 월 3~20만 엔을 버는 법",
+    sideHustle_steps_en: ["STEP 1: Pick one thing you've recently made easier to read (doc, room, image, flow)", "STEP 2: Write in one sentence who you help and what you clarify; publish free or low-price", "STEP 3: Collect 3 reactions; prioritize \"it's clearer now\" feedback over perfection", "STEP 4: Turn that into a product: diagram template, slide review, or LP first-view audit", "STEP 5: Build a portfolio (Behance / Dribbble / your own site); post 3x/week on social media", "STEP 6: Repeat the loop; land corporate repeat clients → stable ¥200,000/month"],
+    sideHustle_steps_zh: ["STEP 1: 选一件你最近「让别人更容易看懂」的东西（文件·房间·图片·动线）", "STEP 2: 用一句话写明你帮谁让什么变清晰，免费或低价公开", "STEP 3: 收集3个反馈，优先重视「变得更清楚了」的声音", "STEP 4: 将其转化为商品：图解模板·PPT添削·LP首屏诊断", "STEP 5: 建立作品集（Behance·Dribbble·个人网站），每周在SNS发布3次", "STEP 6: 循环迭代，获取企业重复案件 → 月入20万日元稳定收入"],
+    sideHustle_steps_ko: ["STEP 1: 최근 「보기 쉽게 만든」 것을 하나 선택 (자료·방·이미지·동선)", "STEP 2: 누구의 무엇을 쉽게 만드는지 한 문장으로 쓰고, 무료 또는 저가로 공개", "STEP 3: 반응 3개를 모으고 「보기 쉬워졌다」는 목소리를 우선", "STEP 4: 도해 템플릿·슬라이드 첨삭·LP 퍼스트뷰 진단으로 상품화", "STEP 5: 포트폴리오(Behance·Dribbble·개인 사이트) 정리, SNS 주 3회 업로드", "STEP 6: 루프를 돌려 기업 반복 수주 획득 → 월 20만 엔 안정 수입으로"],
     relationship_title_en: "How to engage with those who don't rely on words",
     relationship_title_zh: "如何与不依赖语言的人相处",
     relationship_title_ko: "말에 의존하지 않는 상대와 어떻게 관계 맺을까",
@@ -4860,12 +4889,15 @@ const PREMIUM_REPORT = {
       body_ko: "당신의 뇌는 본 것을 「입체 정보」로 변환하고, 반대로 머릿속의 발상을 「보이는 형태」로 변환하는 능력을 가지고 있습니다. 구도, 색, 도형과 배경의 관계, 레이아웃, 조명—이 모든 시각적 요소를, 당신은 그야말로 한순간에 처리합니다.\n\n이 재능은 디자인이나 건축뿐 아니라, 프로그래밍·비즈니스 등 전혀 다른 분야에서도 창조성을 발휘합니다. 「구조」라는 말을 들으면 「도형」「지도」로 파악하고, 「논리」라는 말을 들으면 「흐름선」으로 파악합니다. 당신의 뇌 속에서, 세상은 하나의 거대한 비주얼라이제이션입니다.\n\n주의점은, 언어화를 강요받는 것에 대한 거부감입니다. 무리하지 말고, 「스케치」나 「도해」로 보여주는 것에 능숙해지면, 그것이 곧 당신의 무기가 됩니다."
     },
     program: [
-      "Day 1-5: 毎日1枚、見たものをラフスケッチする（5分でOK）",
-      "Day 6-10: 好きな空間・建築物の写真を集め、構図を分析する",
-      "Day 11-15: 自分の部屋・デスクのレイアウトを再設計する",
-      "Day 16-20: 配色パレットを1日1セット作る（5色組み合わせ）",
-      "Day 21-25: 自分のアイデアを必ず「図解」で説明する練習",
-      "Day 26-30: 1ヶ月で集めたビジュアル素材で、ムードボードを完成させる"
+      "Day 1-3: 今日よく使う場所を1つ写真で記録し、使いにくい点を3つ書く",
+      "Day 4-7: 机・バッグ・スマホ画面のどれかを整え、読んだ記事を1枚の図にする",
+      "Day 8-10: 同じ内容を余白多めのレイアウトに直し、好きなデザインを3つ集める",
+      "Day 11-14: 誰かの説明をフロー図にして確認し、ラフ案を1人に見せる",
+      "Day 15: 前半の気づきを3行でまとめる",
+      "Day 16-19: 相手が最初にどこを見るか観察し、きつく聞こえる指摘を柔らかく変換する",
+      "Day 20-23: 誰かの資料の良い配置を具体的に伝え、未完成のラフを誰かに共有する",
+      "Day 24-27: よくある質問を図解FAQにし、ビフォー・アフターを1枚にまとめる",
+      "Day 28-30: 自分の強みを一文と図で説明し、次の30日で伸ばしたい表現領域を1つ選ぶ"
     ],
     careers: {
       "デザイン系": ["UI/UXデザイナー", "グラフィックデザイナー", "プロダクトデザイナー", "Webデザイナー", "ロゴデザイナー", "ブランドデザイナー", "パッケージデザイナー", "エディトリアルデザイナー", "サインデザイナー", "情報デザイナー"],
@@ -7054,6 +7086,7 @@ function _showResultInner() {
   document.getElementById('quoteAttr').textContent = '— ' + quoteData.a + ' —';
 
   // Radar chart
+  window._radarScores = scores;
   drawRadar(scores);
 
   // ランク判定関数
@@ -7489,101 +7522,207 @@ function onPremiumInterest() {
 function drawRadar(scores) {
   const canvas = document.getElementById('radarChart');
   const ctx = canvas.getContext('2d');
-  const size = canvas.width;
+
+  // ===== HiDPI 対応：論理サイズを保ちつつ高解像度で描画 =====
+  const logicalSize = 600;
+  const dpr = Math.min(window.devicePixelRatio || 1, 3);
+  if (canvas.width !== logicalSize * dpr) {
+    canvas.width = logicalSize * dpr;
+    canvas.height = logicalSize * dpr;
+  }
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  const size = logicalSize;
   const cx = size / 2;
   const cy = size / 2;
-  const radius = size * 0.38;
+  const radius = size * 0.36;
   const n = KEYS.length;
 
   ctx.clearRect(0, 0, size, size);
 
-  // Background grid
+  const PALETTE = {
+    ink: '#0f0e0c',
+    gold: '#b8893a',
+    goldLight: '#d4ad5e',
+    crimson: '#8a2922'
+  };
+
+  const pt = (i, r) => {
+    const angle = (Math.PI * 2 * i) / n - Math.PI / 2;
+    return [cx + Math.cos(angle) * r, cy + Math.sin(angle) * r, angle];
+  };
+
+  // ===== 外周の装飾リング（二重） =====
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius + 20, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(184,137,58,0.25)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius + 14, 0, Math.PI * 2);
+  ctx.setLineDash([1, 5]);
+  ctx.strokeStyle = 'rgba(184,137,58,0.45)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // ===== 背景グリッド（同心多角形） =====
   for (let level = 1; level <= 5; level++) {
     const r = (radius * level) / 5;
     ctx.beginPath();
     for (let i = 0; i < n; i++) {
-      const angle = (Math.PI * 2 * i) / n - Math.PI / 2;
-      const x = cx + Math.cos(angle) * r;
-      const y = cy + Math.sin(angle) * r;
+      const [x, y] = pt(i, r);
       if (i === 0) ctx.moveTo(x, y);
       else ctx.lineTo(x, y);
     }
     ctx.closePath();
-    ctx.strokeStyle = level === 5 ? 'rgba(15,14,12,0.3)' : 'rgba(15,14,12,0.12)';
-    ctx.lineWidth = level === 5 ? 1 : 0.5;
+
+    if (level % 2 === 1) {
+      // 奇数リングに極薄の塗りで陰影を作る
+      ctx.fillStyle = 'rgba(184,137,58,0.035)';
+      ctx.fill();
+    }
+    ctx.strokeStyle = level === 5 ? 'rgba(15,14,12,0.28)' : 'rgba(15,14,12,0.10)';
+    ctx.lineWidth = level === 5 ? 1 : 0.6;
     ctx.stroke();
   }
 
-  // Spokes
+  // ===== スポーク（放射軸） =====
   for (let i = 0; i < n; i++) {
-    const angle = (Math.PI * 2 * i) / n - Math.PI / 2;
+    const [x, y] = pt(i, radius);
     ctx.beginPath();
     ctx.moveTo(cx, cy);
-    ctx.lineTo(cx + Math.cos(angle) * radius, cy + Math.sin(angle) * radius);
-    ctx.strokeStyle = 'rgba(15,14,12,0.15)';
-    ctx.lineWidth = 0.5;
+    ctx.lineTo(x, y);
+    ctx.strokeStyle = 'rgba(15,14,12,0.12)';
+    ctx.lineWidth = 0.6;
     ctx.stroke();
+
+    // 軸の先端に小さなマーカー
+    ctx.beginPath();
+    ctx.arc(x, y, 2, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(184,137,58,0.55)';
+    ctx.fill();
   }
 
-  // Data polygon
-  ctx.beginPath();
-  KEYS.forEach((key, i) => {
-    const angle = (Math.PI * 2 * i) / n - Math.PI / 2;
-    const val = scores[key] / 100;
-    const r = radius * val;
-    const x = cx + Math.cos(angle) * r;
-    const y = cy + Math.sin(angle) * r;
-    if (i === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
+  // ===== データ多角形の頂点を算出 =====
+  const points = KEYS.map((key, i) => {
+    const val = Math.max(0, Math.min(100, scores[key])) / 100;
+    return pt(i, radius * val);
   });
+
+  // ----- 外周グロー（柔らかい光彩） -----
+  ctx.save();
+  ctx.beginPath();
+  points.forEach(([x, y], i) => { i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); });
+  ctx.closePath();
+  ctx.shadowColor = 'rgba(138,41,34,0.35)';
+  ctx.shadowBlur = 22;
+  ctx.fillStyle = 'rgba(138,41,34,0.001)';
+  ctx.fill();
+  ctx.restore();
+
+  // ----- 塗り（放射グラデーション） -----
+  ctx.beginPath();
+  points.forEach(([x, y], i) => { i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); });
   ctx.closePath();
   const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
-  grad.addColorStop(0, 'rgba(138,41,34,0.35)');
-  grad.addColorStop(1, 'rgba(184,137,58,0.25)');
+  grad.addColorStop(0, 'rgba(184,137,58,0.42)');
+  grad.addColorStop(0.55, 'rgba(160,90,58,0.34)');
+  grad.addColorStop(1, 'rgba(138,41,34,0.30)');
   ctx.fillStyle = grad;
   ctx.fill();
-  ctx.strokeStyle = 'rgba(138,41,34,0.85)';
-  ctx.lineWidth = 1.8;
+
+  // ----- 輪郭線（二重：太線＋ハイライト） -----
+  ctx.beginPath();
+  points.forEach(([x, y], i) => { i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); });
+  ctx.closePath();
+  ctx.strokeStyle = 'rgba(138,41,34,0.9)';
+  ctx.lineWidth = 2.2;
+  ctx.lineJoin = 'round';
   ctx.stroke();
 
-  // Data points
-  KEYS.forEach((key, i) => {
-    const angle = (Math.PI * 2 * i) / n - Math.PI / 2;
-    const val = scores[key] / 100;
-    const r = radius * val;
-    const x = cx + Math.cos(angle) * r;
-    const y = cy + Math.sin(angle) * r;
+  ctx.strokeStyle = 'rgba(212,173,94,0.6)';
+  ctx.lineWidth = 0.8;
+  ctx.stroke();
 
+  // ===== データ点（各知能カラーの宝石風マーカー） =====
+  KEYS.forEach((key, i) => {
+    const [x, y] = points[i];
+    const color = (INTELLIGENCES[key] && INTELLIGENCES[key].color) || PALETTE.crimson;
+
+    // 外側の淡いハロー
     ctx.beginPath();
-    ctx.arc(x, y, 5, 0, Math.PI * 2);
-    ctx.fillStyle = '#0f0e0c';
+    ctx.arc(x, y, 8.5, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(244,237,224,0.85)';
     ctx.fill();
-    ctx.strokeStyle = '#b8893a';
-    ctx.lineWidth = 1.5;
+
+    // カラーリング
+    ctx.beginPath();
+    ctx.arc(x, y, 6, 0, Math.PI * 2);
+    ctx.fillStyle = color;
+    ctx.fill();
+
+    // 中心の白点（ハイライト）
+    ctx.beginPath();
+    ctx.arc(x, y, 2.4, 0, Math.PI * 2);
+    ctx.fillStyle = '#f4ede0';
+    ctx.fill();
+
+    // 細い金縁
+    ctx.beginPath();
+    ctx.arc(x, y, 6, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(184,137,58,0.9)';
+    ctx.lineWidth = 1;
     ctx.stroke();
   });
 
-  // Labels
-  ctx.font = '600 18px "Shippori Mincho", serif';
-  ctx.fillStyle = '#0f0e0c';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
+  // ===== 中心の装飾（小さなロゼット） =====
+  ctx.beginPath();
+  ctx.arc(cx, cy, 3.2, 0, Math.PI * 2);
+  ctx.fillStyle = PALETTE.gold;
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(cx, cy, 6.5, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(184,137,58,0.4)';
+  ctx.lineWidth = 0.8;
+  ctx.stroke();
 
+  // ===== ラベル =====
   KEYS.forEach((key, i) => {
-    const angle = (Math.PI * 2 * i) / n - Math.PI / 2;
-    const labelR = radius + 38;
-    const x = cx + Math.cos(angle) * labelR;
-    const y = cy + Math.sin(angle) * labelR;
+    const labelR = radius + 44;
+    const [x, y] = pt(i, labelR);
     const info = INTELLIGENCES[key];
     const shortName = getIntShortName(key);
-    ctx.fillText(shortName, x, y - 8);
 
-    ctx.font = 'italic 11px "Cormorant Garamond", serif';
-    ctx.fillStyle = 'rgba(15,14,12,0.5)';
-    ctx.fillText(info.en, x, y + 10);
+    // スコア値（小さく上品に）
+    const val = Math.round(scores[key]);
+
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
 
     ctx.font = '600 18px "Shippori Mincho", serif';
-    ctx.fillStyle = '#0f0e0c';
+    ctx.fillStyle = PALETTE.ink;
+    ctx.fillText(shortName, x, y - 9);
+
+    ctx.font = 'italic 10px "Cormorant Garamond", serif';
+    ctx.fillStyle = 'rgba(15,14,12,0.45)';
+    ctx.fillText(info.en, x, y + 7);
+
+    ctx.font = '500 11px "JetBrains Mono", monospace';
+    ctx.fillStyle = (INTELLIGENCES[key] && INTELLIGENCES[key].color) || PALETTE.crimson;
+    ctx.fillText(String(val), x, y + 21);
+  });
+}
+
+// 画面幅変更・端末回転でレーダーがぼやけないよう再描画（一度だけ登録）
+if (!window._radarResizeBound) {
+  window._radarResizeBound = true;
+  let _radarResizeTimer = null;
+  window.addEventListener('resize', () => {
+    if (!window._radarScores) return;
+    clearTimeout(_radarResizeTimer);
+    _radarResizeTimer = setTimeout(() => drawRadar(window._radarScores), 150);
   });
 }
 
@@ -9053,11 +9192,11 @@ const I18N = {
     'q.tap_to_proceed': '回答すると次へ進みます',
     'prem.feat1.desc': '公的統計に基づく年収データと、タイプ別の働き方・副業戦略',
     'prem.feat2.title': '人間関係と相性',
-    'prem.feat2.desc': '8タイプ相性図と、苦手な相手との関わり方・最高の相棒',
+    'prem.feat2.desc': '苦手なタイプとの関わり方と、あなたの才能を引き出す相手の見つけ方',
     'prem.feat3.title': '書き込み式ワークブック',
     'prem.feat3.desc': '自分のスコアを記入し、レーダーを描く——読んで終わりにしない仕掛け',
-    'prem.feat4.title': 'A4・9ページのPDF',
-    'prem.feat4.desc': '和モダンデザインの全9ページ。保存・印刷していつでも見返せます',
+    'prem.feat4.title': 'A4・26ページのPDF',
+    'prem.feat4.desc': '和モダンデザインの全26ページ。保存・印刷していつでも見返せます',
     'prem.price.label': 'タイプ別診断レポート（ワークブック付き）',
     'prem.price.tax': '（税込・買い切り）',
     'share.compat': '友達との相性をみる（URLコピー）',
@@ -9102,10 +9241,11 @@ const I18N = {
     'prem.f.sci.title': '才能の深掘り',
     'prem.f.sci.desc': 'あなたの強み・伸びしろ・思考の罠、そして才能が見せる「四つの顔」',
     'prem.f.30days.title': '才能を磨く30日プログラム',
-    'prem.f.30days.desc': '1日10分、思考を鍛える6フェーズの実践トレーニング',
+    'prem.f.30days.desc': '1日10分、前半・後半に分かれた30日間の実践トレーニング',
     'prem.f.jobs.title': '強みの掛け算',
     'prem.f.jobs.desc': '2位・3位の知能と組み合わせて生まれる、あなた固有の才能',
     'prem.f.side.title': '才能を活かす道（仕事・副業・お金）',
+    'prem.f.side.desc': '副業ロードマップ＋あなたのタイプに合う100の職業リスト',
     'prem.payment_notice': '※ お試し公開中につき、現在は決済システムを準備中です。<br>「興味あり」のクリック数を集計しています。',
     'gallery.title': 'キャラクター図鑑',
     'match.title': '相性をみる',
@@ -9119,7 +9259,8 @@ const I18N = {
     'share.window_title': 'じぶマト結果カード',
   
     // premium section label
-    'premium.section_label': '— Section 02 of 06 · Deep Dive —',
+    'radar.caption': 'あなたの8つの知能 · MIバランス',
+    'premium.section_label': '— Section 01 of 06 · 才能の深掘り —',
   
     // computing messages & match placeholder
     'computing.msg1': 'あなたの言葉の海を覗いています...',
@@ -9132,7 +9273,7 @@ const I18N = {
     'match.url_prompt': 'このURLを友達に送ってください:',
   
     // premium preview extension
-    'premium.section_label2': '— Section 06 of 06 · 30日プログラム —',
+    'premium.section_label2': '— Section 02 of 06 · 30日プログラム —',
     'premium.section_label3': '— Section 04 of 06 · 才能を活かす道 —',
     'premium.program_title': '才能を日常に組み込む、30日の習慣設計',
     'prem.locked_program': '残りのフェーズは購入者限定',
@@ -9320,11 +9461,11 @@ const I18N = {
     'q.tap_to_proceed': 'Tap an answer to continue',
     'prem.feat1.desc': 'Salary data from official statistics, plus work and side-hustle strategy by type',
     'prem.feat2.title': 'Relationships & compatibility',
-    'prem.feat2.desc': 'An 8-type compatibility map, how to handle difficult people, and your ideal partner',
+    'prem.feat2.desc': 'How to engage with difficult types, and how to find those who bring out your talent',
     'prem.feat3.title': 'Fill-in workbook',
     'prem.feat3.desc': 'Write in your scores and draw your radar—not just a read-and-forget report',
-    'prem.feat4.title': '9-page A4 PDF',
-    'prem.feat4.desc': 'All 9 pages in a refined Japanese-modern design—save and print anytime',
+    'prem.feat4.title': '26-page A4 PDF',
+    'prem.feat4.desc': 'All 26 pages in a refined Japanese-modern design—save and print anytime',
     'prem.price.label': 'Type-Based Report (with Workbook)',
     'prem.price.tax': '(Tax incl. · One-time purchase)',
     'share.compat': 'Check compatibility with a friend (copy URL)',
@@ -9369,10 +9510,11 @@ const I18N = {
     'prem.f.sci.title': 'A deep dive into your talents',
     'prem.f.sci.desc': 'Your strengths, growth areas, thinking traps, and the "four faces" of your talent',
     'prem.f.30days.title': '30-day talent training',
-    'prem.f.30days.desc': 'A 6-phase practice, 10 minutes a day, to train your thinking',
+    'prem.f.30days.desc': 'A 30-day practice split into two halves, 10 minutes a day',
     'prem.f.jobs.title': 'The power of combination',
     'prem.f.jobs.desc': 'The unique talent born from combining your 2nd and 3rd intelligences',
     'prem.f.side.title': 'Putting talent to work (career, side hustle, money)',
+    'prem.f.side.desc': 'Side-hustle roadmap + 100 careers matched to your type',
     'prem.payment_notice': '* Preview launch—payment is being set up.<br>We are tallying Interested clicks for now.',
     'gallery.title': 'Character Gallery',
     'match.title': 'Check Compatibility',
@@ -9386,7 +9528,8 @@ const I18N = {
     'share.window_title': 'Jibu-Mato Result Card',
   
     // premium section label
-    'premium.section_label': '— Section 02 of 06 · Deep Dive —',
+    'radar.caption': 'YOUR 8 INTELLIGENCES · MI BALANCE',
+    'premium.section_label': '— Section 01 of 06 · Deep Dive —',
   
     // computing messages & match placeholder
     'computing.msg1': 'Peering into your sea of words...',
@@ -9399,7 +9542,7 @@ const I18N = {
     'match.url_prompt': 'Please share this URL with your friend:',
   
     // premium preview extension
-    'premium.section_label2': '— Section 06 of 06 · 30-Day Program —',
+    'premium.section_label2': '— Section 02 of 06 · 30-Day Program —',
     'premium.section_label3': '— Section 04 of 06 · Putting Talent to Work —',
     'premium.program_title': '30-day habit design to embed your talent into everyday life',
     'prem.locked_program': 'The remaining phases are for buyers only',
@@ -9581,11 +9724,11 @@ const I18N = {
     'q.tap_to_proceed': '回答后将自动进入下一题',
     'prem.feat1.desc': '基于官方统计的年收入数据，以及按类型的工作与副业策略',
     'prem.feat2.title': '人际关系与契合度',
-    'prem.feat2.desc': '8种类型契合图，以及与难处之人的相处方式、最佳搭档',
+    'prem.feat2.desc': '如何与苦手类型相处，以及找到能激发你才能的伙伴',
     'prem.feat3.title': '可填写工作簿',
     'prem.feat3.desc': '填入自己的分数、绘制雷达图——不止于读完即忘',
-    'prem.feat4.title': 'A4·9页PDF',
-    'prem.feat4.desc': '和风现代设计全9页，可随时保存·打印查阅',
+    'prem.feat4.title': 'A4·26页PDF',
+    'prem.feat4.desc': '和风现代设计全26页，可随时保存·打印查阅',
     'prem.price.label': '类型诊断报告（含工作簿）',
     'prem.price.tax': '（含税·一次性购买）',
     'share.compat': '查看与朋友的契合度（复制URL）',
@@ -9630,10 +9773,11 @@ const I18N = {
     'prem.f.sci.title': '才能的深度剖析',
     'prem.f.sci.desc': '你的优势、成长空间、思维陷阱，以及才能展现的「四种面貌」',
     'prem.f.30days.title': '磨练才能的30天计划',
-    'prem.f.30days.desc': '每天10分钟、6个阶段锻炼思维的实践训练',
+    'prem.f.30days.desc': '每天10分钟、分前半后半的30天实践训练',
     'prem.f.jobs.title': '优势的乘法',
     'prem.f.jobs.desc': '与第2、第3位智能组合而生的、专属于你的才能',
     'prem.f.side.title': '发挥才能之道（工作·副业·金钱）',
+    'prem.f.side.desc': '副业路线图＋与你的类型相符的100种职业列表',
     'prem.payment_notice': '※ 试运行期间，结算系统正在准备中。<br>暂时统计"感兴趣"的点击数。',
     'gallery.title': '角色图鉴',
     'match.title': '查看契合度',
@@ -9647,7 +9791,8 @@ const I18N = {
     'share.window_title': 'Jibu-Mato 结果卡片',
   
     // premium section label
-    'premium.section_label': '— 第 02 节 / 全 06 节 · 深度剖析 —',
+    'radar.caption': '你的8种智能 · MI 平衡',
+    'premium.section_label': '— 第 01 节 / 全 06 节 · 深度剖析 —',
   
     // computing messages & match placeholder
     'computing.msg1': '正在窥探你的语言之海...',
@@ -9660,7 +9805,7 @@ const I18N = {
     'match.url_prompt': '请把这个URL发给朋友：',
   
     // premium preview extension
-    'premium.section_label2': '— 第 06 节 / 全 06 节 · 30天计划 —',
+    'premium.section_label2': '— 第 02 节 / 全 06 节 · 30天计划 —',
     'premium.section_label3': '— 第 04 节 / 全 06 节 · 发挥才能之道 —',
     'premium.program_title': '将才能融入日常的30天习惯设计',
     'prem.locked_program': '其余阶段仅限购买者',
@@ -9842,11 +9987,11 @@ const I18N = {
     'q.tap_to_proceed': '답하시면 다음으로 진행됩니다',
     'prem.feat1.desc': '공적 통계에 기반한 연봉 데이터와, 유형별 일하는 방식·부업 전략',
     'prem.feat2.title': '인간관계와 궁합',
-    'prem.feat2.desc': '8유형 궁합도와, 어려운 상대와의 관계·최고의 파트너',
+    'prem.feat2.desc': '어려운 타입과의 관계 맺는 법과, 당신의 재능을 끌어내는 상대 찾기',
     'prem.feat3.title': '작성형 워크북',
     'prem.feat3.desc': '자신의 점수를 적고 레이더를 그린다——읽고 끝내지 않는 장치',
-    'prem.feat4.title': 'A4·9페이지 PDF',
-    'prem.feat4.desc': '일본풍 모던 디자인 전 9페이지. 저장·인쇄해 언제든 다시 볼 수 있습니다',
+    'prem.feat4.title': 'A4·26페이지 PDF',
+    'prem.feat4.desc': '일본풍 모던 디자인 전 26페이지. 저장·인쇄해 언제든 다시 볼 수 있습니다',
     'prem.price.label': '유형별 진단 리포트 (워크북 포함)',
     'prem.price.tax': '(부가세 포함·1회 구매)',
     'share.compat': '친구와의 궁합 보기 (URL 복사)',
@@ -9891,10 +10036,11 @@ const I18N = {
     'prem.f.sci.title': '재능의 심층 분석',
     'prem.f.sci.desc': '당신의 강점·성장 여지·사고의 함정, 그리고 재능이 보이는 「네 가지 얼굴」',
     'prem.f.30days.title': '재능을 갈고닦는 30일 프로그램',
-    'prem.f.30days.desc': '하루 10분, 사고를 단련하는 6단계 실천 트레이닝',
+    'prem.f.30days.desc': '하루 10분, 전반·후반으로 나뉜 30일간의 실천 트레이닝',
     'prem.f.jobs.title': '강점의 곱셈',
     'prem.f.jobs.desc': '2위·3위 지능과 조합되어 생기는, 당신만의 고유한 재능',
     'prem.f.side.title': '재능을 살리는 길 (일·부업·돈)',
+    'prem.f.side.desc': '부업 로드맵＋당신의 타입에 맞는 100가지 직업 리스트',
     'prem.payment_notice': '※ 시범 공개 중이라 결제 시스템을 준비 중입니다.<br>「관심 있음」 클릭 수를 집계하고 있습니다.',
     'gallery.title': '캐릭터 도감',
     'match.title': '궁합 보기',
@@ -9908,7 +10054,8 @@ const I18N = {
     'share.window_title': 'Jibu-Mato 결과 카드',
   
     // premium section label
-    'premium.section_label': '— Section 02 of 06 · 심층 분석 —',
+    'radar.caption': '당신의 8가지 지능 · MI 밸런스',
+    'premium.section_label': '— Section 01 of 06 · 심층 분석 —',
   
     // computing messages & match placeholder
     'computing.msg1': '당신의 말의 바다를 들여다보고 있습니다...',
@@ -9921,7 +10068,7 @@ const I18N = {
     'match.url_prompt': '이 URL을 친구에게 보내주세요:',
   
     // premium preview extension
-    'premium.section_label2': '— Section 06 of 06 · 30일 프로그램 —',
+    'premium.section_label2': '— Section 02 of 06 · 30일 프로그램 —',
     'premium.section_label3': '— Section 04 of 06 · 재능을 살리는 길 —',
     'premium.program_title': '재능을 일상에 녹여내는, 30일 습관 설계',
     'prem.locked_program': '나머지 단계는 구매자 전용',
