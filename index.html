@@ -4059,7 +4059,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
 
-      <button class="premium-buy-btn" onclick="onPremiumInterest()">
+      <button class="premium-buy-btn" onclick="goToPremiumCheckout()">
         <span class="premium-buy-icon">✦</span>
         <span><span class="buy-btn-type" id="buyBtnTypeName"></span><span data-i18n="premium.btn_suffix">の診断レポートを開く</span></span>
       </button>
@@ -7491,6 +7491,16 @@ function renderPremiumPreview(key) {
       : typeName;
   }
 
+  // 決済リンクが設定済みのタイプなら、「準備中」注記を実運用の案内へ差し替え
+  try {
+    const note = document.querySelector('.premium-note');
+    const linkReady = typeof STRIPE_PAYMENT_LINKS !== 'undefined' && STRIPE_PAYMENT_LINKS[key];
+    if (note && linkReady) {
+      note.innerHTML = t('prem.payment_ready');
+      note.style.color = '';
+    }
+  } catch (e) { /* ignore */ }
+
   // 言語別フィールド取得
   const suffix = currentLang === 'en' ? '_en'
                 : currentLang === 'zh' ? '_zh'
@@ -7541,6 +7551,38 @@ function renderPremiumPreview(key) {
       }).join('');
     }
   }
+}
+
+// ============ PREMIUM CHECKOUT (Stripe Payment Links) ============
+// 各タイプ（日本語版）の Stripe Payment Link URL。
+// Stripe ダッシュボードで「決済後のリダイレクト先」を
+//   https://www.jibunmatrix.com/thanks.html?type=◯◯
+// に設定したうえで、発行された Payment Link の URL をここに貼ってください。
+// 未設定（空文字）のタイプは、従来どおり「興味あり集計」にフォールバックします。
+const STRIPE_PAYMENT_LINKS = {
+  linguistic:    '', // 例: 'https://buy.stripe.com/xxxxxxxxlinguistic'
+  logical:       '',
+  spatial:       '',
+  musical:       '',
+  bodily:        '',
+  interpersonal: '',
+  intrapersonal: '',
+  naturalist:    ''
+};
+
+function goToPremiumCheckout() {
+  const type = state.top1;
+  const url = STRIPE_PAYMENT_LINKS[type];
+
+  // Payment Link が未設定なら、従来の「興味あり集計」へフォールバック
+  if (!url) {
+    onPremiumInterest();
+    return;
+  }
+
+  // 念のための確認なしで決済ページへ遷移（ボタン文言で意図は明示済み）
+  // 同一タブで遷移。決済後は Stripe 側の設定で thanks.html?type=◯◯ に戻る。
+  window.location.href = url;
 }
 
 function onPremiumInterest() {
@@ -9354,6 +9396,7 @@ const I18N = {
     'prem.f.side.title': '才能を活かす道（仕事・副業・お金）',
     'prem.f.side.desc': '副業ロードマップ＋あなたのタイプに合う100の職業リスト',
     'prem.payment_notice': '※ お試し公開中につき、現在は決済システムを準備中です。<br>「興味あり」のクリック数を集計しています。',
+    'prem.payment_ready': '※ 決済後すぐにPDFをダウンロードできます。<br>クレジットカード・Apple Pay・Google Pay に対応。買い切り・税込です。',
     'gallery.title': 'キャラクター図鑑',
     'match.title': '相性をみる',
     'match.desc': 'もう一人の「じぶマトコード」を入力すると、二人の才能の相性が見られます。',
@@ -9627,6 +9670,7 @@ const I18N = {
     'prem.f.side.title': 'Putting talent to work (career, side hustle, money)',
     'prem.f.side.desc': 'Side-hustle roadmap + 100 careers matched to your type',
     'prem.payment_notice': '* Preview launch—payment is being set up.<br>We are tallying Interested clicks for now.',
+    'prem.payment_ready': '* Download your PDF right after payment.<br>Cards, Apple Pay & Google Pay accepted. One-time, tax included.',
     'gallery.title': 'Character Gallery',
     'match.title': 'Check Compatibility',
     'match.desc': 'Enter another person\'s Jibu-Mato code to see how your talents match.',
@@ -9894,6 +9938,7 @@ const I18N = {
     'prem.f.side.title': '发挥才能之道（工作·副业·金钱）',
     'prem.f.side.desc': '副业路线图＋与你的类型相符的100种职业列表',
     'prem.payment_notice': '※ 试运行期间，结算系统正在准备中。<br>暂时统计"感兴趣"的点击数。',
+    'prem.payment_ready': '※ 付款后即可立即下载PDF。<br>支持信用卡·Apple Pay·Google Pay。一次性买断·含税。',
     'gallery.title': '角色图鉴',
     'match.title': '查看契合度',
     'match.desc': '输入他人的Jibu-Mato码，即可查看你们才能的契合度。',
@@ -10161,6 +10206,7 @@ const I18N = {
     'prem.f.side.title': '재능을 살리는 길 (일·부업·돈)',
     'prem.f.side.desc': '부업 로드맵＋당신의 타입에 맞는 100가지 직업 리스트',
     'prem.payment_notice': '※ 시범 공개 중이라 결제 시스템을 준비 중입니다.<br>「관심 있음」 클릭 수를 집계하고 있습니다.',
+    'prem.payment_ready': '※ 결제 후 바로 PDF를 다운로드할 수 있습니다.<br>카드·Apple Pay·Google Pay 지원. 한 번 결제·세금 포함.',
     'gallery.title': '캐릭터 도감',
     'match.title': '궁합 보기',
     'match.desc': '다른 사람의 Jibu-Mato 코드를 입력하면 두 사람의 재능 궁합을 볼 수 있습니다.',

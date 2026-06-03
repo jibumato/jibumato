@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ご購入ありがとうございます｜じぶんマトリクス</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="じぶんマトリクス プレミアム解説書のダウンロードページです。">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Shippori+Mincho:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink: #0f0e0c;
+    --paper: #f4ede0;
+    --paper-deep: #e8dcc4;
+    --gold: #b8893a;
+    --gold-light: #d4ad5e;
+    --crimson: #8a2922;
+  }
+
+  body {
+    font-family: 'Shippori Mincho', serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* 紙のテクスチャ */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(rgba(15,14,12,0.025) 1px, transparent 1px);
+    background-size: 4px 4px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at 0% 0%, rgba(184,137,58,0.10), transparent 30%),
+      radial-gradient(circle at 100% 100%, rgba(184,137,58,0.10), transparent 30%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 540px;
+    background: linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
+    border: 1px solid rgba(184,137,58,0.4);
+    padding: 48px 36px 40px;
+    text-align: center;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 8px 30px rgba(15,14,12,0.10);
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 1px dashed rgba(184,137,58,0.3);
+    pointer-events: none;
+  }
+
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .badge .mark { color: var(--crimson); margin: 0 10px; }
+
+  .check {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 20px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--crimson);
+    font-size: 26px;
+    background: rgba(184,137,58,0.08);
+  }
+
+  h1 {
+    font-size: clamp(22px, 5vw, 27px);
+    font-weight: 800;
+    line-height: 1.4;
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+  }
+
+  .lead {
+    font-size: 14px;
+    line-height: 1.9;
+    color: rgba(15,14,12,0.7);
+    margin-bottom: 30px;
+  }
+
+  /* 購入タイプ表示 */
+  .type-row {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 28px;
+    padding: 10px 24px;
+    border: 1.5px solid var(--gold);
+    background: rgba(184,137,58,0.08);
+  }
+  .type-row .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .type-row .name {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--crimson);
+  }
+
+  /* DLボタン */
+  .dl-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    padding: 18px 28px;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+  }
+  .dl-btn:hover { background: var(--crimson); letter-spacing: 0.25em; }
+  .dl-btn .icon { font-family: 'JetBrains Mono', monospace; font-size: 17px; }
+
+  .dl-note {
+    font-size: 11px;
+    line-height: 1.8;
+    color: rgba(15,14,12,0.5);
+    margin-top: 18px;
+  }
+
+  .divider {
+    margin: 32px 0 24px;
+    text-align: center;
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 1em;
+    opacity: 0.6;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(184,137,58,0.4);
+    padding-bottom: 2px;
+    transition: color 0.3s;
+  }
+  .back-link:hover { color: var(--crimson); }
+
+  /* エラー表示 */
+  .error-box {
+    display: none;
+    padding: 20px;
+    border: 1px solid rgba(138,41,34,0.4);
+    background: rgba(138,41,34,0.05);
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--crimson);
+    margin-bottom: 24px;
+    text-align: left;
+  }
+  .error-box a { color: var(--crimson); font-weight: 700; }
+
+  .support {
+    font-size: 11px;
+    line-height: 1.8;
+    color: rgba(15,14,12,0.45);
+    margin-top: 28px;
+  }
+  .support a { color: var(--gold); }
+
+  @media (max-width: 480px) {
+    .card { padding: 36px 22px 32px; }
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="badge">
+      <span class="mark">✦</span>JIBU-MATO PREMIUM<span class="mark">✦</span>
+    </div>
+
+    <div class="check">✓</div>
+
+    <h1>ご購入ありがとうございます</h1>
+    <p class="lead">
+      決済が完了しました。<br>
+      下のボタンから、あなたのプレミアム解説書（PDF）をダウンロードできます。
+    </p>
+
+    <!-- 正常時 -->
+    <div id="success">
+      <div class="type-row">
+        <span class="label">Your Type</span>
+        <span class="name" id="typeName">— —</span>
+      </div>
+
+      <div>
+        <a class="dl-btn" id="dlBtn" href="#" download>
+          <span class="icon">⬇</span>
+          <span>解説書をダウンロード（PDF）</span>
+        </a>
+      </div>
+
+      <p class="dl-note">
+        ※ ボタンを押すと、別のタブでPDFが開きます。<br>
+        表示されたPDFは、端末に保存してご利用ください。<br>
+        このページのリンクは、購入されたご本人のためのものです。
+      </p>
+    </div>
+
+    <!-- エラー時（typeパラメータ不正など） -->
+    <div class="error-box" id="errorBox">
+      ダウンロード対象が確認できませんでした。<br>
+      お手数ですが、購入時の完了メール、または
+      <a href="https://www.jibunmatrix.com/">トップページ</a>
+      からお問い合わせください。
+    </div>
+
+    <div class="divider">✦ ✦ ✦</div>
+
+    <a class="back-link" href="https://www.jibunmatrix.com/">← じぶんマトリクスへ戻る</a>
+
+    <p class="support">
+      ダウンロードがうまくいかない場合は、ブラウザを変えてお試しください。<br>
+      ご不明点は <a href="mailto:support@jibunmatrix.com">support@jibunmatrix.com</a> までご連絡ください。
+    </p>
+  </div>
+
+<script>
+  // 8タイプの定義（日本語の型名 + PDFのフルURL）
+  // PDFは Cloudflare R2 のパブリック開発URLから配信
+  var R2_BASE = 'https://pub-a4320a9d71da4683b8c631babc18ffdd.r2.dev';
+  var TYPES = {
+    linguistic:    { name: '言語型',  file: R2_BASE + '/linguistic_p3n8w5z1.pdf' },
+    logical:       { name: '論理型',  file: R2_BASE + '/logical_v6b2m9k7.pdf' },
+    spatial:       { name: '空間型',  file: R2_BASE + '/spatial_k7m2x9q4.pdf' },
+    musical:       { name: '音楽型',  file: R2_BASE + '/musical_h4j8r2t6.pdf' },
+    bodily:        { name: '身体型',  file: R2_BASE + '/bodily_x9c3p7w2.pdf' },
+    interpersonal: { name: '対人型',  file: R2_BASE + '/interpersonal_q5k8n3v6.pdf' },
+    intrapersonal: { name: '内省型',  file: R2_BASE + '/intrapersonal_m2w7b4z9.pdf' },
+    naturalist:    { name: '博物型',  file: R2_BASE + '/naturalist_t6r3h8k1.pdf' }
+  };
+
+  (function () {
+    // URLパラメータ ?type=spatial を取得
+    var params = new URLSearchParams(window.location.search);
+    var type = (params.get('type') || '').toLowerCase().trim();
+    var info = TYPES[type];
+
+    var successEl = document.getElementById('success');
+    var errorEl = document.getElementById('errorBox');
+
+    if (!info) {
+      // 不正・欠落時はエラー表示に切り替え
+      if (successEl) successEl.style.display = 'none';
+      if (errorEl) errorEl.style.display = 'block';
+      return;
+    }
+
+    // 型名とDLリンクをセット
+    document.getElementById('typeName').textContent = info.name;
+    var btn = document.getElementById('dlBtn');
+    btn.setAttribute('href', info.file);
+    // 別ドメイン(r2.dev)配信のため新しいタブで開く（PDFが表示され、そこから保存可能）
+    btn.setAttribute('target', '_blank');
+    btn.setAttribute('rel', 'noopener');
+    // download属性（同一オリジンでないと効かないが、念のため付与）
+    btn.setAttribute('download', 'じぶんマトリクス_' + info.name + '_プレミアム解説書.pdf');
+
+    // タブタイトルにも型名を反映
+    document.title = info.name + ' 解説書のダウンロード｜じぶんマトリクス';
+  })();
+</script>
+</body>
+</html>
