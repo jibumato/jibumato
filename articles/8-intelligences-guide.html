@@ -381,6 +381,27 @@ body::before { content:''; position:fixed; inset:0; background-image: radial-gra
     padding-left: 6px;
     margin-left: -8px;
   }
+
+  /* ===== AdSense ===== */
+  .ad-container {
+    margin: 40px auto;
+    max-width: 100%;
+    text-align: center;
+    min-height: 100px;
+  }
+  .ad-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: rgba(15,14,12,0.35);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .ad-container .adsbygoogle {
+    display: block;
+    margin: 0 auto;
+  }
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -416,6 +437,9 @@ body::before { content:''; position:fixed; inset:0; background-image: radial-gra
   "inLanguage": "ja"
 }
 </script>
+  <!-- ADSENSE-INJECTED -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9187493483642692"
+     crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="reading-progress" id="readingProgress"></div>
@@ -471,6 +495,17 @@ body::before { content:''; position:fixed; inset:0; background-image: radial-gra
   <article class="article-body">
 
     <!-- ===== 概観図 ===== -->
+
+  <div class="ad-container">
+    <span class="ad-label">Sponsored</span>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-9187493483642692"
+         data-ad-slot="9987726722"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+  </div>
+
     <h2 id="overview">8つの知能タイプ 一覧図</h2>
     <p>まず全体像を把握しましょう。MI理論の8タイプをひとつの図でまとめました。</p>
 
@@ -779,6 +814,17 @@ body::before { content:''; position:fixed; inset:0; background-image: radial-gra
     </div>
 
     <!-- ===== Type 05: Bodily ===== -->
+
+  <div class="ad-container">
+    <span class="ad-label">Sponsored</span>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-9187493483642692"
+         data-ad-slot="9987726722"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+  </div>
+
     <h2 id="bodily">⑤ 身体運動的知能（Bodily-Kinesthetic Intelligence）</h2>
 
     <div class="type-section">
@@ -1065,6 +1111,17 @@ body::before { content:''; position:fixed; inset:0; background-image: radial-gra
 
   </article>
 
+  <div class="ad-container">
+    <span class="ad-label">Sponsored</span>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-9187493483642692"
+         data-ad-slot="9987726722"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+  </div>
+
+
   <!-- CTA -->
   <div class="article-cta">
     <div class="article-cta-label">Free Assessment · 無料診断</div>
@@ -1166,5 +1223,17 @@ body::before { content:''; position:fixed; inset:0; background-image: radial-gra
   onScrollToc();
 })();
 </script>
+
+<script>
+  // 記事ページ内の AdSense 枠を初期化
+  (function () {
+    try {
+      document.querySelectorAll('.adsbygoogle').forEach(function () {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      });
+    } catch (e) { console.warn('AdSense load skipped:', e); }
+  })();
+</script>
+
 </body>
 </html>
