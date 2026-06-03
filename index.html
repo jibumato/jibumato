@@ -1106,62 +1106,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     opacity: 0.9;
   }
 
-  /* ===== MIタイプ ラベル & 「・・・」演出 ===== */
-  .mi-type-prelude {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 16px;
-    animation: prelude-fade-in 0.6s ease-out 0.15s both;
-  }
-
-  .mi-type-label {
-    font-family: 'Shippori Mincho', serif;
-    font-size: 14px;
-    color: var(--gold-light);
-    letter-spacing: 0.25em;
-    font-weight: 500;
-    opacity: 0.95;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.25);
-  }
-
-  .mi-type-em {
-    color: var(--paper);
-    font-weight: 700;
-    margin: 0 2px;
-    letter-spacing: 0.15em;
-  }
-
-  .mi-type-dots {
-    display: inline-flex;
-    gap: 2px;
-    font-family: 'Shippori Mincho', serif;
-    font-size: 18px;
-    color: var(--gold-light);
-    letter-spacing: 0.15em;
-  }
-
-  .mi-type-dots .dot {
-    display: inline-block;
-    opacity: 0;
-    animation: dot-appear 0.4s ease-out forwards;
-  }
-
-  .mi-type-dots .dot:nth-child(1) { animation-delay: 0.5s; }
-  .mi-type-dots .dot:nth-child(2) { animation-delay: 0.9s; }
-  .mi-type-dots .dot:nth-child(3) { animation-delay: 1.3s; }
-
-  @keyframes prelude-fade-in {
-    from { opacity: 0; transform: translateY(-6px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes dot-appear {
-    0% { opacity: 0; transform: translateY(2px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
-
   .character-name {
     font-family: 'Shippori Mincho', serif;
     font-weight: 800;
@@ -1184,6 +1128,38 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     animation: en-reveal 0.5s ease-out 2.1s both;
   }
 
+  /* ===== 型名バッジ（◯◯型 — 購入時の記憶づけ用にしっかり見せる） ===== */
+  .character-type-badge {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-top: 16px;
+    padding: 8px 22px;
+    border: 1.5px solid var(--gold);
+    background: linear-gradient(180deg, rgba(212,173,94,0.18), rgba(212,173,94,0.06));
+    box-shadow: 0 0 0 4px rgba(184,137,58,0.08), inset 0 1px 0 rgba(255,255,255,0.15);
+    opacity: 0;
+    animation: en-reveal 0.5s ease-out 2.35s both;
+  }
+
+  .ctb-name {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 800;
+    font-size: 19px;
+    letter-spacing: 0.1em;
+    color: var(--paper);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  }
+
+  .ctb-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--gold-light);
+    opacity: 0.85;
+  }
+
   @keyframes name-reveal {
     0% { opacity: 0; transform: translateY(12px) scale(0.94); filter: blur(8px); }
     50% { filter: blur(0); }
@@ -1193,52 +1169,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   @keyframes en-reveal {
     from { opacity: 0; transform: translateY(4px); }
     to { opacity: 0.85; transform: translateY(0); }
-  }
-
-  .talent-subtitle {
-    text-align: center;
-    margin-bottom: 24px;
-    padding: 16px 20px;
-    border: 1px solid rgba(212,173,94,0.25);
-    background: rgba(244,237,224,0.05);
-  }
-
-  .talent-subtitle-label {
-    display: block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.3em;
-    color: var(--gold-light);
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    opacity: 0.7;
-  }
-
-  .talent-subtitle-name {
-    display: block;
-    font-family: 'Shippori Mincho', serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--paper);
-    margin-bottom: 4px;
-  }
-
-  .talent-subtitle-en {
-    display: block;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 12px;
-    color: rgba(244,237,224,0.6);
-    letter-spacing: 0.1em;
-  }
-
-  .talent-divider {
-    text-align: center;
-    color: var(--gold);
-    font-size: 10px;
-    letter-spacing: 1em;
-    margin-bottom: 28px;
-    opacity: 0.6;
   }
 
   .talent-desc {
@@ -1423,94 +1353,64 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     z-index: 2;
   }
 
-  /* Score Bars */
-  .scores-list {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+  /* 特に発揮しやすい3つの知能（点数なし・並列） */
+  .top-intel-label {
+    text-align: center;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 18px;
+    opacity: 0.85;
+  }
+
+  .top-intel-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
     margin-bottom: 40px;
   }
 
-  .score-item {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 14px;
-    align-items: center;
-  }
-
-  .score-right {
+  .top-intel-card {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    gap: 4px;
-    min-width: 44px;
-  }
-
-  .score-grade {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 1;
-    width: 34px;
-    height: 34px;
-    display: flex;
     align-items: center;
-    justify-content: center;
-    border: 1.5px solid;
-    letter-spacing: 0;
-    font-style: normal;
-  }
-
-  .score-rank {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 14px;
-    color: var(--gold);
-    width: 28px;
-  }
-
-  .score-info {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .score-name {
-    font-size: 14px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
+    text-align: center;
     gap: 8px;
+    padding: 22px 12px 18px;
+    border: 1px solid rgba(15,14,12,0.15);
+    border-top-width: 3px;
+    background: rgba(244,237,224,0.4);
+    position: relative;
   }
 
-  .score-name .en {
+  .tic-symbol {
+    font-size: 26px;
+    line-height: 1;
+  }
+
+  .tic-name {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .tic-en {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 11px;
+    font-size: 10px;
+    letter-spacing: 0.06em;
     color: rgba(15,14,12,0.5);
-    font-weight: 400;
+    line-height: 1.2;
   }
 
-  .score-bar {
-    height: 4px;
-    background: rgba(15,14,12,0.1);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .score-bar-fill {
-    height: 100%;
-    width: 0;
-    transition: width 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-
-  .score-val {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--ink);
-    min-width: 32px;
-    text-align: right;
+  @media (max-width: 460px) {
+    .top-intel-cards { gap: 8px; }
+    .top-intel-card { padding: 16px 6px 14px; }
+    .tic-symbol { font-size: 22px; }
+    .tic-name { font-size: 12px; }
   }
 
   /* Detail Cards */
@@ -1715,25 +1615,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   /* ============ STRENGTH CARDS WITH BIG SYMBOL ============ */
   .strength-card {
     position: relative;
-    padding-top: 80px !important;
+    padding-top: 28px !important;
   }
 
   .strength-symbol {
     position: absolute;
-    top: 18px;
+    top: 22px;
     right: 18px;
-    width: 56px;
-    height: 56px;
+    width: 44px;
+    height: 44px;
     color: var(--gold);
-    opacity: 0.45;
+    opacity: 0.4;
     pointer-events: none;
   }
 
   .strength-card.featured .strength-symbol {
     color: var(--crimson);
-    opacity: 0.55;
-    width: 64px;
-    height: 64px;
+    opacity: 0.5;
+    width: 50px;
+    height: 50px;
   }
 
   .strength-symbol svg {
@@ -1741,10 +1641,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     height: 100%;
   }
 
+  /* ラベルと見出しはシンボルと横で重ならないよう右に余白を確保 */
+  .strength-card .label,
+  .strength-card h4 {
+    padding-right: 58px;
+  }
+
   @media (max-width: 600px) {
-    .strength-symbol { width: 48px; height: 48px; }
-    .strength-card.featured .strength-symbol { width: 54px; height: 54px; }
-    .strength-card { padding-top: 70px !important; }
+    .strength-symbol { width: 40px; height: 40px; }
+    .strength-card.featured .strength-symbol { width: 44px; height: 44px; }
+    .strength-card { padding-top: 24px !important; }
   }
 
   /* ============ TAROT-STYLE CAREER CARDS ============ */
@@ -2662,6 +2568,33 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     letter-spacing: 0.02em;
   }
 
+  /* 購入導線での型名リマインダー（あなたのタイプは ◯◯型） */
+  .premium-type-reminder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 0 auto 22px;
+    padding: 10px 24px;
+    width: fit-content;
+    border: 1.5px solid var(--gold);
+    background: rgba(184,137,58,0.08);
+  }
+  .ptr-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .ptr-type {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: 0.08em;
+    color: var(--crimson);
+  }
+
   .premium-subtitle {
     text-align: center;
     font-size: 14px;
@@ -2714,16 +2647,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     inset: 0;
     background: linear-gradient(180deg,
       rgba(244,237,224,0) 0%,
-      rgba(244,237,224,0) 36%,
-      rgba(244,237,224,0.55) 58%,
-      rgba(244,237,224,0.97) 81%,
-      rgba(244,237,224,1) 100%);
+      rgba(244,237,224,0) 42%,
+      rgba(244,237,224,0.4) 63%,
+      rgba(244,237,224,0.78) 84%,
+      rgba(244,237,224,0.9) 100%);
     display: flex;
     align-items: flex-end;
     justify-content: center;
     padding-bottom: 12px;
-    -webkit-mask-image: linear-gradient(180deg, transparent 0%, transparent 34%, #000 58%);
-    mask-image: linear-gradient(180deg, transparent 0%, transparent 34%, #000 58%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, transparent 40%, #000 64%);
+    mask-image: linear-gradient(180deg, transparent 0%, transparent 40%, #000 64%);
     backdrop-filter: blur(2.5px);
     -webkit-backdrop-filter: blur(2.5px);
   }
@@ -2949,6 +2882,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   .premium-buy-icon {
     font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* 購入ボタン内の型名（「言語型」の…）を強調 */
+  .buy-btn-type {
+    font-weight: 800;
+    color: var(--crimson);
+    margin-right: 1px;
+  }
+  .premium-buy-btn:hover .buy-btn-type,
+  .premium-buy-btn.clicked .buy-btn-type {
+    color: inherit;
   }
 
   .premium-note {
@@ -3828,22 +3772,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="character-name-block">
       <div class="character-tagline" id="characterTagline">— —</div>
-      <div class="mi-type-prelude">
-        <span class="mi-type-label" data-i18n="result.mi_type">あなたの<span class="mi-type-em">MIタイプ</span>は</span>
-        <span class="mi-type-dots">
-          <span class="dot">・</span><span class="dot">・</span><span class="dot">・</span>
-        </span>
-      </div>
       <h2 class="character-name" id="characterName">— —</h2>
       <div class="character-en" id="characterEn">— —</div>
-    </div>
-
-    <div class="talent-divider">✦ ✦ ✦</div>
-
-    <div class="talent-subtitle">
-      <span class="talent-subtitle-label" data-i18n="result.talent_type">才能タイプ</span>
-      <span class="talent-subtitle-name" id="talentName">— —</span>
-      <span class="talent-subtitle-en" id="talentEn">— —</span>
+      <div class="character-type-badge" id="characterTypeBadge">
+        <span class="ctb-name" id="typeBadgeName">— —</span>
+        <span class="ctb-en" id="typeBadgeEn">— —</span>
+      </div>
     </div>
 
     <div class="compound-banner" id="compoundBanner">
@@ -3867,16 +3801,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="radar-caption" data-i18n="radar.caption">YOUR 8 INTELLIGENCES · MI BALANCE</div>
   </div>
 
-  <!-- スコアリスト -->
-  <div class="section-title">
-    <span class="num">II.</span>
-    <span class="sec-icon"><svg aria-hidden="true" viewBox="0 0 32 32"><line x1="5" y1="26" x2="5" y2="18"/><line x1="11" y1="26" x2="11" y2="12"/><line x1="17" y1="26" x2="17" y2="6"/><line x1="23" y1="26" x2="23" y2="14"/><line x1="29" y1="26" x2="29" y2="20"/><line x1="3" y1="29" x2="31" y2="29"/></svg></span>
-    <h3 data-i18n="result.sec2">8つの知能スコア</h3>
-    <span class="en" data-i18n="result.sec2en">Detailed Scores</span>
-  </div>
-  <div class="scores-list" id="scoresList"></div>
+  <!-- 特に発揮しやすい3つの知能（点数なし） -->
+  <div class="top-intel-label" data-i18n="result.top_intel">— あなたが特に発揮しやすい3つ —</div>
+  <div class="top-intel-cards" id="topIntelCards"></div>
 
-  <!-- ===== 広告枠（候補1：スコアリストとTOP3武器の間） ===== -->
+  <!-- ===== 広告枠（候補1：知能バランスと著名人の間） ===== -->
   <div class="ad-container">
     <span class="ad-label" data-i18n="ad.label">Sponsored</span>
     <ins class="adsbygoogle"
@@ -3994,6 +3923,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <h3 class="premium-title" data-i18n="premium.title">あなたの才能を、<br>もっと深く知る</h3>
+
+    <div class="premium-type-reminder" id="premiumTypeReminder">
+      <span class="ptr-label" data-i18n="premium.type_reminder">あなたのタイプは</span>
+      <span class="ptr-type" id="premiumTypeName">— —</span>
+    </div>
+
     <p class="premium-subtitle" data-i18n="premium.sub">
       <span data-i18n="prem.intro1">無料診断は、入り口に過ぎません。</span><br>
       <span data-i18n="prem.intro2">¥980で、あなたのタイプの「才能の取扱説明書」（書き込み式ワークブック付き）を解錠できます。</span>
@@ -4019,20 +3954,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
-    <!-- セクション02: 30日プログラム チラ見せ -->
+    <!-- セクション02: 人間関係の取扱説明書 チラ見せ -->
     <div class="premium-preview premium-preview-secondary">
       <div class="premium-preview-header">
-        <div class="premium-preview-label" data-i18n="premium.section_label2">— Section 06 of 06 · 30-Day Program —</div>
-        <h4 class="premium-preview-headline" id="premiumProgramTitle" data-i18n="premium.program_title">才能を日常に組み込む、30日の習慣設計</h4>
+        <div class="premium-preview-label" data-i18n="premium.section_label2">— Section 05 of 06 · 人間関係の取扱説明書 —</div>
+        <h4 class="premium-preview-headline" id="premiumRelationshipTitle">— —</h4>
       </div>
 
       <div class="premium-preview-body">
-        <ul class="premium-program-list" id="premiumProgramList"></ul>
+        <p class="premium-preview-text" id="premiumRelationshipText">— —</p>
 
         <div class="premium-blur">
           <div class="premium-blur-content">
             <div class="lock-icon">🔒</div>
-            <p data-i18n="prem.locked_program">残りのフェーズは購入者限定</p>
+            <p data-i18n="prem.locked_relationship">続きは購入者限定</p>
           </div>
         </div>
       </div>
@@ -4126,7 +4061,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <button class="premium-buy-btn" onclick="onPremiumInterest()">
         <span class="premium-buy-icon">✦</span>
-        <span data-i18n="premium.btn">タイプ別診断レポートを開く</span>
+        <span><span class="buy-btn-type" id="buyBtnTypeName"></span><span data-i18n="premium.btn_suffix">の診断レポートを開く</span></span>
       </button>
 
       <p class="premium-note" data-i18n="prem.payment_notice">
@@ -4305,6 +4240,14 @@ function getIntShortName(key) {
     .replace(' Intelligence', '')
     .replace(' 智能', '')
     .replace(' 지능', '');
+}
+
+// PDF商品名と揃えた型名ラベル（日本語「言語型」/ 中国語「语言型」/ 英・韓は短縮名）
+function getTypeLabel(key) {
+  const short = getIntShortName(key);
+  if (currentLang === 'ja') return short + '型';
+  if (currentLang === 'zh') return short + '型';
+  return short; // en / ko は短縮名のまま
 }
 
 // ============ INTELLIGENCE EXPLANATIONS (for modal) ============
@@ -7117,10 +7060,12 @@ function _showResultInner() {
   // 知性別シンボルをセット
   setCharacterSymbols(state.top1);
 
-  // Talent type subtitle (the official MI name)
-  document.getElementById('talentName').textContent = talent.name;
-  document.getElementById('talentEn').textContent = talent.en;
+  // Talent description
   document.getElementById('talentDesc').textContent = talent.desc;
+
+  // 型名バッジ（◯◯型）— 購入導線で記憶を繋ぐため明示
+  document.getElementById('typeBadgeName').textContent = getTypeLabel(top1);
+  document.getElementById('typeBadgeEn').textContent = INTELLIGENCES[top1].en;
 
   // Compound character (TOP1 × TOP2)
   document.getElementById('compoundName').textContent = makeCompoundName(top1, top2);
@@ -7223,35 +7168,23 @@ function _showResultInner() {
     return              { rank: 'E', color: 'rgba(15,14,12,0.35)', bg: 'rgba(15,14,12,0.05)' };
   }
 
-  // Scores list
-  const sl = document.getElementById('scoresList');
-  sl.innerHTML = '';
-  sorted.forEach((key, i) => {
-    const info = INTELLIGENCES[key];
-    const val = scores[key];
-    const { rank, color, bg } = getScoreRank(val);
-    const item = document.createElement('div');
-    item.className = 'score-item';
-    item.innerHTML = `
-      <span class="score-rank">${String(i + 1).padStart(2, '0')}</span>
-      <div class="score-info">
-        <div class="score-name">${getIntName(key)} <span class="en">${info.en}</span></div>
-        <div class="score-bar"><div class="score-bar-fill" data-val="${val}" style="background:${info.color};"></div></div>
-      </div>
-      <div class="score-right">
-        <span class="score-grade" style="color:${color}; background:${bg}; border-color:${color};">${rank}</span>
-        <span class="score-val">${val}</span>
-      </div>
-    `;
-    sl.appendChild(item);
-  });
-
-  // Animate bars
-  setTimeout(() => {
-    document.querySelectorAll('.score-bar-fill').forEach(el => {
-      el.style.width = el.dataset.val + '%';
+  // 特に発揮しやすい3つの知能（点数なし・順位の優劣を強調しない並列表示）
+  const tic = document.getElementById('topIntelCards');
+  if (tic) {
+    tic.innerHTML = '';
+    [top1, top2, top3].forEach((key) => {
+      const info = INTELLIGENCES[key];
+      const card = document.createElement('div');
+      card.className = 'top-intel-card';
+      card.style.borderColor = info.color;
+      card.innerHTML = `
+        <span class="tic-symbol" style="color:${info.color};">${info.symbol || '◆'}</span>
+        <span class="tic-name">${getIntName(key)}</span>
+        <span class="tic-en">${info.en}</span>
+      `;
+      tic.appendChild(card);
     });
-  }, 300);
+  }
 
   // 8知能の象徴シンボル（大きく装飾的に表示）
   const BIG_SYMBOLS = {
@@ -7546,6 +7479,18 @@ function renderPremiumPreview(key) {
   const report = PREMIUM_REPORT[key];
   if (!report) return;
 
+  // 型名を購入導線に明示（記憶の紐付け：◯◯型 と 動物キャラ名 をつなぐ）
+  // PDF商品名（例: 空間型 プレミアム解説書）と表記を揃えるため短縮名＋「型」
+  const typeName = getTypeLabel(key);
+  const tbn = document.getElementById('premiumTypeName');
+  if (tbn) tbn.textContent = typeName;
+  const bbt = document.getElementById('buyBtnTypeName');
+  if (bbt) {
+    bbt.textContent = (currentLang === 'ja' || currentLang === 'zh')
+      ? '「' + typeName + '」'
+      : typeName;
+  }
+
   // 言語別フィールド取得
   const suffix = currentLang === 'en' ? '_en'
                 : currentLang === 'zh' ? '_zh'
@@ -7559,27 +7504,15 @@ function renderPremiumPreview(key) {
   document.getElementById('premiumPreviewHeadline').textContent = title;
   document.getElementById('premiumPreviewText').textContent = body;
 
-  // ===== Section 02: 30日プログラム（最初の3項目だけ表示） =====
-  const programList = report['program' + suffix] || report.program;
-  if (programList) {
-    const programEl = document.getElementById('premiumProgramList');
-    if (programEl) {
-      // 最初の3項目だけ表示（Day 1-15相当）
-      const previewItems = programList.slice(0, 3);
-      programEl.innerHTML = previewItems.map((item, idx) => {
-        // "Day 1-5: ..." のような形式から、タグ部分と本文に分割
-        const match = item.match(/^([^:]+):\s*(.+)$/);
-        if (match) {
-          return `
-            <li>
-              <span class="day-tag">${match[1].trim()}</span>
-              <span class="item-body">${match[2].trim()}</span>
-            </li>
-          `;
-        }
-        return `<li><span class="item-body">${item}</span></li>`;
-      }).join('');
-    }
+  // ===== Section 02: 人間関係の取扱説明書（テキスト・冒頭のみ表示） =====
+  const rel = report.relationship;
+  if (rel) {
+    const relTitle = report['relationship_title' + suffix] || rel.title;
+    const relBody = report['relationship_body' + suffix] || rel.body;
+    const relTitleEl = document.getElementById('premiumRelationshipTitle');
+    const relTextEl = document.getElementById('premiumRelationshipText');
+    if (relTitleEl) relTitleEl.textContent = relTitle;
+    if (relTextEl) relTextEl.textContent = relBody;
   }
 
   // ===== Section 03: 副業ロードマップ（最初の2ステップだけ表示） =====
@@ -7656,12 +7589,11 @@ function drawRadar(scores) {
   }
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-  // スクリーンリーダー向けに各知能スコアを言葉で記述
+  // スクリーンリーダー向け：点数ではなく、発揮しやすい上位3つを言葉で伝える
   try {
-    const label = KEYS
-      .map(k => `${getIntShortName(k)} ${Math.round(scores[k])}`)
-      .join('、');
-    canvas.setAttribute('aria-label', '8つの知能スコア: ' + label);
+    const ordered = KEYS.slice().sort((a, b) => scores[b] - scores[a]);
+    const top3names = ordered.slice(0, 3).map(k => getIntShortName(k)).join('、');
+    canvas.setAttribute('aria-label', '8つの知能のバランス図。特に発揮しやすいのは ' + top3names + ' です。');
   } catch (e) {}
 
   const size = logicalSize;
@@ -7820,30 +7752,23 @@ function drawRadar(scores) {
   ctx.lineWidth = 0.8;
   ctx.stroke();
 
-  // ===== ラベル =====
+  // ===== ラベル（知能名のみ。点数は優劣を感じさせるため非表示） =====
   KEYS.forEach((key, i) => {
     const labelR = radius + 44;
     const [x, y] = pt(i, labelR);
     const info = INTELLIGENCES[key];
     const shortName = getIntShortName(key);
 
-    // スコア値（小さく上品に）
-    const val = Math.round(scores[key]);
-
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
 
     ctx.font = '600 18px "Shippori Mincho", serif';
     ctx.fillStyle = PALETTE.ink;
-    ctx.fillText(shortName, x, y - 9);
+    ctx.fillText(shortName, x, y - 6);
 
     ctx.font = 'italic 10px "Cormorant Garamond", serif';
     ctx.fillStyle = 'rgba(15,14,12,0.45)';
-    ctx.fillText(info.en, x, y + 7);
-
-    ctx.font = '500 11px "JetBrains Mono", monospace';
-    ctx.fillStyle = (INTELLIGENCES[key] && INTELLIGENCES[key].color) || PALETTE.crimson;
-    ctx.fillText(String(val), x, y + 21);
+    ctx.fillText(info.en, x, y + 10);
   });
 }
 
@@ -9224,6 +9149,7 @@ const I18N = {
     'result.mi_type':    'あなたのMIタイプは',
     'result.sec1':       '知能バランス',
     'result.sec1en':     'Intelligence Map',
+    'result.top_intel':  '— あなたが特に発揮しやすい3つ —',
     'result.sec2':       '8つの知能スコア',
     'result.sec2en':     'Detailed Scores',
     'result.sec3':       'あなたの武器',
@@ -9344,6 +9270,8 @@ const I18N = {
     'premium.title':     'あなたの才能を、\nもっと深く知る',
     'premium.sub':       '無料診断は、入り口に過ぎません。\n¥980で、あなたのタイプの「才能の取扱説明書」（書き込み式ワークブック付き）を解錠できます。',
     'premium.btn':       'タイプ別診断レポートを開く',
+    'premium.type_reminder': 'あなたのタイプは',
+    'premium.btn_suffix': 'の診断レポートを開く',
     'premium.thanks':    'ご興味ありがとうございます',
     // 知能名
     'intel.linguistic':    '言語的知能',
@@ -9452,10 +9380,11 @@ const I18N = {
     'match.url_prompt': 'このURLを友達に送ってください:',
   
     // premium preview extension
-    'premium.section_label2': '— Section 02 of 06 · 30日プログラム —',
+    'premium.section_label2': '— Section 05 of 06 · 人間関係の取扱説明書 —',
     'premium.section_label3': '— Section 04 of 06 · 才能を活かす道 —',
     'premium.program_title': '才能を日常に組み込む、30日の習慣設計',
     'prem.locked_program': '残りのフェーズは購入者限定',
+    'prem.locked_relationship': '相性の続きは購入者限定',
     'prem.locked_side': '続きは購入者限定',
   
     // ad label
@@ -9499,6 +9428,7 @@ const I18N = {
     'result.mi_type':    'Your MI Type is',
     'result.sec1':       'Intelligence Balance',
     'result.sec1en':     'Intelligence Map',
+    'result.top_intel':  '— Your Three Natural Strengths —',
     'result.sec2':       '8 Intelligence Scores',
     'result.sec2en':     'Detailed Scores',
     'result.sec3':       'Your Strengths',
@@ -9613,6 +9543,8 @@ const I18N = {
     'premium.title':     'Discover Your Talent\neven Deeper',
     'premium.sub':       'The free assessment is just the beginning.\nFor ¥980, unlock your personal Talent Manual.',
     'premium.btn':       'Open Your Type Report',
+    'premium.type_reminder': 'Your type is',
+    'premium.btn_suffix': ' — Open Report',
     'premium.thanks':    'Thank you for your interest',
     // 知能名
     'intel.linguistic':    'Linguistic Intelligence',
@@ -9721,10 +9653,11 @@ const I18N = {
     'match.url_prompt': 'Please share this URL with your friend:',
   
     // premium preview extension
-    'premium.section_label2': '— Section 02 of 06 · 30-Day Program —',
+    'premium.section_label2': '— Section 05 of 06 · Relationships —',
     'premium.section_label3': '— Section 04 of 06 · Putting Talent to Work —',
     'premium.program_title': '30-day habit design to embed your talent into everyday life',
     'prem.locked_program': 'The remaining phases are for buyers only',
+    'prem.locked_relationship': 'The rest is for buyers only',
     'prem.locked_side': 'The rest is for buyers only',
   
     // ad label
@@ -9766,6 +9699,7 @@ const I18N = {
     'result.mi_type':    '你的MI类型是',
     'result.sec1':       '智能平衡图',
     'result.sec1en':     'Intelligence Map',
+    'result.top_intel':  '— 你最容易发挥的三种 —',
     'result.sec2':       '8项智能得分',
     'result.sec2en':     'Detailed Scores',
     'result.sec3':       '你的强项',
@@ -9878,6 +9812,8 @@ const I18N = {
     'premium.title':     '更深入了解\n你的才能',
     'premium.sub':       '免费测评只是入口。\n用¥980解锁属于你的「才能使用说明书」。',
     'premium.btn':       '开启类型诊断报告',
+    'premium.type_reminder': '你的类型是',
+    'premium.btn_suffix': '诊断报告',
     'premium.thanks':    '感谢您的关注',
     'intel.linguistic':    '语言智能',
     'intel.logical':       '逻辑数学智能',
@@ -9984,10 +9920,11 @@ const I18N = {
     'match.url_prompt': '请把这个URL发给朋友：',
   
     // premium preview extension
-    'premium.section_label2': '— 第 02 节 / 全 06 节 · 30天计划 —',
+    'premium.section_label2': '— 第 05 节 / 全 06 节 · 人际关系说明书 —',
     'premium.section_label3': '— 第 04 节 / 全 06 节 · 发挥才能之道 —',
     'premium.program_title': '将才能融入日常的30天习惯设计',
     'prem.locked_program': '其余阶段仅限购买者',
+    'prem.locked_relationship': '契合分析的后续仅限购买者',
     'prem.locked_side': '后续内容仅限购买者',
   
     // ad label
@@ -10029,6 +9966,7 @@ const I18N = {
     'result.mi_type':    '나의 MI 유형은',
     'result.sec1':       '지능 균형 차트',
     'result.sec1en':     'Intelligence Map',
+    'result.top_intel':  '— 당신이 특히 발휘하기 쉬운 3가지 —',
     'result.sec2':       '8가지 지능 점수',
     'result.sec2en':     'Detailed Scores',
     'result.sec3':       '나의 강점',
@@ -10141,6 +10079,8 @@ const I18N = {
     'premium.title':     '나의 재능을\n더 깊이 알아보기',
     'premium.sub':       '무료 진단은 시작에 불과합니다.\n¥980으로 나만의 「재능 사용 설명서」를 해제하세요.',
     'premium.btn':       '유형별 진단 리포트 열기',
+    'premium.type_reminder': '당신의 유형은',
+    'premium.btn_suffix': ' 진단 리포트 열기',
     'premium.thanks':    '관심 가져주셔서 감사합니다',
     'intel.linguistic':    '언어 지능',
     'intel.logical':       '논리수학 지능',
@@ -10247,10 +10187,11 @@ const I18N = {
     'match.url_prompt': '이 URL을 친구에게 보내주세요:',
   
     // premium preview extension
-    'premium.section_label2': '— Section 02 of 06 · 30일 프로그램 —',
+    'premium.section_label2': '— Section 05 of 06 · 인간관계 취급설명서 —',
     'premium.section_label3': '— Section 04 of 06 · 재능을 살리는 길 —',
     'premium.program_title': '재능을 일상에 녹여내는, 30일 습관 설계',
     'prem.locked_program': '나머지 단계는 구매자 전용',
+    'prem.locked_relationship': '궁합의 나머지는 구매자 전용',
     'prem.locked_side': '이후 내용은 구매자 전용',
   
     // ad label
