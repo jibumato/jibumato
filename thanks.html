@@ -274,48 +274,120 @@
   </div>
 
 <script>
-  // 8タイプの定義（日本語の型名 + PDFのフルURL）
-  // PDFは Cloudflare R2 のパブリック開発URLから配信
+  // 言語 × タイプ で PDF を出し分ける。PDFは Cloudflare R2 から配信。
   var R2_BASE = 'https://pub-a4320a9d71da4683b8c631babc18ffdd.r2.dev';
-  var TYPES = {
-    linguistic:    { name: '言語型',  file: R2_BASE + '/linguistic_p3n8w5z1.pdf' },
-    logical:       { name: '論理型',  file: R2_BASE + '/logical_v6b2m9k7.pdf' },
-    spatial:       { name: '空間型',  file: R2_BASE + '/spatial_k7m2x9q4.pdf' },
-    musical:       { name: '音楽型',  file: R2_BASE + '/musical_h4j8r2t6.pdf' },
-    bodily:        { name: '身体型',  file: R2_BASE + '/bodily_x9c3p7w2.pdf' },
-    interpersonal: { name: '対人型',  file: R2_BASE + '/interpersonal_q5k8n3v6.pdf' },
-    intrapersonal: { name: '内省型',  file: R2_BASE + '/intrapersonal_m2w7b4z9.pdf' },
-    naturalist:    { name: '博物型',  file: R2_BASE + '/naturalist_t6r3h8k1.pdf' }
+
+  // 各言語・各タイプのファイル名
+  var FILES = {
+    ja: {
+      linguistic:'linguistic_p3n8w5z1.pdf', logical:'logical_v6b2m9k7.pdf',
+      spatial:'spatial_k7m2x9q4.pdf', musical:'musical_h4j8r2t6.pdf',
+      bodily:'bodily_x9c3p7w2.pdf', interpersonal:'interpersonal_q5k8n3v6.pdf',
+      intrapersonal:'intrapersonal_m2w7b4z9.pdf', naturalist:'naturalist_t6r3h8k1.pdf'
+    },
+    en: {
+      linguistic:'linguistic_en_rbalr2.pdf', logical:'logical_en_9l74wd.pdf',
+      spatial:'spatial_en_mqt3il.pdf', musical:'musical_en_gitszr.pdf',
+      bodily:'bodily_en_cdmgts.pdf', interpersonal:'interpersonal_en_usgn5r.pdf',
+      intrapersonal:'intrapersonal_en_xui293.pdf', naturalist:'naturalist_en_zwim79.pdf'
+    },
+    zh: {
+      linguistic:'linguistic_zh_ympl81.pdf', logical:'logical_zh_czjabm.pdf',
+      spatial:'spatial_zh_vyjj5e.pdf', musical:'musical_zh_t60qfk.pdf',
+      bodily:'bodily_zh_3shj6a.pdf', interpersonal:'interpersonal_zh_k7i8kb.pdf',
+      intrapersonal:'intrapersonal_zh_qcijw3.pdf', naturalist:'naturalist_zh_ksepqb.pdf'
+    },
+    ko: {
+      linguistic:'linguistic_ko_fq2rrz.pdf', logical:'logical_ko_au4o1k.pdf',
+      spatial:'spatial_ko_agh84o.pdf', musical:'musical_ko_903xnq.pdf',
+      bodily:'bodily_ko_ikmsi8.pdf', interpersonal:'interpersonal_ko_oijf1p.pdf',
+      intrapersonal:'intrapersonal_ko_ahmgy5.pdf', naturalist:'naturalist_ko_sjds08.pdf'
+    }
+  };
+
+  // 型名（言語別表示用）
+  var TYPE_NAMES = {
+    ja: { linguistic:'言語型', logical:'論理型', spatial:'空間型', musical:'音楽型', bodily:'身体型', interpersonal:'対人型', intrapersonal:'内省型', naturalist:'博物型' },
+    en: { linguistic:'Linguistic', logical:'Logical', spatial:'Spatial', musical:'Musical', bodily:'Bodily', interpersonal:'Interpersonal', intrapersonal:'Intrapersonal', naturalist:'Naturalist' },
+    zh: { linguistic:'语言型', logical:'逻辑型', spatial:'空间型', musical:'音乐型', bodily:'身体型', interpersonal:'人际型', intrapersonal:'内省型', naturalist:'博物型' },
+    ko: { linguistic:'언어형', logical:'논리형', spatial:'공간형', musical:'음악형', bodily:'신체형', interpersonal:'대인형', intrapersonal:'내성형', naturalist:'박물형' }
+  };
+
+  // UI文言（言語別）
+  var UI = {
+    ja: { badge:'JIBU-MATO PREMIUM', h1:'ご購入ありがとうございます',
+      lead:'決済が完了しました。<br>下のボタンから、あなたのプレミアム解説書（PDF）をダウンロードできます。',
+      typeLabel:'Your Type', btn:'解説書をダウンロード（PDF）',
+      note:'※ ボタンを押すと、別のタブでPDFが開きます。<br>表示されたPDFは、端末に保存してご利用ください。<br>このページのリンクは、購入されたご本人のためのものです。',
+      error:'ダウンロード対象が確認できませんでした。<br>お手数ですが、購入時の完了メール、または<a href="https://www.jibunmatrix.com/">トップページ</a>からお問い合わせください。',
+      back:'← じぶんマトリクスへ戻る',
+      support:'ダウンロードがうまくいかない場合は、ブラウザを変えてお試しください。<br>ご不明点は <a href="mailto:jbnmatrix@gmail.com">jbnmatrix@gmail.com</a> までご連絡ください。',
+      dlfile:'じぶんマトリクス_{name}_プレミアム解説書.pdf', tab:'{name} 解説書のダウンロード｜じぶんマトリクス' },
+    en: { badge:'JIBU-MATO PREMIUM', h1:'Thank you for your purchase',
+      lead:'Your payment is complete.<br>Download your premium guide (PDF) from the button below.',
+      typeLabel:'Your Type', btn:'Download Guide (PDF)',
+      note:'* The PDF opens in a new tab. Please save it to your device.<br>This download link is intended for you, the purchaser.',
+      error:'We could not identify your download. Please check your purchase confirmation email, or contact us from the <a href="https://www.jibunmatrix.com/">top page</a>.',
+      back:'← Back to Jibu-Mato',
+      support:'If the download does not work, please try a different browser.<br>For help, contact <a href="mailto:jbnmatrix@gmail.com">jbnmatrix@gmail.com</a>.',
+      dlfile:'JibuMato_{name}_PremiumGuide.pdf', tab:'Download your {name} guide｜Jibu-Mato' },
+    zh: { badge:'JIBU-MATO PREMIUM', h1:'感谢您的购买',
+      lead:'支付已完成。<br>请点击下方按钮下载您的高级解说书（PDF）。',
+      typeLabel:'Your Type', btn:'下载解说书（PDF）',
+      note:'※ 点击按钮后，PDF将在新标签页打开。<br>请将显示的PDF保存到您的设备。<br>此下载链接仅供购买者本人使用。',
+      error:'无法确认您的下载对象。<br>请查看购买完成邮件，或从<a href="https://www.jibunmatrix.com/">首页</a>与我们联系。',
+      back:'← 返回 Jibu-Mato',
+      support:'如果下载失败，请尝试更换浏览器。<br>如有疑问请联系 <a href="mailto:jbnmatrix@gmail.com">jbnmatrix@gmail.com</a>。',
+      dlfile:'JibuMato_{name}_PremiumGuide.pdf', tab:'下载{name}解说书｜Jibu-Mato' },
+    ko: { badge:'JIBU-MATO PREMIUM', h1:'구매해 주셔서 감사합니다',
+      lead:'결제가 완료되었습니다.<br>아래 버튼에서 프리미엄 해설서(PDF)를 다운로드할 수 있습니다.',
+      typeLabel:'Your Type', btn:'해설서 다운로드 (PDF)',
+      note:'※ 버튼을 누르면 새 탭에서 PDF가 열립니다.<br>표시된 PDF를 기기에 저장해 이용하세요.<br>이 링크는 구매하신 본인을 위한 것입니다.',
+      error:'다운로드 대상을 확인할 수 없습니다.<br>구매 완료 메일을 확인하시거나 <a href="https://www.jibunmatrix.com/">메인 페이지</a>에서 문의해 주세요.',
+      back:'← Jibu-Mato로 돌아가기',
+      support:'다운로드가 안 될 경우 다른 브라우저로 시도해 주세요.<br>문의: <a href="mailto:jbnmatrix@gmail.com">jbnmatrix@gmail.com</a>',
+      dlfile:'JibuMato_{name}_PremiumGuide.pdf', tab:'{name} 해설서 다운로드｜Jibu-Mato' }
   };
 
   (function () {
-    // URLパラメータ ?type=spatial を取得
     var params = new URLSearchParams(window.location.search);
     var type = (params.get('type') || '').toLowerCase().trim();
-    var info = TYPES[type];
+    var lang = (params.get('lang') || 'ja').toLowerCase().trim();
+    if (!UI[lang]) lang = 'ja';            // 不明な言語は日本語に
+    var ui = UI[lang];
 
     var successEl = document.getElementById('success');
     var errorEl = document.getElementById('errorBox');
 
-    if (!info) {
-      // 不正・欠落時はエラー表示に切り替え
+    var fname = FILES[lang] && FILES[lang][type];
+    var tname = TYPE_NAMES[lang] && TYPE_NAMES[lang][type];
+
+    // UIの静的文言を言語に合わせて差し替え
+    document.documentElement.lang = lang;
+    document.querySelector('.badge').innerHTML = '<span class="mark">✦</span>' + ui.badge + '<span class="mark">✦</span>';
+    document.querySelector('h1').textContent = ui.h1;
+    document.querySelector('.lead').innerHTML = ui.lead;
+    document.querySelector('.type-row .label').textContent = ui.typeLabel;
+    document.querySelector('#dlBtn span:last-child').textContent = ui.btn;
+    document.querySelector('.dl-note').innerHTML = ui.note;
+    document.getElementById('errorBox').innerHTML = ui.error;
+    document.querySelector('.back').textContent = ui.back;
+    document.querySelector('.support').innerHTML = ui.support;
+
+    if (!fname || !tname) {
       if (successEl) successEl.style.display = 'none';
       if (errorEl) errorEl.style.display = 'block';
       return;
     }
 
-    // 型名とDLリンクをセット
-    document.getElementById('typeName').textContent = info.name;
+    document.getElementById('typeName').textContent = tname;
     var btn = document.getElementById('dlBtn');
-    btn.setAttribute('href', info.file);
-    // 別ドメイン(r2.dev)配信のため新しいタブで開く（PDFが表示され、そこから保存可能）
+    btn.setAttribute('href', R2_BASE + '/' + fname);
     btn.setAttribute('target', '_blank');
     btn.setAttribute('rel', 'noopener');
-    // download属性（同一オリジンでないと効かないが、念のため付与）
-    btn.setAttribute('download', 'じぶんマトリクス_' + info.name + '_プレミアム解説書.pdf');
+    btn.setAttribute('download', ui.dlfile.replace('{name}', tname));
 
-    // タブタイトルにも型名を反映
-    document.title = info.name + ' 解説書のダウンロード｜じぶんマトリクス';
+    document.title = ui.tab.replace('{name}', tname);
   })();
 </script>
 </body>
