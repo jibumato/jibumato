@@ -3,286 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>お問い合わせ | じぶんマトリクス</title>
-<meta name="description" content="じぶんマトリクスへのお問い合わせ・ご感想・ご質問・お仕事のご依頼はメールにてお願いします。">
+<title>お問い合わせ｜じぶんマトリクス</title>
+<meta name="robots" content="noindex, follow">
+<meta name="description" content="じぶんマトリクスへのお問い合わせ方法のご案内です。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Shippori+Mincho:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --ink: #0f0e0c;
-    --paper: #f4ede0;
-    --paper-deep: #e8dcc4;
-    --gold: #b8893a;
-    --gold-light: #d4ad5e;
-    --crimson: #8a2922;
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --ink:#0f0e0c; --paper:#f4ede0; --gold:#b8893a; --gold-light:#d4ad5e; --crimson:#8a2922; }
+  body { font-family:'Shippori Mincho',serif; background:var(--paper); color:var(--ink); line-height:1.95; position:relative; }
+  body::before { content:''; position:fixed; inset:0; background-image:radial-gradient(rgba(15,14,12,0.025) 1px,transparent 1px); background-size:4px 4px; pointer-events:none; z-index:0; }
+  .wrap { position:relative; z-index:1; max-width:680px; margin:0 auto; padding:56px 24px 80px; }
+  .eyebrow { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.3em; color:var(--gold); text-transform:uppercase; margin-bottom:14px; }
+  h1 { font-size:clamp(24px,5vw,32px); font-weight:800; margin-bottom:8px; }
+  .lead { font-size:14px; color:rgba(15,14,12,0.65); margin-bottom:40px; }
+  .contact-card {
+    border:1px solid rgba(184,137,58,0.4); background:rgba(184,137,58,0.06);
+    padding:32px 28px; text-align:center; margin-bottom:32px;
   }
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'Shippori Mincho', 'Cormorant Garamond', serif;
-    min-height: 100vh;
-    line-height: 1.8;
-  }
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      radial-gradient(circle at 25% 25%, rgba(184,137,58,0.04) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, rgba(138,41,34,0.03) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: 0;
-  }
-  .container {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 60px 24px 80px;
-    position: relative;
-    z-index: 1;
-  }
-  .page-header {
-    text-align: center;
-    margin-bottom: 60px;
-    padding-bottom: 30px;
-    border-bottom: 1px solid rgba(184,137,58,0.3);
-  }
-  .breadcrumb {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    color: var(--gold);
-    margin-bottom: 14px;
-    text-transform: uppercase;
-  }
-  .breadcrumb a { color: var(--gold); text-decoration: none; }
-  .breadcrumb a:hover { opacity: 0.7; }
-  .page-title {
-    font-size: 30px;
-    font-weight: 700;
-    color: var(--ink);
-    letter-spacing: 0.08em;
-    margin-bottom: 8px;
-  }
-  .page-title-en {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: var(--crimson);
-    letter-spacing: 0.1em;
-  }
-  .content {
-    background: rgba(255,255,255,0.4);
-    border: 1px solid rgba(184,137,58,0.2);
-    padding: 40px 32px;
-    border-radius: 2px;
-  }
-  .content h2 {
-    font-size: 19px;
-    color: var(--ink);
-    margin-top: 32px;
-    margin-bottom: 14px;
-    padding-bottom: 8px;
-    border-bottom: 1px dashed rgba(184,137,58,0.4);
-    letter-spacing: 0.05em;
-    font-weight: 600;
-  }
-  .content h2:first-child { margin-top: 0; }
-  .content p {
-    font-size: 15px;
-    color: rgba(15,14,12,0.85);
-    margin-bottom: 14px;
-    line-height: 1.9;
-  }
-  /* メール大きく */
-  .email-card {
-    margin: 30px 0;
-    padding: 30px;
-    background: linear-gradient(160deg, #faf3e1 0%, #ecddc0 100%);
-    border: 1px solid rgba(184,137,58,0.4);
-    text-align: center;
-    border-radius: 2px;
-    position: relative;
-  }
-  .email-card::before {
-    content: '✉';
-    font-size: 28px;
-    color: var(--crimson);
-    margin-bottom: 8px;
-    display: block;
-  }
-  .email-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-  .email-address {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 24px;
-    color: var(--ink);
-    letter-spacing: 0.02em;
-  }
-  .email-address a {
-    color: var(--crimson);
-    text-decoration: none;
-    border-bottom: 1px dashed rgba(138,41,34,0.4);
-    padding-bottom: 2px;
-    transition: border-color 0.2s;
-  }
-  .email-address a:hover { border-color: var(--crimson); }
-  .email-cta {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px 32px;
-    background: var(--ink);
-    color: #faf3e1;
-    text-decoration: none;
-    letter-spacing: 0.15em;
-    font-size: 13px;
-    border-radius: 1px;
-    transition: opacity 0.2s;
-  }
-  .email-cta:hover { opacity: 0.85; }
-  ul.topics {
-    list-style: none;
-    margin: 16px 0;
-  }
-  ul.topics li {
-    padding: 8px 0 8px 24px;
-    position: relative;
-    font-size: 14px;
-    color: rgba(15,14,12,0.85);
-  }
-  ul.topics li::before {
-    content: '◆';
-    position: absolute;
-    left: 0;
-    top: 8px;
-    color: var(--gold);
-    font-size: 8px;
-  }
-  .note {
-    background: rgba(184,137,58,0.08);
-    border-left: 2px solid var(--gold);
-    padding: 14px 18px;
-    font-size: 13px;
-    color: rgba(15,14,12,0.78);
-    margin: 20px 0;
-  }
-  .page-footer {
-    text-align: center;
-    margin-top: 60px;
-    padding-top: 30px;
-    border-top: 1px solid rgba(184,137,58,0.3);
-  }
-  .page-footer .links {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-  }
-  .page-footer .links a {
-    font-size: 12px;
-    color: rgba(15,14,12,0.6);
-    text-decoration: none;
-    letter-spacing: 0.08em;
-    padding: 4px 8px;
-  }
-  .page-footer .links a:hover { color: var(--crimson); }
-  .page-footer .copyright {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: rgba(15,14,12,0.4);
-    text-transform: uppercase;
-  }
-  @media (max-width: 480px) {
-    .container { padding: 40px 16px 60px; }
-    .content { padding: 28px 20px; }
-    .page-title { font-size: 24px; }
-    .email-card { padding: 24px 20px; }
-    .email-address { font-size: 18px; word-break: break-all; }
-  }
+  .contact-label { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.25em; color:var(--gold); text-transform:uppercase; margin-bottom:12px; }
+  .contact-mail { font-size:20px; font-weight:700; color:var(--crimson); word-break:break-all; }
+  p { font-size:14px; color:rgba(15,14,12,0.82); margin-bottom:12px; }
+  .note { font-size:12px; color:rgba(15,14,12,0.55); }
+  .back { display:inline-block; margin-top:24px; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.15em; color:var(--gold); text-decoration:none; border-bottom:1px solid rgba(184,137,58,0.4); padding-bottom:2px; }
+  .back:hover { color:var(--crimson); }
 </style>
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
 </head>
 <body>
-<div class="container">
-  <header class="page-header">
-    <div class="breadcrumb"><a href="/">じぶんマトリクス</a> · CONTACT</div>
-    <h1 class="page-title">お問い合わせ</h1>
-    <div class="page-title-en">Contact</div>
-  </header>
+  <div class="wrap">
+    <div class="eyebrow">Contact</div>
+    <h1>お問い合わせ</h1>
+    <p class="lead">ご質問・ご要望、商品に関するお問い合わせは、以下のメールアドレスまでお願いいたします。</p>
 
-  <main class="content">
-    <p>
-      じぶんマトリクスをご覧いただき、誠にありがとうございます。
-      ご感想・ご質問・お仕事のご依頼など、すべて下記のメールアドレスにてお受けしております。
-    </p>
-
-    <div class="email-card">
-      <div class="email-label">EMAIL</div>
-      <div class="email-address">
-        <a href="mailto:jbnmatrix@gmail.com">jbnmatrix@gmail.com</a>
-      </div>
-      <a href="mailto:jbnmatrix@gmail.com?subject=【じぶんマトリクス】お問い合わせ" class="email-cta">
-        メールを送る →
-      </a>
+    <div class="contact-card">
+      <div class="contact-label">Email</div>
+      <div class="contact-mail">jbnmatrix@gmail.com</div>
     </div>
 
-    <h2>お問い合わせ例</h2>
-    <ul class="topics">
-      <li>診断結果に関するご感想</li>
-      <li>診断の精度・解釈についてのご質問</li>
-      <li>サイトの不具合・誤字脱字のご指摘</li>
-      <li>機能追加・改善のご要望</li>
-      <li>記事・コンテンツに関するお問い合わせ</li>
-      <li>取材・メディア掲載のご依頼</li>
-      <li>広告掲載・タイアップのご相談</li>
-      <li>コラボレーション・業務提携のご相談</li>
-    </ul>
+    <p>商品（プレミアム解説書）のダウンロードに関するお問い合わせの際は、購入時の決済メールに記載の情報を添えていただくと、スムーズに対応できます。</p>
+    <p class="note">お問い合わせの内容によっては、返信までお時間をいただく場合があります。あらかじめご了承ください。</p>
 
-    <h2>ご返信について</h2>
-    <p>
-      いただいたメールには、原則として <strong>3営業日以内</strong> にご返信いたします。
-      ただし、内容によってはお時間をいただく場合や、お返事を控えさせていただく場合がございます。
-      あらかじめご了承ください。
-    </p>
-
-    <div class="note">
-      <strong>お願い:</strong>
-      ご返信が届かない場合、迷惑メールフォルダに振り分けられている可能性があります。
-      お手数ですが、迷惑メール設定をご確認のうえ、再度ご連絡ください。
-    </div>
-
-    <h2>個人情報の取り扱い</h2>
-    <p>
-      お問い合わせ時にいただいた個人情報（メールアドレス・お名前等）は、
-      ご返信の目的以外には使用いたしません。詳しくは
-      <a href="/privacy.html">プライバシーポリシー</a>
-      をご参照ください。
-    </p>
-  </main>
-
-  <footer class="page-footer">
-    <div class="links">
-      <a href="/">トップへ戻る</a>
-      <a href="/about.html">運営者情報</a>
-      <a href="/privacy.html">プライバシーポリシー</a>
-      <a href="/disclaimer.html">免責事項</a>
-      <a href="/contact.html">お問い合わせ</a>
-    </div>
-    <div class="copyright">© Mymatrix · じぶんマトリクス</div>
-  </footer>
-</div>
+    <a class="back" href="https://www.jibunmatrix.com/">← じぶんマトリクスへ戻る</a>
+  </div>
 </body>
 </html>
