@@ -275,7 +275,12 @@
 
 <script>
   // 言語 × タイプ で PDF を出し分ける。PDFは Cloudflare R2 から配信。
-  var R2_BASE = 'https://pub-a4320a9d71da4683b8c631babc18ffdd.r2.dev';
+  var R2_BASE = {
+    ja: 'https://pub-a4320a9d71da4683b8c631babc18ffdd.r2.dev',
+    en: 'https://pub-332a773f229e4e63900a3f7d9e8fcef8.r2.dev',
+    ko: 'https://pub-50988c7f086742e59c9dbd091491bf76.r2.dev',
+    zh: 'https://pub-5d79fa667c494a71b522aecb48819334.r2.dev'
+  };
 
   // 各言語・各タイプのファイル名
   var FILES = {
@@ -371,7 +376,7 @@
     document.querySelector('#dlBtn span:last-child').textContent = ui.btn;
     document.querySelector('.dl-note').innerHTML = ui.note;
     document.getElementById('errorBox').innerHTML = ui.error;
-    document.querySelector('.back').textContent = ui.back;
+    document.querySelector('.back-link').textContent = ui.back;
     document.querySelector('.support').innerHTML = ui.support;
 
     if (!fname || !tname) {
@@ -382,7 +387,7 @@
 
     document.getElementById('typeName').textContent = tname;
     var btn = document.getElementById('dlBtn');
-    btn.setAttribute('href', R2_BASE + '/' + fname);
+    btn.setAttribute('href', R2_BASE[lang] + '/' + fname);
     btn.setAttribute('target', '_blank');
     btn.setAttribute('rel', 'noopener');
     btn.setAttribute('download', ui.dlfile.replace('{name}', tname));
