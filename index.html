@@ -9161,13 +9161,33 @@ function detectBrowserLang() {
   return 'en';
 }
 
-// 言語の決定: ①ユーザーが手動で選んだ保存値 → ②ブラウザ言語 → ③英語
-let currentLang = localStorage.getItem('jibumato_lang') || detectBrowserLang();
+// URLパラメータ ?lang= から言語を取得（対応言語のみ）
+function getLangFromURL() {
+  try {
+    const p = new URLSearchParams(location.search).get('lang');
+    if (p) {
+      const l = p.toLowerCase();
+      if (['ja','en','zh','ko'].includes(l)) return l;
+    }
+  } catch (e) {}
+  return null;
+}
+
+// 言語の決定: ①URLパラメータ → ②ユーザーが手動で選んだ保存値 → ③ブラウザ言語 → ④英語
+let currentLang = getLangFromURL() || localStorage.getItem('jibumato_lang') || detectBrowserLang();
 
 function setLang(lang) {
   currentLang = lang;
   localStorage.setItem('jibumato_lang', lang);
   applyLang();
+  // URLの ?lang= も更新（hreflang・共有URLのため。履歴は汚さず置換）
+  try {
+    const url = new URL(location.href);
+    url.searchParams.set('lang', lang);
+    history.replaceState(null, '', url.toString());
+  } catch (e) {}
+  // hreflang/canonical を現在の言語に合わせて更新
+  if (typeof updateHreflang === 'function') updateHreflang();
   // ボタンの見た目更新
   document.querySelectorAll('.lang-btn').forEach(b => {
     b.classList.toggle('active', b.dataset.lang === lang);
@@ -9179,9 +9199,50 @@ function t(key) {
   return val !== undefined ? val : (I18N.ja[key] || key);
 }
 
+// hreflang と canonical を動的に更新（多言語SEO）
+// 各言語版URL（?lang=◯◯）を相互に示し、現在言語を canonical に設定する
+function updateHreflang() {
+  try {
+    const base = location.origin + location.pathname; // クエリ・ハッシュを除いたパス
+    const langs = ['ja', 'en', 'zh', 'ko'];
+    const head = document.head;
+
+    // 既存の動的hreflang/canonicalを除去（静的canonicalも一旦外して貼り直す）
+    head.querySelectorAll('link[data-dynamic-hreflang]').forEach(el => el.remove());
+    const staticCanon = head.querySelector('link[rel="canonical"]:not([data-dynamic-hreflang])');
+    if (staticCanon) staticCanon.remove();
+
+    // 各言語のalternate
+    langs.forEach(lang => {
+      const link = document.createElement('link');
+      link.rel = 'alternate';
+      link.hreflang = lang;
+      link.href = base + '?lang=' + lang;
+      link.setAttribute('data-dynamic-hreflang', '1');
+      head.appendChild(link);
+    });
+    // x-default（デフォルトは日本語版）
+    const xd = document.createElement('link');
+    xd.rel = 'alternate';
+    xd.hreflang = 'x-default';
+    xd.href = base + '?lang=ja';
+    xd.setAttribute('data-dynamic-hreflang', '1');
+    head.appendChild(xd);
+
+    // canonical（現在の言語版を正規URLに）
+    const canon = document.createElement('link');
+    canon.rel = 'canonical';
+    canon.href = base + '?lang=' + currentLang;
+    canon.setAttribute('data-dynamic-hreflang', '1');
+    head.appendChild(canon);
+  } catch (e) { /* ignore */ }
+}
+
 function applyLang() {
   // スクリーンリーダーの読み上げ言語を実際の表示言語に合わせる
   document.documentElement.lang = currentLang;
+  // hreflang/canonical を更新
+  updateHreflang();
   // data-i18n属性を持つ要素を一括更新
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n;

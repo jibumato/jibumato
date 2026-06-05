@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <!-- トップページ（最重要） -->
+  <!-- トップページ（最重要・4言語対応） -->
   <url>
-    <loc>https://www.jibunmatrix.com/</loc>
+    <loc>https://www.jibunmatrix.com/?lang=ja</loc>
     <lastmod>2026-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.jibunmatrix.com/?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.jibunmatrix.com/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.jibunmatrix.com/?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.jibunmatrix.com/?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.jibunmatrix.com/?lang=ja"/>
   </url>
 
   <!-- 記事一覧 -->
