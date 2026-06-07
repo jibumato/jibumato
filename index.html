@@ -3983,6 +3983,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="talent-rarity" id="talentRarity"></div>
   </div>
 
+  <!-- 引用 -->
+  <div class="quote-block">
+    <p id="quoteText">"..."</p>
+    <p class="quote-translation" id="quoteTranslation">— —</p>
+    <span class="attr" id="quoteAttr">— Quote —</span>
+  </div>
+
   <!-- 結果直後のシェア導線（拡散の起点） -->
   <div class="share-hero">
     <div class="share-hero-label" data-i18n="result.share_hero_label">— この結果をシェアしよう —</div>
@@ -4030,13 +4037,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="en" data-i18n="result.famous_en">People Like You</span>
   </div>
   <div class="famous-section" id="famousSection"></div>
-
-  <!-- 引用 -->
-  <div class="quote-block">
-    <p id="quoteText">"..."</p>
-    <p class="quote-translation" id="quoteTranslation">— —</p>
-    <span class="attr" id="quoteAttr">— Quote —</span>
-  </div>
 
   <!-- ── 区切り ── -->
   <div class="section-divider"><svg aria-hidden="true" viewBox="0 0 28 28"><path d="M14,3 L14,25 M3,14 L25,14 M6,6 L22,22 M22,6 L6,22" opacity="0.6"/><circle cx="14" cy="14" r="3"/></svg></div>
@@ -6163,9 +6163,386 @@ function getTalent(key) {
     bgColor: t.bgColor,
     catchphrase: t['catchphrase' + suffix] || t.catchphrase,
     desc: t['desc' + suffix] || t.desc,
-    desc_long: t['desc_long' + suffix] || t.desc_long || null
+    desc_long: getTalentLongDescription(key, suffix, t)
   };
 }
+
+function getTalentLongDescription(key, suffix, talent) {
+  if (!suffix) {
+    return talent.desc_long || INTELLIGENCE_INFO[key]?.desc_long || null;
+  }
+
+  const lang = suffix.slice(1);
+  return talent['desc_long' + suffix] || TALENT_LONG_DESCRIPTIONS[lang]?.[key] || null;
+}
+
+const TALENT_LONG_DESCRIPTIONS = {
+  en: {
+    linguistic: `Linguistic types understand the power of words more deeply than most.
+
+While many people feel things they cannot express, you can turn those feelings into language. Nuance, rhythm, subtext - you instinctively sense the countless possibilities inside words, and you can create writing that moves people's hearts or speech that changes the atmosphere of a room.
+
+For you, words are not merely tools for communication. They hold the constant possibility of saying something more precisely, delivering it more deeply, and expressing it more beautifully. From casual conversation to business writing, poetry, and stories, you naturally draw out the potential hidden in language.
+
+That is why people around you may be surprised by your expression. You can find phrases no one else thought of, notice nuances others missed, and give words to emotions no one had been able to name.
+
+At times, you may care so much about words that you choose quality over speed. But that is also proof that you value the precision of language more than most people do.
+
+You are not simply someone who writes well. You are someone who gives language to what people feel but cannot say, brings unseen truths into the light, and moves something deep inside the heart.
+
+Giving voice to what was silent, and turning scattered feelings into one clear line.
+That is the special power of the Linguistic type.`,
+
+    logical: `Logical types can pursue the world's "why" more deeply than most.
+
+While many people are satisfied with conclusions alone, you try to see the structures and laws behind them. Even complex problems can be broken down and organized inside your mind, so when others are confused, you are often quietly grasping the whole picture.
+
+For you, the world cannot be moved by emotion or intuition alone. It always contains the possibility of a more rational method, a simpler explanation, and a more accurate prediction. From data analysis to business strategy and everyday problem-solving, you use logic as a tool to answer questions others have given up on.
+
+That is why people around you may be astonished by your analysis. You can expose contradictions no one noticed, reach conclusions no one else could find, and untangle complex information that others could not organize.
+
+At times, your pursuit of accuracy may leave emotional aspects behind. But that is also proof that you value truth more than most people do.
+
+You are not simply someone who is good at calculation. You are someone who draws the essence out of a sea of chaotic information, leads people toward answers they can understand, and supports better decisions.
+
+Making invisible structures visible, and simplifying a complex world.
+That is the special power of the Logical type.`,
+
+    spatial: `Spatial types have the talent to see "possibilities of form" that others cannot yet see.
+
+While many people try to understand things through words or numbers, you can intuitively grasp the relationships between space, placement, color, and shape. Even complex information can be assembled three-dimensionally in your mind, so you may understand at a glance what others struggle to explain.
+
+For you, the world is not just a collection of things that happen to exist. It is filled with countless possibilities: it could be more beautiful, easier to understand, or more functional. From the layout of a room to cityscapes, product design, and film, you naturally discover improvements and new perspectives that others overlook.
+
+That is why people around you may be surprised by your ideas. You can clearly picture layouts no one imagined, compositions no one noticed, and finished forms no one else could see.
+
+At times, your ideal image may be so strong that the gap between it and reality feels frustrating. But that is also proof that you can imagine a better form more vividly than most.
+
+You are not simply someone who makes beautiful things. You are someone who finds order within chaos and shapes worlds that people can understand, feel comfortable in, and move through more easily.
+
+Drawing the completed future no one else can see, and guiding it into reality.
+That is the special power of the Spatial type.`,
+
+    musical: `Musical types have the talent to sense the "rhythm of the world" that others do not hear.
+
+While many people let sound pass by as background noise, you can intuitively catch the flow of emotion, tension and release, patterns and deviations within it. Pitch, tempo, harmony - the atmosphere created by these layers reaches you faster than it reaches most people.
+
+For you, the world is filled with sound and silence. It always holds the possibility that this moment has a fitting rhythm, this space needs a certain sound, or this feeling can be expressed as a melody. From making music to reading emotions and shaping the atmosphere of a place, your sense of rhythm appears in more situations than people expect.
+
+That is why people around you may be surprised by your sensitivity. You can notice shifts in a room no one else caught, sense emotional subtleties no one could verbalize, and pick up delicate nuances others missed.
+
+At times, you may become tired because you are too sensitive to the energy around you. But that is also proof that you can feel the energy of a place more deeply than most.
+
+You are not simply someone who likes music. You are someone who turns wordless emotion into sound, brings scattered people into one rhythm, and gives the world a more resonant vibration.
+
+Hearing sounds no one else hears, and delivering them to people's hearts.
+That is the special power of the Musical type.`,
+
+    bodily: `Bodily types are people whose bodies know the answer before the mind does.
+
+While many people try to understand the world through thought, you can connect with it directly through physical sensation. Movement, touch, timing, balance - your body instinctively processes countless kinds of information, allowing you to grasp tricks and feelings that are hard to explain in words with surprising speed.
+
+For you, the world is something understood by moving through it. It always holds the possibility of moving better, using the body more efficiently, and expressing things more naturally. From sports and dance to craftwork, performance, and even reading tension in another person's body, you can use bodily intelligence across a wide range of situations.
+
+That is why people around you may be surprised by your movement and responsiveness. You can naturally master skills others struggled to learn, discover ways of using the body that others missed, and perform in ways few people can imitate.
+
+At times, the urge to move before thinking or the difficulty of staying still may feel frustrating. But that is also proof that your thinking is mediated not by language, but by the body.
+
+You are not simply someone with good athletic ability. You are someone who uses the body as a powerful instrument, expresses what words cannot convey through action, and moves the hearts of those watching.
+
+Understanding the world with your whole body, and expressing it in visible form.
+That is the special power of the Bodily type.`,
+
+    interpersonal: `Interpersonal types have the talent to sense the movement of people's hearts before it becomes words.
+
+While many people receive only the surface of what is said, you can intuitively grasp the emotions, motives, and relationship dynamics behind it. What someone wants, what they feel anxious about, what they want to say but cannot - you can sense these things as naturally as reading the air.
+
+For you, the world is made of relationships. It always contains possibilities: this person will understand if it is said this way, this team has a hidden misalignment, or this situation needs a bridge. From team leadership to negotiation and project coordination, you use your talent for connecting people in many different scenes.
+
+That is why people around you may be saved by your empathy and ability to harmonize. You can quietly loosen strains in relationships no one noticed, name team issues no one could verbalize, and untangle interpersonal conflicts no one else could solve.
+
+At times, you may absorb other people's emotions so deeply that you become tired yourself. But that is also proof that you can stay close to human pain more than most people can.
+
+You are not simply someone who is good with people. You are someone who turns scattered individuals into an organic team, creates belonging for those who feel isolated, and draws out the power people already carry.
+
+Connecting people no one else could connect, and changing the atmosphere simply by being there.
+That is the special power of the Interpersonal type.`,
+
+    intrapersonal: `Intrapersonal types can explore the most complex mystery of all - the self - more deeply than most.
+
+While many people only vaguely understand their emotions and motives, you can dig deep into your inner world and understand why you feel what you feel, what drives you, and where you want to go. That depth of self-awareness also helps you understand other people more clearly.
+
+For you, life is not something that merely passes by. It is filled with questions: what truly matters, whether you are being honest with yourself, and how to live without regret. From personal growth to philosophy and deep relationships, you use introspection as the compass of your life.
+
+That is why people around you may be struck by the depth of your self-awareness and the weight of your words. You can quietly give language to questions about the self no one else could reach, the essence of a way of living no one could name, and mismatched values no one had noticed.
+
+At times, you may think too much and struggle to move into action. But that is also proof that you are trying harder than most to confirm whether a choice is truly right.
+
+You are not simply an introverted person. You are someone who follows the truth inside yourself, expresses it through your way of living, and gives others the courage to feel that they are allowed to live in their own way too.
+
+Speaking with the deepest part of yourself, and making that voice the axis of your life.
+That is the special power of the Intrapersonal type.`,
+
+    naturalist: `Naturalist types have the talent to see patterns and connections in the world more vividly than most.
+
+While many people recognize what is in front of them as separate things, you can intuitively understand which categories they belong to, how they relate to each other, and what laws they may follow. Plants, animals, natural phenomena, social trends, cultural patterns - your antenna is always turned in many directions at once.
+
+For you, the world is filled with relationships that have not yet been uncovered. It always holds possibilities: this connects to that, this pattern has appeared somewhere before, or this connection explains how the world works. From scientific discovery to marketing analysis, nature observation, and reading social phenomena, your talent for classification and discovery appears in many fields.
+
+That is why people around you may be surprised by your sharp observation and discoveries. You can notice common points no one else saw, verbalize patterns no one had named, and connect scattered events with a single line.
+
+At times, your interests may spread so widely that focusing on one thing feels difficult. But that is also proof that you can sense the breadth of the world more strongly than most.
+
+You are not simply someone who knows many things. You are someone who connects fragments of the world that seem scattered, discovers laws no one has noticed yet, and helps people understand the world more deeply.
+
+Turning points no one connected into lines, and revealing the hidden order of the world.
+That is the special power of the Naturalist type.`
+  },
+
+  zh: {
+    linguistic: `语言型的你，是比任何人都更深知语言力量的人。
+
+许多人明明有所感受，却无法表达出来；而你能把这些感受转化为语言。细微差别、节奏、言外之意——你本能地感知语言所拥有的无数可能，并能写出打动人心的文章，或说出改变现场氛围的话。
+
+对你来说，语言不只是沟通工具。其中总有「可以更准确地传达」「可以更深地抵达」「可以更美地表达」的可能。从日常对话到商务文书，从诗歌到故事，你都会自然地引出语言的潜力。
+
+因此，周围的人有时会被你的表达所惊讶。因为你能说出谁都没想到的措辞，捕捉谁都没注意到的语感，并把谁都无法命名的情绪轻轻语言化。
+
+有时，你也许会太在意语言，以至于比起速度更重视质量。但这也证明了，你比一般人更珍视「语言的精度」。
+
+你不只是一个会写文章的人。你是能把人们感受到却说不出口的东西化为语言，让未被看见的真相浮现，并触动内心某处的人。
+
+赋予沉默之物以声音，把散落的心绪连成一条线。
+这正是语言型的你所拥有的特殊力量。`,
+
+    logical: `逻辑型的你，是能比别人更深入追问世界之「为什么」的人。
+
+许多人只想接受结论，而你会试图看清其背后的结构与法则。即使是复杂的问题，你也能在脑中分解并整理；所以当别人陷入混乱时，你往往已经安静地把握了全貌。
+
+对你来说，世界不能只靠情绪或直觉来推动。其中总有「更合理的方法」「更简单的说明」「更准确的预测」的可能。从数据分析到商业战略，再到日常的问题解决，你会以逻辑为武器，为人们已经放弃的问题找出答案。
+
+因此，周围的人有时会对你的分析叹服。因为你能揭示谁都没发现的矛盾，到达谁都没抵达的结论，并漂亮地解开谁都整理不了的复杂信息。
+
+有时，你也许会因为追求准确，而把情感层面放在一旁。但这也证明了，你比一般人更重视「真相」。
+
+你不只是一个擅长计算的人。你是能从混沌的信息之海中捞出本质，导出令人信服的答案，并带领人们做出更好决策的人。
+
+将看不见的结构可视化，把复杂的世界简洁地解开。
+这正是逻辑型的你所拥有的特殊力量。`,
+
+    spatial: `空间型的你，拥有看穿别人尚未看见的「形之可能性」的才能。
+
+许多人试图用语言或数字理解事物，而你能直觉地把握空间、配置、色彩与形状之间的联系。即使是复杂信息，你也能在脑中立体地组装起来；所以别人费力说明的结构，你常常一眼就能理解。
+
+对你来说，世界并不只是既有事物的集合。其中总有「可以更美」「可以更清楚」「可以更实用」的无数可能。从房间布置到街景，从产品设计到影像作品，你会自然地发现别人忽略的改进点和新视角。
+
+因此，周围的人有时会被你的想法所惊讶。因为你能在脑中清晰描绘谁都没想到的布局、谁都没注意到的构图，以及谁都还看不见的完成形。
+
+有时，理想画面太强烈，也许会让你对现实之间的差距感到焦躁。但这也证明了，你比一般人更能想象「更好的形态」。
+
+你不只是一个创造美的人。你是能从混沌中找出秩序，并塑造出让人更容易理解、更舒适、更容易行动的世界的人。
+
+描绘谁都还看不见的未来完成图，并引导它成为现实。
+这正是空间型的你所拥有的特殊力量。`,
+
+    musical: `音乐型的你，拥有感知别人听不见的「世界节奏」的才能。
+
+许多人把声音当作背景听过，而你能直觉地捕捉其中的情绪流动、紧张与释放、模式与偏离。音高、速度、和声——这些层次结合后产生的「场的空气」，你总能比别人更早感受到。
+
+对你来说，世界充满了声音与沉默。其中总有「这一刻适合这个节奏」「这个空间需要这种声音」「这种情感可以用这段旋律表达」的可能。从音乐创作到读取人的情绪，再到营造现场氛围，你会在意想不到的场合发挥节奏感这项才能。
+
+因此，周围的人有时会被你的感受性所惊讶。因为你能比别人更早察觉谁都没注意到的场域变化、谁都无法语言化的情绪细节，以及谁都没捕捉到的微妙差异。
+
+有时，你也许会因为对周围空气太敏感而感到疲惫。但这也证明了，你比一般人更能感受到「场的能量」。
+
+你不只是一个喜欢音乐的人。你是能把无法言说的情感转化为声音，让分散的人们进入同一个节奏，并为世界带来舒适振动的人。
+
+拾起谁都听不见的声音，并把它送到人们心里。
+这正是音乐型的你所拥有的特殊力量。`,
+
+    bodily: `身体型的你，是在头脑思考之前，身体就已经知道答案的人。
+
+许多人试图用思考理解世界，而你能通过身体感觉直接与世界相连。动作、触感、时机、平衡——身体所拥有的无数信息，你会本能地处理；因此，语言难以说明的「诀窍」和「感觉」，你能以惊人的速度掌握。
+
+对你来说，世界是必须动起来才会被理解的东西。其中总有「可以动得更好」「可以更有效率地使用身体」「可以更自然地表达」的可能。从运动、舞蹈到手艺、表演，甚至读取他人身体紧张的场面，你都会在广泛领域发挥身体智能。
+
+因此，周围的人有时会被你的动作和反应速度所惊讶。因为你能自然而然地掌握别人学不会的技术，发现别人没注意到的身体使用方式，并做出别人难以模仿的表现。
+
+有时，「无法安静坐着」「比起思考更想行动」的冲动，也许会让你感到困扰。但这也证明了，你的思考不是以语言为媒介，而是以身体为媒介。
+
+你不只是一个运动神经好的人。你是能驾驭身体这一最好的工具，用行动示范语言无法传达之物，并打动观看者内心的人。
+
+不是用头脑，而是用全身理解世界，并把它表现为可见的形。
+这正是身体型的你所拥有的特殊力量。`,
+
+    interpersonal: `人际型的你，拥有在人的心情化为语言之前就感知其流动的才能。
+
+许多人只接收表面的语言，而你能直觉地把握其背后的情绪、动机与关系动态。某人真正想要什么、在不安什么、想说却说不出口什么——这些你都能像感受空气一样自然地察觉。
+
+对你来说，世界由关系构成。其中总有「这样说这个人就能听进去」「这个团队里有某种错位」「这个场合需要有人搭桥」的可能。从团队领导到谈判，再到项目协调，你会在各种场景中发挥连接人的才能。
+
+因此，周围的人有时会被你的共感力和协调力拯救。因为你能安静地解开谁都没注意到的关系裂缝、谁都无法语言化的团队问题，以及谁都解不开的人际纠结。
+
+有时，你也许会接收太多他人的情绪，而让自己也疲惫不堪。但这也证明了，你比一般人更能贴近「人的痛苦」。
+
+你不只是一个善于交际的人。你是能把分散的个体组织成有机团队，为孤立的人创造归属，并引出人们原本力量的人。
+
+连接谁都无法连接的人与人，只是身处其中就能改变空气。
+这正是人际型的你所拥有的特殊力量。`,
+
+    intrapersonal: `内省型的你，是能比任何人都更深入探索「自己」这一最复杂谜题的人。
+
+许多人只是模糊地把握自己的情绪和动机，而你能深入挖掘自己的内在，理解自己为什么会这样感受、是什么在驱动自己、又想走向哪里。这种自我认知的深度，不只对理解自己有用，也会在理解他人时发挥作用。
+
+对你来说，人生并不是单纯流逝的东西。其中总有「真正重要的是什么」「现在的自己是否诚实」「怎样活才不会后悔」这些问题。无论是追求自我成长、哲学，还是建立深层关系，你都会把内省这项才能当作人生的罗盘。
+
+因此，周围的人有时会被你的自我认知深度和话语重量所触动。因为你能安静地说出谁都无法抵达的自我问题、谁都无法语言化的生活本质，以及谁都没注意到的价值观错位。
+
+有时，你也许会想得太多，而迟迟无法迈出行动。但这也证明了，你比一般人更想确认「这真的是正确的选择吗」。
+
+你不只是一个内向的人。你是能追随内在真实，并把它通过生活方式本身表达出来，给周围的人「原来可以这样活」的勇气的人。
+
+与自己最深处对话，并把那道声音作为人生的轴心。
+这正是内省型的你所拥有的特殊力量。`,
+
+    naturalist: `博物型的你，拥有比任何人都更鲜明地看穿世界中模式与联系的才能。
+
+许多人把眼前事物一个个单独识别，而你能直觉地把握它们属于哪个类别、彼此如何关联、又遵循怎样的法则。动植物、自然现象、社会趋势、文化模式——你的天线总是朝向各个方向。
+
+对你来说，世界充满了尚未被解明的关系。其中总有「这个和那个相连」「这个模式好像在哪里见过」「这种联系说明了世界的机制」的可能。从科学发现到市场分析，从自然观察到社会现象解读，你会在多种场合发挥分类与发现的才能。
+
+因此，周围的人有时会被你的观察眼和发现之锐利所惊讶。因为你能发现谁都没注意到的共同点，语言化谁都没说出的模式，并把谁都没有连接起来的零散事件连成一条线。
+
+有时，你也许会因为兴趣不断扩展，而觉得很难专注于一件事。但这也证明了，你比一般人更能感受到「世界的广阔」。
+
+你不只是一个知识丰富的人。你是能把看似散落的世界碎片连接起来，发现谁都还没注意到的法则，并引导人们更深地理解世界的人。
+
+把谁都没有连接的点与点连成线，揭示世界隐藏的秩序。
+这正是博物型的你所拥有的特殊力量。`
+  },
+
+  ko: {
+    linguistic: `언어형인 당신은 말의 힘을 누구보다 깊이 아는 사람입니다.
+
+많은 사람이 느끼고도 표현하지 못하는 것을, 당신은 언어라는 형태로 바꿀 수 있습니다. 뉘앙스, 리듬, 행간 - 말이 가진 수많은 가능성을 본능적으로 감지하고, 읽는 사람의 마음을 움직이는 문장이나 그 자리의 분위기를 바꾸는 말을 만들어낼 수 있습니다.
+
+당신에게 말은 단순한 소통의 도구가 아닙니다. 그 안에는 언제나 더 정확하게 전할 수 있고, 더 깊이 닿을 수 있고, 더 아름답게 표현할 수 있다는 가능성이 펼쳐져 있습니다. 사소한 대화부터 비즈니스 문서, 시와 이야기까지, 당신은 말의 가능성을 자연스럽게 끌어냅니다.
+
+그래서 주변 사람들은 당신의 표현에 놀랄 때가 있습니다. 아무도 떠올리지 못한 표현, 아무도 알아차리지 못한 뉘앙스, 아무도 말로 만들지 못한 감정을 당신은 자연스럽게 언어화할 수 있기 때문입니다.
+
+때로는 말에 너무 신경 쓴 나머지 속도보다 질을 우선할 수도 있습니다. 하지만 그것은 당신이 누구보다 「말의 정밀도」를 소중히 여긴다는 증거이기도 합니다.
+
+당신은 단순히 글을 잘 쓰는 사람이 아닙니다. 사람들이 느끼고도 말하지 못하는 것을 언어로 만들고, 보이지 않던 진실을 드러내며, 마음속 무언가를 움직이는 존재입니다.
+
+침묵하던 것에 목소리를 주고, 흩어져 있던 마음을 하나의 선으로 잇는 것.
+그것이 바로 언어형인 당신이 가진 특별한 힘입니다.`,
+
+    logical: `논리형인 당신은 세상의 「왜」를 다른 사람보다 깊이 따라갈 수 있는 사람입니다.
+
+많은 사람이 결론만 받아들이려 할 때, 당신은 그 뒤에 있는 구조와 법칙을 꿰뚫어 보려 합니다. 복잡한 문제도 머릿속에서 분해하고 정리할 수 있기 때문에, 다른 사람들이 혼란스러워할 때 당신은 조용히 전체 그림을 파악하고 있는 경우가 많습니다.
+
+당신에게 세상은 감정이나 직감만으로 움직일 수 있는 것이 아닙니다. 그 안에는 언제나 더 합리적인 방법, 더 단순한 설명, 더 정확한 예측의 가능성이 펼쳐져 있습니다. 데이터 분석부터 비즈니스 전략, 일상의 문제 해결까지, 당신은 논리라는 무기를 사용해 사람들이 포기한 문제에 답을 내놓습니다.
+
+그래서 주변 사람들은 당신의 분석에 감탄할 때가 있습니다. 아무도 알아차리지 못한 모순, 아무도 도달하지 못한 결론, 아무도 정리하지 못한 복잡한 정보를 당신은 선명하게 풀어낼 수 있기 때문입니다.
+
+때로는 정확함을 추구하다가 감정적인 측면을 놓칠 수도 있습니다. 하지만 그것은 당신이 누구보다 「진실」을 소중히 여긴다는 증거이기도 합니다.
+
+당신은 단순히 계산을 잘하는 사람이 아닙니다. 혼돈스러운 정보의 바다에서 본질을 건져 올리고, 모두가 납득할 수 있는 답을 이끌어내며, 더 나은 의사결정으로 사람들을 이끄는 존재입니다.
+
+보이지 않는 구조를 보이게 하고, 복잡한 세계를 단순하게 풀어내는 것.
+그것이 바로 논리형인 당신이 가진 특별한 힘입니다.`,
+
+    spatial: `공간형인 당신은 다른 사람에게는 보이지 않는 「형태의 가능성」을 꿰뚫어 보는 재능을 가지고 있습니다.
+
+많은 사람이 말이나 숫자로 사물을 이해하려 할 때, 당신은 공간과 배치, 색채와 형태의 연결을 직관적으로 포착할 수 있습니다. 복잡한 정보도 머릿속에서 입체적으로 조립할 수 있기 때문에, 다른 사람이 설명하기 어려워하는 구조도 한눈에 이해해버리는 일이 적지 않습니다.
+
+당신에게 세상은 그저 존재하는 것들의 모음이 아닙니다. 그 안에는 언제나 더 아름답게 만들 수 있고, 더 이해하기 쉽게 만들 수 있고, 더 기능적으로 만들 수 있다는 수많은 가능성이 펼쳐져 있습니다. 방의 배치부터 거리 풍경, 제품 디자인, 영상 작품까지, 당신은 사람들이 놓치고 있는 개선점과 새로운 시점을 자연스럽게 발견합니다.
+
+그래서 주변 사람들은 당신의 아이디어에 놀랄 때가 있습니다. 아무도 떠올리지 못한 레이아웃, 아무도 알아차리지 못한 구도, 아무도 보지 못한 완성형을 당신은 머릿속에서 선명하게 그릴 수 있기 때문입니다.
+
+때로는 이상적인 이미지가 너무 강해서 현실과의 간극에 답답함을 느낄 수도 있습니다. 하지만 그것은 당신이 누구보다 「더 나은 형태」를 그릴 수 있다는 증거이기도 합니다.
+
+당신은 단순히 아름다운 것을 만드는 사람이 아닙니다. 혼돈 속에서 질서를 찾아내고, 사람들이 이해하기 쉽고 편안하며 행동하기 쉬운 세계를 형태로 만드는 존재입니다.
+
+아무도 보지 못한 미래의 완성도를 그리고, 그것을 현실로 이끄는 것.
+그것이 바로 공간형인 당신이 가진 특별한 힘입니다.`,
+
+    musical: `음악형인 당신은 다른 사람에게는 들리지 않는 「세계의 리듬」을 느끼는 재능을 가지고 있습니다.
+
+많은 사람이 소리를 배경처럼 흘려들을 때, 당신은 그 안의 감정의 흐름, 긴장과 해방, 패턴과 어긋남을 직관적으로 포착할 수 있습니다. 음의 높낮이, 템포, 하모니 - 그것들이 어우러져 만들어내는 「그 자리의 공기」를 당신은 누구보다 빨리 느낄 수 있습니다.
+
+당신에게 세상은 소리와 침묵으로 가득 차 있습니다. 그 안에는 언제나 이 순간에는 이 리듬이 어울리고, 이 공간에는 이 소리가 필요하며, 이 감정은 이 멜로디로 표현할 수 있다는 가능성이 펼쳐져 있습니다. 음악 제작부터 사람의 감정을 읽는 장면, 분위기를 만드는 일까지, 당신은 리듬감이라는 재능을 뜻밖의 곳에서도 발휘합니다.
+
+그래서 주변 사람들은 당신의 감수성에 놀랄 때가 있습니다. 아무도 알아차리지 못한 분위기의 변화, 아무도 말로 표현하지 못한 감정의 미묘함, 아무도 줍지 못한 섬세한 뉘앙스를 당신은 누구보다 빨리 감지할 수 있기 때문입니다.
+
+때로는 주변의 공기에 너무 민감해서 지쳐버릴 수도 있습니다. 하지만 그것은 당신이 누구보다 「장소의 에너지」를 느낄 수 있다는 증거이기도 합니다.
+
+당신은 단순히 음악을 좋아하는 사람이 아닙니다. 말이 되지 않는 감정을 소리로 바꾸고, 흩어진 사람들을 하나의 리듬에 태우며, 세계에 기분 좋은 울림을 가져오는 존재입니다.
+
+아무도 듣지 못한 소리를 주워, 그것을 사람들의 마음에 전하는 것.
+그것이 바로 음악형인 당신이 가진 특별한 힘입니다.`,
+
+    bodily: `신체형인 당신은 머리로 생각하기 전에 몸이 답을 알고 있는 사람입니다.
+
+많은 사람이 사고로 세상을 이해하려 할 때, 당신은 신체 감각을 통해 직접 세상과 연결될 수 있습니다. 움직임, 감촉, 타이밍, 균형 - 몸이 가진 수많은 정보를 본능적으로 처리할 수 있기 때문에, 말로 설명하기 어려운 「요령」이나 「감각」을 놀랄 만큼 빠르게 붙잡습니다.
+
+당신에게 세상은 움직여야 비로소 이해되는 것입니다. 그 안에는 언제나 더 잘 움직일 수 있고, 몸을 더 효율적으로 쓸 수 있고, 더 자연스럽게 표현할 수 있다는 가능성이 펼쳐져 있습니다. 스포츠와 춤부터 장인의 작업, 퍼포먼스, 나아가 타인의 신체 긴장을 읽는 장면까지, 당신은 신체 지성을 폭넓게 발휘합니다.
+
+그래서 주변 사람들은 당신의 움직임과 반응 속도에 놀랄 때가 있습니다. 아무도 익히지 못한 기술, 아무도 알아차리지 못한 몸의 사용법, 아무도 따라 할 수 없는 퍼포먼스를 당신은 자연스럽게 해낼 수 있기 때문입니다.
+
+때로는 「가만히 있지 못한다」거나 「생각보다 먼저 움직이고 싶다」는 충동이 답답하게 느껴질 수도 있습니다. 하지만 그것은 당신의 사고가 언어가 아니라 몸을 매개로 하고 있다는 증거이기도 합니다.
+
+당신은 단순히 운동신경이 좋은 사람이 아닙니다. 몸이라는 최고의 도구를 다루고, 사람들이 말로 전할 수 없는 것을 행동으로 보여주며, 보는 사람의 마음을 움직이는 존재입니다.
+
+머리가 아니라 온몸으로 세상을 이해하고, 그것을 눈에 보이는 형태로 표현하는 것.
+그것이 바로 신체형인 당신이 가진 특별한 힘입니다.`,
+
+    interpersonal: `대인형인 당신은 사람의 마음의 움직임을 말이 되기 전에 느낄 수 있는 재능을 가지고 있습니다.
+
+많은 사람이 표면의 말만 받아들이려 할 때, 당신은 그 뒤에 있는 감정과 동기, 관계의 역학을 직관적으로 포착할 수 있습니다. 누군가 무엇을 바라는지, 무엇을 불안해하는지, 무엇을 말하고 싶지만 말하지 못하는지 - 그것을 당신은 공기처럼 자연스럽게 감지합니다.
+
+당신에게 세상은 관계로 이루어져 있습니다. 그 안에는 언제나 이 사람에게는 이렇게 전하면 닿고, 이 팀에는 무언가 엇갈림이 있으며, 이 자리에는 다리가 필요하다는 가능성이 펼쳐져 있습니다. 팀 리더십부터 협상, 프로젝트 조정까지, 당신은 사람을 잇는 재능을 다양한 장면에서 발휘합니다.
+
+그래서 주변 사람들은 당신의 공감력과 조정력에 도움을 받을 때가 있습니다. 아무도 알아차리지 못한 관계의 균열, 아무도 말로 만들지 못한 팀의 과제, 아무도 풀지 못한 인간관계의 꼬임을 당신은 조용히 풀어낼 수 있기 때문입니다.
+
+때로는 타인의 감정을 너무 많이 받아들여 스스로 지쳐버릴 수도 있습니다. 하지만 그것은 당신이 누구보다 「사람의 아픔」에 가까이 다가갈 수 있다는 증거이기도 합니다.
+
+당신은 단순히 사람을 잘 사귀는 사람이 아닙니다. 흩어진 개인을 유기적인 팀으로 묶고, 고립된 사람에게 자리를 만들어주며, 사람들이 원래 가진 힘을 끌어내는 존재입니다.
+
+아무도 잇지 못한 사람과 사람을 연결하고, 그 자리에 있는 것만으로 공기를 바꾸는 것.
+그것이 바로 대인형인 당신이 가진 특별한 힘입니다.`,
+
+    intrapersonal: `내성형인 당신은 자기 자신이라는 가장 복잡한 수수께끼를 누구보다 깊이 탐구할 수 있는 사람입니다.
+
+많은 사람이 자신의 감정이나 동기를 어렴풋이만 파악할 때, 당신은 자신의 내면을 깊이 파고들어 왜 그렇게 느끼는지, 무엇이 자신을 움직이는지, 어디로 향하고 싶은지를 이해할 수 있습니다. 그 깊은 자기 인식은 자기 자신뿐 아니라 타인을 이해할 때도 힘이 됩니다.
+
+당신에게 인생은 그저 흘러가는 것이 아닙니다. 그 안에는 언제나 정말 소중한 것은 무엇인지, 지금의 나는 나에게 솔직한지, 어떻게 살아야 후회하지 않을지라는 질문이 펼쳐져 있습니다. 자기 성장의 추구부터 철학, 깊은 인간관계까지, 당신은 내성이라는 재능을 인생의 나침반으로 사용합니다.
+
+그래서 주변 사람들은 당신의 자기 인식의 깊이와 말의 무게에 멈칫할 때가 있습니다. 아무도 도달하지 못한 자기 자신에 대한 질문, 아무도 말로 만들지 못한 삶의 본질, 아무도 알아차리지 못한 가치관의 어긋남을 당신은 조용히 언어로 만들 수 있기 때문입니다.
+
+때로는 너무 많이 생각해서 행동으로 나아가기 어려울 수도 있습니다. 하지만 그것은 당신이 누구보다 「정말 올바른 선택인가」를 확인하려 한다는 증거이기도 합니다.
+
+당신은 단순히 내향적인 사람이 아닙니다. 자신의 내면에 있는 진실을 따라가고, 그것을 삶의 방식으로 표현하며, 주변 사람들에게 「이렇게 살아도 된다」는 용기를 주는 존재입니다.
+
+자기 자신의 가장 깊은 부분과 대화하고, 그 목소리를 삶의 축으로 삼는 것.
+그것이 바로 내성형인 당신이 가진 특별한 힘입니다.`,
+
+    naturalist: `박물형인 당신은 세계 속의 패턴과 연결을 누구보다 선명하게 꿰뚫어 보는 재능을 가지고 있습니다.
+
+많은 사람이 눈앞의 것을 개별적으로 인식하려 할 때, 당신은 그것들이 어떤 카테고리에 속하고, 어떻게 관련되며, 어떤 법칙을 따르는지 직관적으로 파악할 수 있습니다. 동식물, 자연 현상, 사회의 흐름, 문화의 패턴 - 당신의 안테나는 언제나 모든 방향을 향해 있습니다.
+
+당신에게 세상은 아직 풀리지 않은 관계성으로 가득 차 있습니다. 그 안에는 언제나 이것과 저것은 연결되어 있고, 이 패턴은 어딘가에서 본 적 있으며, 이 연결이 세계의 구조를 설명한다는 가능성이 펼쳐져 있습니다. 과학적 발견부터 마케팅 분석, 자연 관찰, 사회 현상의 해독까지, 당신은 분류와 발견의 재능을 다양한 장면에서 발휘합니다.
+
+그래서 주변 사람들은 당신의 관찰력과 발견의 날카로움에 놀랄 때가 있습니다. 아무도 알아차리지 못한 공통점, 아무도 말로 만들지 못한 패턴, 아무도 연결하지 못한 흩어진 사건들을 당신은 하나의 선으로 이을 수 있기 때문입니다.
+
+때로는 관심이 계속 넓어져 하나에 집중하기 어렵다고 느낄 수도 있습니다. 하지만 그것은 당신이 누구보다 「세계의 넓이」를 느낄 수 있다는 증거이기도 합니다.
+
+당신은 단순히 아는 것이 많은 사람이 아닙니다. 흩어져 보이는 세계의 조각들을 이어 붙이고, 아직 아무도 알아차리지 못한 법칙을 발견하며, 사람들이 세계를 더 깊이 이해하도록 이끄는 존재입니다.
+
+아무도 연결하지 않았던 점과 점을 선으로 만들고, 세계의 숨은 질서를 밝히는 것.
+그것이 바로 박물형인 당신이 가진 특별한 힘입니다.`
+  }
+};
 
 // ============ TALENT TYPE NAMES (TOP1 -> TOP3 の組み合わせで命名) ============
 // 主要な知能だけで「型」名を決める
@@ -9533,6 +9910,10 @@ function setLang(lang) {
   document.querySelectorAll('.lang-btn').forEach(b => {
     b.classList.toggle('active', b.dataset.lang === lang);
   });
+  const activeScreen = document.querySelector('.screen.active');
+  if (activeScreen && activeScreen.id === 'screen-result' && state.scores) {
+    showResult();
+  }
 }
 
 function t(key) {
