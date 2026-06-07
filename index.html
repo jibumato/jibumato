@@ -6163,7 +6163,16 @@ function getTalent(key) {
     bgColor: t.bgColor,
     catchphrase: t['catchphrase' + suffix] || t.catchphrase,
     desc: t['desc' + suffix] || t.desc,
-    desc_long: getTalentLongDescription(key, suffix, t)
+    desc_long: getTalentLongDescription(key, suffix, t),
+    // rarity（特別感）/ reframe（才能の裏側）は INTELLIGENCE_INFO 側に定義
+    rarity_ja: INTELLIGENCE_INFO[key]?.rarity_ja || '',
+    rarity_en: INTELLIGENCE_INFO[key]?.rarity_en || '',
+    rarity_zh: INTELLIGENCE_INFO[key]?.rarity_zh || '',
+    rarity_ko: INTELLIGENCE_INFO[key]?.rarity_ko || '',
+    reframe_ja: INTELLIGENCE_INFO[key]?.reframe_ja || '',
+    reframe_en: INTELLIGENCE_INFO[key]?.reframe_en || '',
+    reframe_zh: INTELLIGENCE_INFO[key]?.reframe_zh || '',
+    reframe_ko: INTELLIGENCE_INFO[key]?.reframe_ko || ''
   };
 }
 
