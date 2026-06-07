@@ -86,7 +86,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Shippori+Mincho:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Shippori+Mincho:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Spectral:ital,wght@0,300;0,400;0,500;0,600&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -241,6 +241,58 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     text-transform: uppercase;
   }
 
+  /* ===== ブランドロゴ（The Talent Matrix） ===== */
+  .brand-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .brand-main {
+    font-family: 'Spectral', serif;
+    font-weight: 500;
+    font-size: clamp(30px, 7vw, 46px);
+    line-height: 1.08;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .brand-main .brand-word { display: block; }
+  .brand-sep {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .brand-sep-line {
+    width: 40px;
+    height: 1px;
+    background: rgba(184,137,58,0.5);
+  }
+  .brand-inf {
+    font-family: 'Spectral', serif;
+    font-size: 22px;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .brand-tagline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-top: 14px;
+    text-transform: uppercase;
+  }
+  .brand-ja {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: rgba(15,14,12,0.5);
+    margin-top: 16px;
+  }
+
   .hero-sub {
     margin: 32px auto 0;
     max-width: 480px;
@@ -269,6 +321,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   .intelligences-preview-wrap {
     margin: 40px 0;
+  }
+
+  .intel-section-title {
+    text-align: center;
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+    margin-bottom: 10px;
   }
 
   .intel-hint {
@@ -392,6 +454,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   .start-btn:hover { background: var(--crimson); letter-spacing: 0.4em; }
   .start-btn:hover::before { inset: 3px; }
+
+  .start-hint {
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    margin: -8px 0 24px;
+  }
 
   /* 前回の結果を見るバナー */
   .last-result-banner {
@@ -2302,6 +2373,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     margin: 28px 0 12px;
   }
 
+  /* 最上部に配置する場合のマージン調整 */
+  .lang-switcher-top {
+    margin: 18px 0 28px;
+  }
+
   .lang-btn {
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
@@ -3475,6 +3551,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section id="screen-intro" class="screen active">
   <div class="top-mark">Jibu-Mato · じぶんマトリクス</div>
 
+  <!-- 言語切り替え（最上部） -->
+  <div class="lang-switcher lang-switcher-top">
+    <button class="lang-btn active" data-lang="ja" onclick="setLang('ja')">JA</button>
+    <span class="lang-sep">·</span>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+    <span class="lang-sep">·</span>
+    <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button>
+    <span class="lang-sep">·</span>
+    <button class="lang-btn" data-lang="ko" onclick="setLang('ko')">한국어</button>
+  </div>
+
   <!-- マンダラ挿絵 -->
   <div class="mandala-illustration">
     <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -3523,10 +3610,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <!-- 中央の文字 -->
       <g transform="translate(200,200)">
-        <text y="-20" text-anchor="middle" font-family="Shippori Mincho, serif" font-size="18" font-weight="700" fill="#0f0e0c" letter-spacing="2">じぶん</text>
-        <text y="5" text-anchor="middle" font-family="Shippori Mincho, serif" font-size="18" font-weight="700" fill="#0f0e0c" letter-spacing="2">マトリクス</text>
-        <line x1="-30" y1="15" x2="30" y2="15" stroke="#b8893a" stroke-width="0.4"/>
-        <text y="32" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-size="9" fill="#b8893a" letter-spacing="3">ORACLE</text>
+        <text y="-16" text-anchor="middle" font-family="Spectral, serif" font-size="16" font-weight="500" fill="#0f0e0c" letter-spacing="1.5">THE TALENT</text>
+        <text y="7" text-anchor="middle" font-family="Spectral, serif" font-size="16" font-weight="500" fill="#0f0e0c" letter-spacing="1.5">MATRIX</text>
+        <line x1="-28" y1="19" x2="28" y2="19" stroke="#b8893a" stroke-width="0.4"/>
+        <text y="35" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-size="9" fill="#b8893a" letter-spacing="3">∞ POTENTIAL</text>
       </g>
 
       <!-- 上部の星 -->
@@ -3550,9 +3637,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="hero">
     <div class="hero-eyebrow" data-i18n="hero.eyebrow">— あなたの中に眠る、八つの才能 —</div>
-    <h1>
-      じぶんマトリクス
-      <span class="accent">JIBU-MATO · The Talent Matrix</span>
+    <h1 class="brand-logo">
+      <span class="brand-main"><span class="brand-word">The Talent</span><span class="brand-word">Matrix</span></span>
+      <span class="brand-sep"><span class="brand-sep-line"></span><span class="brand-inf">∞</span><span class="brand-sep-line"></span></span>
+      <span class="brand-tagline" data-i18n="brand.tagline">8つの才能、無限の可能性</span>
+      <span class="brand-ja">じぶんマトリクス</span>
     </h1>
     <p class="hero-sub" data-i18n="hero.sub">
       ハーバード大学のハワード・ガードナーが提唱した「多重知能理論（MI理論）」をベースに、あなたの中に眠る8種類の知性を測定します。<br>
@@ -3560,37 +3649,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </p>
   </div>
 
-  <div class="ornament"></div>
-
-  <div class="intelligences-preview-wrap">
-    <div class="intel-hint" data-i18n="title.hint">▼ タップで詳しい解説 ▼</div>
-    <div class="intelligences-preview">
-      <button class="intel-cell" onclick="openIntelModal('linguistic')"><span class="num">01</span><div class="name" data-i18n="cell.linguistic">言語</div><span class="en">Linguistic</span></button>
-      <button class="intel-cell" onclick="openIntelModal('logical')"><span class="num">02</span><div class="name" data-i18n="cell.logical">論理数学</div><span class="en">Logical</span></button>
-      <button class="intel-cell" onclick="openIntelModal('spatial')"><span class="num">03</span><div class="name" data-i18n="cell.spatial">空間</div><span class="en">Spatial</span></button>
-      <button class="intel-cell" onclick="openIntelModal('musical')"><span class="num">04</span><div class="name" data-i18n="cell.musical">音楽</div><span class="en">Musical</span></button>
-      <button class="intel-cell" onclick="openIntelModal('bodily')"><span class="num">05</span><div class="name" data-i18n="cell.bodily">身体運動</div><span class="en">Bodily</span></button>
-      <button class="intel-cell" onclick="openIntelModal('interpersonal')"><span class="num">06</span><div class="name" data-i18n="cell.interpersonal">対人</div><span class="en">Interpersonal</span></button>
-      <button class="intel-cell" onclick="openIntelModal('intrapersonal')"><span class="num">07</span><div class="name" data-i18n="cell.intrapersonal">内省</div><span class="en">Intrapersonal</span></button>
-      <button class="intel-cell" onclick="openIntelModal('naturalist')"><span class="num">08</span><div class="name" data-i18n="cell.naturalist">博物</div><span class="en">Naturalist</span></button>
-    </div>
-  </div>
-
   <div class="meta-info">
-    <span>QUESTIONS · 24</span>
-    <span>DURATION · 3 MIN</span>
-    <span>TYPE · MI THEORY</span>
-  </div>
-
-  <!-- 言語切り替え -->
-  <div class="lang-switcher">
-    <button class="lang-btn active" data-lang="ja" onclick="setLang('ja')">JA</button>
-    <span class="lang-sep">·</span>
-    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
-    <span class="lang-sep">·</span>
-    <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button>
-    <span class="lang-sep">·</span>
-    <button class="lang-btn" data-lang="ko" onclick="setLang('ko')">한국어</button>
+    <span data-i18n="meta.questions">質問は24問だけ</span>
+    <span data-i18n="meta.duration">所要時間は約3分</span>
+    <span data-i18n="meta.free">完全無料</span>
   </div>
 
   <div id="resumeBanner" class="resume-banner" style="display:none;">
@@ -3603,6 +3665,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <button class="start-btn" id="startButton" onclick="startDiagnosis()" data-i18n="title.start">診断をはじめる</button>
+  <p class="start-hint" data-i18n="title.start_hint">登録不要・3分で完了。今すぐ無料で。</p>
+
+  <div class="ornament"></div>
+
+  <div class="intelligences-preview-wrap">
+    <div class="intel-section-title" data-i18n="title.eight_talents">この診断でわかる、8つの才能</div>
+    <div class="intel-hint" data-i18n="title.hint">▼ タップで詳しい解説 ▼</div>
+    <div class="intelligences-preview">
+      <button class="intel-cell" onclick="openIntelModal('linguistic')"><span class="num">01</span><div class="name" data-i18n="cell.linguistic">言語</div><span class="en">Linguistic</span></button>
+      <button class="intel-cell" onclick="openIntelModal('logical')"><span class="num">02</span><div class="name" data-i18n="cell.logical">論理数学</div><span class="en">Logical</span></button>
+      <button class="intel-cell" onclick="openIntelModal('spatial')"><span class="num">03</span><div class="name" data-i18n="cell.spatial">空間</div><span class="en">Spatial</span></button>
+      <button class="intel-cell" onclick="openIntelModal('musical')"><span class="num">04</span><div class="name" data-i18n="cell.musical">音楽</div><span class="en">Musical</span></button>
+      <button class="intel-cell" onclick="openIntelModal('bodily')"><span class="num">05</span><div class="name" data-i18n="cell.bodily">身体運動</div><span class="en">Bodily</span></button>
+      <button class="intel-cell" onclick="openIntelModal('interpersonal')"><span class="num">06</span><div class="name" data-i18n="cell.interpersonal">対人</div><span class="en">Interpersonal</span></button>
+      <button class="intel-cell" onclick="openIntelModal('intrapersonal')"><span class="num">07</span><div class="name" data-i18n="cell.intrapersonal">内省</div><span class="en">Intrapersonal</span></button>
+      <button class="intel-cell" onclick="openIntelModal('naturalist')"><span class="num">08</span><div class="name" data-i18n="cell.naturalist">博物</div><span class="en">Naturalist</span></button>
+    </div>
+  </div>
 
   <!-- 前回の結果を見る（過去に診断済みの人のみ表示） -->
   <div class="last-result-banner" id="lastResultBanner" style="display:none;">
@@ -3697,7 +3777,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </svg>
     </div>
     <h2 id="computingText" data-i18n="computing.title">あなたの才能を読み解いています...</h2>
-    <p class="computing-text" data-i18n="computing.body">8つの知性のバランスを解析中。<br>あなたが何者であるかが、いま、浮かび上がります。</p>
+    <p class="computing-text" data-i18n="computing.body">8つの才能のバランスを解析中。<br>あなたが何者であるかが、いま、浮かび上がります。</p>
   </div>
 </section>
 
@@ -3813,7 +3893,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="en" data-i18n="result.sec1en">Intelligence Map</span>
   </div>
   <div class="radar-container">
-    <canvas id="radarChart" width="600" height="600" role="img" aria-label="8つの知能スコアのレーダーチャート"></canvas>
+    <canvas id="radarChart" width="600" height="600" role="img" aria-label="8つの才能スコアのレーダーチャート"></canvas>
     <div class="radar-caption" data-i18n="radar.caption">YOUR 8 INTELLIGENCES · MI BALANCE</div>
   </div>
 
@@ -7670,7 +7750,7 @@ function drawRadar(scores) {
   try {
     const ordered = KEYS.slice().sort((a, b) => scores[b] - scores[a]);
     const top3names = ordered.slice(0, 3).map(k => getIntShortName(k)).join('、');
-    canvas.setAttribute('aria-label', '8つの知能のバランス図。特に発揮しやすいのは ' + top3names + ' です。');
+    canvas.setAttribute('aria-label', '8つの才能のバランス図。特に発揮しやすいのは ' + top3names + ' です。');
   } catch (e) {}
 
   const size = logicalSize;
@@ -9268,7 +9348,9 @@ const I18N = {
   ja: {
     // タイトル画面
     'title.hint':       '▼ タップで詳しい解説 ▼',
+    'title.eight_talents': 'この診断でわかる、8つの才能',
     'title.start':      '診断をはじめる',
+    'title.start_hint': '登録不要・3分で完了。今すぐ無料で。',
     'title.disclaimer': '本診断は、ハワード・ガードナーの多重知能理論（MI理論）を着想源とした、じぶんマトリクス独自のエンターテインメント診断です。学術的・心理学的な診断や評価を行うものではありません。結果は娯楽・自己理解の参考として、楽しくお使いください。',
     'title.resume.label':   '— Continue Where You Left Off —',
     'title.resume.btn':     '続きから再開',
@@ -9288,7 +9370,7 @@ const I18N = {
     'result.sec1':       '知能バランス',
     'result.sec1en':     'Intelligence Map',
     'result.top_intel':  '— あなたが特に発揮しやすい3つ —',
-    'result.sec2':       '8つの知能スコア',
+    'result.sec2':       '8つの才能スコア',
     'result.sec2en':     'Detailed Scores',
     'result.sec3':       'あなたの武器',
     'result.sec3en':     'Your Strengths',
@@ -9310,7 +9392,7 @@ const I18N = {
     'result.book_disclosure': '※ 当ページのリンクはAmazonアソシエイトを利用しています',
     // Computing
     'computing.title':   'あなたの才能を読み解いています...',
-    'computing.body':    '8つの知性のバランスを解析中。あなたが何者であるかが、いま、浮かび上がります。',
+    'computing.body':    '8つの才能のバランスを解析中。あなたが何者であるかが、いま、浮かび上がります。',
     // 結果画面追加セクション
     'result.talent_type': '才能タイプ',
     'result.sec4':       '伸びしろの領域',
@@ -9432,6 +9514,10 @@ const I18N = {
   
     // 追加翻訳（v2: HTML hardcode fix）
     'hero.eyebrow': '— あなたの中に眠る、八つの才能 —',
+    'brand.tagline': '8つの才能、無限の可能性',
+    'meta.questions': '質問は24問だけ',
+    'meta.duration': '所要時間は約3分',
+    'meta.free': '完全無料',
     'chapter.thinking': '— 思考の領域 —',
     'q.back': '← 前の質問へ',
     'q.tap_to_proceed': '回答すると次へ進みます',
@@ -9478,7 +9564,7 @@ const I18N = {
     'close': '閉じる',
   
     // v4: hero/premium/gallery/match
-    'hero.sub': 'ハーバード大学のハワード・ガードナーが提唱した「多重知能理論（MI理論）」をベースに、あなたの中に眠る8種類の知性を測定します。<br>性格ではなく、<em>武器</em>を知るための、じぶんの取扱説明書。',
+    'hero.sub': '24の質問に答えるだけ。たった3分で、あなたの中に眠る8つの才能のバランスがわかります。<br>性格ではなく「<em>武器</em>」を知る——ハーバード発のMI理論にもとづく、じぶんの取扱説明書。',
     'prem.intro1': '無料診断は、入り口に過ぎません。',
     'prem.intro2': '¥980で、あなたのタイプの「才能の取扱説明書」（書き込み式ワークブック付き）を解錠できます。',
     'prem.locked': '続きは購入者限定',
@@ -9505,14 +9591,14 @@ const I18N = {
     'share.window_title': 'じぶマト結果カード',
   
     // premium section label
-    'radar.caption': 'あなたの8つの知能 · MIバランス',
+    'radar.caption': 'あなたの8つの才能 · MIバランス',
     'premium.section_label': '— Section 01 of 06 · 才能の深掘り —',
   
     // computing messages & match placeholder
     'computing.msg1': 'あなたの言葉の海を覗いています...',
     'computing.msg2': '論理と直感の比率を測っています...',
     'computing.msg3': 'あなたの中の隠れた強みを探っています...',
-    'computing.msg4': '8つの知性のバランスを読み解いています...',
+    'computing.msg4': '8つの才能のバランスを読み解いています...',
     'match.placeholder': '例: LI-IN-SP / 78-65-62-50-48-40-38-25',
   
     // match url prompt
@@ -9549,7 +9635,9 @@ const I18N = {
   en: {
     // タイトル画面
     'title.hint':       '▼ Tap for details ▼',
+    'title.eight_talents': 'The 8 talents this assessment reveals',
     'title.start':      'Start the Assessment',
+    'title.start_hint': 'No sign-up · Done in 3 minutes · Free',
     'title.disclaimer': 'This assessment is an original entertainment diagnosis by Jibu-Mato, inspired by Howard Gardner\'s Multiple Intelligences theory. It is not an academic or psychological evaluation. Please enjoy the results as a reference for self-understanding and entertainment.',
     'title.resume.label':   '— Continue Where You Left Off —',
     'title.resume.btn':     'Resume',
@@ -9569,7 +9657,7 @@ const I18N = {
     'result.sec1':       'Intelligence Balance',
     'result.sec1en':     'Intelligence Map',
     'result.top_intel':  '— Your Three Natural Strengths —',
-    'result.sec2':       '8 Intelligence Scores',
+    'result.sec2':       '8 Talent Scores',
     'result.sec2en':     'Detailed Scores',
     'result.sec3':       'Your Strengths',
     'result.sec3en':     'Top Abilities',
@@ -9590,7 +9678,7 @@ const I18N = {
     'result.book_cta':   'View on Amazon',
     'result.book_disclosure': '※ Links on this page are part of the Amazon Associates Program',
     'computing.title':   'Reading your talents...',
-    'computing.body':    'Analyzing the balance of 8 intelligences. Who you truly are is now surfacing.',
+    'computing.body':    'Analyzing the balance of 8 talents. Who you truly are is now surfacing.',
     'result.talent_type': 'Talent Type',
     'result.sec4':       'Growth Areas',
     'result.sec4en':     'Growth Areas',
@@ -9707,6 +9795,10 @@ const I18N = {
   
     // 追加翻訳（v2: HTML hardcode fix）
     'hero.eyebrow': '— The eight talents within you —',
+    'brand.tagline': '8 talents · infinite potential',
+    'meta.questions': 'Only 24 questions',
+    'meta.duration': 'About 3 minutes',
+    'meta.free': 'Completely free',
     'chapter.thinking': '— Realm of Thought —',
     'q.back': '← Previous question',
     'q.tap_to_proceed': 'Tap an answer to continue',
@@ -9753,7 +9845,7 @@ const I18N = {
     'close': 'Close',
   
     // v4: hero/premium/gallery/match
-    'hero.sub': 'Based on Howard Gardner\'s Theory of Multiple Intelligences (Harvard University), we measure the 8 kinds of intelligence that sleep within you.<br>A personal owner\'s manual—not for personality, but for your <em>weapons</em>.',
+    'hero.sub': 'Just 24 questions. In only 3 minutes, discover the balance of the 8 talents within you.<br>Know your <em>weapons</em>, not your personality—a personal owner\'s manual based on Harvard\'s MI theory.',
     'prem.intro1': 'The free diagnosis is only the beginning.',
     'prem.intro2': 'For 980 yen, unlock the Owner Manual of Talent for your type — with a fill-in workbook.',
     'prem.locked': 'The rest is for buyers only',
@@ -9780,14 +9872,14 @@ const I18N = {
     'share.window_title': 'Jibu-Mato Result Card',
   
     // premium section label
-    'radar.caption': 'YOUR 8 INTELLIGENCES · MI BALANCE',
+    'radar.caption': 'YOUR 8 TALENTS · MI BALANCE',
     'premium.section_label': '— Section 01 of 06 · Deep Dive —',
   
     // computing messages & match placeholder
     'computing.msg1': 'Peering into your sea of words...',
     'computing.msg2': 'Measuring the ratio of logic and intuition...',
     'computing.msg3': 'Searching for hidden strengths within you...',
-    'computing.msg4': 'Reading the balance of 8 intelligences...',
+    'computing.msg4': 'Reading the balance of 8 talents...',
     'match.placeholder': 'e.g.: LI-IN-SP / 78-65-62-50-48-40-38-25',
   
     // match url prompt
@@ -9825,7 +9917,9 @@ const I18N = {
   // ===== 中文（简体）=====
   zh: {
     'title.hint':       '▼ 点击查看详细说明 ▼',
+    'title.eight_talents': '本测评将揭示的8种才能',
     'title.start':      '开始测评',
+    'title.start_hint': '无需注册·3分钟完成·立即免费',
     'title.disclaimer': '本测评是以霍华德·加德纳的多元智能理论（MI理论）为灵感，由じぶんマトリクス独创的娱乐测评。本测评不属于学术或心理学诊断，结果仅供娱乐和自我了解参考。',
     'title.resume.label':   '— 从上次中断处继续 —',
     'title.resume.btn':     '继续测评',
@@ -9842,7 +9936,7 @@ const I18N = {
     'result.sec1':       '智能平衡图',
     'result.sec1en':     'Intelligence Map',
     'result.top_intel':  '— 你最容易发挥的三种 —',
-    'result.sec2':       '8项智能得分',
+    'result.sec2':       '8项才能得分',
     'result.sec2en':     'Detailed Scores',
     'result.sec3':       '你的强项',
     'result.sec3en':     'Your Strengths',
@@ -9863,7 +9957,7 @@ const I18N = {
     'result.book_cta':   '在Amazon查看',
     'result.book_disclosure': '※ 本页面链接使用Amazon联盟项目',
     'computing.title':   '正在解读你的才能...',
-    'computing.body':    '正在分析8项智能的平衡。你是谁，此刻即将浮现。',
+    'computing.body':    '正在分析8项才能的平衡。你是谁，此刻即将浮现。',
     'result.talent_type': '才能类型',
     'result.sec4':       '成长空间',
     'result.sec4en':     'Growth Areas',
@@ -9976,6 +10070,10 @@ const I18N = {
   
     // 追加翻訳（v2: HTML hardcode fix）
     'hero.eyebrow': '— 沉睡在你心中的八种才能 —',
+    'brand.tagline': '8种才能 · 无限可能',
+    'meta.questions': '仅24个问题',
+    'meta.duration': '约需3分钟',
+    'meta.free': '完全免费',
     'chapter.thinking': '— 思维的领域 —',
     'q.back': '← 上一题',
     'q.tap_to_proceed': '回答后将自动进入下一题',
@@ -10022,7 +10120,7 @@ const I18N = {
     'close': '关闭',
   
     // v4: hero/premium/gallery/match
-    'hero.sub': '基于哈佛大学加德纳教授提出的"多元智能理论(MI理论)"，测量你心中沉睡的8种智能。<br>这不是关于性格，而是关于<em>武器</em>的——你的专属说明书。',
+    'hero.sub': '只需回答24个问题，仅需3分钟，即可了解你心中沉睡的8种才能的平衡。<br>认识你的「<em>武器</em>」而非性格——基于哈佛大学MI理论的你的专属说明书。',
     'prem.intro1': '免费诊断只是入口。',
     'prem.intro2': '只需980日元，即可解锁你所属类型的"才能使用说明书"（附可填写工作簿）。',
     'prem.locked': '后续内容仅限购买者',
@@ -10049,14 +10147,14 @@ const I18N = {
     'share.window_title': 'Jibu-Mato 结果卡片',
   
     // premium section label
-    'radar.caption': '你的8种智能 · MI 平衡',
+    'radar.caption': '你的8种才能 · MI 平衡',
     'premium.section_label': '— 第 01 节 / 全 06 节 · 深度剖析 —',
   
     // computing messages & match placeholder
     'computing.msg1': '正在窥探你的语言之海...',
     'computing.msg2': '正在测量逻辑与直觉的比例...',
     'computing.msg3': '正在探寻你心中隐藏的强项...',
-    'computing.msg4': '正在解读8种智能的平衡...',
+    'computing.msg4': '正在解读8种才能的平衡...',
     'match.placeholder': '例：LI-IN-SP / 78-65-62-50-48-40-38-25',
   
     // match url prompt
@@ -10094,7 +10192,9 @@ const I18N = {
   // ===== 한국어 =====
   ko: {
     'title.hint':       '▼ 탭하여 자세한 설명 보기 ▼',
+    'title.eight_talents': '이 진단으로 알 수 있는 8가지 재능',
     'title.start':      '진단 시작하기',
+    'title.start_hint': '가입 불필요·3분이면 완료·지금 무료로',
     'title.disclaimer': '본 진단은 하워드 가드너의 다중지능이론(MI이론)을 바탕으로 한 じぶんマトリクス 독자적인 엔터테인먼트 진단입니다. 학술적·심리학적 진단이 아니며, 결과는 오락 및 자기 이해의 참고로 즐겁게 활용해 주세요.',
     'title.resume.label':   '— 이어서 계속하기 —',
     'title.resume.btn':     '이어서 계속하기',
@@ -10111,7 +10211,7 @@ const I18N = {
     'result.sec1':       '지능 균형 차트',
     'result.sec1en':     'Intelligence Map',
     'result.top_intel':  '— 당신이 특히 발휘하기 쉬운 3가지 —',
-    'result.sec2':       '8가지 지능 점수',
+    'result.sec2':       '8가지 재능 점수',
     'result.sec2en':     'Detailed Scores',
     'result.sec3':       '나의 강점',
     'result.sec3en':     'Your Strengths',
@@ -10132,7 +10232,7 @@ const I18N = {
     'result.book_cta':   'Amazon에서 보기',
     'result.book_disclosure': '※ 본 페이지 링크는 Amazon Associates Program을 이용합니다',
     'computing.title':   '당신의 재능을 분석하고 있습니다...',
-    'computing.body':    '8가지 지능의 균형을 분석 중. 당신이 누구인지, 지금 떠오르고 있습니다.',
+    'computing.body':    '8가지 재능의 균형을 분석 중. 당신이 누구인지, 지금 떠오르고 있습니다.',
     'result.talent_type': '재능 유형',
     'result.sec4':       '성장 가능성의 영역',
     'result.sec4en':     'Growth Areas',
@@ -10245,6 +10345,10 @@ const I18N = {
   
     // 追加翻訳（v2: HTML hardcode fix）
     'hero.eyebrow': '— 당신 안에 잠든 여덟 가지 재능 —',
+    'brand.tagline': '8가지 재능 · 무한한 가능성',
+    'meta.questions': '질문은 24개뿐',
+    'meta.duration': '소요 시간 약 3분',
+    'meta.free': '완전 무료',
     'chapter.thinking': '— 사고의 영역 —',
     'q.back': '← 이전 질문으로',
     'q.tap_to_proceed': '답하시면 다음으로 진행됩니다',
@@ -10291,7 +10395,7 @@ const I18N = {
     'close': '닫기',
   
     // v4: hero/premium/gallery/match
-    'hero.sub': '하버드 대학의 하워드 가드너가 제창한「다중지능 이론(MI 이론)」을 기반으로, 당신 안에 잠든 8종류의 지능을 측정합니다.<br>성격이 아닌, <em>무기</em>를 알기 위한, 자신의 취급설명서.',
+    'hero.sub': '24개의 질문에 답하기만 하면 됩니다. 단 3분이면 당신 안에 잠든 8가지 재능의 균형을 알 수 있습니다.<br>성격이 아닌 「<em>무기</em>」를 아는——하버드 발 MI 이론에 기반한 자신의 취급설명서.',
     'prem.intro1': '무료 진단은 입구에 불과합니다.',
     'prem.intro2': '980엔으로, 당신 유형의「재능 취급설명서」(작성형 워크북 포함)를 해제할 수 있습니다.',
     'prem.locked': '이후 내용은 구매자 전용',
@@ -10318,14 +10422,14 @@ const I18N = {
     'share.window_title': 'Jibu-Mato 결과 카드',
   
     // premium section label
-    'radar.caption': '당신의 8가지 지능 · MI 밸런스',
+    'radar.caption': '당신의 8가지 재능 · MI 밸런스',
     'premium.section_label': '— Section 01 of 06 · 심층 분석 —',
   
     // computing messages & match placeholder
     'computing.msg1': '당신의 말의 바다를 들여다보고 있습니다...',
     'computing.msg2': '논리와 직관의 비율을 측정하고 있습니다...',
     'computing.msg3': '당신 안에 숨겨진 강점을 찾고 있습니다...',
-    'computing.msg4': '8가지 지능의 균형을 읽고 있습니다...',
+    'computing.msg4': '8가지 재능의 균형을 읽고 있습니다...',
     'match.placeholder': '예: LI-IN-SP / 78-65-62-50-48-40-38-25',
   
     // match url prompt
