@@ -3980,7 +3980,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <p class="talent-desc" id="talentDesc">...</p>
-    <div class="talent-rarity" id="talentRarity"></div>
   </div>
 
   <!-- 引用 -->
@@ -7738,18 +7737,6 @@ function _showResultInner() {
     const longText = talent['desc_long' + suffix] || talent['desc_long'] || null;
     descEl.textContent = longText || talent.desc;
     descEl.style.whiteSpace = longText ? 'pre-line' : '';
-  }
-
-  // ① 才能の特別感（rarity）— キャラカード直後に表示
-  const rarityEl = document.getElementById('talentRarity');
-  if (rarityEl) {
-    const suffix = currentLang === 'en' ? '_en'
-                 : currentLang === 'zh' ? '_zh'
-                 : currentLang === 'ko' ? '_ko' : '_ja';
-    const rarityKey = 'rarity' + suffix;
-    const rarityText = talent[rarityKey] || talent['rarity_ja'] || '';
-    rarityEl.textContent = rarityText;
-    rarityEl.style.display = rarityText ? '' : 'none';
   }
 
   // ② 才能の裏側（reframe）— IV.セクションの冒頭に表示
