@@ -3071,6 +3071,43 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     opacity: 0.85;
   }
 
+  /* ===== 才能の特別感（rarity） ===== */
+  .talent-rarity {
+    margin: 16px 0 0;
+    padding: 14px 18px;
+    border-left: 3px solid var(--gold);
+    background: rgba(184,137,58,0.06);
+    font-family: 'Shippori Mincho', serif;
+    font-size: 14px;
+    line-height: 1.8;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ===== 才能の裏側（reframe） ===== */
+  .reframe-card {
+    margin: 12px 0 20px;
+    padding: 20px 20px 16px;
+    border: 1px solid rgba(184,137,58,0.3);
+    background: linear-gradient(135deg, rgba(244,237,224,0.8), rgba(232,220,196,0.4));
+    font-family: 'Shippori Mincho', serif;
+    font-size: 13px;
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+    color: rgba(15,14,12,0.85);
+    position: relative;
+  }
+  .reframe-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 10px;
+  }
+
   /* ===== 折りたたみ詳細（details-drawer） ===== */
   .expand-btn {
     display: block;
@@ -3727,6 +3764,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <button class="start-btn" id="startButton" onclick="startDiagnosis()" data-i18n="title.start">診断をはじめる</button>
   <p class="start-hint" data-i18n="title.start_hint">登録不要・3分で完了。今すぐ無料で。</p>
 
+  <!-- 前回の結果を見る（過去に診断済みの人のみ表示） -->
+  <div class="last-result-banner" id="lastResultBanner" style="display:none;">
+    <span class="last-result-icon">↩</span>
+    <span data-i18n="title.last_result">前回の診断結果を見る</span>
+  </div>
+
   <div class="ornament"></div>
 
   <div class="intelligences-preview-wrap">
@@ -3742,12 +3785,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <button class="intel-cell" onclick="openIntelModal('intrapersonal')"><span class="num">07</span><div class="name" data-i18n="cell.intrapersonal">内省</div><span class="en">Intrapersonal</span></button>
       <button class="intel-cell" onclick="openIntelModal('naturalist')"><span class="num">08</span><div class="name" data-i18n="cell.naturalist">博物</div><span class="en">Naturalist</span></button>
     </div>
-  </div>
-
-  <!-- 前回の結果を見る（過去に診断済みの人のみ表示） -->
-  <div class="last-result-banner" id="lastResultBanner" style="display:none;">
-    <span class="last-result-icon">↩</span>
-    <span data-i18n="title.last_result">前回の診断結果を見る</span>
   </div>
 
   <p style="text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; color:rgba(15,14,12,0.5); margin-top:20px;">
@@ -3943,6 +3980,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <p class="talent-desc" id="talentDesc">...</p>
+    <div class="talent-rarity" id="talentRarity"></div>
   </div>
 
   <!-- 結果直後のシェア導線（拡散の起点） -->
@@ -4020,13 +4058,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- 折りたたみ詳細ブロック（デフォルト非表示） -->
   <div class="details-drawer" id="detailsDrawer" style="display:none;">
 
-  <!-- 弱点 -->
+  <!-- 弱点→才能の裏側（リフレーミング） -->
   <div class="section-title">
     <span class="num">IV.</span>
     <span class="sec-icon"><svg aria-hidden="true" viewBox="0 0 32 32"><path d="M16,28 L16,18"/><path d="M16,18 C16,18 10,15 8,9 C8,9 14,11 16,18"/><path d="M16,18 C16,18 22,15 24,9 C24,9 18,11 16,18"/><line x1="10" y1="28" x2="22" y2="28"/></svg></span>
-    <h3 data-i18n="result.sec4">伸びしろの領域</h3>
-    <span class="en" data-i18n="result.sec4en">Growth Areas</span>
+    <h3 data-i18n="result.sec4">才能の裏側</h3>
+    <span class="en" data-i18n="result.sec4en">The Other Side</span>
   </div>
+  <div class="reframe-card" id="reframeCard"></div>
   <div class="detail-cards" id="growthArea"></div>
 
   <!-- ── 区切り ── -->
@@ -4461,7 +4500,16 @@ const INTELLIGENCE_INFO = {
     examples_ko: ["글쓰기", "연설하기", "책 읽기", "언어 학습", "토론", "이야기 전하기"],
     famous_en: "<strong>Haruki Murakami</strong> (novelist) · <strong>Shigesato Itoi</strong> (copywriter) · <strong>Maya Angelou</strong> (poet) · <strong>Barack Obama</strong> (politician)",
     famous_zh: "<strong>村上春树</strong>(作家) · <strong>糸井重里</strong>(文案大师) · <strong>玛雅·安杰卢</strong>(诗人) · <strong>巴拉克·奥巴马</strong>(政治家)",
-    famous_ko: "<strong>무라카미 하루키</strong>(작가) · <strong>이토이 시게사토</strong>(카피라이터) · <strong>마야 안젤루</strong>(시인) · <strong>버락 오바마</strong>(정치인)"
+    famous_ko: "<strong>무라카미 하루키</strong>(작가) · <strong>이토이 시게사토</strong>(카피라이터) · <strong>마야 안젤루</strong>(시인) · <strong>버락 오바마</strong>(정치인)",
+    desc_long: "言語型のあなたは、言葉の力を誰よりも深く知っている人です。\n\n多くの人が感じていても表現できないことを、あなたは言葉という形に変えることができます。ニュアンス、リズム、行間——言葉が持つ無数の可能性を本能的に感じ取り、読む人の心を動かす文章や、場を変えるスピーチを生み出すことができます。\n\nあなたにとって言葉は、単なるコミュニケーションの道具ではありません。そこには常に「もっと正確に伝えられる」「もっと深く届けられる」「もっと美しく表現できる」という可能性が広がっています。何気ない会話から、ビジネスの文書、詩、物語に至るまで、あなたは言葉の可能性を自然と引き出すでしょう。\n\nそのため周囲の人は、あなたの表現に驚かされることがあります。誰も思いつかなかった言い回し、誰も気づかなかったニュアンス、誰も言葉にできなかった感情を、あなたはすっと言語化できるからです。\n\n時には言葉にこだわりすぎて、スピードより質を優先してしまうこともあるかもしれません。しかし、それはあなたが人一倍「言葉の精度」を大切にしている証でもあります。\n\nあなたは単に文章を書く人ではありません。人々が感じているのに言えないことを言葉にし、見えていなかった真実を明るみに出し、心の中の何かを動かす存在です。\n\n沈黙していたものに声を与え、散らばっていた想いを一本の線にすること。\nそれこそが、言語型のあなたが持つ特別な力なのです。",
+    rarity_ja: "言葉で世界をつくり直せる人。それが、言語型の才能の本質です。",
+    rarity_en: "You have the rare ability to reshape reality through words.",
+    rarity_zh: "能用语言重塑世界的人——这就是语言型才能的本质。",
+    rarity_ko: "말로 세상을 다시 만들 수 있는 사람. 그것이 언어형 재능의 본질입니다.",
+    reframe_ja: "言語型が「書きすぎる・話しすぎる」と感じるのは、言葉への解像度が高いから。沈黙より言語化を選ぶのは、弱さではなく、あなたの才能が「伝えたがっている」証拠です。",
+    reframe_en: "If you feel you \"write too much\" or \"talk too much,\" it's because your resolution for language is high. Choosing words over silence is not a weakness—it's proof that your talent wants to be heard.",
+    reframe_zh: "如果你觉得自己「写太多」「说太多」，那是因为你对语言有着极高的分辨率。选择语言化而非沉默，不是弱点，而是你的才能「渴望被表达」的证明。",
+    reframe_ko: "언어형이 「너무 많이 쓴다·너무 많이 말한다」고 느끼는 것은, 언어에 대한 해상도가 높기 때문입니다. 침묵보다 언어화를 선택하는 것은 약점이 아니라, 당신의 재능이 「전하고 싶어하는」 증거입니다."
   },
   logical: {
     num: '02',
@@ -4486,7 +4534,16 @@ const INTELLIGENCE_INFO = {
     examples_ko: ["프로그래밍", "데이터 분석", "과학 실험", "체스·장기", "회계", "전략 수립"],
     famous_en: "<strong>Einstein</strong> (physicist) · <strong>Elon Musk</strong> (entrepreneur) · <strong>Yoshiharu Habu</strong> (shogi master) · <strong>Bill Gates</strong> (entrepreneur)",
     famous_zh: "<strong>爱因斯坦</strong>(物理学家) · <strong>埃隆·马斯克</strong>(企业家) · <strong>羽生善治</strong>(棋手) · <strong>比尔·盖茨</strong>(创业者)",
-    famous_ko: "<strong>아인슈타인</strong>(물리학자) · <strong>일론 머스크</strong>(기업가) · <strong>하부 요시하루</strong>(쇼기 기사) · <strong>빌 게이츠</strong>(창업가)"
+    famous_ko: "<strong>아인슈타인</strong>(물리학자) · <strong>일론 머스크</strong>(기업가) · <strong>하부 요시하루</strong>(쇼기 기사) · <strong>빌 게이츠</strong>(창업가)",
+    desc_long: "論理型のあなたは、世界の「なぜ」を他の人よりも深く追いかけることができる人です。\n\n多くの人が結論だけを受け取ろうとする中、あなたはその裏にある構造や法則を見抜こうとします。複雑な問題でさえ頭の中で分解・整理することができるため、他の人が混乱しているときに、あなたは静かに全体像を把握していることが少なくありません。\n\nあなたにとって世界は、感情や直感だけでは動かせないものです。そこには常に「もっと合理的な方法がある」「もっとシンプルに説明できる」「もっと正確に予測できる」という可能性が広がっています。データ分析からビジネス戦略、日常の問題解決に至るまで、あなたは論理という武器を使って、人々が諦めた問題に答えを出すでしょう。\n\nそのため周囲の人は、あなたの分析に舌を巻くことがあります。誰も気づかなかった矛盾、誰も辿り着けなかった結論、誰も整理できなかった複雑な情報を、あなたは鮮やかに解き明かすことができるからです。\n\n時には正確さを追い求めるあまり、感情的な側面が置き去りになることもあるかもしれません。しかし、それはあなたが人一倍「真実」を大切にしている証でもあります。\n\nあなたは単に計算が得意な人ではありません。混沌とした情報の海から本質を掬い取り、誰もが納得できる答えを導き出し、より良い意思決定へと人々を導く存在です。\n\n見えない構造を可視化し、複雑な世界をシンプルに解き明かすこと。\nそれこそが、論理型のあなたが持つ特別な力なのです。",
+    rarity_ja: "感情ではなく構造で世界を見る。その目は、ほとんどの人が持っていません。",
+    rarity_en: "You see the world through structure, not emotion. Most people never develop this lens.",
+    rarity_zh: "不用感情，而用结构看世界。这样的眼光，大多数人并不具备。",
+    rarity_ko: "감정이 아닌 구조로 세상을 봅니다. 그 시선은 대부분의 사람들이 갖고 있지 않습니다.",
+    reframe_ja: "論理型が「冷たい・共感が薄い」と言われるのは、感情より真実を優先するから。それは欠点ではなく、混乱した状況で唯一冷静でいられる才能の代償です。あなたの「距離感」は、強みの形です。",
+    reframe_en: "If you're told you're \"cold\" or \"lack empathy,\" it's because you prioritize truth over emotion. That's not a flaw—it's the price of being the one person who stays calm when everything is chaos. Your \"distance\" is the shape of your strength.",
+    reframe_zh: "逻辑型被说「冷漠、缺乏共情」，是因为你优先考虑真相而非情感。这不是缺点，而是在混乱局面中唯一能保持冷静的才能所承担的代价。你的「距离感」是力量的形状。",
+    reframe_ko: "논리형이 「차갑다·공감이 부족하다」는 말을 듣는 것은, 감정보다 진실을 우선하기 때문입니다. 그것은 결점이 아니라, 혼란스러운 상황에서 유일하게 냉정할 수 있는 재능의 대가입니다. 당신의 「거리감」은 강점의 모습입니다."
   },
   spatial: {
     num: '03',
@@ -4511,7 +4568,16 @@ const INTELLIGENCE_INFO = {
     examples_ko: ["그림 그리기", "디자인하기", "사진 찍기", "지도 읽기", "3D 모델링", "인테리어 배치"],
     famous_en: "<strong>Picasso</strong> (painter) · <strong>Tadao Ando</strong> (architect) · <strong>Hayao Miyazaki</strong> (animator) · <strong>Leonardo da Vinci</strong> (artist)",
     famous_zh: "<strong>毕加索</strong>(画家) · <strong>安藤忠雄</strong>(建筑师) · <strong>宫崎骏</strong>(动画导演) · <strong>列奥纳多·达·芬奇</strong>(艺术家)",
-    famous_ko: "<strong>피카소</strong>(화가) · <strong>안도 타다오</strong>(건축가) · <strong>미야자키 하야오</strong>(애니메이션 감독) · <strong>레오나르도 다 빈치</strong>(예술가)"
+    famous_ko: "<strong>피카소</strong>(화가) · <strong>안도 타다오</strong>(건축가) · <strong>미야자키 하야오</strong>(애니메이션 감독) · <strong>레오나르도 다 빈치</strong>(예술가)",
+    desc_long: "空間型のあなたは、他の人には見えていない「形の可能性」を見抜く才能を持っています。\n\n多くの人が言葉や数字で物事を理解しようとする中、あなたは空間や配置、色彩や形のつながりを直感的に捉えることができます。複雑な情報でさえ頭の中で立体的に組み立てられるため、人が説明に苦労するような構造も、一目見ただけで理解してしまうことが少なくありません。\n\nあなたにとって世界は、ただ存在しているものの集まりではありません。そこには常に「もっと美しくできる」「もっと分かりやすくできる」「もっと機能的にできる」という無数の可能性が広がっています。何気ない部屋の配置から街並み、製品デザイン、映像作品に至るまで、あなたは人々が見過ごしている改善点や新しい視点を自然と見つけ出すでしょう。\n\nそのため周囲の人は、あなたのアイデアに驚かされることがあります。誰も思いつかなかったレイアウト、誰も気づかなかった構図、誰も見えていなかった完成形を、あなたは頭の中で鮮明に描くことができるからです。\n\n時には理想のイメージが強すぎて、現実とのギャップにもどかしさを感じることもあるかもしれません。しかし、それはあなたが人一倍「より良い形」を思い描ける証でもあります。\n\nあなたは単に美しいものを作る人ではありません。混沌の中から秩序を見つけ出し、人々が理解しやすく、心地よく、行動しやすい世界を形にする存在です。\n\n誰も見えていない未来の完成図を描き、それを現実へと導くこと。\nそれこそが、空間型のあなたが持つ特別な力なのです。",
+    rarity_ja: "まだ存在しないものを、頭の中でリアルに見ることができる。これは訓練では得られない才能です。",
+    rarity_en: "You can see things that don't yet exist—vividly, in your mind. This is a talent that cannot be trained into someone.",
+    rarity_zh: "能在脑中清晰地「看见」尚不存在的事物。这是无法靠训练获得的才能。",
+    rarity_ko: "아직 존재하지 않는 것을 머릿속에서 생생하게 볼 수 있습니다. 이것은 훈련으로는 얻을 수 없는 재능입니다.",
+    reframe_ja: "空間型が「説明が下手・言葉にできない」と感じるのは、思考が言語より速いから。頭の中に「見えている答え」を人に伝える方法を磨けば、それはそのまま最強の武器になります。",
+    reframe_en: "If you feel you're \"bad at explaining\" or \"can't find the words,\" it's because your thinking moves faster than language. Refine your ability to translate what you already \"see\" in your mind—and that becomes your ultimate weapon.",
+    reframe_zh: "空间型觉得「不擅长说明、说不清楚」，是因为思维比语言快。磨练把脑中「看见的答案」传达给他人的方法，那本身就会成为最强的武器。",
+    reframe_ko: "공간형이 「설명을 못 한다·말로 표현하지 못한다」고 느끼는 것은, 사고가 언어보다 빠르기 때문입니다. 머릿속에 「보이는 답」을 사람에게 전달하는 방법을 연마하면, 그것이 그대로 최강의 무기가 됩니다."
   },
   musical: {
     num: '04',
@@ -4536,7 +4602,16 @@ const INTELLIGENCE_INFO = {
     examples_ko: ["악기 연주", "작곡", "DJ 하기", "팟캐스트", "사운드 디자인", "플레이리스트 큐레이션"],
     famous_en: "<strong>Mozart</strong> (composer) · <strong>Ryuichi Sakamoto</strong> (composer) · <strong>Hikaru Utada</strong> (singer) · <strong>Beyoncé</strong> (singer)",
     famous_zh: "<strong>莫扎特</strong>(作曲家) · <strong>坂本龙一</strong>(作曲家) · <strong>宇多田光</strong>(歌手) · <strong>碧昂丝</strong>(歌手)",
-    famous_ko: "<strong>모차르트</strong>(작곡가) · <strong>사카모토 류이치</strong>(작곡가) · <strong>우타다 히카루</strong>(가수) · <strong>비욘세</strong>(가수)"
+    famous_ko: "<strong>모차르트</strong>(작곡가) · <strong>사카모토 류이치</strong>(작곡가) · <strong>우타다 히카루</strong>(가수) · <strong>비욘세</strong>(가수)",
+    desc_long: "音楽型のあなたは、他の人には聞こえていない「世界のリズム」を感じ取る才能を持っています。\n\n多くの人が音を背景として流し聞きする中、あなたはその中に感情の流れ、緊張と解放、パターンと逸脱を直感的に捉えることができます。音の高低、テンポ、ハーモニー——それらが組み合わさることで生まれる「場の空気」を、あなたは誰よりも早く感じ取ることができます。\n\nあなたにとって世界は、音と沈黙で満ちています。そこには常に「この瞬間にはこのリズムが合う」「この空間にはこの音が必要だ」「この感情はこのメロディで表せる」という可能性が広がっています。音楽の制作から、人の感情を読む場面、場の空気づくりに至るまで、あなたはリズム感という才能を思わぬ場面で発揮するでしょう。\n\nそのため周囲の人は、あなたの感受性に驚かされることがあります。誰も気づかなかった場の変化、誰も言語化できなかった感情の機微、誰も拾えなかった微妙なニュアンスを、あなたはいち早く感じ取ることができるからです。\n\n時には周囲の空気に敏感すぎて、疲れてしまうこともあるかもしれません。しかし、それはあなたが人一倍「場のエネルギー」を感じ取れる証でもあります。\n\nあなたは単に音楽が好きな人ではありません。言葉にならない感情を音に変え、バラバラな人々を一つのリズムに乗せ、世界に心地よい波動をもたらす存在です。\n\n誰も聞こえていない音を拾い、それを人々の心に届けること。\nそれこそが、音楽型のあなたが持つ特別な力なのです。",
+    rarity_ja: "音や空気のリズムを、他の人より一段深く感じ取れる。その感受性は、ギフトです。",
+    rarity_en: "You perceive the rhythm of sound and atmosphere a level deeper than others. That sensitivity is a gift.",
+    rarity_zh: "能比他人更深一层地感受声音与空气的节奏。这种感受力，是一份礼物。",
+    rarity_ko: "소리와 공기의 리듬을 다른 사람보다 한 단계 깊이 느낄 수 있습니다. 그 감수성은 선물입니다.",
+    reframe_ja: "音楽型が「感情的になりすぎる・空気を読みすぎる」のは、環境の変化を肌で感知する精密センサーを持っているから。それは繊細さではなく、場のエネルギーを最初に察知できる才能です。",
+    reframe_en: "If you're \"too emotional\" or \"too sensitive to the atmosphere,\" it's because you have a precision sensor that physically detects environmental shifts. That's not fragility—it's the talent to be the first to sense the energy in a room.",
+    reframe_zh: "音乐型「过于感情化、过度察言观色」，是因为拥有能用身体感知环境变化的精密传感器。这不是敏感脆弱，而是能最先察觉场合能量的才能。",
+    reframe_ko: "음악형이 「너무 감정적이 된다·공기를 너무 많이 읽는다」는 것은, 환경의 변화를 피부로 감지하는 정밀 센서를 갖고 있기 때문입니다. 그것은 섬세함이 아니라, 장소의 에너지를 가장 먼저 감지할 수 있는 재능입니다."
   },
   bodily: {
     num: '05',
@@ -4561,7 +4636,16 @@ const INTELLIGENCE_INFO = {
     examples_ko: ["스포츠", "댄스", "외과 수술", "요리", "장인 기술", "연기"],
     famous_en: "<strong>Ichiro</strong> (baseball) · <strong>Beyoncé</strong> (dance/performance) · <strong>Cristiano Ronaldo</strong> (footballer) · <strong>Jiro Ono</strong> (sushi master)",
     famous_zh: "<strong>铃木一朗</strong>(棒球) · <strong>碧昂丝</strong>(舞蹈/表演) · <strong>克里斯蒂亚诺·罗纳尔多</strong>(足球) · <strong>小野二郎</strong>(寿司大师)",
-    famous_ko: "<strong>스즈키 이치로</strong>(야구) · <strong>비욘세</strong>(댄스/퍼포먼스) · <strong>크리스티아누 호날두</strong>(축구) · <strong>오노 지로</strong>(스시 장인)"
+    famous_ko: "<strong>스즈키 이치로</strong>(야구) · <strong>비욘세</strong>(댄스/퍼포먼스) · <strong>크리스티아누 호날두</strong>(축구) · <strong>오노 지로</strong>(스시 장인)",
+    desc_long: "身体型のあなたは、頭で考えるより先に、身体が答えを知っている人です。\n\n多くの人が思考で世界を理解しようとする中、あなたは身体感覚を通じて直接、世界と繋がることができます。動き、感触、タイミング、バランス——身体が持つ無数の情報を本能的に処理できるため、言葉では説明しにくい「コツ」や「感覚」を驚くほど素早く掴むことができます。\n\nあなたにとって世界は、動いて初めて理解できるものです。そこには常に「もっと上手く動ける」「もっと効率的に体を使える」「もっと自然な表現ができる」という可能性が広がっています。スポーツやダンスから、職人仕事、パフォーマンス、さらには人の身体の緊張を読む場面に至るまで、あなたは身体知性という才能を幅広い場面で発揮するでしょう。\n\nそのため周囲の人は、あなたの動きや反応の速さに驚かされることがあります。誰も習得できなかった技術、誰も気づかなかった身体の使い方、誰も真似できないパフォーマンスを、あなたはごく自然にやってのけることができるからです。\n\n時には「じっとしていられない」「考えるより動きたい」という衝動を、もどかしく感じることもあるかもしれません。しかし、それはあなたの思考が言語ではなく身体を媒介にしている証でもあります。\n\nあなたは単に運動神経がいい人ではありません。身体という最高の道具を使いこなし、人々が言葉では伝えられないことをアクションで示し、見ている人の心を動かす存在です。\n\n頭ではなく全身で世界を理解し、それを目に見える形で表現すること。\nそれこそが、身体型のあなたが持つ特別な力なのです。",
+    rarity_ja: "頭で考える前に、身体が答えを知っている。その身体知性は、言語で学べるものではありません。",
+    rarity_en: "Your body knows the answer before your mind catches up. That physical intelligence cannot be learned from books.",
+    rarity_zh: "在脑子想到之前，身体已经知道了答案。这种身体知性，无法通过语言来学习。",
+    rarity_ko: "머리로 생각하기 전에, 몸이 이미 답을 알고 있습니다. 그 신체 지성은 언어로 배울 수 있는 것이 아닙니다.",
+    reframe_ja: "身体型が「じっとしていられない・集中できない」と感じるのは、身体が常に「動くことで考えている」から。それは多動ではなく、思考の形が身体を媒介にしているサインです。動きながら考えることを、許してあげてください。",
+    reframe_en: "If you \"can't sit still\" or \"can't concentrate,\" it's because your body is always \"thinking by moving.\" That's not hyperactivity—it's a sign that your thinking uses your body as its medium. Give yourself permission to think in motion.",
+    reframe_zh: "身体型「坐不住、无法集中」，是因为身体一直在「通过运动来思考」。这不是多动，而是思维以身体为媒介的信号。请允许自己一边动一边思考。",
+    reframe_ko: "신체형이 「가만히 있지 못한다·집중하지 못한다」고 느끼는 것은, 몸이 항상 「움직이면서 생각하고 있기」 때문입니다. 그것은 과잉 행동이 아니라, 사고의 형태가 신체를 매개로 하고 있다는 신호입니다. 움직이면서 생각하는 것을 허락해 주세요."
   },
   interpersonal: {
     num: '06',
@@ -4586,7 +4670,16 @@ const INTELLIGENCE_INFO = {
     examples_ko: ["가르치기", "상담", "영업", "리더십", "이벤트 주최", "멘토링"],
     famous_en: "<strong>Oprah Winfrey</strong> (broadcaster) · <strong>Nelson Mandela</strong> (statesman) · <strong>Princess Diana</strong> · <strong>Tetsuko Kuroyanagi</strong> (broadcaster)",
     famous_zh: "<strong>奥普拉·温芙瑞</strong>(主持人) · <strong>纳尔逊·曼德拉</strong>(政治家) · <strong>戴安娜王妃</strong> · <strong>黑柳彻子</strong>(主持人)",
-    famous_ko: "<strong>오프라 윈프리</strong>(방송인) · <strong>넬슨 만델라</strong>(정치인) · <strong>다이애나 비</strong> · <strong>구로야나기 테츠코</strong>(방송인)"
+    famous_ko: "<strong>오프라 윈프리</strong>(방송인) · <strong>넬슨 만델라</strong>(정치인) · <strong>다이애나 비</strong> · <strong>구로야나기 테츠코</strong>(방송인)",
+    desc_long: "対人型のあなたは、人の心の動きを言葉になる前に感じ取れる才能を持っています。\n\n多くの人が表面の言葉だけを受け取ろうとする中、あなたはその裏にある感情や動機、関係性のダイナミクスを直感的に捉えることができます。誰かが何を望んでいるのか、何に不安を感じているのか、何を言いたくて言えないのか——それをあなたは空気のように自然に察知することができます。\n\nあなたにとって世界は、関係性で成り立っています。そこには常に「この人にはこう伝えれば届く」「このチームには何かがすれ違っている」「この場には橋渡しが必要だ」という可能性が広がっています。チームのリーダーシップから、交渉、プロジェクトの調整役に至るまで、あなたは人を繋ぐ才能を様々な場面で発揮するでしょう。\n\nそのため周囲の人は、あなたの共感力と調整力に救われることがあります。誰も気づかなかった関係のひずみ、誰も言語化できなかったチームの課題、誰も解けなかった人間関係のこじれを、あなたは静かに解きほぐすことができるからです。\n\n時には人の感情を受け取りすぎて、自分自身が疲れてしまうこともあるかもしれません。しかし、それはあなたが人一倍「人の痛み」に寄り添える証でもあります。\n\nあなたは単に人付き合いが上手な人ではありません。バラバラな個人を有機的なチームにまとめ上げ、孤立している人に居場所を作り、人々が本来持っている力を引き出す存在です。\n\n誰も繋げられなかった人と人を結び、その場にいるだけで空気を変えること。\nそれこそが、対人型のあなたが持つ特別な力なのです。",
+    rarity_ja: "人の感情の動きを、言葉になる前に読み取れる。その力は、AIにも真似できません。",
+    rarity_en: "You can read the movement of human emotions before they're put into words. That's something even AI cannot replicate.",
+    rarity_zh: "能在情感化为语言之前就将其读取。这种能力，连AI也无法模仿。",
+    rarity_ko: "사람의 감정의 움직임을, 말이 되기 전에 읽어낼 수 있습니다. 그 힘은 AI도 흉내낼 수 없습니다.",
+    reframe_ja: "対人型が「疲れやすい・人との境界線が曖昧」なのは、他者の感情を自分ごとのように感じ取るから。それは共感力の高さの裏側。その感受性があるから、あなたは誰より人の痛みに気づける人でいられます。",
+    reframe_en: "If you \"tire easily\" or have \"blurry boundaries with people,\" it's because you absorb others' emotions as if they were your own. That's the flip side of high empathy. It's that same sensitivity that makes you the person who notices others' pain before anyone else.",
+    reframe_zh: "对人型「容易疲倦、与人的边界模糊」，是因为你像感受自己的情感一样感受着他人的情感。这是共情力高的另一面。正因为有这份感受力，你才是最先注意到他人痛苦的人。",
+    reframe_ko: "대인형이 「쉽게 지친다·사람과의 경계선이 모호하다」는 것은, 타인의 감정을 자신의 것처럼 느끼기 때문입니다. 그것은 공감력이 높은 것의 뒷면입니다. 그 감수성이 있기 때문에, 당신은 누구보다 사람의 아픔을 알아챌 수 있는 사람으로 있을 수 있습니다."
   },
   intrapersonal: {
     num: '07',
@@ -4611,7 +4704,16 @@ const INTELLIGENCE_INFO = {
     examples_ko: ["저널링", "명상", "에세이 쓰기", "코칭", "혼자 여행", "철학"],
     famous_en: "<strong>Carl Jung</strong> (psychologist) · <strong>Haruki Murakami</strong> (novelist) · <strong>Marcus Aurelius</strong> (emperor/philosopher) · <strong>Naoki Matayoshi</strong> (writer)",
     famous_zh: "<strong>荣格</strong>(心理学家) · <strong>村上春树</strong>(作家) · <strong>马可·奥勒留</strong>(皇帝/哲学家) · <strong>又吉直树</strong>(作家)",
-    famous_ko: "<strong>칼 융</strong>(심리학자) · <strong>무라카미 하루키</strong>(작가) · <strong>마르쿠스 아우렐리우스</strong>(황제/철학자) · <strong>마타요시 나오키</strong>(작가)"
+    famous_ko: "<strong>칼 융</strong>(심리학자) · <strong>무라카미 하루키</strong>(작가) · <strong>마르쿠스 아우렐리우스</strong>(황제/철학자) · <strong>마타요시 나오키</strong>(작가)",
+    desc_long: "内省型のあなたは、自分自身という最も複雑な謎を、誰よりも深く探求できる人です。\n\n多くの人が自分の感情や動機をなんとなく把握しているだけの中、あなたは自分の内側を深く掘り下げ、なぜ自分がそう感じるのか、何が自分を動かしているのか、どこへ向かいたいのかを理解することができます。その自己認識の深さは、自分自身だけでなく、他者を理解する際にも活きてきます。\n\nあなたにとって人生は、ただ流れていくものではありません。そこには常に「本当に大切なことは何か」「今の自分に正直か」「どう生きれば後悔しないか」という問いが広がっています。自己成長の追求から、哲学、深い人間関係の構築に至るまで、あなたは内省という才能を人生の羅針盤として使うでしょう。\n\nそのため周囲の人は、あなたの自己認識の深さと言葉の重みに、ハッとさせられることがあります。誰も辿り着けなかった自分への問い、誰も言語化できなかった生き方の本質、誰も気づかなかった価値観のすれ違いを、あなたは静かに言葉にすることができるからです。\n\n時には考えすぎて、なかなか行動に踏み出せないことがあるかもしれません。しかし、それはあなたが人一倍「本当に正しい選択か」を確かめようとしている証でもあります。\n\nあなたは単に内向的な人ではありません。自分の内側にある真実を辿り、それを生き方そのもので表現し、周りの人に「こう生きていいんだ」という勇気を与える存在です。\n\n自分自身の最も深い部分と対話し、その声を人生の軸にすること。\nそれこそが、内省型のあなたが持つ特別な力なのです。",
+    rarity_ja: "自分の感情・動機・価値観を、他者より深く理解できる。それが、内省型が持つ唯一無二の地図です。",
+    rarity_en: "You understand your own emotions, motivations, and values more deeply than most. That is the one-of-a-kind map that intrapersonal types carry.",
+    rarity_zh: "能比他人更深入地理解自己的情感、动机与价值观。这就是内省型所持有的独一无二的地图。",
+    rarity_ko: "자신의 감정·동기·가치관을 타인보다 깊이 이해할 수 있습니다. 그것이 내성형이 가진 유일무이한 지도입니다.",
+    reframe_ja: "内省型が「考えすぎる・行動に移せない」のは、行動の前に「本当にこれでいいか」を確かめようとするから。それは慎重さではなく、浅い判断を嫌う才能の誠実さです。深く考えた行動は、必ず質が高い。",
+    reframe_en: "If you \"overthink\" or \"can't move to action,\" it's because you're verifying \"is this really right?\" before acting. That's not excessive caution—it's the integrity of a talent that refuses shallow judgment. Actions taken after deep reflection are always high quality.",
+    reframe_zh: "内省型「想太多、无法付诸行动」，是因为在行动之前想确认「这样真的可以吗」。这不是谨慎，而是厌恶肤浅判断的才能的诚实。经过深思熟虑的行动，质量必定更高。",
+    reframe_ko: "내성형이 「너무 많이 생각한다·행동으로 옮기지 못한다」는 것은, 행동 전에 「정말 이것으로 괜찮은가」를 확인하려 하기 때문입니다. 그것은 신중함이 아니라, 얕은 판단을 싫어하는 재능의 성실함입니다. 깊이 생각한 행동은 반드시 질이 높습니다."
   },
   naturalist: {
     num: '08',
@@ -4636,7 +4738,16 @@ const INTELLIGENCE_INFO = {
     examples_ko: ["현장 조사", "가드닝", "데이터 큐레이션", "편집", "카탈로깅", "버드워칭"],
     famous_en: "<strong>Charles Darwin</strong> (naturalist) · <strong>Jane Goodall</strong> (primatologist) · <strong>David Attenborough</strong> (broadcaster) · <strong>Kumagusu Minakata</strong> (naturalist)",
     famous_zh: "<strong>查尔斯·达尔文</strong>(博物学家) · <strong>珍·古道尔</strong>(灵长类学家) · <strong>大卫·爱登堡</strong>(主持人) · <strong>南方熊楠</strong>(博物学家)",
-    famous_ko: "<strong>찰스 다윈</strong>(박물학자) · <strong>제인 구달</strong>(영장류학자) · <strong>데이비드 애튼버러</strong>(방송인) · <strong>미나카타 쿠마구스</strong>(박물학자)"
+    famous_ko: "<strong>찰스 다윈</strong>(박물학자) · <strong>제인 구달</strong>(영장류학자) · <strong>데이비드 애튼버러</strong>(방송인) · <strong>미나카타 쿠마구스</strong>(박물학자)",
+    desc_long: "博物型のあなたは、世界の中にあるパターンと繋がりを、誰よりも鮮明に見抜く才能を持っています。\n\n多くの人が目の前のものを個別に認識しようとする中、あなたはそれらがどのカテゴリに属し、どのように関連し合い、どんな法則に従っているのかを直感的に把握することができます。動植物、自然現象、社会のトレンド、文化のパターン——あなたのアンテナは常にあらゆる方向に向いています。\n\nあなたにとって世界は、まだ解き明かされていない関係性で満ちています。そこには常に「これとあれはつながっている」「このパターンはどこかで見た」「この繋がりが世界の仕組みを説明している」という可能性が広がっています。科学的な発見から、マーケティング分析、自然観察、社会現象の解読に至るまで、あなたは分類と発見の才能を多様な場面で発揮するでしょう。\n\nそのため周囲の人は、あなたの観察眼と発見の鋭さに驚かされることがあります。誰も気づかなかった共通点、誰も言語化できなかったパターン、誰も結びつけられなかったバラバラな事象を、あなたは一本の線で繋ぐことができるからです。\n\n時には興味が次々と広がりすぎて、一つのことに集中するのが難しいと感じることもあるかもしれません。しかし、それはあなたが人一倍「世界の広さ」を感じ取れる証でもあります。\n\nあなたは単に物知りな人ではありません。散らばっているように見える世界の断片を繋ぎ合わせ、誰もまだ気づいていない法則を発見し、人々が世界をもっと深く理解できるよう導く存在です。\n\n誰も結びつけなかった点と点を線にし、世界の隠れた秩序を明らかにすること。\nそれこそが、博物型のあなたが持つ特別な力なのです。",
+    rarity_ja: "世界をカテゴリと関係性で見る目。その分類眼は、専門家でも一朝一夕には身につきません。",
+    rarity_en: "You see the world through categories and relationships. That taxonomic eye takes specialists years to develop—and you were born with it.",
+    rarity_zh: "用类别与关系来看世界的眼光。这种分类眼力，即便是专家也非一朝一夕能培养出来的。",
+    rarity_ko: "세상을 카테고리와 관계성으로 보는 눈. 그 분류안은 전문가도 하루아침에 익힐 수 없습니다.",
+    reframe_ja: "博物型が「飽きやすい・関心が散漫」に見えるのは、あらゆる方向にアンテナが立っているから。それは集中力の欠如ではなく、世界の広さをそのまま受け取れる才能の証明です。点と点はいつか線になる。",
+    reframe_en: "If you seem \"easily bored\" or \"scatter-brained,\" it's because you have antennas pointing in every direction. That's not a lack of focus—it's proof of a talent that can receive the full breadth of the world. The dots will connect someday.",
+    reframe_zh: "博物型看起来「容易厌倦、注意力分散」，是因为天线朝着各个方向都立着。这不是缺乏专注力，而是能原原本本地接收世界广度的才能的证明。点与点终将连成线。",
+    reframe_ko: "박물형이 「쉽게 질린다·관심이 산만하다」고 보이는 것은, 모든 방향으로 안테나가 서 있기 때문입니다. 그것은 집중력의 부재가 아니라, 세상의 넓이를 그대로 받아들일 수 있는 재능의 증명입니다. 점과 점은 언젠가 선이 됩니다."
   }
 };
 
@@ -6051,7 +6162,8 @@ function getTalent(key) {
     animal: t.animal,
     bgColor: t.bgColor,
     catchphrase: t['catchphrase' + suffix] || t.catchphrase,
-    desc: t['desc' + suffix] || t.desc
+    desc: t['desc' + suffix] || t.desc,
+    desc_long: t['desc_long' + suffix] || t.desc_long || null
   };
 }
 
@@ -6532,6 +6644,15 @@ const GROWTH_ADVICE = {
     en: "Once a week, place yourself somewhere with nature. Or try making a notebook that 'classifies' the subjects of your interest.",
     zh: "每周一次置身有自然的环境。或试着做一本笔记本，把你感兴趣的对象「分类」一下。",
     ko: "주 1회, 자연이 있는 장소에 몸을 두기. 또는 흥미 대상을 「분류해 보는」 노트를 만들어 보세요."
+  ,
+    rarity_ja: "世界をカテゴリと関係性で見る目。その分類眼は、専門家でも一朝一夕には身につきません。",
+    rarity_en: "You see the world through categories and relationships. That taxonomic eye takes specialists years to develop—and you were born with it.",
+    rarity_zh: "用类别与关系来看世界的眼光。这种分类眼力，即便是专家也非一朝一夕能培养出来的。",
+    rarity_ko: "세상을 카테고리와 관계성으로 보는 눈. 그 분류안은 전문가도 하루아침에 익힐 수 없습니다.",
+    reframe_ja: "博物型が「飽きやすい・関心が散漫」に見えるのは、あらゆる方向にアンテナが立っているから。それは集中力の欠如ではなく、世界の広さをそのまま受け取れる才能の証明です。点と点はいつか線になる。",
+    reframe_en: "If you seem \"easily bored\" or \"scatter-brained,\" it's because you have antennas pointing in every direction. That's not a lack of focus—it's proof of a talent that can receive the full breadth of the world. The dots will connect someday.",
+    reframe_zh: "博物型看起来「容易厌倦、注意力分散」，是因为天线朝着各个方向都立着。这不是缺乏专注力，而是能原原本本地接收世界广度的才能的证明。点与点终将连成线。",
+    reframe_ko: "박물형이 「쉽게 질린다·관심이 산만하다」고 보이는 것은, 모든 방향으로 안테나가 서 있기 때문입니다. 그것은 집중력의 부재가 아니라, 세상의 넓이를 그대로 받아들일 수 있는 재능의 증명입니다. 점과 점은 언젠가 선이 됩니다."
   }
 };
 
@@ -7222,8 +7343,45 @@ function _showResultInner() {
   // 知性別シンボルをセット
   setCharacterSymbols(state.top1);
 
-  // Talent description
-  document.getElementById('talentDesc').textContent = talent.desc;
+  // Talent description（desc_longがあれば長文版を、なければ短い説明を表示）
+  const descEl = document.getElementById('talentDesc');
+  if (descEl) {
+    const suffix = currentLang === 'en' ? '_en'
+                 : currentLang === 'zh' ? '_zh'
+                 : currentLang === 'ko' ? '_ko' : '';
+    const longText = talent['desc_long' + suffix] || talent['desc_long'] || null;
+    descEl.textContent = longText || talent.desc;
+    descEl.style.whiteSpace = longText ? 'pre-line' : '';
+  }
+
+  // ① 才能の特別感（rarity）— キャラカード直後に表示
+  const rarityEl = document.getElementById('talentRarity');
+  if (rarityEl) {
+    const suffix = currentLang === 'en' ? '_en'
+                 : currentLang === 'zh' ? '_zh'
+                 : currentLang === 'ko' ? '_ko' : '_ja';
+    const rarityKey = 'rarity' + suffix;
+    const rarityText = talent[rarityKey] || talent['rarity_ja'] || '';
+    rarityEl.textContent = rarityText;
+    rarityEl.style.display = rarityText ? '' : 'none';
+  }
+
+  // ② 才能の裏側（reframe）— IV.セクションの冒頭に表示
+  const reframeEl = document.getElementById('reframeCard');
+  if (reframeEl) {
+    const suffix = currentLang === 'en' ? '_en'
+                 : currentLang === 'zh' ? '_zh'
+                 : currentLang === 'ko' ? '_ko' : '_ja';
+    const reframeKey = 'reframe' + suffix;
+    const reframeText = talent[reframeKey] || talent['reframe_ja'] || '';
+    const labelText = {
+      ja: '才能の裏側', en: 'The Flip Side', zh: '才能的另一面', ko: '재능의 이면'
+    }[currentLang] || '才能の裏側';
+    reframeEl.innerHTML = reframeText
+      ? `<span class="reframe-label">${labelText}</span>${reframeText}`
+      : '';
+    reframeEl.style.display = reframeText ? '' : 'none';
+  }
 
   // 型名バッジ（◯◯型）— 購入導線で記憶を繋ぐため明示
   document.getElementById('typeBadgeName').textContent = getTypeLabel(top1);
@@ -9502,8 +9660,8 @@ const I18N = {
     'computing.body':    '8つの才能のバランスを解析中。あなたが何者であるかが、いま、浮かび上がります。',
     // 結果画面追加セクション
     'result.talent_type': '才能タイプ',
-    'result.sec4':       '伸びしろの領域',
-    'result.sec4en':     'Growth Areas',
+    'result.sec4':       '才能の裏側',
+    'result.sec4en':     'The Flip Side',
     'result.sec5':       '向いている道',
     'result.sec5en':     'Career & Side Hustle',
     'result.sec6':       'これからのために',
@@ -9791,7 +9949,7 @@ const I18N = {
     'computing.title':   'Reading your talents...',
     'computing.body':    'Analyzing the balance of 8 talents. Who you truly are is now surfacing.',
     'result.talent_type': 'Talent Type',
-    'result.sec4':       'Growth Areas',
+    'result.sec4':       'The Flip Side',
     'result.sec4en':     'Growth Areas',
     'result.sec5':       'Your Path',
     'result.sec5en':     'Career & Side Hustle',
@@ -10074,7 +10232,7 @@ const I18N = {
     'computing.title':   '正在解读你的才能...',
     'computing.body':    '正在分析8项才能的平衡。你是谁，此刻即将浮现。',
     'result.talent_type': '才能类型',
-    'result.sec4':       '成长空间',
+    'result.sec4':       '才能的另一面',
     'result.sec4en':     'Growth Areas',
     'result.sec5':       '适合的方向',
     'result.sec5en':     'Career & Side Hustle',
@@ -10353,7 +10511,7 @@ const I18N = {
     'computing.title':   '당신의 재능을 분석하고 있습니다...',
     'computing.body':    '8가지 재능의 균형을 분석 중. 당신이 누구인지, 지금 떠오르고 있습니다.',
     'result.talent_type': '재능 유형',
-    'result.sec4':       '성장 가능성의 영역',
+    'result.sec4':       '재능의 이면',
     'result.sec4en':     'Growth Areas',
     'result.sec5':       '어울리는 길',
     'result.sec5en':     'Career & Side Hustle',
