@@ -2759,11 +2759,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   .premium-outcome-mark {
     flex: 0 0 auto;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
+    width: 24px;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
     line-height: 1;
+    font-weight: 700;
     color: var(--gold);
-    margin-top: 2px;
+    margin-top: 1px;
   }
 
   .premium-outcome strong {
@@ -2784,11 +2787,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   /* チラ見せ */
   .premium-preview {
-    background: var(--paper);
-    padding: 26px 24px;
-    margin-bottom: 36px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.36), rgba(255,255,255,0.14)),
+      var(--paper);
+    padding: 22px 20px 18px;
+    margin-bottom: 16px;
     border: 1px solid rgba(15,14,12,0.15);
     position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 28px rgba(15,14,12,0.07);
+  }
+
+  .premium-preview::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(212,173,94,0.08), transparent 22%, transparent 78%, rgba(138,41,34,0.05)),
+      radial-gradient(circle at 20% 0%, rgba(212,173,94,0.10), transparent 34%);
+    pointer-events: none;
+  }
+
+  .premium-preview > * {
+    position: relative;
+    z-index: 1;
   }
 
   .premium-preview-label {
@@ -2804,44 +2826,55 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     font-family: 'Shippori Mincho', serif;
     font-weight: 700;
     font-size: 18px;
-    margin-bottom: 16px;
+    margin-bottom: 0;
     color: var(--ink);
   }
 
   .premium-preview-body {
     position: relative;
-    max-height: 180px;
+    min-height: 138px;
+    margin-top: 16px;
     overflow: hidden;
   }
 
   .premium-preview-text {
+    display: block;
     font-size: 14px;
     line-height: 2;
-    color: rgba(15,14,12,0.85);
+    color: rgba(15,14,12,0.60);
     text-align: justify;
+    filter: blur(2.1px);
+    user-select: none;
+  }
+
+  .premium-preview .premium-side-list {
+    filter: blur(2.1px);
+    opacity: 0.72;
+    user-select: none;
   }
 
   .premium-blur {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg,
-      rgba(244,237,224,0) 0%,
-      rgba(244,237,224,0) 42%,
-      rgba(244,237,224,0.4) 63%,
-      rgba(244,237,224,0.78) 84%,
-      rgba(244,237,224,0.9) 100%);
+    background:
+      linear-gradient(180deg,
+        rgba(244,237,224,0.16) 0%,
+        rgba(244,237,224,0.38) 42%,
+        rgba(244,237,224,0.72) 74%,
+        rgba(244,237,224,0.92) 100%);
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
-    padding-bottom: 12px;
-    -webkit-mask-image: linear-gradient(180deg, transparent 0%, transparent 40%, #000 64%);
-    mask-image: linear-gradient(180deg, transparent 0%, transparent 40%, #000 64%);
-    backdrop-filter: blur(2.5px);
-    -webkit-backdrop-filter: blur(2.5px);
+    padding: 12px;
+    backdrop-filter: blur(2.4px);
+    -webkit-backdrop-filter: blur(2.4px);
   }
 
   .premium-blur-content {
     text-align: center;
+    padding: 10px 14px;
+    background: rgba(244,237,224,0.72);
+    border: 1px solid rgba(184,137,58,0.26);
   }
 
   .lock-icon {
@@ -4242,21 +4275,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="premium-outcomes" aria-label="Premium report outcomes">
       <div class="premium-outcome">
-        <span class="premium-outcome-mark">I</span>
+        <span class="premium-outcome-mark" aria-hidden="true">✓</span>
         <div>
           <strong data-i18n="prem.outcome1.title">強みの正体がわかる</strong>
           <span data-i18n="prem.outcome1.desc">なぜその才能が出るのか、どんな場面で武器になるのかを言語化します。</span>
         </div>
       </div>
       <div class="premium-outcome">
-        <span class="premium-outcome-mark">II</span>
+        <span class="premium-outcome-mark" aria-hidden="true">✓</span>
         <div>
           <strong data-i18n="prem.outcome2.title">日常で使える形に変える</strong>
           <span data-i18n="prem.outcome2.desc">30日プログラムとワークで、読んで終わりにしない設計です。</span>
         </div>
       </div>
       <div class="premium-outcome">
-        <span class="premium-outcome-mark">III</span>
+        <span class="premium-outcome-mark" aria-hidden="true">✓</span>
         <div>
           <strong data-i18n="prem.outcome3.title">仕事・人間関係に接続する</strong>
           <span data-i18n="prem.outcome3.desc">向いている道、苦手な相手、才能を引き出す環境まで整理します。</span>
@@ -4436,17 +4469,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <div class="famous-section" id="famousSection"></div>
 
-  <!-- ===== 広告枠（同じタイプの人物を見た後に表示） ===== -->
-  <div class="ad-container">
-    <span class="ad-label" data-i18n="ad.label">Sponsored</span>
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-9187493483642692"
-         data-ad-slot="9987726722"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-  </div>
-
   <p class="disclaimer" data-i18n="title.disclaimer">
     <span data-i18n="result.disclaimer"></span>
   </p>
@@ -4469,6 +4491,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <div class="footer-copyright">© Mymatrix</div>
   <button class="back-to-top-btn" type="button" onclick="scrollResultToTop()" data-i18n="footer.back_to_top">↑ 一番上に戻る</button>
+
+  <!-- ===== 広告枠（ページ最下部に表示） ===== -->
+  <div class="ad-container">
+    <span class="ad-label" data-i18n="ad.label">Sponsored</span>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-9187493483642692"
+         data-ad-slot="9987726722"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+  </div>
   </section>
 
 <!-- ============ GALLERY SCREEN ============ -->
@@ -8283,9 +8316,12 @@ function arrangeResultConversionFlow() {
   if (topStrengths && premium) topStrengths.insertAdjacentElement('afterend', premium);
   if (premium && share) premium.insertAdjacentElement('afterend', share);
 
-  // 有料PDFの中身は3点に絞り、長いチラ見せと7項目リストは主導線から外す
+  // 有料PDFの中身は3つのモザイクプレビューに絞り、長い7項目リストは主導線から外す
   if (premium) {
-    premium.querySelectorAll('.premium-preview, .premium-features').forEach(el => {
+    premium.querySelectorAll('.premium-preview').forEach(el => {
+      el.style.display = '';
+    });
+    premium.querySelectorAll('.premium-features').forEach(el => {
       el.style.display = 'none';
     });
   }
@@ -8475,7 +8511,8 @@ function renderPremiumPreview(key) {
   document.getElementById('premiumPreviewLabel').textContent =
     t('premium.section_label');
   document.getElementById('premiumPreviewHeadline').textContent = title;
-  document.getElementById('premiumPreviewText').textContent = body;
+  const previewTextEl = document.getElementById('premiumPreviewText');
+  if (previewTextEl) previewTextEl.textContent = body;
 
   // ===== Section 02: 人間関係の取扱説明書（テキスト・冒頭のみ表示） =====
   const rel = report.relationship;
@@ -8488,7 +8525,7 @@ function renderPremiumPreview(key) {
     if (relTextEl) relTextEl.textContent = relBody;
   }
 
-  // ===== Section 03: 副業ロードマップ（最初の2ステップだけ表示） =====
+  // ===== Section 03: 副業ロードマップ（冒頭だけブラー表示） =====
   const sideHustleTitle = report['sideHustle_title' + suffix] || report.sideHustle?.title;
   const sideHustleSteps = report['sideHustle_steps' + suffix] || report.sideHustle?.steps;
   if (sideHustleTitle) {
@@ -8498,9 +8535,8 @@ function renderPremiumPreview(key) {
   if (sideHustleSteps) {
     const sideEl = document.getElementById('premiumSideHustleList');
     if (sideEl) {
-      // 最初の2ステップだけ表示
       const previewSteps = sideHustleSteps.slice(0, 2);
-      sideEl.innerHTML = previewSteps.map((step, idx) => {
+      sideEl.innerHTML = previewSteps.map((step) => {
         const match = step.match(/^([^:]+):\s*(.+)$/);
         if (match) {
           return `
