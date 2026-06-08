@@ -1758,6 +1758,48 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     padding-right: 58px;
   }
 
+  .strength-locked-preview {
+    position: relative;
+    margin-top: 12px;
+    min-height: 96px;
+    overflow: hidden;
+  }
+
+  .strength-locked-preview .strength-locked-text {
+    filter: blur(2.1px);
+    opacity: 0.64;
+    user-select: none;
+  }
+
+  .strength-locked-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    background: linear-gradient(180deg,
+      rgba(244,237,224,0.18) 0%,
+      rgba(244,237,224,0.58) 60%,
+      rgba(244,237,224,0.88) 100%);
+    backdrop-filter: blur(2.2px);
+    -webkit-backdrop-filter: blur(2.2px);
+  }
+
+  .strength-locked-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    border: 1px solid rgba(184,137,58,0.34);
+    background: rgba(244,237,224,0.78);
+    color: var(--crimson);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
   @media (max-width: 600px) {
     .strength-symbol { width: 40px; height: 40px; }
     .strength-card.featured .strength-symbol { width: 44px; height: 44px; }
@@ -8169,11 +8211,14 @@ function _showResultInner() {
     const symbol = BIG_SYMBOLS[k] || '';
     const card = document.createElement('div');
     card.className = 'detail-card strength-card' + (i === 0 ? ' featured' : '');
+    const strengthHtml = i === 0
+      ? `<p>${makeShortStrength(detail.strength)}</p>`
+      : makeLockedStrengthHTML(detail.strength);
     card.innerHTML = `
       <div class="strength-symbol">${symbol}</div>
       <div class="label">${[t('result.strength_1'), t('result.strength_2'), t('result.strength_3')][i]}</div>
       <h4>${getIntName(k)} <span class="en">${info.en}</span></h4>
-      <p>${makeShortStrength(detail.strength)}</p>
+      ${strengthHtml}
     `;
     ts.appendChild(card);
   });
@@ -8307,6 +8352,33 @@ function makeShortStrength(text) {
   if (!sentences || !sentences.length) return src;
   const preview = sentences.slice(0, 4).join('').trim();
   return preview.length > 360 ? preview.slice(0, 360).trim() + '…' : preview;
+}
+
+function escapeHTML(str) {
+  return String(str || '').replace(/[&<>"']/g, ch => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[ch]));
+}
+
+function makeLockedStrengthHTML(text) {
+  const src = String(text || '').trim();
+  if (!src) return '';
+  const sentences = src.match(/[^。！？.!?]+[。！？.!?]?/g) || [src];
+  const lead = sentences[0].trim();
+  const locked = sentences.slice(1, 4).join('').trim() || src;
+  return `
+    <p>${escapeHTML(lead)}</p>
+    <div class="strength-locked-preview" aria-label="${escapeHTML(t('strength.locked'))}">
+      <p class="strength-locked-text">${escapeHTML(locked)}</p>
+      <div class="strength-locked-overlay" aria-hidden="true">
+        <span class="strength-locked-badge">▣ ${escapeHTML(t('strength.locked'))}</span>
+      </div>
+    </div>
+  `;
 }
 
 function arrangeResultConversionFlow() {
@@ -10488,6 +10560,7 @@ const I18N = {
     'result.strength_1': 'Strength I — 主軸の才能',
     'result.strength_2': 'Strength II — 補佐の才能',
     'result.strength_3': 'Strength III — 隠れた才能',
+    'strength.locked': '続きは有料PDFで読めます',
     // 相性画面
     'match.title':       '相性診断',
     'match.input_label': '相手のコードを入力',
@@ -10790,6 +10863,7 @@ const I18N = {
     'result.strength_1': 'Strength I — Core Talent',
     'result.strength_2': 'Strength II — Supporting Talent',
     'result.strength_3': 'Strength III — Hidden Talent',
+    'strength.locked': 'Continue in the paid PDF',
     // 相性画面
     'match.title':       'Compatibility Check',
     'match.input_label': "Enter your partner's code",
@@ -11090,6 +11164,7 @@ const I18N = {
     'result.strength_1': 'Strength I — 核心才能',
     'result.strength_2': 'Strength II — 辅助才能',
     'result.strength_3': 'Strength III — 隐藏才能',
+    'strength.locked': '购买PDF后继续阅读',
     'match.title':       '相性诊断',
     'match.input_label': '输入对方的代码',
     'match.input_ph':    '在此粘贴得分代码',
@@ -11386,6 +11461,7 @@ const I18N = {
     'result.strength_1': 'Strength I — 핵심 재능',
     'result.strength_2': 'Strength II — 보조 재능',
     'result.strength_3': 'Strength III — 숨겨진 재능',
+    'strength.locked': '유료 PDF에서 이어서 읽기',
     'match.title':       '궁합 진단',
     'match.input_label': '상대방의 코드를 입력하세요',
     'match.input_ph':    '점수 코드를 여기에 붙여넣기',
