@@ -23,7 +23,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <!-- SEO -->
 <meta name="description" content="あなたの中に眠る8種類の知性を測定する無料診断。ハーバード大学のハワード・ガードナーが提唱した多重知能理論（MI理論）をベースに、性格ではなく才能を可視化します。3分で完了。">
-<meta name="keywords" content="才能診断,性格診断,MI理論,多重知能,キャリア診断,自己分析,適性診断,じぶマト,じぶんマトリクス">
+<meta name="keywords" content="才能診断,性格診断,MI理論,多重知能,キャリア診断,自己分析,適性診断,じぶんマトリクス">
 <meta name="author" content="じぶんマトリクス">
 
 <!-- Open Graph (Facebook / LINE / Slack 等) -->
@@ -66,7 +66,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "THE TALENT MATRIX -8つの才能を可視化する診断- (じぶんマトリクス)",
-  "alternateName": "じぶんマトリクス（じぶマト）",
+  "alternateName": "THE TALENT MATRIX",
   "url": "https://www.jibunmatrix.com/",
   "description": "ハーバード大学のMI理論をベースに、8種類の知能を測定する無料の才能診断。",
   "applicationCategory": "LifestyleApplication",
@@ -2011,6 +2011,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     text-transform: uppercase;
   }
 
+  .back-to-top-btn {
+    display: block;
+    width: 100%;
+    margin: 26px 0 0;
+    padding: 14px 18px;
+    border: 1px solid rgba(15,14,12,0.24);
+    background: transparent;
+    color: rgba(15,14,12,0.62);
+    font-family: 'Shippori Mincho', serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .back-to-top-btn:hover {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+  }
+
   /* 免責事項：目立たないがちゃんと読める */
   .disclaimer {
     max-width: 480px;
@@ -3747,7 +3769,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ============ INTRO SCREEN ============ -->
 <section id="screen-intro" class="screen active">
-  <div class="top-mark">Jibu-Mato · じぶんマトリクス</div>
+  <div class="top-mark">THE TALENT MATRIX · じぶんマトリクス</div>
 
   <!-- 言語切り替え（最上部） -->
   <div class="lang-switcher lang-switcher-top">
@@ -4198,22 +4220,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <button class="mission-refresh" onclick="rollMission()" data-i18n="result.mission_refresh">▷ 別のミッションに変える</button>
   </div>
 
-  <!-- ===== 広告枠（ひと通り結果を見た後に表示） ===== -->
-  <div class="ad-container">
-    <span class="ad-label" data-i18n="ad.label">Sponsored</span>
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-9187493483642692"
-         data-ad-slot="9987726722"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-  </div>
-
   <!-- ============ PREMIUM REPORT (有料拡張レポート) ============ -->
   <div class="premium-section">
     <div class="premium-badge">
       <span class="premium-badge-mark">✦</span>
-      <span>JIBU-MATO PREMIUM REPORT</span>
+      <span>THE TALENT MATRIX PREMIUM REPORT</span>
       <span class="premium-badge-mark">✦</span>
     </div>
 
@@ -4425,6 +4436,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <div class="famous-section" id="famousSection"></div>
 
+  <!-- ===== 広告枠（同じタイプの人物を見た後に表示） ===== -->
+  <div class="ad-container">
+    <span class="ad-label" data-i18n="ad.label">Sponsored</span>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-9187493483642692"
+         data-ad-slot="9987726722"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+  </div>
+
   <p class="disclaimer" data-i18n="title.disclaimer">
     <span data-i18n="result.disclaimer"></span>
   </p>
@@ -4446,6 +4468,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a href="/contact.html" data-i18n="footer.contact">お問い合わせ</a>
   </div>
   <div class="footer-copyright">© Mymatrix</div>
+  <button class="back-to-top-btn" type="button" onclick="scrollResultToTop()" data-i18n="footer.back_to_top">↑ 一番上に戻る</button>
   </section>
 
 <!-- ============ GALLERY SCREEN ============ -->
@@ -4455,7 +4478,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="hero" style="padding: 10px 0 20px;">
     <h1 style="font-size: clamp(28px, 6vw, 38px);">
       <span data-i18n="gallery.title">キャラクター図鑑</span>
-      <span class="accent" style="font-size: 0.4em;">All 8 Talents of Jibu-Mato</span>
+      <span class="accent" style="font-size: 0.4em;">All 8 Talents of THE TALENT MATRIX</span>
     </h1>
   </div>
 
@@ -4475,12 +4498,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="accent" style="font-size: 0.4em;">Talent Compatibility Match</span>
     </h1>
     <p class="hero-sub" style="margin-top: 18px;">
-      <span data-i18n="match.desc">もう一人の「じぶマトコード」を入力すると、二人の才能の相性が見られます。</span>
+      <span data-i18n="match.desc">もう一人の「才能コード」を入力すると、二人の才能の相性が見られます。</span>
     </p>
   </div>
 
   <div class="match-input-box">
-    <label data-i18n="match.input_label">友達のじぶマトコードを入力</label>
+    <label data-i18n="match.input_label">友達の才能コードを入力</label>
     <input type="text" id="matchCodeInput" data-i18n-placeholder="match.placeholder" placeholder="例: LI-IN-SP / 78-65-62-50-48-40-38-25" autocomplete="off">
     <button class="start-btn" style="margin: 8px 0;" onclick="runMatch()" data-i18n="match.run">相性を診断する</button>
   </div>
@@ -4908,7 +4931,7 @@ function getChapterForQuestion(idx) {
 }
 
 // ============ LOCAL STORAGE (途中保存) ============
-const SAVE_KEY = 'jibumato_progress_v1';
+const SAVE_KEY = 'talent_matrix_progress_v1';
 
 function saveProgress() {
   try {
@@ -4940,7 +4963,7 @@ function clearProgress() {
 }
 
 // ===== 完了した診断結果の保存・復元 =====
-const LAST_RESULT_KEY = 'jibumato_lastResult';
+const LAST_RESULT_KEY = 'talent_matrix_last_result';
 
 function saveLastResult(scores, tiebreak) {
   try {
@@ -8567,14 +8590,14 @@ function onPremiumInterest() {
 
   // ローカルに記録（需要検証用）
   try {
-    const log = JSON.parse(localStorage.getItem('jibumato_premium_interest') || '[]');
+    const log = JSON.parse(localStorage.getItem('talent_matrix_premium_interest') || '[]');
     log.push({
       timestamp: Date.now(),
       top1: state.top1,
       top2: state.top2,
       top3: state.top3
     });
-    localStorage.setItem('jibumato_premium_interest', JSON.stringify(log));
+    localStorage.setItem('talent_matrix_premium_interest', JSON.stringify(log));
   } catch (e) { /* ignore */ }
 
   showToast(t('toast.interest_counted'), 4000);
@@ -8998,7 +9021,7 @@ function copyMatchLink() {
   let baseUrl;
   if (location.protocol === 'about:' || location.protocol === 'blob:' || !location.origin) {
     // サンドボックス環境: 相対パスのフラグメントのみ伝える
-    baseUrl = 'https://jibu-mato.app/';
+    baseUrl = 'https://jibunmatrix.com/';
   } else {
     baseUrl = location.origin + location.pathname;
   }
@@ -9040,6 +9063,15 @@ function restart() {
     }
   } catch(e) {}
   showScreen('screen-intro');
+}
+
+function scrollResultToTop() {
+  const result = document.getElementById('screen-result');
+  if (result && result.classList.contains('active')) {
+    result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ===========================================
@@ -9600,7 +9632,7 @@ function _doDownloadResultCard() {
   ctx.fillStyle = '#d4ad5e';
   ctx.font = '500 26px monospace';
   ctx.textAlign = 'center';
-  ctx.fillText(currentLang === 'ja' ? 'JIBU-MATO · じぶんマトリクス' : 'JIBU-MATO · Talent Matrix', W/2, 160);
+  ctx.fillText(currentLang === 'ja' ? 'THE TALENT MATRIX · じぶんマトリクス' : 'THE TALENT MATRIX', W/2, 160);
 
   ctx.strokeStyle = 'rgba(212,173,94,0.3)';
   ctx.beginPath();
@@ -9667,7 +9699,7 @@ function _doDownloadResultCard() {
   // ===== Footer =====
   ctx.fillStyle = 'rgba(212,173,94,0.6)';
   ctx.font = 'italic 28px serif';
-  ctx.fillText('Take your own at:  jibu-mato', W/2, 1820);
+  ctx.fillText('Take your own at:  jibunmatrix.com', W/2, 1820);
 
   // ===== Download =====
   // canvas.toBlob と toDataURL の両方を試す（環境互換性のため）
@@ -9680,7 +9712,7 @@ function _doDownloadResultCard() {
           return;
         }
         const link = document.createElement('a');
-        link.download = `jibumato-${talent.characterEn.replace(/\s/g, '-').toLowerCase()}.png`;
+        link.download = `talent-matrix-${talent.characterEn.replace(/\s/g, '-').toLowerCase()}.png`;
         const url = URL.createObjectURL(blob);
         link.href = url;
         document.body.appendChild(link);
@@ -9703,7 +9735,7 @@ function downloadAsDataURL(canvas, talent) {
   try {
     const dataUrl = canvas.toDataURL('image/png');
     const link = document.createElement('a');
-    link.download = `jibumato-${talent.characterEn.replace(/\s/g, '-').toLowerCase()}.png`;
+    link.download = `talent-matrix-${talent.characterEn.replace(/\s/g, '-').toLowerCase()}.png`;
     link.href = dataUrl;
     document.body.appendChild(link);
     link.click();
@@ -10191,11 +10223,11 @@ function getLangFromURL() {
 }
 
 // 言語の決定: ①URLパラメータ → ②ユーザーが手動で選んだ保存値 → ③ブラウザ言語 → ④英語
-let currentLang = getLangFromURL() || localStorage.getItem('jibumato_lang') || detectBrowserLang();
+let currentLang = getLangFromURL() || localStorage.getItem('talent_matrix_lang') || detectBrowserLang();
 
 function setLang(lang) {
   currentLang = lang;
-  localStorage.setItem('jibumato_lang', lang);
+  localStorage.setItem('talent_matrix_lang', lang);
   applyLang();
   // URLの ?lang= も更新（hreflang・共有URLのため。履歴は汚さず置換）
   try {
@@ -10483,7 +10515,7 @@ const I18N = {
     'gallery.topmark': 'Character Gallery · 全8キャラ図鑑',
     'back.btn': '← 戻る',
     'match.topmark': 'Compatibility · 才能の相性診断',
-    'match.input_label': '友達のじぶマトコードを入力',
+    'match.input_label': '友達の才能コードを入力',
     'match.run': '相性を診断する',
     'modal.what': 'What is it · どんな知性?',
     'modal.signs': 'Signs · こんな人',
@@ -10542,14 +10574,14 @@ const I18N = {
     'prem.payment_ready': '※ 決済後すぐにPDFをダウンロードできます。<br>クレジットカード・Apple Pay・Google Pay に対応。買い切り・税込です。',
     'gallery.title': 'キャラクター図鑑',
     'match.title': '相性をみる',
-    'match.desc': 'もう一人の「じぶマトコード」を入力すると、二人の才能の相性が見られます。',
+    'match.desc': 'もう一人の「才能コード」を入力すると、二人の才能の相性が見られます。',
     'result.disclaimer': '本診断は、ハワード・ガードナーの多重知能理論（MI理論）を着想源とした、じぶんマトリクス独自のエンターテインメント診断です。学術的・心理学的な診断や評価を行うものではなく、結果は娯楽・自己理解の参考としてお楽しみください。',
     'footer.short': '— じぶんマトリクス —',
   
     // v5: share & dynamic content
-    'share.text': 'わたしの才能キャラは『{character}』でした!\\n複合タイプ: {compound}\\n{catchphrase}\\n\\n#じぶマト #じぶんマトリクス #多重知能診断\\n{url}',
+    'share.text': 'わたしの才能キャラは『{character}』でした!\\n複合タイプ: {compound}\\n{catchphrase}\\n\\n#じぶんマトリクス #多重知能診断\\n{url}',
     'share.title': 'じぶんマトリクス',
-    'share.window_title': 'じぶマト結果カード',
+    'share.window_title': '才能結果カード',
   
     // premium section label
     'radar.caption': 'あなたの8つの才能 · MIバランス',
@@ -10582,6 +10614,7 @@ const I18N = {
     'footer.disclaimer': '免責事項',
     'footer.tokushoho': '特定商取引法に基づく表記',
     'footer.contact': 'お問い合わせ',
+    'footer.back_to_top': '↑ 一番上に戻る',
   
     'footer.articles': '読み物',
   
@@ -10599,7 +10632,7 @@ const I18N = {
     'title.eight_talents': 'The 8 talents this assessment reveals',
     'title.start':      'Start the Assessment',
     'title.start_hint': 'No sign-up · Done in 3 minutes · Free',
-    'title.disclaimer': 'This assessment is an original entertainment diagnosis by Jibu-Mato, inspired by Howard Gardner\'s Multiple Intelligences theory. It is not an academic or psychological evaluation. Please enjoy the results as a reference for self-understanding and entertainment.',
+    'title.disclaimer': 'This assessment is an original entertainment diagnosis by THE TALENT MATRIX, inspired by Howard Gardner\'s Multiple Intelligences theory. It is not an academic or psychological evaluation. Please enjoy the results as a reference for self-understanding and entertainment.',
     'title.resume.label':   '— Continue Where You Left Off —',
     'title.resume.btn':     'Resume',
     'title.restart.btn':    'Start Over',
@@ -10780,11 +10813,11 @@ const I18N = {
     'prem.price.tax': '(Tax incl. · One-time purchase)',
     'share.compat': 'Check compatibility with a friend (copy URL)',
     'share.gallery': 'View the character gallery (all 8)',
-    'footer.mark': '— Jibu-Mato · Inspired by Howard Gardner\'s MI Theory —',
+    'footer.mark': '— THE TALENT MATRIX · Inspired by Howard Gardner\'s MI Theory —',
     'gallery.topmark': 'Character Gallery · All 8 Characters',
     'back.btn': '← Back',
     'match.topmark': 'Compatibility · Talent Match',
-    'match.input_label': 'Enter your friend\'s Jibu-Mato code',
+    'match.input_label': 'Enter your friend\'s talent code',
     'match.run': 'Check compatibility',
     'modal.what': 'What is it · About this intelligence',
     'modal.signs': 'Signs · You might be this type',
@@ -10843,14 +10876,14 @@ const I18N = {
     'prem.payment_ready': '* Download your PDF right after payment.<br>Cards, Apple Pay & Google Pay accepted. One-time, tax included.',
     'gallery.title': 'Character Gallery',
     'match.title': 'Check Compatibility',
-    'match.desc': 'Enter another person\'s Jibu-Mato code to see how your talents match.',
-    'result.disclaimer': 'This diagnosis is an entertainment tool inspired by Howard Gardner\'s Theory of Multiple Intelligences (MI Theory) and is unique to Jibu-Mato. It is not an academic or psychological evaluation—please enjoy the results as a reference for fun and self-understanding.',
-    'footer.short': '— Jibu-Mato —',
+    'match.desc': 'Enter another person\'s talent code to see how your talents match.',
+    'result.disclaimer': 'This diagnosis is an entertainment tool inspired by Howard Gardner\'s Theory of Multiple Intelligences (MI Theory) and is unique to THE TALENT MATRIX. It is not an academic or psychological evaluation—please enjoy the results as a reference for fun and self-understanding.',
+    'footer.short': '— THE TALENT MATRIX —',
   
     // v5: share & dynamic content
-    'share.text': 'My talent character is "{character}"!\\nCompound type: {compound}\\n{catchphrase}\\n\\n#JibuMato #MITheory\\n{url}',
-    'share.title': 'Jibu-Mato · Talent Matrix',
-    'share.window_title': 'Jibu-Mato Result Card',
+    'share.text': 'My talent character is "{character}"!\\nCompound type: {compound}\\n{catchphrase}\\n\\n#TalentMatrix #MITheory\\n{url}',
+    'share.title': 'THE TALENT MATRIX',
+    'share.window_title': 'THE TALENT MATRIX Result Card',
   
     // premium section label
     'radar.caption': 'YOUR 8 TALENTS · MI BALANCE',
@@ -10883,6 +10916,7 @@ const I18N = {
     'footer.disclaimer': 'Disclaimer',
     'footer.tokushoho': 'Commercial Transactions Act',
     'footer.contact': 'Contact',
+    'footer.back_to_top': '↑ Back to top',
   
     'footer.articles': 'Articles',
   
@@ -10901,7 +10935,7 @@ const I18N = {
     'title.eight_talents': '本测评将揭示的8种才能',
     'title.start':      '开始测评',
     'title.start_hint': '无需注册·3分钟完成·立即免费',
-    'title.disclaimer': '本测评是以霍华德·加德纳的多元智能理论（MI理论）为灵感，由じぶんマトリクス独创的娱乐测评。本测评不属于学术或心理学诊断，结果仅供娱乐和自我了解参考。',
+    'title.disclaimer': '本测评是以霍华德·加德纳的多元智能理论（MI理论）为灵感，由THE TALENT MATRIX独创的娱乐测评。本测评不属于学术或心理学诊断，结果仅供娱乐和自我了解参考。',
     'title.resume.label':   '— 从上次中断处继续 —',
     'title.resume.btn':     '继续测评',
     'title.restart.btn':    '重新开始',
@@ -11075,11 +11109,11 @@ const I18N = {
     'prem.price.tax': '（含税·一次性购买）',
     'share.compat': '查看与朋友的契合度（复制URL）',
     'share.gallery': '查看角色图鉴（全8个）',
-    'footer.mark': '— Jibu-Mato · 灵感来自加德纳的多元智能理论 —',
+    'footer.mark': '— THE TALENT MATRIX · 灵感来自加德纳的多元智能理论 —',
     'gallery.topmark': 'Character Gallery · 全8角色图鉴',
     'back.btn': '← 返回',
     'match.topmark': 'Compatibility · 才能契合度诊断',
-    'match.input_label': '请输入朋友的Jibu-Mato码',
+    'match.input_label': '请输入朋友的才能码',
     'match.run': '诊断契合度',
     'modal.what': 'What is it · 这是什么样的智能?',
     'modal.signs': 'Signs · 这种类型的人',
@@ -11138,14 +11172,14 @@ const I18N = {
     'prem.payment_ready': '※ 付款后即可立即下载PDF。<br>支持信用卡·Apple Pay·Google Pay。一次性买断·含税。',
     'gallery.title': '角色图鉴',
     'match.title': '查看契合度',
-    'match.desc': '输入他人的Jibu-Mato码，即可查看你们才能的契合度。',
-    'result.disclaimer': '本诊断借鉴加德纳的多元智能理论(MI理论)，是Jibu-Mato独立设计的娱乐性诊断。并非学术或心理评估，请将结果作为娱乐与自我理解的参考。',
-    'footer.short': '— Jibu-Mato —',
+    'match.desc': '输入他人的才能码，即可查看你们才能的契合度。',
+    'result.disclaimer': '本诊断借鉴加德纳的多元智能理论(MI理论)，是THE TALENT MATRIX独立设计的娱乐性诊断。并非学术或心理评估，请将结果作为娱乐与自我理解的参考。',
+    'footer.short': '— THE TALENT MATRIX —',
   
     // v5: share & dynamic content
-    'share.text': '我的才能角色是『{character}』！\\n复合型: {compound}\\n{catchphrase}\\n\\n#JibuMato #多元智能 #才能诊断\\n{url}',
-    'share.title': 'Jibu-Mato · 才能矩阵',
-    'share.window_title': 'Jibu-Mato 结果卡片',
+    'share.text': '我的才能角色是『{character}』！\\n复合型: {compound}\\n{catchphrase}\\n\\n#TalentMatrix #多元智能 #才能诊断\\n{url}',
+    'share.title': 'THE TALENT MATRIX · 才能矩阵',
+    'share.window_title': 'THE TALENT MATRIX 结果卡片',
   
     // premium section label
     'radar.caption': '你的8种才能 · MI 平衡',
@@ -11178,6 +11212,7 @@ const I18N = {
     'footer.disclaimer': '免责声明',
     'footer.tokushoho': '特定商业交易法标示',
     'footer.contact': '联系我们',
+    'footer.back_to_top': '↑ 返回顶部',
   
     'footer.articles': '文章',
   
@@ -11196,7 +11231,7 @@ const I18N = {
     'title.eight_talents': '이 진단으로 알 수 있는 8가지 재능',
     'title.start':      '진단 시작하기',
     'title.start_hint': '가입 불필요·3분이면 완료·지금 무료로',
-    'title.disclaimer': '본 진단은 하워드 가드너의 다중지능이론(MI이론)을 바탕으로 한 じぶんマトリクス 독자적인 엔터테인먼트 진단입니다. 학술적·심리학적 진단이 아니며, 결과는 오락 및 자기 이해의 참고로 즐겁게 활용해 주세요.',
+    'title.disclaimer': '본 진단은 하워드 가드너의 다중지능이론(MI이론)을 바탕으로 한 THE TALENT MATRIX 독자적인 엔터테인먼트 진단입니다. 학술적·심리학적 진단이 아니며, 결과는 오락 및 자기 이해의 참고로 즐겁게 활용해 주세요.',
     'title.resume.label':   '— 이어서 계속하기 —',
     'title.resume.btn':     '이어서 계속하기',
     'title.restart.btn':    '처음부터 다시하기',
@@ -11370,11 +11405,11 @@ const I18N = {
     'prem.price.tax': '(부가세 포함·1회 구매)',
     'share.compat': '친구와의 궁합 보기 (URL 복사)',
     'share.gallery': '캐릭터 도감 보기 (전 8체)',
-    'footer.mark': '— Jibu-Mato · 하워드 가드너의 MI 이론에서 영감 —',
+    'footer.mark': '— THE TALENT MATRIX · 하워드 가드너의 MI 이론에서 영감 —',
     'gallery.topmark': 'Character Gallery · 전 8 캐릭터 도감',
     'back.btn': '← 돌아가기',
     'match.topmark': 'Compatibility · 재능 궁합 진단',
-    'match.input_label': '친구의 Jibu-Mato 코드 입력',
+    'match.input_label': '친구의 재능 코드 입력',
     'match.run': '궁합 진단하기',
     'modal.what': 'What is it · 어떤 지능인가?',
     'modal.signs': 'Signs · 이런 사람',
@@ -11433,14 +11468,14 @@ const I18N = {
     'prem.payment_ready': '※ 결제 후 바로 PDF를 다운로드할 수 있습니다.<br>카드·Apple Pay·Google Pay 지원. 한 번 결제·세금 포함.',
     'gallery.title': '캐릭터 도감',
     'match.title': '궁합 보기',
-    'match.desc': '다른 사람의 Jibu-Mato 코드를 입력하면 두 사람의 재능 궁합을 볼 수 있습니다.',
-    'result.disclaimer': '본 진단은 하워드 가드너의 다중지능 이론(MI 이론)에서 착안한 Jibu-Mato 독자 엔터테인먼트 진단입니다. 학술적·심리학적 평가가 아니며, 결과는 즐거움과 자기 이해의 참고로 즐겨주세요.',
-    'footer.short': '— Jibu-Mato —',
+    'match.desc': '다른 사람의 재능 코드를 입력하면 두 사람의 재능 궁합을 볼 수 있습니다.',
+    'result.disclaimer': '본 진단은 하워드 가드너의 다중지능 이론(MI 이론)에서 착안한 THE TALENT MATRIX 독자 엔터테인먼트 진단입니다. 학술적·심리학적 평가가 아니며, 결과는 즐거움과 자기 이해의 참고로 즐겨주세요.',
+    'footer.short': '— THE TALENT MATRIX —',
   
     // v5: share & dynamic content
-    'share.text': '제 재능 캐릭터는 『{character}』였습니다!\\n복합 타입: {compound}\\n{catchphrase}\\n\\n#JibuMato #다중지능 #재능진단\\n{url}',
-    'share.title': 'Jibu-Mato · 재능 매트릭스',
-    'share.window_title': 'Jibu-Mato 결과 카드',
+    'share.text': '제 재능 캐릭터는 『{character}』였습니다!\\n복합 타입: {compound}\\n{catchphrase}\\n\\n#TalentMatrix #다중지능 #재능진단\\n{url}',
+    'share.title': 'THE TALENT MATRIX · 재능 매트릭스',
+    'share.window_title': 'THE TALENT MATRIX 결과 카드',
   
     // premium section label
     'radar.caption': '당신의 8가지 재능 · MI 밸런스',
@@ -11473,6 +11508,7 @@ const I18N = {
     'footer.disclaimer': '면책 사항',
     'footer.tokushoho': '특정상거래법 표기',
     'footer.contact': '문의하기',
+    'footer.back_to_top': '↑ 맨 위로',
   
     'footer.articles': '읽을거리',
   
