@@ -9867,6 +9867,19 @@ function getCompatLexicon() {
 // ============ MATCH関数 ============
 function checkURLHash() {
   const hash = location.hash;
+  if (hash.startsWith('#s=')) {
+    const scoresFromUrl = parseScoresFromString(hash);
+    if (scoresFromUrl) {
+      clearProgress();
+      state.scores = scoresFromUrl;
+      state.tiebreak = null;
+      state.answers = new Array(QUESTIONS.length).fill(2);
+      saveLastResult(scoresFromUrl, null);
+      showResult();
+      return true;
+    }
+  }
+
   if (hash.startsWith('#match=')) {
     const friendScoreString = hash.replace('#match=', '');
     const friendScores = parseScoresFromString(friendScoreString);
@@ -9884,8 +9897,10 @@ function checkURLHash() {
       `;
       const intro = document.getElementById('screen-intro');
       intro.insertBefore(hint, intro.firstChild.nextSibling);
+      return true;
     }
   }
+  return false;
 }
 
 // After diagnosis, if pendingMatch exists, jump to match
@@ -11437,9 +11452,11 @@ const CHAPTERS_KO = [
 document.getElementById('qTotal').textContent = String(QUESTIONS.length).padStart(2, '0');
 // 初期タブタイトルを記憶（結果表示後にトップへ戻ったとき復元するため）
 window._defaultDocTitle = document.title;
-checkURLHash();
-checkResumeBanner();
-showLastResultButton();
+const didRestoreFromHash = checkURLHash();
+if (!didRestoreFromHash) {
+  checkResumeBanner();
+  showLastResultButton();
+}
 // 言語設定を適用
 setLang(currentLang);
 </script>
