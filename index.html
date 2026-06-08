@@ -961,6 +961,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     margin-bottom: 40px;
     position: relative;
     overflow: hidden;
+    isolation: isolate;
   }
 
   .talent-card::before {
@@ -969,6 +970,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     inset: 12px;
     border: 1px solid rgba(212,173,94,0.25);
     pointer-events: none;
+    z-index: 4;
   }
 
   .talent-card::after {
@@ -980,9 +982,47 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       radial-gradient(circle at 30% 30%, rgba(212,173,94,0.15), transparent 40%),
       radial-gradient(circle at 70% 70%, rgba(138,41,34,0.2), transparent 40%);
     pointer-events: none;
+    z-index: 0;
   }
 
-  .talent-card > * { position: relative; z-index: 2; }
+  .talent-card > :not(.talent-backdrop) { position: relative; z-index: 2; }
+
+  .talent-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    color: rgba(244,237,224,0.52);
+    opacity: 0.74;
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+
+  .talent-backdrop svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .talent-backdrop .sketch-line {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.15;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.14;
+  }
+
+  .talent-backdrop .sketch-line.soft { opacity: 0.08; stroke-width: 0.85; }
+  .talent-backdrop .sketch-line.gold { stroke: rgba(212,173,94,0.55); opacity: 0.13; }
+  .talent-backdrop .sketch-wash { fill: rgba(244,237,224,0.05); }
+  .talent-backdrop .sketch-wash.gold { fill: rgba(212,173,94,0.055); }
+  .talent-backdrop .sketch-wash.crimson { fill: rgba(138,41,34,0.07); }
+
+  @media (max-width: 480px) {
+    .talent-backdrop {
+      opacity: 0.62;
+    }
+  }
 
   .talent-eyebrow {
     font-family: 'JetBrains Mono', monospace;
@@ -3947,6 +3987,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <!-- メインの才能カード -->
   <div class="talent-card" id="talentCard">
+    <div class="talent-backdrop" id="talentBackdrop" aria-hidden="true"></div>
     <div class="talent-eyebrow">— You Are —</div>
 
     <div class="character-stage">
@@ -6787,6 +6828,119 @@ const TALENT_TYPES = {
   }
 };
 
+function getTalentBackdropSVG(type) {
+  const scenes = {
+    linguistic: `
+      <path class="sketch-line gold" d="M54 470 C118 430 176 448 226 418 C280 386 332 404 382 368"/>
+      <path class="sketch-line soft" d="M62 500 C132 462 194 490 266 450 C316 424 356 428 402 398"/>
+      <path class="sketch-line" d="M98 414 C122 390 156 382 178 398 C146 407 124 425 106 454"/>
+      <path class="sketch-line soft" d="M118 430 C140 420 158 421 178 433"/>
+      <path class="sketch-line" d="M252 396 C264 366 288 348 316 354 C294 370 278 392 270 424"/>
+      <path class="sketch-line soft" d="M76 528 C128 508 168 526 206 500 C236 480 266 484 306 464"/>
+      <path class="sketch-line gold" d="M142 520 C164 486 200 472 232 482 C210 498 190 522 178 552"/>
+      <path class="sketch-line" d="M300 438 l24 -20 l22 10 l-24 22 z M312 442 l3 -22 M331 434 l-4 22"/>
+      <path class="sketch-line soft" d="M88 360 q30 -22 62 0 M286 326 q34 -26 72 0"/>
+    `,
+    logical: `
+      <path class="sketch-line gold" d="M44 472 L110 424 L174 472 L238 412 L318 464 L386 404"/>
+      <path class="sketch-line soft" d="M58 506 L122 458 L188 500 L252 450 L324 496 L402 440"/>
+      <path class="sketch-line" d="M128 436 L196 382 L264 436"/>
+      <path class="sketch-line" d="M156 414 L196 448 L236 414"/>
+      <path class="sketch-line soft" d="M196 382 L196 448"/>
+      <circle class="sketch-line gold" cx="98" cy="378" r="20"/>
+      <circle class="sketch-line soft" cx="98" cy="378" r="34"/>
+      <path class="sketch-line" d="M300 344 l26 -26 l26 26 l-26 26 z"/>
+      <path class="sketch-line soft" d="M300 344 h52 M326 318 v52"/>
+      <path class="sketch-line soft" d="M70 552 C128 530 178 548 228 520 C286 488 344 500 398 474"/>
+    `,
+    spatial: `
+      <path class="sketch-wash gold" d="M42 476 C120 410 178 444 236 390 C304 330 356 384 404 334 L404 680 L42 680 Z"/>
+      <path class="sketch-line gold" d="M42 476 C120 410 178 444 236 390 C304 330 356 384 404 334"/>
+      <path class="sketch-line soft" d="M38 512 C118 462 174 486 240 438 C306 390 352 430 410 382"/>
+      <path class="sketch-line" d="M88 448 L132 402 L176 448 M112 422 L112 488 M152 422 L152 488"/>
+      <path class="sketch-line soft" d="M82 488 H184"/>
+      <path class="sketch-line" d="M250 428 C250 392 278 370 310 370 C342 370 370 392 370 428"/>
+      <path class="sketch-line soft" d="M270 428 C270 404 288 390 310 390 C332 390 350 404 350 428"/>
+      <path class="sketch-line gold" d="M70 552 C150 514 232 536 324 494"/>
+    `,
+    musical: `
+      <path class="sketch-line gold" d="M46 476 C100 452 136 492 190 468 C238 446 274 476 322 452 C356 436 382 440 404 424"/>
+      <path class="sketch-line soft" d="M42 512 C96 488 140 526 194 502 C246 480 286 510 334 486 C362 472 386 474 410 462"/>
+      <path class="sketch-line soft" d="M54 548 C126 516 180 558 248 526 C306 500 352 518 404 492"/>
+      <path class="sketch-line" d="M122 414 c34 -28 78 -28 112 0"/>
+      <path class="sketch-line soft" d="M104 438 c46 -36 108 -36 154 0"/>
+      <path class="sketch-line gold" d="M286 362 v96"/>
+      <path class="sketch-line gold" d="M286 362 c34 4 48 18 46 36 c-18 -14 -32 -16 -46 -16"/>
+      <ellipse class="sketch-line" cx="274" cy="468" rx="20" ry="14" transform="rotate(-18 274 468)"/>
+      <path class="sketch-line soft" d="M74 380 q24 -18 48 0 M330 324 q22 -16 44 0"/>
+    `,
+    bodily: `
+      <path class="sketch-wash crimson" d="M38 500 C104 438 150 458 206 400 C266 338 330 384 402 326 L402 680 L38 680 Z"/>
+      <path class="sketch-line gold" d="M38 500 C104 438 150 458 206 400 C266 338 330 384 402 326"/>
+      <path class="sketch-line soft" d="M56 534 C126 488 178 512 236 456 C292 404 344 426 408 380"/>
+      <path class="sketch-line" d="M98 548 C138 512 176 494 220 488 C264 482 306 454 344 416"/>
+      <path class="sketch-line gold" d="M116 536 l22 -6 l-8 20 M172 506 l24 -4 l-10 20 M228 486 l24 -8 l-8 22 M286 452 l24 -12 l-4 24"/>
+      <path class="sketch-line soft" d="M72 404 q36 -24 76 0 M270 350 q42 -28 86 0"/>
+      <path class="sketch-line" d="M342 390 c12 -22 26 -36 44 -44"/>
+    `,
+    interpersonal: `
+      <path class="sketch-line gold" d="M50 516 C104 474 148 482 190 452 C238 418 286 424 340 386 C362 370 382 358 404 350"/>
+      <path class="sketch-line soft" d="M46 552 C116 512 166 524 222 486 C278 448 330 456 406 408"/>
+      <path class="sketch-line" d="M104 434 l34 -28 l34 28 v50 h-68 z"/>
+      <path class="sketch-line soft" d="M122 484 v-28 h30 v28 M104 434 h68"/>
+      <path class="sketch-line" d="M250 412 l30 -24 l30 24 v44 h-60 z"/>
+      <path class="sketch-line soft" d="M264 456 v-24 h30 v24"/>
+      <path class="sketch-line gold" d="M80 578 C130 522 176 530 214 560 C252 590 304 566 356 512"/>
+      <path class="sketch-line soft" d="M72 380 q28 -18 56 0 M302 344 q30 -20 60 0"/>
+      <circle class="sketch-wash gold" cx="138" cy="426" r="48"/>
+      <circle class="sketch-wash gold" cx="282" cy="404" r="42"/>
+    `,
+    intrapersonal: `
+      <path class="sketch-line gold" d="M42 520 C112 470 166 494 224 452 C284 408 338 430 404 382"/>
+      <path class="sketch-line soft" d="M54 556 C126 514 182 536 242 494 C300 454 350 464 406 426"/>
+      <path class="sketch-line" d="M196 374 C174 404 166 438 178 474 C188 506 220 526 250 508 C222 494 210 462 216 430 C222 402 242 380 272 366 C242 358 214 354 196 374 Z"/>
+      <path class="sketch-line soft" d="M106 492 C112 452 134 422 168 402"/>
+      <path class="sketch-line soft" d="M310 484 C318 442 342 412 378 394"/>
+      <path class="sketch-line gold" d="M210 540 C212 498 226 470 252 448 C278 426 288 396 280 366"/>
+      <path class="sketch-line soft" d="M84 368 q30 -22 62 0 M294 330 q34 -24 70 0"/>
+      <circle class="sketch-wash gold" cx="232" cy="408" r="82"/>
+    `,
+    naturalist: `
+      <path class="sketch-wash gold" d="M40 512 C102 466 160 488 218 444 C280 398 330 420 406 364 L406 680 L40 680 Z"/>
+      <path class="sketch-line gold" d="M40 512 C102 466 160 488 218 444 C280 398 330 420 406 364"/>
+      <path class="sketch-line soft" d="M50 548 C118 510 172 532 236 488 C294 450 344 462 408 420"/>
+      <path class="sketch-line" d="M118 516 C116 460 132 418 166 388"/>
+      <path class="sketch-line" d="M166 388 C128 394 108 376 96 344 C132 346 158 360 166 388"/>
+      <path class="sketch-line" d="M164 420 C202 414 226 394 242 360 C202 360 176 382 164 420"/>
+      <path class="sketch-line soft" d="M92 552 C86 510 96 478 118 452 M284 530 C288 478 310 436 350 404"/>
+      <path class="sketch-line" d="M302 468 C334 452 352 424 358 386 C326 396 306 424 302 468"/>
+      <path class="sketch-line soft" d="M76 392 q30 -22 64 0 M292 342 q34 -24 72 0"/>
+    `
+  };
+
+  const scene = scenes[type] || scenes.linguistic;
+
+  return `
+    <svg viewBox="0 0 420 680" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+      <g>
+        <path class="sketch-wash" d="M0 450 C72 410 126 430 196 394 C270 356 326 378 420 322 L420 680 L0 680 Z"/>
+        <path class="sketch-line soft" d="M26 610 C96 568 152 594 226 548 C286 510 342 524 414 480"/>
+        <path class="sketch-line soft" d="M36 304 q34 -24 70 0 M298 268 q40 -28 82 0"/>
+        ${scene}
+      </g>
+    </svg>
+  `;
+}
+
+function setTalentBackdrop(type) {
+  const backdrop = document.getElementById('talentBackdrop');
+  if (!backdrop) return;
+
+  const isDisabled = new URLSearchParams(location.search).has('noill');
+  backdrop.style.display = isDisabled ? 'none' : '';
+  backdrop.innerHTML = isDisabled ? '' : getTalentBackdropSVG(type);
+}
+
 // 各知能に対応する詳細情報
 // ============ Career Icon Mapping ============
 // 職業名のキーワードからSVGアイコンを返す
@@ -7826,6 +7980,7 @@ function _showResultInner() {
   // Apply tinted background to talent card
   const card = document.getElementById('talentCard');
   card.style.background = `linear-gradient(135deg, ${talent.bgColor} 0%, #0f0e0c 100%)`;
+  setTalentBackdrop(top1);
 
   // Quote
   const quotes = {
