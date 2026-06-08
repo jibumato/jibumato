@@ -3980,6 +3980,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <p class="talent-desc" id="talentDesc">...</p>
+    <div class="talent-rarity" id="talentRarity"></div>
   </div>
 
   <!-- 引用 -->
@@ -3993,9 +3994,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="share-hero">
     <div class="share-hero-label" data-i18n="result.share_hero_label">— この結果をシェアしよう —</div>
     <div class="share-hero-buttons">
-      <button class="share-btn primary" onclick="downloadResultCard()">
-        <span class="share-btn-icon">⬇</span>
-        <span data-i18n="result.share_img">結果カードを画像で保存</span>
+      <button class="share-btn primary" onclick="sendResultEmail()">
+        <span class="share-btn-icon">✉</span>
+        <span data-i18n="result.email">結果をメールで受け取る</span>
       </button>
       <button class="share-btn" onclick="shareResult()">
         <span class="share-btn-icon">✦</span>
@@ -6162,16 +6163,7 @@ function getTalent(key) {
     bgColor: t.bgColor,
     catchphrase: t['catchphrase' + suffix] || t.catchphrase,
     desc: t['desc' + suffix] || t.desc,
-    desc_long: getTalentLongDescription(key, suffix, t),
-    // rarity（特別感）/ reframe（才能の裏側）は INTELLIGENCE_INFO 側に定義
-    rarity_ja: INTELLIGENCE_INFO[key]?.rarity_ja || '',
-    rarity_en: INTELLIGENCE_INFO[key]?.rarity_en || '',
-    rarity_zh: INTELLIGENCE_INFO[key]?.rarity_zh || '',
-    rarity_ko: INTELLIGENCE_INFO[key]?.rarity_ko || '',
-    reframe_ja: INTELLIGENCE_INFO[key]?.reframe_ja || '',
-    reframe_en: INTELLIGENCE_INFO[key]?.reframe_en || '',
-    reframe_zh: INTELLIGENCE_INFO[key]?.reframe_zh || '',
-    reframe_ko: INTELLIGENCE_INFO[key]?.reframe_ko || ''
+    desc_long: getTalentLongDescription(key, suffix, t)
   };
 }
 
@@ -7739,6 +7731,18 @@ function _showResultInner() {
     descEl.style.whiteSpace = longText ? 'pre-line' : '';
   }
 
+  // ① 才能の特別感（rarity）— キャラカード直後に表示
+  const rarityEl = document.getElementById('talentRarity');
+  if (rarityEl) {
+    const suffix = currentLang === 'en' ? '_en'
+                 : currentLang === 'zh' ? '_zh'
+                 : currentLang === 'ko' ? '_ko' : '_ja';
+    const rarityKey = 'rarity' + suffix;
+    const rarityText = talent[rarityKey] || talent['rarity_ja'] || '';
+    rarityEl.textContent = rarityText;
+    rarityEl.style.display = rarityText ? '' : 'none';
+  }
+
   // ② 才能の裏側（reframe）— IV.セクションの冒頭に表示
   const reframeEl = document.getElementById('reframeCard');
   if (reframeEl) {
@@ -8693,6 +8697,54 @@ function shareResult() {
   } else {
     copyToClipboard(text);
   }
+}
+
+const RESULT_EMAIL_ENDPOINT = 'https://jibunmatrix-send-result.sunny-rainy1115.workers.dev/';
+
+async function sendResultEmail() {
+  const input = prompt(t('email.prompt'));
+  if (input === null) return;
+
+  const email = input.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showToast(t('email.invalid'));
+    return;
+  }
+
+  const talent = getTalent(state.top1);
+  const compound = makeCompoundName(state.top1, state.top2);
+  const resultUrl = getPublicResultUrl();
+
+  try {
+    showToast(t('email.sending'), 4000);
+    const res = await fetch(RESULT_EMAIL_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email,
+        typeName: talent.character,
+        compound,
+        resultUrl,
+        lang: currentLang
+      })
+    });
+
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.ok) throw new Error(data.error || 'send failed');
+    showToast(t('email.sent'), 4200);
+  } catch (e) {
+    showToast(t('email.failed'), 5200);
+  }
+}
+
+function getPublicResultUrl() {
+  const hash = location.hash || '';
+  const search = currentLang ? '?lang=' + encodeURIComponent(currentLang) : '';
+  const isLocal = location.protocol === 'file:' ||
+                  location.hostname === '127.0.0.1' ||
+                  location.hostname === 'localhost';
+  if (isLocal) return 'https://jibunmatrix.com/' + search + hash;
+  return location.origin + location.pathname + search + hash;
 }
 
 function copyToClipboard(text) {
@@ -10026,6 +10078,7 @@ const I18N = {
     'result.share_img':  '結果カードを画像で保存',
     'result.share_match':'相性を診断する',
     'result.share_sns':  'SNSでシェア',
+    'result.email':      '結果をメールで受け取る',
     'result.back':       'もう一度診断する',
     'result.book':       'あなたにおすすめの一冊',
     'result.book_en':    'Recommended Book',
@@ -10191,6 +10244,11 @@ const I18N = {
     'toast.result_copied': '結果をコピーしました。SNSにペーストしてください。',
     'toast.copy_failed': 'コピーできませんでした',
     'toast.match_url_copied': '相性診断用のURLをコピー!友達に送ってね。',
+    'email.prompt': '診断結果を送るメールアドレスを入力してください。入力されたメールアドレスは結果送信のみに使用します。',
+    'email.invalid': 'メールアドレスの形式を確認してください。',
+    'email.sending': '診断結果をメールで送信しています...',
+    'email.sent': '診断結果をメールで送りました。',
+    'email.failed': 'メール送信に失敗しました。時間をおいて再度お試しください。',
     'toast.image_generating': '画像を生成しています...',
     'toast.image_saved': '画像を保存しました!',
     'toast.image_long_press': '画像を長押しして保存してください',
@@ -10317,6 +10375,7 @@ const I18N = {
     'result.share_img':  'Save Result Card as Image',
     'result.share_match':'Check Compatibility',
     'result.share_sns':  'Share on SNS',
+    'result.email':      'Send my result by email',
     'result.back':       'Take the Assessment Again',
     'result.book':       'A Book for You',
     'result.book_en':    'Recommended Book',
@@ -10476,6 +10535,11 @@ const I18N = {
     'toast.result_copied': 'Result copied. Paste it on social media.',
     'toast.copy_failed': 'Couldn\'t copy',
     'toast.match_url_copied': 'Compatibility URL copied! Send it to a friend.',
+    'email.prompt': 'Enter the email address where you want to receive your result. Your email will be used only to send this result.',
+    'email.invalid': 'Please check the email address format.',
+    'email.sending': 'Sending your result by email...',
+    'email.sent': 'Your result has been sent by email.',
+    'email.failed': 'Could not send the email. Please try again later.',
     'toast.image_generating': 'Generating image…',
     'toast.image_saved': 'Image saved!',
     'toast.image_long_press': 'Long-press the image to save it',
@@ -10600,6 +10664,7 @@ const I18N = {
     'result.share_img':  '保存结果卡片图片',
     'result.share_match':'查看与好友的相性',
     'result.share_sns':  '分享到社交媒体',
+    'result.email':      '通过邮件接收结果',
     'result.back':       '再测一次',
     'result.book':       '为你推荐的一本书',
     'result.book_en':    'Recommended Book',
@@ -10755,6 +10820,11 @@ const I18N = {
     'toast.result_copied': '结果已复制，请粘贴到社交平台。',
     'toast.copy_failed': '复制失败',
     'toast.match_url_copied': '已复制契合度诊断URL，发给朋友吧！',
+    'email.prompt': '请输入用于接收诊断结果的邮箱地址。输入的邮箱仅用于发送本次结果。',
+    'email.invalid': '请确认邮箱地址格式。',
+    'email.sending': '正在通过邮件发送诊断结果...',
+    'email.sent': '诊断结果已发送到邮箱。',
+    'email.failed': '邮件发送失败。请稍后再试。',
     'toast.image_generating': '正在生成图像…',
     'toast.image_saved': '图像已保存！',
     'toast.image_long_press': '请长按图片保存',
@@ -10879,6 +10949,7 @@ const I18N = {
     'result.share_img':  '결과 카드 이미지로 저장',
     'result.share_match':'친구와의 궁합 보기',
     'result.share_sns':  'SNS에 공유하기',
+    'result.email':      '결과를 이메일로 받기',
     'result.back':       '다시 진단하기',
     'result.book':       '당신에게 추천하는 한 권',
     'result.book_en':    'Recommended Book',
@@ -11034,6 +11105,11 @@ const I18N = {
     'toast.result_copied': '결과를 복사했습니다. SNS에 붙여넣어 주세요.',
     'toast.copy_failed': '복사하지 못했습니다',
     'toast.match_url_copied': '궁합 진단 URL을 복사했습니다! 친구에게 보내보세요.',
+    'email.prompt': '진단 결과를 받을 이메일 주소를 입력해 주세요. 입력한 이메일 주소는 결과 발송에만 사용됩니다.',
+    'email.invalid': '이메일 주소 형식을 확인해 주세요.',
+    'email.sending': '진단 결과를 이메일로 보내는 중입니다...',
+    'email.sent': '진단 결과를 이메일로 보냈습니다.',
+    'email.failed': '이메일 발송에 실패했습니다. 잠시 후 다시 시도해 주세요.',
     'toast.image_generating': '이미지를 생성 중입니다…',
     'toast.image_saved': '이미지를 저장했습니다!',
     'toast.image_long_press': '이미지를 길게 눌러 저장해 주세요',
