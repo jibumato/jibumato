@@ -3053,7 +3053,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     font-size: 14px;
     letter-spacing: 0.1em;
     color: var(--ink);
-    margin-bottom: 16px;
+    margin-bottom: 8px;
+  }
+  .share-hero-note {
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.7;
+    color: rgba(15,14,12,0.68);
+    margin: 0 0 16px;
   }
   .share-hero-buttons {
     display: flex;
@@ -3993,6 +4000,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- 結果直後のシェア導線（拡散の起点） -->
   <div class="share-hero">
     <div class="share-hero-label" data-i18n="result.share_hero_label">— この結果をシェアしよう —</div>
+    <p class="share-hero-note" data-i18n="result.share_hero_note">メールで送ると、この結果ページをあとからそのまま開けます。</p>
     <div class="share-hero-buttons">
       <button class="share-btn primary" onclick="sendResultEmail()">
         <span class="share-btn-icon">✉</span>
@@ -4001,10 +4009,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <button class="share-btn" onclick="shareResult()">
         <span class="share-btn-icon">✦</span>
         <span data-i18n="result.share_sns">テキストでシェア</span>
-      </button>
-      <button class="share-btn" onclick="copyMatchLink()">
-        <span class="share-btn-icon">⚭</span>
-        <span data-i18n="share.compat">友達との相性をみる（URLコピー）</span>
       </button>
     </div>
     <div class="share-hero-hint" data-i18n="result.share_hero_hint">▼ さらに詳しいあなたの分析は、この下に ▼</div>
@@ -4312,13 +4316,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- シェア（再掲）・補助 -->
   <div class="share-section">
     <div class="share-section-label" data-i18n="result.share_label">— Share Your Result —</div>
-    <button class="share-btn primary" onclick="downloadResultCard()">
+    <button class="share-btn" onclick="downloadResultCard()">
       <span class="share-btn-icon">⬇</span>
       <span data-i18n="result.share_img">結果カードを画像で保存</span>
     </button>
-    <button class="share-btn" onclick="shareResult()">
-      <span class="share-btn-icon">✦</span>
-      <span data-i18n="result.share_sns">テキストでシェア</span>
+    <button class="share-btn ghost" onclick="copyMatchLink()">
+      <span class="share-btn-icon">⚭</span>
+      <span data-i18n="share.compat">友達との相性をみる（URLコピー）</span>
     </button>
     <button class="share-btn ghost" onclick="showGallery()">
       <span class="share-btn-icon">◇</span>
@@ -10085,11 +10089,12 @@ const I18N = {
     'result.famous':     '同じMIタイプの人物',
     'result.famous_en':  'People Like You',
     'result.famous_intro': '— あなたと同じ才能の系譜を持つ人たち —',
-    'result.share_label': '— Share Your Result —',
+    'result.share_label': '— 保存・共有・もう一度 —',
     'result.expand': '▼ もっと詳しく見る（伸びしろ・キャリア・相性・おすすめ本）',
     'result.collapse': '▲ 閉じる',
-    'result.share_hero_label': 'この結果をシェアしよう',
-    'result.share_hero_hint': '▼ さらに詳しいあなたの分析は、この下に ▼',
+    'result.share_hero_label': '結果をあとで読み返す',
+    'result.share_hero_note': 'メールで送ると、この結果ページをあとからそのまま開けます。',
+    'result.share_hero_hint': '▼ 詳しい分析とレポート案内は、この下に ▼',
     'result.share_img':  '結果カードを画像で保存',
     'result.share_match':'相性を診断する',
     'result.share_sns':  'SNSでシェア',
@@ -10382,11 +10387,12 @@ const I18N = {
     'result.famous':     'People With Your MI Type',
     'result.famous_en':  'People Like You',
     'result.famous_intro': '— Notable figures who share your talent lineage —',
-    'result.share_label': '— Share Your Result —',
+    'result.share_label': '— Save · Compare · Explore —',
     'result.expand': '▼ Show more (Growth · Career · Partner · Books)',
     'result.collapse': '▲ Close',
-    'result.share_hero_label': 'Share your result',
-    'result.share_hero_hint': '▼ Your full analysis continues below ▼',
+    'result.share_hero_label': 'Save this result for later',
+    'result.share_hero_note': 'Send it to your inbox so you can reopen this exact result later.',
+    'result.share_hero_hint': '▼ Analysis and report details continue below ▼',
     'result.share_img':  'Save Result Card as Image',
     'result.share_match':'Check Compatibility',
     'result.share_sns':  'Share on SNS',
@@ -10671,11 +10677,12 @@ const I18N = {
     'result.famous':     '同类型的历史人物',
     'result.famous_en':  'People Like You',
     'result.famous_intro': '— 与你拥有相同才能谱系的人物 —',
-    'result.share_label': '— 分享你的结果 —',
+    'result.share_label': '— 保存・比较・再测 —',
     'result.expand': '▼ 查看更多（成长空间・职业・相性・推荐书）',
     'result.collapse': '▲ 收起',
-    'result.share_hero_label': '分享你的结果',
-    'result.share_hero_hint': '▼ 更详细的分析在下方 ▼',
+    'result.share_hero_label': '保存结果，稍后再看',
+    'result.share_hero_note': '发送到邮箱后，之后可以直接打开这个结果页面。',
+    'result.share_hero_hint': '▼ 更详细的分析与报告说明在下方 ▼',
     'result.share_img':  '保存结果卡片图片',
     'result.share_match':'查看与好友的相性',
     'result.share_sns':  '分享到社交媒体',
@@ -10956,11 +10963,12 @@ const I18N = {
     'result.famous':     '같은 MI 유형의 인물',
     'result.famous_en':  'People Like You',
     'result.famous_intro': '— 당신과 같은 재능의 계보를 가진 인물들 —',
-    'result.share_label': '— 결과 공유하기 —',
+    'result.share_label': '— 저장・비교・다시 하기 —',
     'result.expand': '▼ 더 보기（성장 영역·커리어·궁합·추천 도서）',
     'result.collapse': '▲ 닫기',
-    'result.share_hero_label': '결과를 공유하세요',
-    'result.share_hero_hint': '▼ 더 자세한 분석은 아래에 ▼',
+    'result.share_hero_label': '결과를 나중에 다시 보기',
+    'result.share_hero_note': '이메일로 보내두면 이 결과 페이지를 나중에 그대로 열 수 있습니다.',
+    'result.share_hero_hint': '▼ 자세한 분석과 리포트 안내는 아래에 ▼',
     'result.share_img':  '결과 카드 이미지로 저장',
     'result.share_match':'친구와의 궁합 보기',
     'result.share_sns':  'SNS에 공유하기',
