@@ -1249,6 +1249,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     text-align: justify;
   }
 
+  .type-desc-card {
+    margin: 30px 0 36px;
+    padding: 26px 22px;
+    border: 1px solid rgba(184,137,58,0.32);
+    background: rgba(255,255,255,0.28);
+    position: relative;
+  }
+
+  .type-desc-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+
+  .type-desc-card .talent-desc {
+    color: rgba(15,14,12,0.78);
+    margin: 0;
+  }
+
   /* Radar Chart */
   .section-title {
     display: flex;
@@ -2676,7 +2699,48 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     font-size: 14px;
     line-height: 1.95;
     color: rgba(15,14,12,0.7);
-    margin-bottom: 36px;
+    margin-bottom: 28px;
+  }
+
+  .premium-outcomes {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin: 0 0 34px;
+  }
+
+  .premium-outcome {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 13px 14px;
+    border: 1px solid rgba(184,137,58,0.22);
+    background: rgba(255,255,255,0.24);
+  }
+
+  .premium-outcome-mark {
+    flex: 0 0 auto;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    line-height: 1;
+    color: var(--gold);
+    margin-top: 2px;
+  }
+
+  .premium-outcome strong {
+    display: block;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+
+  .premium-outcome span {
+    display: block;
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: rgba(15,14,12,0.64);
   }
 
   /* チラ見せ */
@@ -2978,6 +3042,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     line-height: 1.7;
     color: rgba(244,237,224,0.55);
     margin-top: 18px;
+  }
+
+  .premium-trust {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 14px;
+    margin-top: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: rgba(244,237,224,0.68);
+    text-transform: uppercase;
   }
 
   /* 言語限定の注意書き（外国語UIのときだけ表示） */
@@ -3986,8 +4063,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="compound-note" id="compoundNote">— —</div>
     </div>
 
-    <p class="talent-desc" id="talentDesc">...</p>
-    <div class="talent-rarity" id="talentRarity"></div>
   </div>
 
   <!-- 引用 -->
@@ -3997,21 +4072,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="attr" id="quoteAttr">— Quote —</span>
   </div>
 
-  <!-- 結果直後のシェア導線（拡散の起点） -->
-  <div class="share-hero">
-    <div class="share-hero-label" data-i18n="result.share_hero_label">— この結果をシェアしよう —</div>
-    <p class="share-hero-note" data-i18n="result.share_hero_note">メールで送ると、この結果ページをあとからそのまま開けます。</p>
-    <div class="share-hero-buttons">
-      <button class="share-btn primary" onclick="sendResultEmail()">
-        <span class="share-btn-icon">✉</span>
-        <span data-i18n="result.email">結果をメールで受け取る</span>
-      </button>
-      <button class="share-btn" onclick="shareResult()">
-        <span class="share-btn-icon">✦</span>
-        <span data-i18n="result.share_sns">テキストでシェア</span>
-      </button>
-    </div>
-    <div class="share-hero-hint" data-i18n="result.share_hero_hint">▼ さらに詳しいあなたの分析は、この下に ▼</div>
+  <!-- タイプ説明 -->
+  <div class="type-desc-card">
+    <div class="type-desc-label" data-i18n="result.type_desc_label">— Type Description —</div>
+    <p class="talent-desc" id="talentDesc">...</p>
+    <div class="talent-rarity" id="talentRarity"></div>
   </div>
 
   <!-- レーダーチャート -->
@@ -4033,21 +4098,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- ── 区切り ── -->
   <div class="section-divider"><svg aria-hidden="true" viewBox="0 0 28 28"><circle cx="14" cy="14" r="11"/><path d="M14,4 L17,11 L24,14 L17,17 L14,24 L11,17 L4,14 L11,11 Z"/></svg></div>
 
-  <!-- 同じMIタイプの著名人 -->
-  <div class="section-title">
-    <span class="num">—</span>
-    <span class="sec-icon"><svg aria-hidden="true" viewBox="0 0 32 32"><circle cx="10" cy="11" r="3.5"/><circle cx="22" cy="11" r="3.5"/><circle cx="16" cy="8" r="3"/><path d="M4,26 Q4,18 10,18 Q13,18 14,21"/><path d="M28,26 Q28,18 22,18 Q19,18 18,21"/><path d="M9,28 Q9,22 16,22 Q23,22 23,28"/></svg></span>
-    <h3 data-i18n="result.famous">同じMIタイプの人物</h3>
-    <span class="en" data-i18n="result.famous_en">People Like You</span>
-  </div>
-  <div class="famous-section" id="famousSection"></div>
-
-  <!-- ── 区切り ── -->
-  <div class="section-divider"><svg aria-hidden="true" viewBox="0 0 28 28"><path d="M14,3 L14,25 M3,14 L25,14 M6,6 L22,22 M22,6 L6,22" opacity="0.6"/><circle cx="14" cy="14" r="3"/></svg></div>
-
   <!-- TOP3詳細 -->
   <div class="section-title">
-    <span class="num">III.</span>
+    <span class="num">II.</span>
     <span class="sec-icon"><svg aria-hidden="true" viewBox="0 0 32 32"><path d="M9,23 L23,9"/><path d="M9,23 L6,26 L4,28"/><path d="M22,9 L24,7 L26,5 L28,7 L26,9 L24,11 Z"/><path d="M7,23 L9,25"/></svg></span>
     <h3 data-i18n="result.sec3">あなたの武器</h3>
     <span class="en" data-i18n="result.sec3en">Your Strengths</span>
@@ -4159,9 +4212,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <p class="premium-subtitle" data-i18n="premium.sub">
-      <span data-i18n="prem.intro1">無料診断は、入り口に過ぎません。</span><br>
-      <span data-i18n="prem.intro2">¥980で、あなたのタイプの「才能の取扱説明書」（書き込み式ワークブック付き）を解錠できます。</span>
+      無料診断で見えた才能を、仕事・人間関係・日常でどう使うか。<br>
+      あなたのタイプ専用のA4・26ページPDFレポートです。
     </p>
+
+    <div class="premium-outcomes" aria-label="Premium report outcomes">
+      <div class="premium-outcome">
+        <span class="premium-outcome-mark">I</span>
+        <div>
+          <strong data-i18n="prem.outcome1.title">強みの正体がわかる</strong>
+          <span data-i18n="prem.outcome1.desc">なぜその才能が出るのか、どんな場面で武器になるのかを言語化します。</span>
+        </div>
+      </div>
+      <div class="premium-outcome">
+        <span class="premium-outcome-mark">II</span>
+        <div>
+          <strong data-i18n="prem.outcome2.title">日常で使える形に変える</strong>
+          <span data-i18n="prem.outcome2.desc">30日プログラムとワークで、読んで終わりにしない設計です。</span>
+        </div>
+      </div>
+      <div class="premium-outcome">
+        <span class="premium-outcome-mark">III</span>
+        <div>
+          <strong data-i18n="prem.outcome3.title">仕事・人間関係に接続する</strong>
+          <span data-i18n="prem.outcome3.desc">向いている道、苦手な相手、才能を引き出す環境まで整理します。</span>
+        </div>
+      </div>
+    </div>
 
     <!-- チラ見せセクション(ぼかし) -->
     <div class="premium-preview">
@@ -4295,6 +4372,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span><span class="buy-btn-type" id="buyBtnTypeName"></span><span data-i18n="premium.btn_suffix">の診断レポートを開く</span></span>
       </button>
 
+      <div class="premium-trust">
+        <span data-i18n="prem.trust1">PDF即時ダウンロード</span>
+        <span data-i18n="prem.trust2">買い切り</span>
+        <span data-i18n="prem.trust3">Apple Pay対応</span>
+      </div>
+
       <p class="premium-note" data-i18n="prem.payment_notice">
         ※ お試し公開中につき、現在は決済システムを準備中です。<br>
         「興味あり」のクリック数を集計しています。
@@ -4302,31 +4385,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 
-  <!-- ===== 記事誘導セクション ===== -->
-  <div class="articles-promo">
-    <div class="articles-promo-label" data-i18n="articles.promo_label">— もっと深く学ぶ —</div>
-    <h3 class="articles-promo-title" data-i18n="articles.promo_title">才能についての読み物</h3>
-    <p class="articles-promo-desc" data-i18n="articles.promo_desc">多重知能理論の基礎から、キャリア・副業・子育てへの活かし方まで。</p>
-    <a href="/articles.html" class="articles-promo-btn">
-      <span data-i18n="articles.promo_btn">記事一覧を読む</span>
-      <span>→</span>
-    </a>
-  </div>
-
   <!-- シェア（再掲）・補助 -->
   <div class="share-section">
-    <div class="share-section-label" data-i18n="result.share_label">— Share Your Result —</div>
-    <button class="share-btn" onclick="downloadResultCard()">
-      <span class="share-btn-icon">⬇</span>
-      <span data-i18n="result.share_img">結果カードを画像で保存</span>
+    <div class="share-section-label" data-i18n="result.share_label">— 保存・共有・もう一度 —</div>
+    <button class="share-btn primary" onclick="sendResultEmail()">
+      <span class="share-btn-icon">✉</span>
+      <span data-i18n="result.email">結果をメールで受け取る</span>
     </button>
-    <button class="share-btn ghost" onclick="copyMatchLink()">
-      <span class="share-btn-icon">⚭</span>
-      <span data-i18n="share.compat">友達との相性をみる（URLコピー）</span>
-    </button>
-    <button class="share-btn ghost" onclick="showGallery()">
-      <span class="share-btn-icon">◇</span>
-      <span data-i18n="share.gallery">キャラクター図鑑を見る（全8体）</span>
+    <button class="share-btn" onclick="shareResult()">
+      <span class="share-btn-icon">✦</span>
+      <span data-i18n="result.share_sns">テキストでシェア</span>
     </button>
     <button class="share-btn ghost" onclick="restart()">
       <span class="share-btn-icon">↻</span>
@@ -7912,7 +7980,7 @@ function _showResultInner() {
       <div class="strength-symbol">${symbol}</div>
       <div class="label">${[t('result.strength_1'), t('result.strength_2'), t('result.strength_3')][i]}</div>
       <h4>${getIntName(k)} <span class="en">${info.en}</span></h4>
-      <p>${detail.strength}</p>
+      <p>${makeShortStrength(detail.strength)}</p>
     `;
     ts.appendChild(card);
   });
@@ -8021,6 +8089,9 @@ function _showResultInner() {
   // Recommended book (Amazon Associate)
   renderRecommendedBook(top1);
 
+  // 購入導線を結果ページの主線に合わせて並べ替える
+  arrangeResultConversionFlow();
+
   // Update URL hash with scores for sharing
   updateShareableURL(scores);
 
@@ -8034,6 +8105,30 @@ function _showResultInner() {
 
   // If user came in via match link, automatically show match result
   maybeShowPendingMatch();
+}
+
+function makeShortStrength(text) {
+  const src = String(text || '').trim();
+  if (!src) return '';
+  const sentences = src.match(/[^。！？.!?]+[。！？.!?]?/g);
+  if (!sentences || !sentences.length) return src;
+  return sentences[0].trim();
+}
+
+function arrangeResultConversionFlow() {
+  const result = document.getElementById('screen-result');
+  const topStrengths = document.getElementById('topStrengths');
+  const premium = result ? result.querySelector('.premium-section') : null;
+  const share = result ? result.querySelector('.share-section') : null;
+  if (topStrengths && premium) topStrengths.insertAdjacentElement('afterend', premium);
+  if (premium && share) premium.insertAdjacentElement('afterend', share);
+
+  // 有料PDFの中身は3点に絞り、長いチラ見せと7項目リストは主導線から外す
+  if (premium) {
+    premium.querySelectorAll('.premium-preview, .premium-features').forEach(el => {
+      el.style.display = 'none';
+    });
+  }
 }
 
 // AdSense広告を読み込む（重複読み込みを防ぐ）
@@ -8187,9 +8282,9 @@ function renderPremiumPreview(key) {
   if (tbn) tbn.textContent = typeName;
   const bbt = document.getElementById('buyBtnTypeName');
   if (bbt) {
-    bbt.textContent = (currentLang === 'ja' || currentLang === 'zh')
-      ? '「' + typeName + '」'
-      : typeName;
+    bbt.textContent = currentLang === 'zh'
+      ? '购买「' + typeName + '」'
+      : (currentLang === 'ja' ? '「' + typeName + '」' : typeName);
   }
 
   // 決済リンクが設定済みのタイプなら、「準備中」注記を実運用の案内へ差し替え
@@ -10184,6 +10279,7 @@ const I18N = {
     'compat.comp.intrapersonal':   'あなたが外に向きすぎる時、相手が「立ち止まろう」と内省の時間をくれる。心の地図役。',
     'compat.comp.naturalist':      'あなたが見落とす細部・違いを、相手が拾い集めて体系化してくれる。情報の整理者。',
     'result.compound':   '— Rare Type · あなたの複合キャラ —',
+    'result.type_desc_label': '— あなたのタイプ説明 —',
     'result.strength_1': 'Strength I — 主軸の才能',
     'result.strength_2': 'Strength II — 補佐の才能',
     'result.strength_3': 'Strength III — 隠れた才能',
@@ -10202,11 +10298,11 @@ const I18N = {
     'match.friend':      '友達',
     'match.love':        '恋愛',
     // プレミアム
-    'premium.title':     'あなたの才能を、\nもっと深く知る',
-    'premium.sub':       '無料診断は、入り口に過ぎません。\n¥980で、あなたのタイプの「才能の取扱説明書」（書き込み式ワークブック付き）を解錠できます。',
-    'premium.btn':       'タイプ別診断レポートを開く',
+    'premium.title':     '診断結果を、\nあなたの行動地図に変える',
+    'premium.sub':       '無料診断で見えた才能を、仕事・人間関係・日常でどう使うか。<br>あなたのタイプ専用のA4・26ページPDFレポートです。',
+    'premium.btn':       'タイプ別診断レポートを購入する',
     'premium.type_reminder': 'あなたのタイプは',
-    'premium.btn_suffix': 'の診断レポートを開く',
+    'premium.btn_suffix': 'のPDFレポートを購入する',
     'premium.thanks':    'ご興味ありがとうございます',
     // 知能名
     'intel.linguistic':    '言語的知能',
@@ -10238,11 +10334,11 @@ const I18N = {
     'q.tap_to_proceed': '回答すると次へ進みます',
     'prem.feat1.desc': '公的統計に基づく年収データと、タイプ別の働き方・副業戦略',
     'prem.feat2.title': '人間関係と相性',
-    'prem.feat2.desc': '苦手なタイプとの関わり方と、あなたの才能を引き出す相手の見つけ方',
+    'prem.feat2.desc': '才能が伝わる相手・すれ違いやすい相手・関係を整える言葉',
     'prem.feat3.title': '書き込み式ワークブック',
     'prem.feat3.desc': '自分のスコアを記入し、レーダーを描く——読んで終わりにしない仕掛け',
     'prem.feat4.title': 'A4・26ページのPDF',
-    'prem.feat4.desc': '和モダンデザインの全26ページ。保存・印刷していつでも見返せます',
+    'prem.feat4.desc': '保存・印刷していつでも見返せる、タイプ専用レポート',
     'prem.price.label': 'タイプ別診断レポート（ワークブック付き）',
     'prem.price.tax': '（税込・買い切り）',
     'share.compat': '友達との相性をみる（URLコピー）',
@@ -10285,9 +10381,18 @@ const I18N = {
   
     // v4: hero/premium/gallery/match
     'hero.sub': '24の質問に答えるだけ。たった3分で、あなたの中に眠る8つの才能のバランスがわかります。<br>性格ではなく「<em>武器</em>」を知る——ハーバード発のMI理論にもとづく、じぶんの取扱説明書。',
-    'prem.intro1': '無料診断は、入り口に過ぎません。',
-    'prem.intro2': '¥980で、あなたのタイプの「才能の取扱説明書」（書き込み式ワークブック付き）を解錠できます。',
-    'prem.locked': '続きは購入者限定',
+    'prem.intro1': '無料診断で見えた才能を、仕事・人間関係・日常でどう使うか。',
+    'prem.intro2': 'あなたのタイプ専用のA4・26ページPDFレポートです。',
+    'prem.locked': '購入後に全文を読めます',
+    'prem.outcome1.title': '強みの正体がわかる',
+    'prem.outcome1.desc': 'なぜその才能が出るのか、どんな場面で武器になるのかを言語化します。',
+    'prem.outcome2.title': '日常で使える形に変える',
+    'prem.outcome2.desc': '30日プログラムとワークで、読んで終わりにしない設計です。',
+    'prem.outcome3.title': '仕事・人間関係に接続する',
+    'prem.outcome3.desc': '向いている道、苦手な相手、才能を引き出す環境まで整理します。',
+    'prem.trust1': 'PDF即時ダウンロード',
+    'prem.trust2': '買い切り',
+    'prem.trust3': 'Apple Pay対応',
     'prem.features_label': '— このレポートに含まれるもの —',
     'prem.f.sci.title': '才能の深掘り',
     'prem.f.sci.desc': 'あなたの強み・伸びしろ・思考の罠、そして才能が見せる「四つの顔」',
@@ -10329,8 +10434,8 @@ const I18N = {
     'premium.section_label3': '— Section 04 of 06 · 才能を活かす道 —',
     'premium.program_title': '才能を日常に組み込む、30日の習慣設計',
     'prem.locked_program': '残りのフェーズは購入者限定',
-    'prem.locked_relationship': '相性の続きは購入者限定',
-    'prem.locked_side': '続きは購入者限定',
+    'prem.locked_relationship': '購入後に全文を読めます',
+    'prem.locked_side': '購入後に全文を読めます',
   
     // ad label
     'ad.label': 'スポンサーリンク',
@@ -10476,6 +10581,7 @@ const I18N = {
     'compat.comp.intrapersonal':   'When you focus too much outward, they offer "let\'s pause" and give you time for reflection. Your inner compass.',
     'compat.comp.naturalist':      'The details and differences you miss — they gather and systematize them. Your information organizer.',
     'result.compound':   '— Rare Type · Your Compound Character —',
+    'result.type_desc_label': '— Your Type Description —',
     'result.strength_1': 'Strength I — Core Talent',
     'result.strength_2': 'Strength II — Supporting Talent',
     'result.strength_3': 'Strength III — Hidden Talent',
@@ -10494,11 +10600,11 @@ const I18N = {
     'match.friend':      'Friendship',
     'match.love':        'Romance',
     // プレミアム
-    'premium.title':     'Discover Your Talent\neven Deeper',
-    'premium.sub':       'The free assessment is just the beginning.\nFor ¥980, unlock your personal Talent Manual.',
-    'premium.btn':       'Open Your Type Report',
+    'premium.title':     'Turn your result\ninto an action map',
+    'premium.sub':       'Use the talents revealed by the free assessment in work, relationships, and everyday life.<br>A 26-page PDF report made for your type.',
+    'premium.btn':       'Buy Your Type Report',
     'premium.type_reminder': 'Your type is',
-    'premium.btn_suffix': ' — Open Report',
+    'premium.btn_suffix': ' — Buy PDF Report',
     'premium.thanks':    'Thank you for your interest',
     // 知能名
     'intel.linguistic':    'Linguistic Intelligence',
@@ -10530,11 +10636,11 @@ const I18N = {
     'q.tap_to_proceed': 'Tap an answer to continue',
     'prem.feat1.desc': 'Salary data from official statistics, plus work and side-hustle strategy by type',
     'prem.feat2.title': 'Relationships & compatibility',
-    'prem.feat2.desc': 'How to engage with difficult types, and how to find those who bring out your talent',
+    'prem.feat2.desc': 'Who receives your talent well, where friction appears, and what words help relationships work',
     'prem.feat3.title': 'Fill-in workbook',
     'prem.feat3.desc': 'Write in your scores and draw your radar—not just a read-and-forget report',
     'prem.feat4.title': '26-page A4 PDF',
-    'prem.feat4.desc': 'All 26 pages in a refined Japanese-modern design—save and print anytime',
+    'prem.feat4.desc': 'A type-specific report you can save, print, and revisit anytime',
     'prem.price.label': 'Type-Based Report (with Workbook)',
     'prem.price.tax': '(Tax incl. · One-time purchase)',
     'share.compat': 'Check compatibility with a friend (copy URL)',
@@ -10577,9 +10683,18 @@ const I18N = {
   
     // v4: hero/premium/gallery/match
     'hero.sub': 'Just 24 questions. In only 3 minutes, discover the balance of the 8 talents within you.<br>Know your <em>weapons</em>, not your personality—a personal owner\'s manual based on Harvard\'s MI theory.',
-    'prem.intro1': 'The free diagnosis is only the beginning.',
-    'prem.intro2': 'For 980 yen, unlock the Owner Manual of Talent for your type — with a fill-in workbook.',
-    'prem.locked': 'The rest is for buyers only',
+    'prem.intro1': 'Use the talents revealed by the free assessment in work, relationships, and everyday life.',
+    'prem.intro2': 'A 26-page PDF report made specifically for your type.',
+    'prem.locked': 'Read the full section after purchase',
+    'prem.outcome1.title': 'Understand what your strength really is',
+    'prem.outcome1.desc': 'See why this talent appears and where it becomes a practical advantage.',
+    'prem.outcome2.title': 'Turn insight into daily action',
+    'prem.outcome2.desc': 'A 30-day program and workbook help you move beyond simply reading the result.',
+    'prem.outcome3.title': 'Connect it to work and relationships',
+    'prem.outcome3.desc': 'Clarify suitable paths, difficult dynamics, and environments where your talent comes alive.',
+    'prem.trust1': 'Instant PDF download',
+    'prem.trust2': 'One-time purchase',
+    'prem.trust3': 'Apple Pay supported',
     'prem.features_label': '— What is included in this report —',
     'prem.f.sci.title': 'A deep dive into your talents',
     'prem.f.sci.desc': 'Your strengths, growth areas, thinking traps, and the "four faces" of your talent',
@@ -10621,8 +10736,8 @@ const I18N = {
     'premium.section_label3': '— Section 04 of 06 · Putting Talent to Work —',
     'premium.program_title': '30-day habit design to embed your talent into everyday life',
     'prem.locked_program': 'The remaining phases are for buyers only',
-    'prem.locked_relationship': 'The rest is for buyers only',
-    'prem.locked_side': 'The rest is for buyers only',
+    'prem.locked_relationship': 'Read the full section after purchase',
+    'prem.locked_side': 'Read the full section after purchase',
   
     // ad label
     'ad.label': 'Sponsored',
@@ -10766,6 +10881,7 @@ const I18N = {
     'compat.comp.intrapersonal':   '你过于向外时，对方会给予「先停下来」的内省时间。是心的导航者。',
     'compat.comp.naturalist':      '你忽略的细节和差异，对方会收集并体系化。是信息的整理者。',
     'result.compound':   '— 稀有类型 · 你的复合角色 —',
+    'result.type_desc_label': '— 你的类型说明 —',
     'result.strength_1': 'Strength I — 核心才能',
     'result.strength_2': 'Strength II — 辅助才能',
     'result.strength_3': 'Strength III — 隐藏才能',
@@ -10782,11 +10898,11 @@ const I18N = {
     'match.business':    '商业伙伴',
     'match.friend':      '朋友',
     'match.love':        '恋爱',
-    'premium.title':     '更深入了解\n你的才能',
-    'premium.sub':       '免费测评只是入口。\n用¥980解锁属于你的「才能使用说明书」。',
-    'premium.btn':       '开启类型诊断报告',
+    'premium.title':     '把测评结果\n变成你的行动地图',
+    'premium.sub':       '把免费测评中看见的才能，连接到工作、人际关系与日常。<br>这是为你的类型制作的A4・26页PDF报告。',
+    'premium.btn':       '购买类型诊断报告',
     'premium.type_reminder': '你的类型是',
-    'premium.btn_suffix': '诊断报告',
+    'premium.btn_suffix': 'PDF报告',
     'premium.thanks':    '感谢您的关注',
     'intel.linguistic':    '语言智能',
     'intel.logical':       '逻辑数学智能',
@@ -10816,11 +10932,11 @@ const I18N = {
     'q.tap_to_proceed': '回答后将自动进入下一题',
     'prem.feat1.desc': '基于官方统计的年收入数据，以及按类型的工作与副业策略',
     'prem.feat2.title': '人际关系与契合度',
-    'prem.feat2.desc': '如何与苦手类型相处，以及找到能激发你才能的伙伴',
+    'prem.feat2.desc': '谁更容易接住你的才能、哪里容易错位，以及让关系顺畅的表达方式',
     'prem.feat3.title': '可填写工作簿',
     'prem.feat3.desc': '填入自己的分数、绘制雷达图——不止于读完即忘',
     'prem.feat4.title': 'A4·26页PDF',
-    'prem.feat4.desc': '和风现代设计全26页，可随时保存·打印查阅',
+    'prem.feat4.desc': '可保存、打印、随时回看的类型专属报告',
     'prem.price.label': '类型诊断报告（含工作簿）',
     'prem.price.tax': '（含税·一次性购买）',
     'share.compat': '查看与朋友的契合度（复制URL）',
@@ -10863,9 +10979,18 @@ const I18N = {
   
     // v4: hero/premium/gallery/match
     'hero.sub': '只需回答24个问题，仅需3分钟，即可了解你心中沉睡的8种才能的平衡。<br>认识你的「<em>武器</em>」而非性格——基于哈佛大学MI理论的你的专属说明书。',
-    'prem.intro1': '免费诊断只是入口。',
-    'prem.intro2': '只需980日元，即可解锁你所属类型的"才能使用说明书"（附可填写工作簿）。',
-    'prem.locked': '后续内容仅限购买者',
+    'prem.intro1': '把免费测评中看见的才能，连接到工作、人际关系与日常。',
+    'prem.intro2': '这是为你的类型制作的A4・26页PDF报告。',
+    'prem.locked': '购买后可阅读全文',
+    'prem.outcome1.title': '看清强项的本质',
+    'prem.outcome1.desc': '说明这种才能为什么会出现，以及在哪些场景中会成为你的武器。',
+    'prem.outcome2.title': '把理解变成日常行动',
+    'prem.outcome2.desc': '通过30天计划与工作簿，不让结果停留在读完为止。',
+    'prem.outcome3.title': '连接到工作与人际关系',
+    'prem.outcome3.desc': '整理适合的道路、容易错位的关系，以及能激发才能的环境。',
+    'prem.trust1': 'PDF即时下载',
+    'prem.trust2': '一次性买断',
+    'prem.trust3': '支持Apple Pay',
     'prem.features_label': '— 本报告包含的内容 —',
     'prem.f.sci.title': '才能的深度剖析',
     'prem.f.sci.desc': '你的优势、成长空间、思维陷阱，以及才能展现的「四种面貌」',
@@ -10907,8 +11032,8 @@ const I18N = {
     'premium.section_label3': '— 第 04 节 / 全 06 节 · 发挥才能之道 —',
     'premium.program_title': '将才能融入日常的30天习惯设计',
     'prem.locked_program': '其余阶段仅限购买者',
-    'prem.locked_relationship': '契合分析的后续仅限购买者',
-    'prem.locked_side': '后续内容仅限购买者',
+    'prem.locked_relationship': '购买后可阅读全文',
+    'prem.locked_side': '购买后可阅读全文',
   
     // ad label
     'ad.label': '赞助商链接',
@@ -11052,6 +11177,7 @@ const I18N = {
     'compat.comp.intrapersonal':   '당신이 너무 밖을 향할 때 상대가 「잠깐 멈추자」며 내성의 시간을 줍니다. 마음의 나침반 역할.',
     'compat.comp.naturalist':      '당신이 놓치는 세부 사항과 차이를 상대가 수집하고 체계화해줍니다. 정보의 정리자.',
     'result.compound':   '— 희귀 유형 · 나의 복합 캐릭터 —',
+    'result.type_desc_label': '— 나의 유형 설명 —',
     'result.strength_1': 'Strength I — 핵심 재능',
     'result.strength_2': 'Strength II — 보조 재능',
     'result.strength_3': 'Strength III — 숨겨진 재능',
@@ -11068,11 +11194,11 @@ const I18N = {
     'match.business':    '비즈니스 파트너',
     'match.friend':      '친구',
     'match.love':        '연애',
-    'premium.title':     '나의 재능을\n더 깊이 알아보기',
-    'premium.sub':       '무료 진단은 시작에 불과합니다.\n¥980으로 나만의 「재능 사용 설명서」를 해제하세요.',
-    'premium.btn':       '유형별 진단 리포트 열기',
+    'premium.title':     '진단 결과를\n나의 행동 지도로 바꾸기',
+    'premium.sub':       '무료 진단에서 보인 재능을 일, 인간관계, 일상에 어떻게 쓸지 정리합니다.<br>당신의 유형을 위한 A4・26페이지 PDF 리포트입니다.',
+    'premium.btn':       '유형별 진단 리포트 구매하기',
     'premium.type_reminder': '당신의 유형은',
-    'premium.btn_suffix': ' 진단 리포트 열기',
+    'premium.btn_suffix': ' PDF 리포트 구매하기',
     'premium.thanks':    '관심 가져주셔서 감사합니다',
     'intel.linguistic':    '언어 지능',
     'intel.logical':       '논리수학 지능',
@@ -11102,11 +11228,11 @@ const I18N = {
     'q.tap_to_proceed': '답하시면 다음으로 진행됩니다',
     'prem.feat1.desc': '공적 통계에 기반한 연봉 데이터와, 유형별 일하는 방식·부업 전략',
     'prem.feat2.title': '인간관계와 궁합',
-    'prem.feat2.desc': '어려운 타입과의 관계 맺는 법과, 당신의 재능을 끌어내는 상대 찾기',
+    'prem.feat2.desc': '당신의 재능이 잘 전해지는 상대, 엇갈리기 쉬운 관계, 관계를 정리하는 말',
     'prem.feat3.title': '작성형 워크북',
     'prem.feat3.desc': '자신의 점수를 적고 레이더를 그린다——읽고 끝내지 않는 장치',
     'prem.feat4.title': 'A4·26페이지 PDF',
-    'prem.feat4.desc': '일본풍 모던 디자인 전 26페이지. 저장·인쇄해 언제든 다시 볼 수 있습니다',
+    'prem.feat4.desc': '저장·인쇄해 언제든 다시 볼 수 있는 유형 전용 리포트',
     'prem.price.label': '유형별 진단 리포트 (워크북 포함)',
     'prem.price.tax': '(부가세 포함·1회 구매)',
     'share.compat': '친구와의 궁합 보기 (URL 복사)',
@@ -11149,9 +11275,18 @@ const I18N = {
   
     // v4: hero/premium/gallery/match
     'hero.sub': '24개의 질문에 답하기만 하면 됩니다. 단 3분이면 당신 안에 잠든 8가지 재능의 균형을 알 수 있습니다.<br>성격이 아닌 「<em>무기</em>」를 아는——하버드 발 MI 이론에 기반한 자신의 취급설명서.',
-    'prem.intro1': '무료 진단은 입구에 불과합니다.',
-    'prem.intro2': '980엔으로, 당신 유형의「재능 취급설명서」(작성형 워크북 포함)를 해제할 수 있습니다.',
-    'prem.locked': '이후 내용은 구매자 전용',
+    'prem.intro1': '무료 진단에서 보인 재능을 일, 인간관계, 일상에 어떻게 쓸지 정리합니다.',
+    'prem.intro2': '당신의 유형을 위한 A4・26페이지 PDF 리포트입니다.',
+    'prem.locked': '구매 후 전체 내용을 읽을 수 있습니다',
+    'prem.outcome1.title': '강점의 정체를 이해하기',
+    'prem.outcome1.desc': '왜 그 재능이 나타나는지, 어떤 장면에서 무기가 되는지 말로 정리합니다.',
+    'prem.outcome2.title': '이해를 일상의 행동으로 바꾸기',
+    'prem.outcome2.desc': '30일 프로그램과 워크북으로 읽고 끝나지 않게 설계했습니다.',
+    'prem.outcome3.title': '일과 인간관계에 연결하기',
+    'prem.outcome3.desc': '어울리는 길, 엇갈리기 쉬운 상대, 재능이 살아나는 환경까지 정리합니다.',
+    'prem.trust1': 'PDF 즉시 다운로드',
+    'prem.trust2': '1회 구매',
+    'prem.trust3': 'Apple Pay 지원',
     'prem.features_label': '— 이 리포트에 포함된 내용 —',
     'prem.f.sci.title': '재능의 심층 분석',
     'prem.f.sci.desc': '당신의 강점·성장 여지·사고의 함정, 그리고 재능이 보이는 「네 가지 얼굴」',
@@ -11193,8 +11328,8 @@ const I18N = {
     'premium.section_label3': '— Section 04 of 06 · 재능을 살리는 길 —',
     'premium.program_title': '재능을 일상에 녹여내는, 30일 습관 설계',
     'prem.locked_program': '나머지 단계는 구매자 전용',
-    'prem.locked_relationship': '궁합의 나머지는 구매자 전용',
-    'prem.locked_side': '이후 내용은 구매자 전용',
+    'prem.locked_relationship': '구매 후 전체 내용을 읽을 수 있습니다',
+    'prem.locked_side': '구매 후 전체 내용을 읽을 수 있습니다',
   
     // ad label
     'ad.label': '스폰서 링크',
