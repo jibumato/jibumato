@@ -3146,6 +3146,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     font-weight: 500;
   }
 
+  .talent-landscape {
+    margin-top: 24px;
+    border: 1px solid rgba(212,173,94,0.42);
+    background: rgba(244,237,224,0.92);
+    box-shadow: inset 0 0 0 6px rgba(255,255,255,0.32), 0 10px 26px rgba(0,0,0,0.18);
+    overflow: hidden;
+  }
+
+  .talent-landscape svg {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
+  .landscape-caption {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10px;
+    font-style: italic;
+    letter-spacing: 0.22em;
+    text-align: center;
+    color: rgba(15,14,12,0.5);
+    padding: 8px 10px 10px;
+    background: rgba(244,237,224,0.72);
+    text-transform: uppercase;
+  }
+
   /* ===== 才能の裏側（reframe） ===== */
   .reframe-card {
     margin: 12px 0 20px;
@@ -4042,6 +4068,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <p class="talent-desc" id="talentDesc">...</p>
     <div class="talent-rarity" id="talentRarity"></div>
+    <div class="talent-landscape" id="talentLandscape" aria-hidden="true"></div>
   </div>
 
   <!-- 引用 -->
@@ -5793,6 +5820,142 @@ function setCharacterSymbols(key) {
   container.innerHTML = symbols.map((s, i) =>
     `<span class="symbol s${i+1}">${s}</span>`
   ).join('');
+}
+
+function getTalentLandscapeSVG(key) {
+  const captions = {
+    linguistic: 'Linguistic · river of words',
+    logical: 'Logical · mountain of structure',
+    spatial: 'Spatial · horizon of form',
+    musical: 'Musical · lake of rhythm',
+    bodily: 'Bodily · path of motion',
+    interpersonal: 'Interpersonal · bridge of voices',
+    intrapersonal: 'Intrapersonal · inner moon',
+    naturalist: 'Naturalist · field of patterns'
+  };
+  const scenes = {
+    linguistic: `
+      <path d="M0 132 C60 102 102 112 160 86 C228 55 290 64 360 42 L360 190 L0 190 Z" fill="url(#g1)" opacity=".62"/>
+      <path d="M0 154 C72 132 112 142 170 119 C230 96 282 112 360 88 L360 190 L0 190 Z" fill="url(#g2)" opacity=".7"/>
+      <path d="M48 150 C95 132 132 136 170 151 C212 168 256 160 314 130" fill="none" stroke="#6f8fa3" stroke-width="9" stroke-linecap="round" opacity=".36"/>
+      <path d="M54 151 C104 137 136 142 171 154 C212 168 252 158 309 133" fill="none" stroke="#f7fbf2" stroke-width="3" stroke-linecap="round" opacity=".65"/>
+      <g opacity=".45" stroke="#7d4f42" stroke-width="1.1" fill="none" stroke-linecap="round">
+        <path d="M72 75 C95 68 116 72 138 62"/>
+        <path d="M77 86 C108 78 126 82 153 72"/>
+        <path d="M208 69 C230 61 251 64 275 55"/>
+        <path d="M214 81 C242 73 262 77 291 67"/>
+      </g>`,
+    logical: `
+      <path d="M0 148 L78 82 L124 122 L188 55 L258 126 L316 76 L360 118 L360 190 L0 190 Z" fill="url(#g1)" opacity=".66"/>
+      <path d="M0 162 L82 112 L136 140 L196 90 L260 146 L332 104 L360 122 L360 190 L0 190 Z" fill="url(#g2)" opacity=".74"/>
+      <g stroke="#8a2922" stroke-width="1.1" opacity=".32" fill="none">
+        <path d="M78 82 L136 140 L188 55 L260 146 L316 76"/>
+        <path d="M46 156 L116 118 L196 158 L288 112"/>
+        <path d="M36 176 L324 176"/>
+        <path d="M56 162 L56 180 M112 132 L112 180 M188 58 L188 180 M260 128 L260 180 M316 80 L316 180"/>
+      </g>
+      <circle cx="292" cy="44" r="18" fill="#d8b764" opacity=".38"/>`,
+    spatial: `
+      <rect x="0" y="0" width="360" height="190" fill="url(#sky)" opacity=".7"/>
+      <path d="M0 136 C46 105 84 100 128 84 C178 67 221 51 292 40 L360 30 L360 190 L0 190 Z" fill="url(#g1)" opacity=".62"/>
+      <path d="M0 166 C58 132 122 123 180 105 C238 86 296 72 360 64 L360 190 L0 190 Z" fill="url(#g2)" opacity=".72"/>
+      <path d="M54 168 L176 101 L304 168" fill="none" stroke="#f7f2df" stroke-width="6" opacity=".45"/>
+      <path d="M176 101 L176 178" fill="none" stroke="#7f8f8e" stroke-width="2" opacity=".28"/>
+      <g fill="#b8893a" opacity=".26">
+        <rect x="254" y="76" width="28" height="18" transform="rotate(-10 268 85)"/>
+        <rect x="284" y="67" width="18" height="14" transform="rotate(-10 293 74)"/>
+      </g>`,
+    musical: `
+      <circle cx="270" cy="48" r="24" fill="#d8b764" opacity=".45"/>
+      <path d="M0 100 C58 74 112 88 166 70 C224 50 278 64 360 34 L360 190 L0 190 Z" fill="url(#g1)" opacity=".5"/>
+      <path d="M0 136 C62 119 104 127 156 112 C220 94 282 111 360 88 L360 190 L0 190 Z" fill="url(#g2)" opacity=".65"/>
+      <g fill="none" stroke="#5f88a0" stroke-linecap="round" opacity=".42">
+        <path d="M42 142 C86 130 125 155 168 142 C212 129 250 153 314 134" stroke-width="3"/>
+        <path d="M28 158 C80 146 123 171 170 158 C218 144 263 170 336 150" stroke-width="2"/>
+        <path d="M88 116 C108 103 130 103 152 116" stroke-width="2"/>
+      </g>
+      <path d="M244 86 C244 112 216 113 216 95 C216 82 230 82 238 88 L238 54 L268 48 L268 80 C268 105 242 106 242 90" fill="none" stroke="#8a2922" stroke-width="2.4" opacity=".4"/>`,
+    bodily: `
+      <path d="M0 122 C44 96 86 108 132 82 C176 57 218 70 258 48 C294 28 326 37 360 20 L360 190 L0 190 Z" fill="url(#g1)" opacity=".56"/>
+      <path d="M0 158 C54 133 104 146 158 122 C218 94 280 118 360 82 L360 190 L0 190 Z" fill="url(#g2)" opacity=".72"/>
+      <path d="M34 180 C82 145 126 154 166 126 C206 97 240 92 326 54" fill="none" stroke="#f8efd7" stroke-width="16" stroke-linecap="round" opacity=".44"/>
+      <path d="M36 180 C84 145 126 154 166 126 C206 97 240 92 326 54" fill="none" stroke="#9b6f52" stroke-width="3" stroke-linecap="round" opacity=".28"/>
+      <g fill="#8a2922" opacity=".32">
+        <circle cx="252" cy="74" r="4"/>
+        <path d="M252 78 L244 98 L260 98 Z"/>
+        <path d="M247 88 L232 82 M257 88 L272 80" stroke="#8a2922" stroke-width="3" stroke-linecap="round"/>
+      </g>`,
+    interpersonal: `
+      <path d="M0 114 C48 92 96 101 138 80 C184 58 220 66 264 48 C306 31 336 34 360 22 L360 190 L0 190 Z" fill="url(#g1)" opacity=".52"/>
+      <path d="M0 166 C44 136 92 130 136 146 C184 164 224 164 274 132 C312 108 340 100 360 94 L360 190 L0 190 Z" fill="url(#g2)" opacity=".74"/>
+      <path d="M78 142 C116 116 146 106 180 106 C214 106 244 116 282 142" fill="none" stroke="#f6ead0" stroke-width="8" stroke-linecap="round" opacity=".58"/>
+      <path d="M78 142 C116 116 146 106 180 106 C214 106 244 116 282 142" fill="none" stroke="#8a2922" stroke-width="2" stroke-linecap="round" opacity=".32"/>
+      <circle cx="104" cy="103" r="10" fill="#d8b764" opacity=".42"/>
+      <circle cx="254" cy="104" r="10" fill="#d8b764" opacity=".42"/>
+      <path d="M114 104 C146 84 214 84 244 104" fill="none" stroke="#d8b764" stroke-width="2" stroke-dasharray="3 7" opacity=".48"/>`,
+    intrapersonal: `
+      <rect x="0" y="0" width="360" height="190" fill="#e7e0d4" opacity=".5"/>
+      <circle cx="180" cy="58" r="28" fill="#e9d9aa" opacity=".46"/>
+      <path d="M0 118 C58 92 112 96 166 83 C222 69 282 74 360 52 L360 190 L0 190 Z" fill="url(#g1)" opacity=".48"/>
+      <path d="M0 150 C66 132 120 139 180 126 C238 113 294 124 360 100 L360 190 L0 190 Z" fill="url(#g2)" opacity=".68"/>
+      <ellipse cx="180" cy="146" rx="64" ry="16" fill="#6f8fa3" opacity=".22"/>
+      <path d="M150 145 C162 124 198 124 210 145 C194 154 166 154 150 145 Z" fill="#8a6a4a" opacity=".28"/>
+      <path d="M180 118 L180 154" stroke="#8a2922" stroke-width="1.5" opacity=".28"/>
+      <path d="M160 132 C174 123 188 123 202 132" fill="none" stroke="#8a2922" stroke-width="1.5" opacity=".24"/>`,
+    naturalist: `
+      <path d="M0 112 C50 90 92 101 138 78 C184 55 226 68 276 44 C320 23 342 28 360 18 L360 190 L0 190 Z" fill="url(#g1)" opacity=".58"/>
+      <path d="M0 156 C62 128 112 134 166 112 C228 87 292 106 360 78 L360 190 L0 190 Z" fill="url(#g2)" opacity=".76"/>
+      <g stroke="#55775c" stroke-width="2" stroke-linecap="round" opacity=".42">
+        <path d="M72 156 L72 102 M72 117 C58 107 49 94 44 78 M72 118 C88 106 96 94 101 78"/>
+        <path d="M292 150 L292 94 M292 113 C278 103 270 91 266 76 M292 114 C308 102 316 91 321 75"/>
+      </g>
+      <g fill="#55775c" opacity=".34">
+        <ellipse cx="56" cy="90" rx="13" ry="6" transform="rotate(36 56 90)"/>
+        <ellipse cx="92" cy="90" rx="14" ry="6" transform="rotate(-34 92 90)"/>
+        <ellipse cx="276" cy="88" rx="13" ry="6" transform="rotate(38 276 88)"/>
+        <ellipse cx="314" cy="88" rx="14" ry="6" transform="rotate(-35 314 88)"/>
+      </g>`
+  };
+  const scene = scenes[key] || scenes.linguistic;
+  const id = 'wc-' + (key || 'talent');
+  return `
+    <svg class="watercolor-landscape" viewBox="0 0 360 190" role="img" aria-label="${captions[key] || captions.linguistic}" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="${id}-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#f8efd9"/>
+          <stop offset=".58" stop-color="#ead9bd"/>
+          <stop offset="1" stop-color="#d8c3a4"/>
+        </linearGradient>
+        <linearGradient id="${id}-g1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#c7b38e"/>
+          <stop offset=".5" stop-color="#9fb0a1"/>
+          <stop offset="1" stop-color="#6f8fa3"/>
+        </linearGradient>
+        <linearGradient id="${id}-g2" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#b8893a"/>
+          <stop offset=".52" stop-color="#8a6a4a"/>
+          <stop offset="1" stop-color="#8a2922"/>
+        </linearGradient>
+        <filter id="${id}-paper">
+          <feTurbulence type="fractalNoise" baseFrequency="0.018 0.055" numOctaves="3" seed="7"/>
+          <feColorMatrix type="saturate" values="0"/>
+          <feComponentTransfer>
+            <feFuncA type="table" tableValues="0 0.14"/>
+          </feComponentTransfer>
+        </filter>
+        <filter id="${id}-soft">
+          <feGaussianBlur stdDeviation="1.25"/>
+        </filter>
+      </defs>
+      <rect x="0" y="0" width="360" height="190" fill="url(#${id}-sky)"/>
+      <g filter="url(#${id}-soft)">
+        ${scene.replaceAll('url(#sky)', `url(#${id}-sky)`).replaceAll('url(#g1)', `url(#${id}-g1)`).replaceAll('url(#g2)', `url(#${id}-g2)`)}
+      </g>
+      <rect x="0" y="0" width="360" height="190" fill="#fff7e8" filter="url(#${id}-paper)" opacity=".9"/>
+      <rect x="9" y="9" width="342" height="172" fill="none" stroke="rgba(138,41,34,.22)" stroke-width="1"/>
+    </svg>
+    <div class="landscape-caption">${captions[key] || captions.linguistic}</div>
+  `;
 }
 
 // ============ CHARACTER SVG GENERATOR ============
@@ -7773,6 +7936,12 @@ function _showResultInner() {
 
   // 知性別シンボルをセット
   setCharacterSymbols(state.top1);
+
+  // タイプ別の水彩風風景画
+  const landscapeEl = document.getElementById('talentLandscape');
+  if (landscapeEl) {
+    landscapeEl.innerHTML = getTalentLandscapeSVG(top1);
+  }
 
   // Talent description（desc_longがあれば長文版を、なければ短い説明を表示）
   const descEl = document.getElementById('talentDesc');
