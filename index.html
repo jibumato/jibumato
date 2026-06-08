@@ -1249,29 +1249,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     text-align: justify;
   }
 
-  .type-desc-card {
-    margin: 30px 0 36px;
-    padding: 26px 22px;
-    border: 1px solid rgba(184,137,58,0.32);
-    background: rgba(255,255,255,0.28);
-    position: relative;
-  }
-
-  .type-desc-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.28em;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 14px;
-    text-align: center;
-  }
-
-  .type-desc-card .talent-desc {
-    color: rgba(15,14,12,0.78);
-    margin: 0;
-  }
-
   /* Radar Chart */
   .section-title {
     display: flex;
@@ -4063,6 +4040,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="compound-note" id="compoundNote">— —</div>
     </div>
 
+    <p class="talent-desc" id="talentDesc">...</p>
+    <div class="talent-rarity" id="talentRarity"></div>
   </div>
 
   <!-- 引用 -->
@@ -4070,13 +4049,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p id="quoteText">"..."</p>
     <p class="quote-translation" id="quoteTranslation">— —</p>
     <span class="attr" id="quoteAttr">— Quote —</span>
-  </div>
-
-  <!-- タイプ説明 -->
-  <div class="type-desc-card">
-    <div class="type-desc-label" data-i18n="result.type_desc_label">— Type Description —</div>
-    <p class="talent-desc" id="talentDesc">...</p>
-    <div class="talent-rarity" id="talentRarity"></div>
   </div>
 
   <!-- レーダーチャート -->
@@ -4401,6 +4373,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span data-i18n="result.back">もう一度診断する</span>
     </button>
   </div>
+
+  <!-- 同じMIタイプの著名人 -->
+  <div class="section-divider"><svg aria-hidden="true" viewBox="0 0 28 28"><path d="M14,3 L14,25 M3,14 L25,14 M6,6 L22,22 M22,6 L6,22" opacity="0.6"/><circle cx="14" cy="14" r="3"/></svg></div>
+  <div class="section-title">
+    <span class="num">—</span>
+    <span class="sec-icon"><svg aria-hidden="true" viewBox="0 0 32 32"><circle cx="10" cy="11" r="3.5"/><circle cx="22" cy="11" r="3.5"/><circle cx="16" cy="8" r="3"/><path d="M4,26 Q4,18 10,18 Q13,18 14,21"/><path d="M28,26 Q28,18 22,18 Q19,18 18,21"/><path d="M9,28 Q9,22 16,22 Q23,22 23,28"/></svg></span>
+    <h3 data-i18n="result.famous">同じMIタイプの人物</h3>
+    <span class="en" data-i18n="result.famous_en">People Like You</span>
+  </div>
+  <div class="famous-section" id="famousSection"></div>
 
   <p class="disclaimer" data-i18n="title.disclaimer">
     <span data-i18n="result.disclaimer"></span>
@@ -10279,7 +10261,6 @@ const I18N = {
     'compat.comp.intrapersonal':   'あなたが外に向きすぎる時、相手が「立ち止まろう」と内省の時間をくれる。心の地図役。',
     'compat.comp.naturalist':      'あなたが見落とす細部・違いを、相手が拾い集めて体系化してくれる。情報の整理者。',
     'result.compound':   '— Rare Type · あなたの複合キャラ —',
-    'result.type_desc_label': '— あなたのタイプ説明 —',
     'result.strength_1': 'Strength I — 主軸の才能',
     'result.strength_2': 'Strength II — 補佐の才能',
     'result.strength_3': 'Strength III — 隠れた才能',
@@ -10581,7 +10562,6 @@ const I18N = {
     'compat.comp.intrapersonal':   'When you focus too much outward, they offer "let\'s pause" and give you time for reflection. Your inner compass.',
     'compat.comp.naturalist':      'The details and differences you miss — they gather and systematize them. Your information organizer.',
     'result.compound':   '— Rare Type · Your Compound Character —',
-    'result.type_desc_label': '— Your Type Description —',
     'result.strength_1': 'Strength I — Core Talent',
     'result.strength_2': 'Strength II — Supporting Talent',
     'result.strength_3': 'Strength III — Hidden Talent',
@@ -10881,7 +10861,6 @@ const I18N = {
     'compat.comp.intrapersonal':   '你过于向外时，对方会给予「先停下来」的内省时间。是心的导航者。',
     'compat.comp.naturalist':      '你忽略的细节和差异，对方会收集并体系化。是信息的整理者。',
     'result.compound':   '— 稀有类型 · 你的复合角色 —',
-    'result.type_desc_label': '— 你的类型说明 —',
     'result.strength_1': 'Strength I — 核心才能',
     'result.strength_2': 'Strength II — 辅助才能',
     'result.strength_3': 'Strength III — 隐藏才能',
@@ -11177,7 +11156,6 @@ const I18N = {
     'compat.comp.intrapersonal':   '당신이 너무 밖을 향할 때 상대가 「잠깐 멈추자」며 내성의 시간을 줍니다. 마음의 나침반 역할.',
     'compat.comp.naturalist':      '당신이 놓치는 세부 사항과 차이를 상대가 수집하고 체계화해줍니다. 정보의 정리자.',
     'result.compound':   '— 희귀 유형 · 나의 복합 캐릭터 —',
-    'result.type_desc_label': '— 나의 유형 설명 —',
     'result.strength_1': 'Strength I — 핵심 재능',
     'result.strength_2': 'Strength II — 보조 재능',
     'result.strength_3': 'Strength III — 숨겨진 재능',
