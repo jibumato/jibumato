@@ -1,285 +1,110 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>読み物 — 才能と自己理解のヒント | じぶんマトリクス</title>
-<meta name="description" content="MI理論（多重知能）をもとに、才能の活かし方・キャリア・学び・子育てのヒントをまとめた読み物一覧。あなたの「強み」を理解し、行動に変えるための記事を揃えています。">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>読み物 | THE TALENT MATRIX（じぶんマトリクス）</title>
+<meta name="description" content="自分に合う学び方、強みの見つけ方、キャリア・副業・子育てへの才能の活かし方を整理する読み物です。">
 <link rel="canonical" href="https://www.jibunmatrix.com/articles.html">
-
-<!-- OGP -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="読み物 — 才能と自己理解のヒント | じぶんマトリクス">
-<meta property="og:description" content="MI理論をもとに、才能の活かし方・キャリア・学び・子育てのヒントをまとめた読み物一覧。">
-<meta property="og:url" content="https://www.jibunmatrix.com/articles.html">
-<meta property="og:site_name" content="じぶんマトリクス">
-
-<!-- AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9187493483642692" crossorigin="anonymous"></script>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Shippori+Mincho:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-
-<!-- 構造化データ -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "name": "読み物 — 才能と自己理解のヒント",
-  "description": "MI理論をもとにした才能・キャリア・学び・子育ての読み物一覧",
-  "url": "https://www.jibunmatrix.com/articles.html",
-  "isPartOf": { "@type": "WebSite", "name": "じぶんマトリクス", "url": "https://www.jibunmatrix.com/" }
-}
-</script>
-
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --ink:#0f0e0c; --paper:#f4ede0; --paper-deep:#e8dcc4;
-    --gold:#b8893a; --gold-light:#d4ad5e; --crimson:#8a2922;
-    --moss:#4a5d3a; --indigo:#2c3e5c; --plum:#5a3a4a;
+    --ink: #171512;
+    --muted: rgba(23,21,18,.66);
+    --paper: #f4ede0;
+    --card: rgba(255,255,255,.42);
+    --gold: #b8893a;
+    --crimson: #8a2922;
+    --line: rgba(23,21,18,.14);
   }
+  * { box-sizing: border-box; }
   body {
-    font-family:'Shippori Mincho',serif; background:var(--paper); color:var(--ink);
-    line-height:1.8; position:relative;
+    margin: 0;
+    background: radial-gradient(circle at 12% 0%, rgba(184,137,58,.12), transparent 28%), var(--paper);
+    color: var(--ink);
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", serif;
+    line-height: 1.85;
   }
-  body::before {
-    content:''; position:fixed; inset:0;
-    background-image:radial-gradient(rgba(15,14,12,0.025) 1px,transparent 1px);
-    background-size:4px 4px; pointer-events:none; z-index:0;
-  }
-  body::after {
-    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
-    background:
-      radial-gradient(circle at 0% 0%, rgba(184,137,58,0.08), transparent 28%),
-      radial-gradient(circle at 100% 100%, rgba(184,137,58,0.08), transparent 28%);
-  }
-  .wrap { position:relative; z-index:1; max-width:860px; margin:0 auto; padding:0 24px; }
-
-  /* ヘッダー */
-  header { text-align:center; padding:64px 24px 40px; position:relative; z-index:1; }
-  .site-link {
-    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.3em;
-    color:var(--gold); text-transform:uppercase; text-decoration:none;
-  }
-  .site-link:hover { color:var(--crimson); }
-  header h1 {
-    font-size:clamp(26px,6vw,38px); font-weight:800; margin:18px 0 12px; letter-spacing:0.02em;
-  }
-  header .sub {
-    font-family:'Cormorant Garamond',serif; font-style:italic;
-    font-size:16px; color:var(--gold); letter-spacing:0.08em; margin-bottom:6px;
-  }
-  header .lead { font-size:14px; color:rgba(15,14,12,0.65); max-width:540px; margin:14px auto 0; }
-
-  /* カテゴリ */
-  .category { margin:48px 0 0; }
-  .category-title {
-    display:flex; align-items:center; gap:14px; margin-bottom:24px;
-  }
-  .category-title .num {
-    font-family:'Cormorant Garamond',serif; font-style:italic;
-    font-size:22px; color:var(--gold);
-  }
-  .category-title h2 { font-size:20px; font-weight:700; letter-spacing:0.04em; }
-  .category-title .line { flex:1; height:1px; background:rgba(184,137,58,0.3); }
-
-  /* 記事カード */
-  .article-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+  a { color: inherit; }
+  .wrap { width: min(920px, calc(100% - 36px)); margin: 0 auto; padding: 42px 0 72px; }
+  .top { display: flex; justify-content: space-between; gap: 20px; align-items: center; margin-bottom: 42px; }
+  .brand { font-size: 12px; letter-spacing: .18em; color: var(--gold); text-transform: uppercase; }
+  .home { font-size: 13px; color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--line); }
+  h1 { font-size: clamp(30px, 6vw, 48px); line-height: 1.35; margin: 0 0 14px; letter-spacing: .04em; }
+  .lead { color: var(--muted); max-width: 720px; margin: 0 0 34px; }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
   .article-card {
-    display:block; text-decoration:none; color:inherit;
-    border:1px solid rgba(15,14,12,0.15); background:rgba(244,237,224,0.5);
-    padding:24px 22px; position:relative; transition:all 0.35s cubic-bezier(0.2,0.8,0.2,1);
-    border-top:3px solid var(--gold);
+    display: block;
+    padding: 24px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    text-decoration: none;
   }
-  .article-card:hover {
-    transform:translateY(-3px); border-color:rgba(184,137,58,0.5);
-    box-shadow:0 8px 24px rgba(15,14,12,0.08);
-  }
-  .article-card .tag {
-    font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.2em;
-    color:var(--gold); text-transform:uppercase; margin-bottom:10px; display:block;
-  }
-  .article-card h3 { font-size:16px; font-weight:700; line-height:1.5; margin-bottom:10px; }
-  .article-card p { font-size:12.5px; color:rgba(15,14,12,0.65); line-height:1.7; }
-  .article-card .read {
-    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em;
-    color:var(--crimson); margin-top:14px; display:inline-block;
-  }
-
-  /* 広告枠 */
-  .ad-container { margin:44px auto; text-align:center; min-height:100px; }
-  .ad-label {
-    font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.25em;
-    color:rgba(15,14,12,0.35); text-transform:uppercase; margin-bottom:8px; display:block;
-  }
-  .ad-container .adsbygoogle { display:block; margin:0 auto; }
-
-  /* 診断CTA */
+  .article-card:hover { border-color: rgba(184,137,58,.45); }
+  .label { font-size: 11px; letter-spacing: .18em; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; }
+  h2 { font-size: 24px; line-height: 1.55; margin: 0 0 8px; }
+  .desc { color: var(--muted); margin: 0; font-size: 14px; }
+  .soon { opacity: .58; pointer-events: none; }
   .cta {
-    margin:56px 0; padding:44px 32px; text-align:center;
-    background:linear-gradient(180deg,var(--paper) 0%,var(--paper-deep) 100%);
-    border:1px solid rgba(184,137,58,0.4); position:relative;
+    margin-top: 44px;
+    padding: 28px;
+    border: 1px solid rgba(184,137,58,.28);
+    background: rgba(255,255,255,.34);
+    text-align: center;
   }
-  .cta::before { content:''; position:absolute; inset:8px; border:1px dashed rgba(184,137,58,0.3); pointer-events:none; }
-  .cta-label { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.3em; color:var(--gold); text-transform:uppercase; margin-bottom:14px; }
-  .cta h2 { font-size:22px; font-weight:800; margin-bottom:10px; }
-  .cta p { font-size:13px; color:rgba(15,14,12,0.65); margin-bottom:24px; }
-  .cta-btn {
-    display:inline-block; padding:16px 40px; background:var(--ink); color:var(--paper);
-    font-family:'Shippori Mincho',serif; font-size:14px; font-weight:700; letter-spacing:0.2em;
-    text-decoration:none; transition:all 0.4s cubic-bezier(0.2,0.8,0.2,1);
-  }
-  .cta-btn:hover { background:var(--crimson); letter-spacing:0.3em; }
-
-  /* フッター */
-  footer { text-align:center; padding:48px 24px 60px; position:relative; z-index:1; }
-  .footer-links { font-size:12px; margin-bottom:14px; }
-  .footer-links a { color:var(--gold); text-decoration:none; margin:0 4px; }
-  .footer-links a:hover { color:var(--crimson); }
-  .footer-links .sep { color:rgba(15,14,12,0.3); }
-  .footer-copy { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.2em; color:rgba(15,14,12,0.4); }
-
-  @media (max-width:600px) {
-    .article-grid { grid-template-columns:1fr; }
-    header { padding:48px 24px 32px; }
+  .cta p { color: var(--muted); margin: 0 0 18px; }
+  .btn {
+    display: inline-block;
+    padding: 13px 22px;
+    border: 1px solid var(--crimson);
+    color: #fff;
+    background: var(--crimson);
+    text-decoration: none;
+    letter-spacing: .08em;
+    font-size: 14px;
   }
 </style>
 </head>
 <body>
-  <header>
-    <a href="https://www.jibunmatrix.com/" class="site-link">← じぶんマトリクス</a>
-    <div class="sub" style="margin-top:18px;">Reading · 読み物</div>
-    <h1>才能と自己理解のヒント</h1>
-    <p class="lead">MI理論（多重知能）をもとに、自分の強みを理解し、仕事・学び・暮らしに活かすための読み物を集めました。</p>
-  </header>
-
-  <div class="wrap">
-
-    <!-- カテゴリ1：基礎を知る -->
-    <section class="category">
-      <div class="category-title">
-        <span class="num">I.</span><h2>まず基礎を知る</h2><span class="line"></span>
-      </div>
-      <div class="article-grid">
-        <a class="article-card" href="/articles/mi-theory.html">
-          <span class="tag">MI理論・基礎</span>
-          <h3>多重知能理論（MI理論）とは？</h3>
-          <p>ハーバードのガードナー博士が提唱した「IQでは測れない8つの知能」をわかりやすく解説。すべての出発点になる記事です。</p>
-          <span class="read">記事を読む →</span>
-        </a>
-        <a class="article-card" href="/articles/8-intelligences-guide.html">
-          <span class="tag">タイプ解説</span>
-          <h3>8つの知能タイプ完全ガイド</h3>
-          <p>言語・論理・空間・音楽・身体・対人・内省・博物。各タイプの特徴・強み・向いている職業・有名人までを総まとめ。</p>
-          <span class="read">記事を読む →</span>
-        </a>
-        <a class="article-card" href="/articles/mbti-vs-mi.html">
-          <span class="tag">比較解説</span>
-          <h3>MBTI・ストレングス・MIの違い</h3>
-          <p>3大自己診断を目的・仕組み・活かし方で徹底比較。「どれを使えばいい？」の答えが見つかります。</p>
-          <span class="read">記事を読む →</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- 広告1 -->
-    <div class="ad-container">
-      <span class="ad-label">Sponsored</span>
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9187493483642692" data-ad-slot="9987726722" data-ad-format="auto" data-full-width-responsive="true"></ins>
-    </div>
-
-    <!-- カテゴリ2：仕事・お金に活かす -->
-    <section class="category">
-      <div class="category-title">
-        <span class="num">II.</span><h2>仕事・お金に活かす</h2><span class="line"></span>
-      </div>
-      <div class="article-grid">
-        <a class="article-card" href="/articles/careers-by-type.html">
-          <span class="tag">キャリア・副業</span>
-          <h3>タイプ別・向いている職業と副業</h3>
-          <p>8タイプ別に、向いている仕事と副業を具体的に解説。自分の才能を収入につなげるロードマップ。</p>
-          <span class="read">記事を読む →</span>
-        </a>
-        <a class="article-card" href="/articles/side-hustle-by-type.html">
-          <span class="tag">副業</span>
-          <h3>タイプ別・副業で稼ぐロードマップ</h3>
-          <p>才能に合った副業なら、続けやすく成果も出やすい。月3〜30万円を目指すステップを図解。</p>
-          <span class="read">記事を読む →</span>
-        </a>
-        <a class="article-card" href="/articles/before-changing-jobs.html">
-          <span class="tag">キャリア</span>
-          <h3>転職を決める前の自己診断</h3>
-          <p>仕事が合わない、毎日消耗する…それは才能と仕事のミスマッチかも。転職前に確認したいセルフチェック。</p>
-          <span class="read">記事を読む →</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- 広告2 -->
-    <div class="ad-container">
-      <span class="ad-label">Sponsored</span>
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9187493483642692" data-ad-slot="9987726722" data-ad-format="auto" data-full-width-responsive="true"></ins>
-    </div>
-
-    <!-- カテゴリ3：学び・育てる -->
-    <section class="category">
-      <div class="category-title">
-        <span class="num">III.</span><h2>学び、そして育てる</h2><span class="line"></span>
-      </div>
-      <div class="article-grid">
-        <a class="article-card" href="/articles/study-by-type.html">
-          <span class="tag">学習</span>
-          <h3>タイプ別・最強の勉強法</h3>
-          <p>勉強が続かないのは「自分に合わない方法」だから。タイプ別に最も効果的な学び方を解説。</p>
-          <span class="read">記事を読む →</span>
-        </a>
-        <a class="article-card" href="/articles/parenting-mi-theory.html">
-          <span class="tag">子育て・教育</span>
-          <h3>子どもの才能を伸ばす親の関わり方</h3>
-          <p>「勉強が苦手」な子にも必ず才能がある。タイプ別の特徴と、才能を伸ばす声かけを解説。</p>
-          <span class="read">記事を読む →</span>
-        </a>
-        <a class="article-card" href="/articles/30-day-talent-habit.html">
-          <span class="tag">習慣・成長</span>
-          <h3>30日でじぶんを変える「才能習慣」</h3>
-          <p>才能は気づくだけでは伸びない。30日で才能を日常に落とし込む習慣設計を4週間のロードマップで。</p>
-          <span class="read">記事を読む →</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- 診断CTA -->
-    <div class="cta">
-      <div class="cta-label">Free Assessment · 無料診断</div>
-      <h2>まずは、自分のタイプを知ろう</h2>
-      <p>3分の診断で、あなたの8つの知能のバランスと「特に発揮しやすい才能」がわかります。</p>
-      <a class="cta-btn" href="https://www.jibunmatrix.com/">無料で診断する</a>
-    </div>
-
+<main class="wrap">
+  <div class="top">
+    <div class="brand">THE TALENT MATRIX · Articles</div>
+    <a class="home" href="index.html">診断トップへ</a>
   </div>
+  <h1>才能についての読み物</h1>
+  <p class="lead">勉強法、強みの見つけ方、キャリア・副業・子育てへの活かし方を、日常の悩みから整理します。</p>
 
-  <footer>
-    <div class="footer-links">
-      <a href="https://www.jibunmatrix.com/">トップ</a><span class="sep">·</span>
-      <a href="/about.html">運営者情報</a><span class="sep">·</span>
-      <a href="/privacy.html">プライバシーポリシー</a><span class="sep">·</span>
-      <a href="/disclaimer.html">免責事項</a><span class="sep">·</span>
-      <a href="/tokushoho.html">特定商取引法に基づく表記</a><span class="sep">·</span>
-      <a href="/contact.html">お問い合わせ</a>
-    </div>
-    <div class="footer-copy">© Mymatrix</div>
-  </footer>
+  <section class="grid" aria-label="記事一覧">
+    <a class="article-card" href="article-study-method.html">
+      <div class="label">Pillar Article</div>
+      <h2>自分に合う勉強法が分からない人へ</h2>
+      <p class="desc">「努力しているのに続かない」「覚え方が合わない」と感じる人に向けて、才能と学び方の相性を整理します。</p>
+    </a>
+    <a class="article-card" href="article-study-continue.html">
+      <div class="label">Study Habit</div>
+      <h2>勉強が続かない人の共通点</h2>
+      <p class="desc">やる気の問題に見える悩みを、学び方とのミスマッチから見直します。</p>
+    </a>
+    <a class="article-card" href="article-memorization-weak.html">
+      <div class="label">Memorization</div>
+      <h2>暗記が苦手な人は頭が悪いのか？</h2>
+      <p class="desc">暗記が苦手でも、理解・図解・身体感覚で伸びるタイプがあります。</p>
+    </a>
+    <a class="article-card" href="article-note-taking.html">
+      <div class="label">Visual Learning</div>
+      <h2>ノートを取るのが苦手な人の特徴</h2>
+      <p class="desc">文章でまとめるより、図や配置で理解する方が得意な人に向けた記事です。</p>
+    </a>
+    <a class="article-card" href="article-music-study.html">
+      <div class="label">Music & Focus</div>
+      <h2>音楽を聴きながら勉強する人の特徴</h2>
+      <p class="desc">集中と音・リズムの関係を、才能タイプの視点から整理します。</p>
+    </a>
+  </section>
 
-<script>
-  (function(){
-    try {
-      document.querySelectorAll('.adsbygoogle').forEach(function(){
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-      });
-    } catch(e){ console.warn('AdSense load skipped:', e); }
-  })();
-</script>
+  <section class="cta">
+    <p>自分の強みや学び方を先に知りたい方は、無料診断から始められます。</p>
+    <a class="btn" href="index.html?src=articles">無料診断をはじめる</a>
+  </section>
+</main>
 </body>
 </html>
