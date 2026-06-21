@@ -212,6 +212,12 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
     display: block;
     margin: 0 auto;
   }
+  .article-faq { margin-top:56px; padding-top:32px; border-top:1px solid rgba(184,137,58,.25); }
+  .faq-heading { font-size:20px; font-weight:700; margin-bottom:18px; letter-spacing:.04em; }
+  .faq-item { padding:18px 0; border-bottom:1px solid rgba(184,137,58,.18); }
+  .faq-q { font-size:15px; font-weight:600; line-height:1.6; margin-bottom:8px; color:var(--crimson); }
+  .faq-q::before { content:'Q. '; font-family:'JetBrains Mono',monospace; color:var(--gold); }
+  .faq-a { font-size:14px; line-height:1.85; color:rgba(15,14,12,.78); }
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -269,6 +275,46 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
       "position": 3,
       "name": "転職前の自己診断",
       "item": "https://www.jibunmatrix.com/articles/before-changing-jobs.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "今の仕事が「向いていない」と感じたら転職すべきですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "すぐに結論を出す前に、まず『何が合わないのか』を分けて考えることが大切です。仕事内容そのものが強みと合わないのか、人間関係や環境の問題なのかで対処は変わります。自分の強い知能を活かせる役割が今の会社の中にないかを確認し、それでも難しい場合に転職を検討するのが現実的です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "「向いていない仕事」のサインにはどんなものがありますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "同じ成果を出すのに人より多くのエネルギーを使う、得意なことを発揮する場面がほとんどない、日曜の夜に強い憂うつを感じる、成長実感がない——などがサインです。ただしこれらは『甘え』ではなく、強みと仕事のミスマッチを示す情報です。自分を責めず、相性の問題として捉えてください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "転職する前に自己分析でやっておくべきことは何ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "自分の強い知能（得意な力）と、それが発揮できる環境の条件を言語化しておくことです。これを明確にしないまま転職すると、職場が変わっても同じミスマッチを繰り返しがちです。まず無料診断などで自分の才能の方向性をつかみ、それを軸に次の仕事の条件を整理しましょう。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "仕事が辛いと感じるのは自分が甘えているからですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "必ずしも甘えではありません。強みと仕事が噛み合っていないと、努力していても消耗しやすくなります。これは能力や根性の問題ではなく相性の問題です。自分の才能が活きる場面を増やす工夫をしたうえで、それでも合わない場合は環境を変える選択も前向きな一手です。"
+      }
     }
   ]
 }
@@ -506,6 +552,26 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
     <p>24問に答えるだけ。あなたの才能タイプと<br>向いている仕事の方向性が無料で分かります。</p>
     <a href="/">無料診断を受ける →</a>
   </div>
+
+  <section class="article-faq" aria-label="よくある質問">
+    <h2 class="faq-heading">よくある質問</h2>
+    <div class="faq-item">
+      <h3 class="faq-q">今の仕事が「向いていない」と感じたら転職すべきですか？</h3>
+      <p class="faq-a">すぐに結論を出す前に、まず『何が合わないのか』を分けて考えることが大切です。仕事内容そのものが強みと合わないのか、人間関係や環境の問題なのかで対処は変わります。自分の強い知能を活かせる役割が今の会社の中にないかを確認し、それでも難しい場合に転職を検討するのが現実的です。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">「向いていない仕事」のサインにはどんなものがありますか？</h3>
+      <p class="faq-a">同じ成果を出すのに人より多くのエネルギーを使う、得意なことを発揮する場面がほとんどない、日曜の夜に強い憂うつを感じる、成長実感がない——などがサインです。ただしこれらは『甘え』ではなく、強みと仕事のミスマッチを示す情報です。自分を責めず、相性の問題として捉えてください。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">転職する前に自己分析でやっておくべきことは何ですか？</h3>
+      <p class="faq-a">自分の強い知能（得意な力）と、それが発揮できる環境の条件を言語化しておくことです。これを明確にしないまま転職すると、職場が変わっても同じミスマッチを繰り返しがちです。まず無料診断などで自分の才能の方向性をつかみ、それを軸に次の仕事の条件を整理しましょう。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">仕事が辛いと感じるのは自分が甘えているからですか？</h3>
+      <p class="faq-a">必ずしも甘えではありません。強みと仕事が噛み合っていないと、努力していても消耗しやすくなります。これは能力や根性の問題ではなく相性の問題です。自分の才能が活きる場面を増やす工夫をしたうえで、それでも合わない場合は環境を変える選択も前向きな一手です。</p>
+    </div>
+  </section>
 
   <div class="related-articles">
     <div class="related-title">Related Articles · 関連記事</div>

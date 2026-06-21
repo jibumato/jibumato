@@ -211,6 +211,12 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
     display: block;
     margin: 0 auto;
   }
+  .article-faq { margin-top:56px; padding-top:32px; border-top:1px solid rgba(184,137,58,.25); }
+  .faq-heading { font-size:20px; font-weight:700; margin-bottom:18px; letter-spacing:.04em; }
+  .faq-item { padding:18px 0; border-bottom:1px solid rgba(184,137,58,.18); }
+  .faq-q { font-size:15px; font-weight:600; line-height:1.6; margin-bottom:8px; color:var(--crimson); }
+  .faq-q::before { content:'Q. '; font-family:'JetBrains Mono',monospace; color:var(--gold); }
+  .faq-a { font-size:14px; line-height:1.85; color:rgba(15,14,12,.78); }
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -268,6 +274,46 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
       "position": 3,
       "name": "才能タイプ別・副業ロードマップ",
       "item": "https://www.jibunmatrix.com/articles/side-hustle-by-type.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "自分に向いている副業はどう見つければいいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "副業は限られた時間で成果を出す必要があるため、得意な知能（才能）に合った分野を選ぶと立ち上がりが早くなります。言語が強い人はライティングや編集、論理が強い人はデータ分析やプログラミング、空間が強い人はデザインや動画、対人が強い人はコーチングや販売が向きやすい傾向です。まず自分の強みの方向性を把握してから選ぶのが近道です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "副業は何から始めればいいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "いきなり大きく始めるより、小さく試すのが鉄則です。得意分野に近い案件を1件だけ受けてみる、無料・低コストで作品やサービスを出してみるなど、リスクの低い形で反応を確かめましょう。続けられそうか、苦にならないかを見ながら徐々に広げていくと失敗しにくくなります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "才能タイプ別におすすめの副業はありますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "あります。言語タイプはライター・ブロガー、論理タイプはデータ分析・プログラミング・コンサル、空間タイプはデザイン・写真・動画編集、音楽タイプは音源制作・ナレーション、対人タイプはコーチング・接客・コミュニティ運営など、強みに沿った副業を選ぶと成果が出やすくなります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "副業で稼げるようになるまでどのくらいかかりますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "分野や時間の使い方によりますが、得意な領域を選ぶほど立ち上がりは早くなります。苦手な分野を無理に選ぶと習得に時間がかかり挫折しやすいため、まずは才能に合った分野で小さな実績を積み、徐々に単価や規模を上げていくのが現実的です。"
+      }
     }
   ]
 }
@@ -515,6 +561,26 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
     <p>24問に答えるだけ。あなたの才能タイプから<br>向いている副業の方向性が無料で分かります。</p>
     <a href="/">無料診断を受ける →</a>
   </div>
+
+  <section class="article-faq" aria-label="よくある質問">
+    <h2 class="faq-heading">よくある質問</h2>
+    <div class="faq-item">
+      <h3 class="faq-q">自分に向いている副業はどう見つければいいですか？</h3>
+      <p class="faq-a">副業は限られた時間で成果を出す必要があるため、得意な知能（才能）に合った分野を選ぶと立ち上がりが早くなります。言語が強い人はライティングや編集、論理が強い人はデータ分析やプログラミング、空間が強い人はデザインや動画、対人が強い人はコーチングや販売が向きやすい傾向です。まず自分の強みの方向性を把握してから選ぶのが近道です。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">副業は何から始めればいいですか？</h3>
+      <p class="faq-a">いきなり大きく始めるより、小さく試すのが鉄則です。得意分野に近い案件を1件だけ受けてみる、無料・低コストで作品やサービスを出してみるなど、リスクの低い形で反応を確かめましょう。続けられそうか、苦にならないかを見ながら徐々に広げていくと失敗しにくくなります。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">才能タイプ別におすすめの副業はありますか？</h3>
+      <p class="faq-a">あります。言語タイプはライター・ブロガー、論理タイプはデータ分析・プログラミング・コンサル、空間タイプはデザイン・写真・動画編集、音楽タイプは音源制作・ナレーション、対人タイプはコーチング・接客・コミュニティ運営など、強みに沿った副業を選ぶと成果が出やすくなります。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">副業で稼げるようになるまでどのくらいかかりますか？</h3>
+      <p class="faq-a">分野や時間の使い方によりますが、得意な領域を選ぶほど立ち上がりは早くなります。苦手な分野を無理に選ぶと習得に時間がかかり挫折しやすいため、まずは才能に合った分野で小さな実績を積み、徐々に単価や規模を上げていくのが現実的です。</p>
+    </div>
+  </section>
 
   <div class="related-articles">
     <div class="related-title">Related Articles · 関連記事</div>
