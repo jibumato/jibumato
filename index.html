@@ -8011,13 +8011,28 @@ function compute() {
 
   state.scores = normalized;
 
-  // --- 同点時の順位決定（公平化） ---
-  // 表示スコアは丸めの都合で同点が起きやすい。順位だけは、丸める前の
-  // 生スコアに微小なランダム値を足した「隠しの序列」で決め、特定の知能が
-  // 常に上位に来てしまう偏りをなくす。表示用スコアには影響しない。
+  // --- 同点時の順位決定（公平化・再現性あり） ---
+  // 表示スコアは丸めの都合で同点が起きやすい。順位だけは、丸める前の生スコアに
+  // 微小なオフセットを足した「隠しの序列」で決める。オフセットは回答パターンから
+  // 決定的に生成するため、同じ回答なら毎回まったく同じ結果になり（再現性）、かつ
+  // 回答ごとに値が変わるので特定の知能が常に上位へ来る偏りも生まない（公平性）。
+  // 以前は Math.random() を使っていたため、同じ回答でも再診断のたびに順位が
+  // 入れ替わる可能性があった。表示用スコアには影響しない。
+  const hashStr = (str) => {
+    // 32-bit FNV-1a
+    let h = 0x811c9dc5;
+    for (let i = 0; i < str.length; i++) {
+      h ^= str.charCodeAt(i);
+      h = Math.imul(h, 0x01000193);
+    }
+    return h >>> 0;
+  };
+  const answerSeed = state.answers.map(a => a === null ? 'x' : a).join(',');
   const tiebreak = {};
   KEYS.forEach(k => {
-    tiebreak[k] = raw[k] + Math.random() * 0.001;
+    // 回答パターン + 知能キーから 0〜1未満の決定的な値を作り、微小オフセットに変換
+    const frac = (hashStr(answerSeed + '|' + k) % 100000) / 100000;
+    tiebreak[k] = raw[k] + frac * 0.001;
   });
   state.tiebreak = tiebreak;
 
