@@ -198,6 +198,12 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
     display: block;
     margin: 0 auto;
   }
+  .article-faq { margin-top:56px; padding-top:32px; border-top:1px solid rgba(184,137,58,.25); }
+  .faq-heading { font-size:20px; font-weight:700; margin-bottom:18px; letter-spacing:.04em; }
+  .faq-item { padding:18px 0; border-bottom:1px solid rgba(184,137,58,.18); }
+  .faq-q { font-size:15px; font-weight:600; line-height:1.6; margin-bottom:8px; color:var(--crimson); }
+  .faq-q::before { content:'Q. '; font-family:'JetBrains Mono',monospace; color:var(--gold); }
+  .faq-a { font-size:14px; line-height:1.85; color:rgba(15,14,12,.78); }
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -255,6 +261,46 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
       "position": 3,
       "name": "知能タイプ別の最強の勉強法",
       "item": "https://www.jibunmatrix.com/articles/study-by-type.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "自分に合った勉強法はどうやって見つければいいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "自分の強い知能（得意な学び方の入り口）から逆算すると見つかります。文章で理解しやすい人、図にすると分かる人、声に出すと覚える人、手を動かすと定着する人——人によって効果的な方法は違います。まず同じ内容を複数の方法で試し、『一番疲れにくく、思い出しやすかった』やり方を採用するのがおすすめです。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "知能タイプ別におすすめの勉強法はありますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "あります。言語タイプは音読や要約・人に説明する、空間タイプは図やマップで可視化する、音楽タイプはリズムや語呂で覚える、身体運動タイプは手を動かす・歩きながら覚える、論理タイプは仕組みや因果から理解する、といった具合です。自分の強いタイプに合わせると、同じ時間でも定着しやすくなります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "勉強しても覚えられないのはなぜですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "記憶力が低いからではなく、自分に合わない『入口』で覚えようとしている場合が多いです。視覚で理解する人が文字だけで覚えようとしたり、体で覚える人が座学だけで進めたりすると、努力のわりに定着しません。自分の得意な感覚を使う方法に変えると、覚えやすさが大きく変わります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "子どもの勉強法にもタイプ別の考え方は使えますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "使えます。子どもは特に、自分に合わない方法を強いられると勉強嫌いになりやすいです。その子の強い知能に合った学び方（図・体験・対話など）を取り入れると、勉強への抵抗が減り、得意を入り口に苦手も乗り越えやすくなります。"
+      }
     }
   ]
 }
@@ -530,6 +576,26 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
     <p>24問に答えるだけ。あなたの知能タイプから<br>最適な学習スタイルが無料で分かります。</p>
     <a href="/">無料診断を受ける →</a>
   </div>
+
+  <section class="article-faq" aria-label="よくある質問">
+    <h2 class="faq-heading">よくある質問</h2>
+    <div class="faq-item">
+      <h3 class="faq-q">自分に合った勉強法はどうやって見つければいいですか？</h3>
+      <p class="faq-a">自分の強い知能（得意な学び方の入り口）から逆算すると見つかります。文章で理解しやすい人、図にすると分かる人、声に出すと覚える人、手を動かすと定着する人——人によって効果的な方法は違います。まず同じ内容を複数の方法で試し、『一番疲れにくく、思い出しやすかった』やり方を採用するのがおすすめです。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">知能タイプ別におすすめの勉強法はありますか？</h3>
+      <p class="faq-a">あります。言語タイプは音読や要約・人に説明する、空間タイプは図やマップで可視化する、音楽タイプはリズムや語呂で覚える、身体運動タイプは手を動かす・歩きながら覚える、論理タイプは仕組みや因果から理解する、といった具合です。自分の強いタイプに合わせると、同じ時間でも定着しやすくなります。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">勉強しても覚えられないのはなぜですか？</h3>
+      <p class="faq-a">記憶力が低いからではなく、自分に合わない『入口』で覚えようとしている場合が多いです。視覚で理解する人が文字だけで覚えようとしたり、体で覚える人が座学だけで進めたりすると、努力のわりに定着しません。自分の得意な感覚を使う方法に変えると、覚えやすさが大きく変わります。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">子どもの勉強法にもタイプ別の考え方は使えますか？</h3>
+      <p class="faq-a">使えます。子どもは特に、自分に合わない方法を強いられると勉強嫌いになりやすいです。その子の強い知能に合った学び方（図・体験・対話など）を取り入れると、勉強への抵抗が減り、得意を入り口に苦手も乗り越えやすくなります。</p>
+    </div>
+  </section>
 
   <div class="related-articles">
     <div class="related-title">Related Articles · 関連記事</div>

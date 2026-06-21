@@ -270,6 +270,12 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
     display: block;
     margin: 0 auto;
   }
+  .article-faq { margin-top:56px; padding-top:32px; border-top:1px solid rgba(184,137,58,.25); }
+  .faq-heading { font-size:20px; font-weight:700; margin-bottom:18px; letter-spacing:.04em; }
+  .faq-item { padding:18px 0; border-bottom:1px solid rgba(184,137,58,.18); }
+  .faq-q { font-size:15px; font-weight:600; line-height:1.6; margin-bottom:8px; color:var(--crimson); }
+  .faq-q::before { content:'Q. '; font-family:'JetBrains Mono',monospace; color:var(--gold); }
+  .faq-a { font-size:14px; line-height:1.85; color:rgba(15,14,12,.78); }
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -327,6 +333,46 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
       "position": 3,
       "name": "子どもの才能を伸ばす親の関わり方",
       "item": "https://www.jibunmatrix.com/articles/parenting-mi-theory.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "子どもの才能はどうやって見つければいいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "子どもが時間を忘れて夢中になること、放っておいてもやり続けること、繰り返し選ぶ遊びに注目してください。それらは才能のサインです。成績や周囲との比較ではなく、その子が自然に力を発揮する場面を観察することが大切です。多重知能（MI理論）の8分野を視点に持つと、勉強以外の才能にも気づきやすくなります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "勉強が苦手な子でも才能はありますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "あります。学校の勉強は主に言語・論理数学の知能を測るため、それ以外の知能（空間・身体運動・音楽・対人など）が強い子は『勉強が苦手』に見えがちです。しかしそれは才能がないのではなく、評価される分野とその子の強みがずれているだけです。強い知能を入り口にすると、苦手分野の学習もスムーズになります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "子どもの才能を伸ばすために親ができることは何ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "結果ではなく『過程』や『工夫』をほめること、いろいろな体験の機会を与えて反応を観察すること、そして他の子と比べないことが大切です。親が『この子はこういうタイプだ』と決めつけず、強みが発揮される環境を整える伴走者になると、子どもは安心して才能を伸ばせます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "兄弟でも才能のタイプは違いますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "違うことがほとんどです。同じ家庭で育っても、強い知能の組み合わせは一人ひとり異なります。上の子に合った関わり方が下の子に合うとは限りません。それぞれの子の強みを個別に見てあげることが、きょうだいそれぞれの才能を伸ばす近道です。"
+      }
     }
   ]
 }
@@ -690,6 +736,26 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
     <p>24問に答えるだけ。お子さんの（そしてあなた自身の）<br>知能タイプが無料で分かります。</p>
     <a href="/">無料診断を受ける →</a>
   </div>
+
+  <section class="article-faq" aria-label="よくある質問">
+    <h2 class="faq-heading">よくある質問</h2>
+    <div class="faq-item">
+      <h3 class="faq-q">子どもの才能はどうやって見つければいいですか？</h3>
+      <p class="faq-a">子どもが時間を忘れて夢中になること、放っておいてもやり続けること、繰り返し選ぶ遊びに注目してください。それらは才能のサインです。成績や周囲との比較ではなく、その子が自然に力を発揮する場面を観察することが大切です。多重知能（MI理論）の8分野を視点に持つと、勉強以外の才能にも気づきやすくなります。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">勉強が苦手な子でも才能はありますか？</h3>
+      <p class="faq-a">あります。学校の勉強は主に言語・論理数学の知能を測るため、それ以外の知能（空間・身体運動・音楽・対人など）が強い子は『勉強が苦手』に見えがちです。しかしそれは才能がないのではなく、評価される分野とその子の強みがずれているだけです。強い知能を入り口にすると、苦手分野の学習もスムーズになります。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">子どもの才能を伸ばすために親ができることは何ですか？</h3>
+      <p class="faq-a">結果ではなく『過程』や『工夫』をほめること、いろいろな体験の機会を与えて反応を観察すること、そして他の子と比べないことが大切です。親が『この子はこういうタイプだ』と決めつけず、強みが発揮される環境を整える伴走者になると、子どもは安心して才能を伸ばせます。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">兄弟でも才能のタイプは違いますか？</h3>
+      <p class="faq-a">違うことがほとんどです。同じ家庭で育っても、強い知能の組み合わせは一人ひとり異なります。上の子に合った関わり方が下の子に合うとは限りません。それぞれの子の強みを個別に見てあげることが、きょうだいそれぞれの才能を伸ばす近道です。</p>
+    </div>
+  </section>
 
   <div class="related-articles">
     <div class="related-title">Related Articles · 関連記事</div>
