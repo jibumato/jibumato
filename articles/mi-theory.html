@@ -606,6 +606,39 @@ body::before {
     display: block;
     margin: 0 auto;
   }
+  /* ===== よくある質問 ===== */
+  .article-faq {
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(184,137,58,0.25);
+  }
+  .faq-heading {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    letter-spacing: 0.04em;
+  }
+  .faq-item {
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(184,137,58,0.18);
+  }
+  .faq-q {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    color: var(--crimson);
+  }
+  .faq-q::before {
+    content: 'Q. ';
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--gold);
+  }
+  .faq-a {
+    font-size: 14px;
+    line-height: 1.85;
+    color: rgba(15,14,12,0.78);
+  }
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -639,6 +672,54 @@ body::before {
   },
   "articleSection": "MI理論・基礎知識",
   "inLanguage": "ja"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "多重知能理論（MI理論）とは何ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "多重知能理論（MI理論）は、1983年にハーバード大学のハワード・ガードナー博士が提唱した理論です。人間の知能はIQのような単一の物差しでは測れず、言語・論理数学・空間・音楽・身体運動・対人・内省・博物という複数の独立した知能から成り立つと考えます。誰もが異なる知能の組み合わせを持っており、「頭の良さ」は一つではない、という点が最大の特徴です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "MI理論の8つの知能とは何ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "8つの知能とは、言語的知能・論理数学的知能・空間的知能・音楽的知能・身体運動的知能・対人的知能・内省的知能・博物的知能を指します。たとえば言語的知能は言葉を扱う力、論理数学的知能は論理や数を扱う力、空間的知能はイメージや立体を扱う力です。人によってどの知能が強いかは異なり、複数の知能を組み合わせて物事に取り組んでいます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "IQとMI理論は何が違うのですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "IQは主に言語的知能と論理数学的知能を中心に「一つの数値」で知能を測ろうとします。一方MI理論は、知能を一つの軸で順位づけするのではなく、複数の独立した知能の「バランス（プロフィール）」として捉えます。そのため、IQでは評価されにくい音楽・身体運動・対人などの才能も、独立した強みとして正当に扱える点が大きな違いです。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "自分の知能タイプはどうやって調べられますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "じぶんマトリクスの無料診断では、24問の質問に約3分で答えるだけで、8つの知能のバランスと自分が特に発揮しやすい才能タイプを可視化できます。登録は不要で、結果はその場で確認できます。専門的な検査ではなく自己理解のきっかけとして、気軽に試せる方法です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "MI理論は子育てや仕事に役立ちますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "役立ちます。子育てでは「勉強が苦手＝能力が低い」と決めつけず、その子が持つ別の知能（身体運動や空間など）に注目して伸ばす視点が得られます。仕事では、自分の強い知能に合った役割や学び方を選ぶことで、無理なく成果を出しやすくなります。MI理論は、弱みを責めるのではなく強みを活かすための実用的な枠組みです。"
+      }
+    }
+  ]
 }
 </script>
   <!-- ADSENSE-INJECTED -->
@@ -996,6 +1077,31 @@ body::before {
     <p>24問に答えるだけ。登録不要・完全無料で<br>あなた固有のMIタイプが分かります。</p>
     <a href="/">無料で診断してみる →</a>
   </div>
+
+  <!-- ===== よくある質問 ===== -->
+  <section class="article-faq" aria-label="よくある質問">
+    <h2 class="faq-heading">よくある質問</h2>
+    <div class="faq-item">
+      <h3 class="faq-q">多重知能理論（MI理論）とは何ですか？</h3>
+      <p class="faq-a">多重知能理論（MI理論）は、1983年にハーバード大学のハワード・ガードナー博士が提唱した理論です。人間の知能はIQのような単一の物差しでは測れず、言語・論理数学・空間・音楽・身体運動・対人・内省・博物という複数の独立した知能から成り立つと考えます。誰もが異なる知能の組み合わせを持っており、「頭の良さ」は一つではない、という点が最大の特徴です。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">MI理論の8つの知能とは何ですか？</h3>
+      <p class="faq-a">8つの知能とは、言語的知能・論理数学的知能・空間的知能・音楽的知能・身体運動的知能・対人的知能・内省的知能・博物的知能を指します。たとえば言語的知能は言葉を扱う力、論理数学的知能は論理や数を扱う力、空間的知能はイメージや立体を扱う力です。人によってどの知能が強いかは異なり、複数の知能を組み合わせて物事に取り組んでいます。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">IQとMI理論は何が違うのですか？</h3>
+      <p class="faq-a">IQは主に言語的知能と論理数学的知能を中心に「一つの数値」で知能を測ろうとします。一方MI理論は、知能を一つの軸で順位づけするのではなく、複数の独立した知能の「バランス（プロフィール）」として捉えます。そのため、IQでは評価されにくい音楽・身体運動・対人などの才能も、独立した強みとして正当に扱える点が大きな違いです。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">自分の知能タイプはどうやって調べられますか？</h3>
+      <p class="faq-a">じぶんマトリクスの無料診断では、24問の質問に約3分で答えるだけで、8つの知能のバランスと自分が特に発揮しやすい才能タイプを可視化できます。登録は不要で、結果はその場で確認できます。専門的な検査ではなく自己理解のきっかけとして、気軽に試せる方法です。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">MI理論は子育てや仕事に役立ちますか？</h3>
+      <p class="faq-a">役立ちます。子育てでは「勉強が苦手＝能力が低い」と決めつけず、その子が持つ別の知能（身体運動や空間など）に注目して伸ばす視点が得られます。仕事では、自分の強い知能に合った役割や学び方を選ぶことで、無理なく成果を出しやすくなります。MI理論は、弱みを責めるのではなく強みを活かすための実用的な枠組みです。</p>
+    </div>
+  </section>
 
   <!-- ===== 関連記事 ===== -->
   <div class="related-articles">

@@ -423,6 +423,12 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
     display: block;
     margin: 0 auto;
   }
+  .article-faq { margin-top:56px; padding-top:32px; border-top:1px solid rgba(184,137,58,.25); }
+  .faq-heading { font-size:20px; font-weight:700; margin-bottom:18px; letter-spacing:.04em; }
+  .faq-item { padding:18px 0; border-bottom:1px solid rgba(184,137,58,.18); }
+  .faq-q { font-size:15px; font-weight:600; line-height:1.6; margin-bottom:8px; color:var(--crimson); }
+  .faq-q::before { content:'Q. '; font-family:'JetBrains Mono',monospace; color:var(--gold); }
+  .faq-a { font-size:14px; line-height:1.85; color:rgba(15,14,12,.78); }
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -456,6 +462,46 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
   },
   "articleSection": "比較解説",
   "inLanguage": "ja"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "MBTIとMI理論の違いは何ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MBTIは性格を16タイプに分類し、ものの考え方や対人スタイルの「傾向」を知るための指標です。一方MI理論（多重知能理論）は、性格ではなく「どんな能力が得意か」という8つの知能の強弱を捉えます。MBTIが『あなたはどんな人か』を見るのに対し、MI理論は『あなたは何が得意か』を見る、という目的の違いがあります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "MBTIとストレングスファインダー、MI理論はどう使い分ければいいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MBTIは自分や他者の性格傾向・コミュニケーションの理解に、ストレングスファインダーは34資質から強みを言語化し仕事に活かすために、MI理論は得意な知能の分野（言語・論理・空間・音楽など）を知り学び方や進路選びに活かすために向いています。目的が『性格理解』ならMBTI、『強みの行動化』ならストレングスファインダー、『才能の方向性』ならMI理論と使い分けると効果的です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "MI理論はMBTIより精度が高いのですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "どちらが優れているという関係ではなく、測っている対象が異なります。MBTIは性格傾向、MI理論は能力の分野を捉えるため、目的に合うものを選ぶことが大切です。どの自己診断ツールも結果を絶対視せず、自己理解のきっかけとして使うのが適切な向き合い方です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "自分のMI（多重知能）タイプを無料で知る方法はありますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "じぶんマトリクスの無料診断なら、24問・約3分で8つの知能のバランスと自分が発揮しやすい才能タイプを可視化できます。登録不要で、結果はその場で確認できます。MBTIなどの性格診断と組み合わせると、性格と能力の両面から自己理解を深められます。"
+      }
+    }
+  ]
 }
 </script>
   <!-- ADSENSE-INJECTED -->
@@ -907,6 +953,27 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
     <p>24問に答えるだけ。登録不要・完全無料で<br>あなたの8知能バランスと才能タイプが分かります。</p>
     <a href="/">無料で診断してみる →</a>
   </div>
+
+  <!-- ===== よくある質問 ===== -->
+  <section class="article-faq" aria-label="よくある質問">
+    <h2 class="faq-heading">よくある質問</h2>
+    <div class="faq-item">
+      <h3 class="faq-q">MBTIとMI理論の違いは何ですか？</h3>
+      <p class="faq-a">MBTIは性格を16タイプに分類し、ものの考え方や対人スタイルの「傾向」を知るための指標です。一方MI理論（多重知能理論）は、性格ではなく「どんな能力が得意か」という8つの知能の強弱を捉えます。MBTIが『あなたはどんな人か』を見るのに対し、MI理論は『あなたは何が得意か』を見る、という目的の違いがあります。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">MBTIとストレングスファインダー、MI理論はどう使い分ければいいですか？</h3>
+      <p class="faq-a">MBTIは自分や他者の性格傾向・コミュニケーションの理解に、ストレングスファインダーは34資質から強みを言語化し仕事に活かすために、MI理論は得意な知能の分野（言語・論理・空間・音楽など）を知り学び方や進路選びに活かすために向いています。目的が『性格理解』ならMBTI、『強みの行動化』ならストレングスファインダー、『才能の方向性』ならMI理論と使い分けると効果的です。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">MI理論はMBTIより精度が高いのですか？</h3>
+      <p class="faq-a">どちらが優れているという関係ではなく、測っている対象が異なります。MBTIは性格傾向、MI理論は能力の分野を捉えるため、目的に合うものを選ぶことが大切です。どの自己診断ツールも結果を絶対視せず、自己理解のきっかけとして使うのが適切な向き合い方です。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">自分のMI（多重知能）タイプを無料で知る方法はありますか？</h3>
+      <p class="faq-a">じぶんマトリクスの無料診断なら、24問・約3分で8つの知能のバランスと自分が発揮しやすい才能タイプを可視化できます。登録不要で、結果はその場で確認できます。MBTIなどの性格診断と組み合わせると、性格と能力の両面から自己理解を深められます。</p>
+    </div>
+  </section>
 
   <!-- 関連記事 -->
   <div class="related-articles">

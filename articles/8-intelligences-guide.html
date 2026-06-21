@@ -402,6 +402,12 @@ body::before { content:''; position:fixed; inset:0; background-image: radial-gra
     display: block;
     margin: 0 auto;
   }
+  .article-faq { margin-top:56px; padding-top:32px; border-top:1px solid rgba(184,137,58,.25); }
+  .faq-heading { font-size:20px; font-weight:700; margin-bottom:18px; letter-spacing:.04em; }
+  .faq-item { padding:18px 0; border-bottom:1px solid rgba(184,137,58,.18); }
+  .faq-q { font-size:15px; font-weight:600; line-height:1.6; margin-bottom:8px; color:var(--crimson); }
+  .faq-q::before { content:'Q. '; font-family:'JetBrains Mono',monospace; color:var(--gold); }
+  .faq-a { font-size:14px; line-height:1.85; color:rgba(15,14,12,.78); }
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -435,6 +441,46 @@ body::before { content:''; position:fixed; inset:0; background-image: radial-gra
   },
   "articleSection": "MI理論・タイプ解説",
   "inLanguage": "ja"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "8つの知能タイプとは何ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "多重知能理論（MI理論）でいう8つの知能とは、言語的知能・論理数学的知能・空間的知能・音楽的知能・身体運動的知能・対人的知能・内省的知能・博物的知能です。それぞれ得意な領域が異なり、たとえば言語的知能は言葉、音楽的知能は音やリズム、身体運動的知能は体を使った学習や表現に強みを発揮します。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "自分がどの知能タイプか分かりません。どう見分ければいいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "夢中になれること、人より早く覚えられること、苦にならない作業に注目すると、自分の強い知能が見えてきます。たとえば文章を書くのが好きなら言語的知能、地図や図形が得意なら空間的知能が強い傾向です。じぶんマトリクスの無料診断を使えば、24問・約3分で8知能のバランスを客観的に確認できます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "知能タイプは一つだけですか？複数持てますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "知能タイプは一つに限られません。ほとんどの人は複数の知能を組み合わせて持っており、その「バランス（プロフィール）」こそが一人ひとりの個性です。たとえば言語と対人が強い人、論理と空間が強い人など、組み合わせ次第で活かせる場面が変わります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "知能タイプは生まれつきで、後から伸ばせないのですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "知能には生まれつきの傾向もありますが、環境や経験、訓練によって伸ばすことができます。MI理論は『弱い知能を諦める』ためではなく、『強い知能を活かしながら必要な知能を育てる』ために使うものです。得意な知能を入り口にすると、苦手分野の学習もスムーズになります。"
+      }
+    }
+  ]
 }
 </script>
   <!-- ADSENSE-INJECTED -->
@@ -1129,6 +1175,27 @@ body::before { content:''; position:fixed; inset:0; background-image: radial-gra
     <p>24問に答えるだけ。あなたの8知能のバランスと<br>才能タイプが無料で分かります。</p>
     <a href="/">無料診断を受ける →</a>
   </div>
+
+  <!-- ===== よくある質問 ===== -->
+  <section class="article-faq" aria-label="よくある質問">
+    <h2 class="faq-heading">よくある質問</h2>
+    <div class="faq-item">
+      <h3 class="faq-q">8つの知能タイプとは何ですか？</h3>
+      <p class="faq-a">多重知能理論（MI理論）でいう8つの知能とは、言語的知能・論理数学的知能・空間的知能・音楽的知能・身体運動的知能・対人的知能・内省的知能・博物的知能です。それぞれ得意な領域が異なり、たとえば言語的知能は言葉、音楽的知能は音やリズム、身体運動的知能は体を使った学習や表現に強みを発揮します。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">自分がどの知能タイプか分かりません。どう見分ければいいですか？</h3>
+      <p class="faq-a">夢中になれること、人より早く覚えられること、苦にならない作業に注目すると、自分の強い知能が見えてきます。たとえば文章を書くのが好きなら言語的知能、地図や図形が得意なら空間的知能が強い傾向です。じぶんマトリクスの無料診断を使えば、24問・約3分で8知能のバランスを客観的に確認できます。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">知能タイプは一つだけですか？複数持てますか？</h3>
+      <p class="faq-a">知能タイプは一つに限られません。ほとんどの人は複数の知能を組み合わせて持っており、その「バランス（プロフィール）」こそが一人ひとりの個性です。たとえば言語と対人が強い人、論理と空間が強い人など、組み合わせ次第で活かせる場面が変わります。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">知能タイプは生まれつきで、後から伸ばせないのですか？</h3>
+      <p class="faq-a">知能には生まれつきの傾向もありますが、環境や経験、訓練によって伸ばすことができます。MI理論は『弱い知能を諦める』ためではなく、『強い知能を活かしながら必要な知能を育てる』ために使うものです。得意な知能を入り口にすると、苦手分野の学習もスムーズになります。</p>
+    </div>
+  </section>
 
   <!-- 関連記事 -->
   <div class="related-articles">
