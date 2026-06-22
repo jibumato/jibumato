@@ -9183,10 +9183,22 @@ function parseScoresFromString(str) {
 }
 
 // ----- Share text -----
+function getShareResultUrl() {
+  // 結果のシェアは、トップ知能ごとの静的結果ページに向ける。
+  // これにより、SNSでシェアされたときのOGP画像がタイプ別キャラクターになり、
+  // かつ各ページが検索インデックス対象になる（ハッシュURLは不可だった）。
+  const key = state.top1;
+  const path = key ? '/result/' + key + '.html' : '/';
+  const isSandbox = location.protocol === 'about:' || location.protocol === 'blob:' || !location.origin ||
+                    location.protocol === 'file:' || location.hostname === '127.0.0.1' || location.hostname === 'localhost';
+  if (isSandbox) return 'https://www.jibunmatrix.com' + path;
+  return location.origin + path;
+}
+
 function shareResult() {
   const talent = getTalent(state.top1);
   const compound = makeCompoundName(state.top1, state.top2);
-  const url = location.href;
+  const url = getShareResultUrl();
   const text = t('share.text')
     .replace('{character}', talent.character)
     .replace('{compound}', compound)
