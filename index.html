@@ -1239,6 +1239,45 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     animation: en-reveal 0.5s ease-out 2.1s both;
   }
 
+  /* ===== アーキタイプの構成才能（第一才能・第二才能） ===== */
+  .archetype-talents {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 18px;
+    padding: 12px 26px;
+    border: 1px solid rgba(212,173,94,0.45);
+    border-radius: 3px;
+    background: linear-gradient(180deg, rgba(212,173,94,0.14), rgba(212,173,94,0.04));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+    opacity: 0;
+    animation: en-reveal 0.5s ease-out 2.35s both;
+  }
+  .at-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 10px;
+  }
+  .at-rank {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    min-width: 4.5em;
+    text-align: right;
+  }
+  .at-sep { color: rgba(212,173,94,0.5); }
+  .at-val {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.06em;
+    color: var(--paper);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  }
+
   /* ===== 型名バッジ（◯◯型 — 購入時の記憶づけ用にしっかり見せる） ===== */
   .character-type-badge {
     display: inline-flex;
@@ -4221,7 +4260,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- メインの才能カード -->
   <div class="talent-card" id="talentCard">
     <div class="talent-backdrop" id="talentBackdrop" aria-hidden="true"></div>
-    <div class="talent-eyebrow">— You Are —</div>
+    <div class="talent-eyebrow" data-i18n="result.archetype_label">あなたのアーキタイプは</div>
 
     <div class="character-stage">
       <!-- レイヤー1: 後光（16本の光線・低速回転） -->
@@ -4302,9 +4341,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="character-tagline" id="characterTagline">— —</div>
       <h2 class="character-name" id="characterName">— —</h2>
       <div class="character-en" id="characterEn">— —</div>
-      <div class="character-type-badge" id="characterTypeBadge">
-        <span class="ctb-name" id="typeBadgeName">— —</span>
-        <span class="ctb-en" id="typeBadgeEn">— —</span>
+      <div class="archetype-talents" id="archetypeTalents">
+        <div class="at-row">
+          <span class="at-rank" data-i18n="result.talent1">第一才能</span>
+          <span class="at-sep">·</span>
+          <span class="at-val" id="talent1Val">— —</span>
+        </div>
+        <div class="at-row">
+          <span class="at-rank" data-i18n="result.talent2">第二才能</span>
+          <span class="at-sep">·</span>
+          <span class="at-val" id="talent2Val">— —</span>
+        </div>
       </div>
     </div>
 
@@ -5302,6 +5349,63 @@ function makeCompoundName(top1Key, top2Key) {
     return modifier + ' ' + baseChar;
   }
   return modifier + baseChar;
+}
+
+// ============ 28 ARCHETYPES（上位2才能の組み合わせ＝主役） ============
+// 8才能から2つを選ぶ組み合わせ = C(8,2) = 28通り。
+// 「言語型」より「構想家」の方が感情移入される——才能タイプを裏方にし、
+// アーキタイプ（役割名）を結果の主役にするためのマップ。
+const ARCHETYPE_ORDER = ['linguistic','logical','spatial','musical','bodily','interpersonal','intrapersonal','naturalist'];
+function archetypeKey(a, b) {
+  const ia = ARCHETYPE_ORDER.indexOf(a), ib = ARCHETYPE_ORDER.indexOf(b);
+  return (ia <= ib) ? (a + '|' + b) : (b + '|' + a);
+}
+const ARCHETYPES = {
+  'linguistic|logical':         { name:'構想家',   en:'The Architect',     tagline:'言葉と論理で、まだ無い構造を描き出す。' },
+  'linguistic|spatial':         { name:'表現者',   en:'The Storyweaver',   tagline:'言葉とイメージで、世界観をかたちにする。' },
+  'linguistic|musical':         { name:'吟遊詩人', en:'The Lyricist',      tagline:'言葉と響きで、感情を旋律に乗せる。' },
+  'linguistic|bodily':          { name:'伝道師',   en:'The Orator',        tagline:'言葉と身体で、人の心を動かす。' },
+  'linguistic|interpersonal':   { name:'語り部',   en:'The Communicator',  tagline:'言葉と共感で、人と人をつなぐ。' },
+  'linguistic|intrapersonal':   { name:'文人',     en:'The Essayist',      tagline:'言葉と内省で、思索を綴る。' },
+  'linguistic|naturalist':      { name:'編纂者',   en:'The Chronicler',    tagline:'言葉と観察で、世界を記録する。' },
+  'logical|spatial':            { name:'設計者',   en:'The Engineer',      tagline:'論理と空間で、仕組みを組み上げる。' },
+  'logical|musical':            { name:'調律師',   en:'The Harmonizer',    tagline:'論理と音で、秩序ある美を生む。' },
+  'logical|bodily':             { name:'技巧家',   en:'The Craftsman',     tagline:'論理と身体で、技を極める。' },
+  'logical|interpersonal':      { name:'戦略家',   en:'The Strategist',    tagline:'論理と人心で、最善の一手を選ぶ。' },
+  'logical|intrapersonal':      { name:'哲学者',   en:'The Philosopher',   tagline:'論理と内省で、本質を問い続ける。' },
+  'logical|naturalist':         { name:'研究者',   en:'The Analyst',       tagline:'論理と観察で、世界の法則を解く。' },
+  'spatial|musical':            { name:'演出家',   en:'The Director',      tagline:'空間と音で、体験を演出する。' },
+  'spatial|bodily':             { name:'造形家',   en:'The Sculptor',      tagline:'空間と身体で、かたちを生み出す。' },
+  'spatial|interpersonal':      { name:'意匠家',   en:'The Designer',      tagline:'空間と共感で、心地よさを設計する。' },
+  'spatial|intrapersonal':      { name:'芸術家',   en:'The Artist',        tagline:'空間と内省で、内なる世界を描く。' },
+  'spatial|naturalist':         { name:'観測者',   en:'The Cartographer',  tagline:'空間と観察で、世界を見立てる。' },
+  'musical|bodily':             { name:'舞踏家',   en:'The Performer',     tagline:'音と身体で、表現を解き放つ。' },
+  'musical|interpersonal':      { name:'共鳴者',   en:'The Entertainer',   tagline:'音と共感で、その場を一つにする。' },
+  'musical|intrapersonal':      { name:'情感家',   en:'The Composer',      tagline:'音と内省で、感情を作品に変える。' },
+  'musical|naturalist':         { name:'採譜者',   en:'The Sound Curator', tagline:'音と観察で、世界の響きを集める。' },
+  'bodily|interpersonal':       { name:'牽引者',   en:'The Leader',        tagline:'身体と人心で、人を前へ導く。' },
+  'bodily|intrapersonal':       { name:'求道者',   en:'The Practitioner',  tagline:'身体と内省で、己の道を究める。' },
+  'bodily|naturalist':          { name:'冒険家',   en:'The Explorer',      tagline:'身体と観察で、未知へ踏み出す。' },
+  'interpersonal|intrapersonal':{ name:'共感者',   en:'The Empath',        tagline:'人心と内省で、心の機微を読み解く。' },
+  'interpersonal|naturalist':   { name:'組織者',   en:'The Organizer',     tagline:'人心と観察で、全体を束ねる。' },
+  'intrapersonal|naturalist':   { name:'記録者',   en:'The Archivist',     tagline:'内省と観察で、静かに体系を編む。' }
+};
+function getArchetype(a, b) {
+  return ARCHETYPES[archetypeKey(a, b)] || null;
+}
+function getArchetypeName(a, b) {
+  const arc = getArchetype(a, b);
+  if (!arc) return '';
+  // en は英語名、その他（ja/zh/ko）は当面 日本語(漢字)名を表示
+  return (currentLang === 'en') ? arc.en : arc.name;
+}
+function getArchetypeEn(a, b) {
+  const arc = getArchetype(a, b);
+  return arc ? arc.en : '';
+}
+function getArchetypeTagline(a, b) {
+  const arc = getArchetype(a, b);
+  return arc ? arc.tagline : '';
 }
 
 // ============ INTELLIGENCE PARTNERSHIPS ============
@@ -8120,9 +8224,10 @@ function _showResultInner() {
 
   // Character display
   document.getElementById('characterSvg').innerHTML = getCharacterSVG(talent.animal);
-  document.getElementById('characterTagline').textContent = '— ' + talent.catchphrase + ' —';
-  document.getElementById('characterName').textContent = talent.character;
-  document.getElementById('characterEn').textContent = talent.characterEn;
+  // 主役はアーキタイプ（上位2才能の組み合わせ）。才能キャラは裏方の構成要素に。
+  document.getElementById('characterTagline').textContent = '— ' + (getArchetypeTagline(top1, top2) || talent.catchphrase) + ' —';
+  document.getElementById('characterName').textContent = getArchetypeName(top1, top2) || talent.character;
+  document.getElementById('characterEn').textContent = getArchetypeEn(top1, top2) || talent.characterEn;
 
   // 知性別シンボルをセット
   setCharacterSymbols(state.top1);
@@ -8167,14 +8272,13 @@ function _showResultInner() {
     reframeEl.style.display = reframeText ? '' : 'none';
   }
 
-  // 型名バッジ（◯◯型）— 購入導線で記憶を繋ぐため明示
-  document.getElementById('typeBadgeName').textContent = getTypeLabel(top1);
-  document.getElementById('typeBadgeEn').textContent = INTELLIGENCES[top1].en;
+  // アーキタイプの構成才能（第一才能・第二才能）— 才能タイプは裏方の構成要素として表示
+  document.getElementById('talent1Val').textContent = getTypeLabel(top1);
+  document.getElementById('talent2Val').textContent = getTypeLabel(top2);
 
-  // Compound character (TOP1 × TOP2)
-  document.getElementById('compoundName').textContent = makeCompoundName(top1, top2);
-  document.getElementById('compoundNote').innerHTML =
-    `<span class="combo-a">${getIntShortName(top1)}</span><span class="cross">×</span><span class="combo-b">${getIntShortName(top2)}</span>`;
+  // 複合キャラ・バナーはアーキタイプと役割が重複するため非表示（共有画像では従来通り使用）
+  const compoundBannerEl = document.getElementById('compoundBanner');
+  if (compoundBannerEl) compoundBannerEl.style.display = 'none';
 
   // Apply tinted background to talent card
   const card = document.getElementById('talentCard');
@@ -10707,6 +10811,9 @@ const I18N = {
     'compat.comp.intrapersonal':   'あなたが外に向きすぎる時、相手が「立ち止まろう」と内省の時間をくれる。心の地図役。',
     'compat.comp.naturalist':      'あなたが見落とす細部・違いを、相手が拾い集めて体系化してくれる。情報の整理者。',
     'result.compound':   '— Rare Type · あなたの複合キャラ —',
+    'result.archetype_label': 'あなたのアーキタイプは',
+    'result.talent1':    '第一才能',
+    'result.talent2':    '第二才能',
     'result.strength_1': 'Strength I — 主軸の才能',
     'result.strength_2': 'Strength II — 補佐の才能',
     'result.strength_3': 'Strength III — 隠れた才能',
@@ -11043,6 +11150,9 @@ const I18N = {
     'compat.comp.intrapersonal':   'When you focus too much outward, they offer "let\'s pause" and give you time for reflection. Your inner compass.',
     'compat.comp.naturalist':      'The details and differences you miss — they gather and systematize them. Your information organizer.',
     'result.compound':   '— Rare Type · Your Compound Character —',
+    'result.archetype_label': 'Your Archetype',
+    'result.talent1':    '1st Talent',
+    'result.talent2':    '2nd Talent',
     'result.strength_1': 'Strength I — Core Talent',
     'result.strength_2': 'Strength II — Supporting Talent',
     'result.strength_3': 'Strength III — Hidden Talent',
@@ -11377,6 +11487,9 @@ const I18N = {
     'compat.comp.intrapersonal':   '你过于向外时，对方会给予「先停下来」的内省时间。是心的导航者。',
     'compat.comp.naturalist':      '你忽略的细节和差异，对方会收集并体系化。是信息的整理者。',
     'result.compound':   '— 稀有类型 · 你的复合角色 —',
+    'result.archetype_label': '你的原型',
+    'result.talent1':    '第一才能',
+    'result.talent2':    '第二才能',
     'result.strength_1': 'Strength I — 核心才能',
     'result.strength_2': 'Strength II — 辅助才能',
     'result.strength_3': 'Strength III — 隐藏才能',
@@ -11707,6 +11820,9 @@ const I18N = {
     'compat.comp.intrapersonal':   '당신이 너무 밖을 향할 때 상대가 「잠깐 멈추자」며 내성의 시간을 줍니다. 마음의 나침반 역할.',
     'compat.comp.naturalist':      '당신이 놓치는 세부 사항과 차이를 상대가 수집하고 체계화해줍니다. 정보의 정리자.',
     'result.compound':   '— 희귀 유형 · 나의 복합 캐릭터 —',
+    'result.archetype_label': '나의 아키타입',
+    'result.talent1':    '제1 재능',
+    'result.talent2':    '제2 재능',
     'result.strength_1': 'Strength I — 핵심 재능',
     'result.strength_2': 'Strength II — 보조 재능',
     'result.strength_3': 'Strength III — 숨겨진 재능',
