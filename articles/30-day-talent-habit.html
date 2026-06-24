@@ -204,6 +204,12 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
     display: block;
     margin: 0 auto;
   }
+  .article-faq { margin-top:56px; padding-top:32px; border-top:1px solid rgba(184,137,58,.25); }
+  .faq-heading { font-size:20px; font-weight:700; margin-bottom:18px; letter-spacing:.04em; }
+  .faq-item { padding:18px 0; border-bottom:1px solid rgba(184,137,58,.18); }
+  .faq-q { font-size:15px; font-weight:600; line-height:1.6; margin-bottom:8px; color:var(--crimson); }
+  .faq-q::before { content:'Q. '; font-family:'JetBrains Mono',monospace; color:var(--gold); }
+  .faq-a { font-size:14px; line-height:1.85; color:rgba(15,14,12,.78); }
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -237,6 +243,72 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
   },
   "articleSection": "習慣・成長",
   "inLanguage": "ja"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "ホーム",
+      "item": "https://www.jibunmatrix.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "読み物",
+      "item": "https://www.jibunmatrix.com/articles.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "30日で変わる才能習慣",
+      "item": "https://www.jibunmatrix.com/articles/30-day-talent-habit.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "才能は習慣で伸ばせますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "伸ばせます。才能は生まれつきの固定された才能ではなく、使うほど伸びる性質があります。特に自分の強い知能に沿った行動を毎日の習慣に組み込むと、無理なく成長を実感できます。大切なのは、苦手の克服より『得意を伸ばす』方向に習慣を設計することです。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "新しい習慣を30日続けるコツはありますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ハードルを極端に下げること、既存の習慣にくっつけること、記録して見える化することが効果的です。『1日5分だけ』『歯磨きのあとに』のように、始めるための摩擦を減らすと続きやすくなります。完璧を目指さず、できなかった日があっても翌日また戻れば大丈夫です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "自分のタイプに合った習慣はどう作ればいいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "自分の強い知能を入り口にすると続けやすくなります。言語タイプは書く・話す習慣、身体運動タイプは動きを伴う習慣、対人タイプは誰かと一緒に取り組む習慣、内省タイプは振り返りの習慣が合いやすいです。まず自分のタイプを把握し、それに沿った形に習慣をアレンジしましょう。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "三日坊主を防ぐにはどうすればいいですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "意志の力に頼らず、続く『仕組み』を作るのが鍵です。やる時間と場所を固定する、できたらチェックをつける、誰かに宣言する、といった工夫が有効です。また、自分に合わない方法を無理に続けようとすると挫折しやすいので、得意なやり方に変えることも三日坊主の予防になります。"
+      }
+    }
+  ]
 }
 </script>
   <!-- ADSENSE-INJECTED -->
@@ -488,6 +560,26 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
     <a href="/">無料診断を受ける →</a>
   </div>
 
+  <section class="article-faq" aria-label="よくある質問">
+    <h2 class="faq-heading">よくある質問</h2>
+    <div class="faq-item">
+      <h3 class="faq-q">才能は習慣で伸ばせますか？</h3>
+      <p class="faq-a">伸ばせます。才能は生まれつきの固定された才能ではなく、使うほど伸びる性質があります。特に自分の強い知能に沿った行動を毎日の習慣に組み込むと、無理なく成長を実感できます。大切なのは、苦手の克服より『得意を伸ばす』方向に習慣を設計することです。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">新しい習慣を30日続けるコツはありますか？</h3>
+      <p class="faq-a">ハードルを極端に下げること、既存の習慣にくっつけること、記録して見える化することが効果的です。『1日5分だけ』『歯磨きのあとに』のように、始めるための摩擦を減らすと続きやすくなります。完璧を目指さず、できなかった日があっても翌日また戻れば大丈夫です。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">自分のタイプに合った習慣はどう作ればいいですか？</h3>
+      <p class="faq-a">自分の強い知能を入り口にすると続けやすくなります。言語タイプは書く・話す習慣、身体運動タイプは動きを伴う習慣、対人タイプは誰かと一緒に取り組む習慣、内省タイプは振り返りの習慣が合いやすいです。まず自分のタイプを把握し、それに沿った形に習慣をアレンジしましょう。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">三日坊主を防ぐにはどうすればいいですか？</h3>
+      <p class="faq-a">意志の力に頼らず、続く『仕組み』を作るのが鍵です。やる時間と場所を固定する、できたらチェックをつける、誰かに宣言する、といった工夫が有効です。また、自分に合わない方法を無理に続けようとすると挫折しやすいので、得意なやり方に変えることも三日坊主の予防になります。</p>
+    </div>
+  </section>
+
   <div class="related-articles">
     <div class="related-title">Related Articles · 関連記事</div>
     <div class="related-grid">
@@ -499,9 +591,9 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
         <div class="related-card-tag">タイプ解説</div>
         <div class="related-card-title">8つの知能タイプ完全ガイド — 特徴・強み・有名人まとめ</div>
       </a>
-      <a href="/articles/study-by-type.html" class="related-card">
-        <div class="related-card-tag">学習</div>
-        <div class="related-card-title">知能タイプ別の最強の勉強法</div>
+      <a href="/articles/easily-bored.html" class="related-card">
+        <div class="related-card-tag">飽き性</div>
+        <div class="related-card-title">飽きっぽい性格は悪くない｜飽き性の強みと向いてる仕事</div>
       </a>
       <a href="/articles/mi-theory.html" class="related-card">
         <div class="related-card-tag">MI理論・基礎</div>

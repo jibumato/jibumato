@@ -232,6 +232,12 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
     display: block;
     margin: 0 auto;
   }
+  .article-faq { margin-top:56px; padding-top:32px; border-top:1px solid rgba(184,137,58,.25); }
+  .faq-heading { font-size:20px; font-weight:700; margin-bottom:18px; letter-spacing:.04em; }
+  .faq-item { padding:18px 0; border-bottom:1px solid rgba(184,137,58,.18); }
+  .faq-q { font-size:15px; font-weight:600; line-height:1.6; margin-bottom:8px; color:var(--crimson); }
+  .faq-q::before { content:'Q. '; font-family:'JetBrains Mono',monospace; color:var(--gold); }
+  .faq-a { font-size:14px; line-height:1.85; color:rgba(15,14,12,.78); }
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -265,6 +271,72 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
   },
   "articleSection": "キャリア・副業",
   "inLanguage": "ja"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "ホーム",
+      "item": "https://www.jibunmatrix.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "読み物",
+      "item": "https://www.jibunmatrix.com/articles.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "タイプ別・向いている職業と副業",
+      "item": "https://www.jibunmatrix.com/articles/careers-by-type.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "自分に向いている職業はどうすればわかりますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "向いている職業は「自分がどんな知能（能力）を発揮しやすいか」から逆算すると見えてきます。たとえば言語の知能が強い人は伝える・書く仕事、論理の知能が強い人は分析・設計の仕事、対人の知能が強い人は人を支える・つなぐ仕事が向きやすい傾向です。じぶんマトリクスの無料診断で8つの知能のバランスを把握すると、向いている方向性を具体的に絞り込めます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "向いている仕事と好きな仕事、どちらを選ぶべきですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "長く続けることを重視するなら、まずは「向いている（得意な）仕事」を起点にするのがおすすめです。得意な仕事は成果が出やすく、成果が出ると好きになりやすいという好循環が生まれます。好きだけで選ぶと上達の壁で挫折しやすいため、得意を入り口に好きを育てる順番が現実的です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "知能タイプに合わない仕事をしているとどうなりますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "強みと仕事がずれていると、同じ成果を出すにも人より多くのエネルギーが必要になり、消耗しやすくなります。これは能力不足ではなく相性の問題です。今の仕事の中で自分の強い知能を活かせる役割を増やす、または強みが活きる職種・副業を検討することで、無理なく力を発揮しやすくなります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "副業を選ぶときも知能タイプは参考になりますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "参考になります。副業は限られた時間で成果を出す必要があるため、得意な知能に合った分野を選ぶと立ち上がりが早くなります。言語タイプはライティング、論理タイプはデータ分析やプログラミング、空間タイプはデザインなど、強みに沿った副業を選ぶのが効率的です。"
+      }
+    }
+  ]
 }
 </script>
   <!-- ADSENSE-INJECTED -->
@@ -715,6 +787,26 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
     <a href="/">無料診断を受ける →</a>
   </div>
 
+  <section class="article-faq" aria-label="よくある質問">
+    <h2 class="faq-heading">よくある質問</h2>
+    <div class="faq-item">
+      <h3 class="faq-q">自分に向いている職業はどうすればわかりますか？</h3>
+      <p class="faq-a">向いている職業は「自分がどんな知能（能力）を発揮しやすいか」から逆算すると見えてきます。たとえば言語の知能が強い人は伝える・書く仕事、論理の知能が強い人は分析・設計の仕事、対人の知能が強い人は人を支える・つなぐ仕事が向きやすい傾向です。じぶんマトリクスの無料診断で8つの知能のバランスを把握すると、向いている方向性を具体的に絞り込めます。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">向いている仕事と好きな仕事、どちらを選ぶべきですか？</h3>
+      <p class="faq-a">長く続けることを重視するなら、まずは「向いている（得意な）仕事」を起点にするのがおすすめです。得意な仕事は成果が出やすく、成果が出ると好きになりやすいという好循環が生まれます。好きだけで選ぶと上達の壁で挫折しやすいため、得意を入り口に好きを育てる順番が現実的です。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">知能タイプに合わない仕事をしているとどうなりますか？</h3>
+      <p class="faq-a">強みと仕事がずれていると、同じ成果を出すにも人より多くのエネルギーが必要になり、消耗しやすくなります。これは能力不足ではなく相性の問題です。今の仕事の中で自分の強い知能を活かせる役割を増やす、または強みが活きる職種・副業を検討することで、無理なく力を発揮しやすくなります。</p>
+    </div>
+    <div class="faq-item">
+      <h3 class="faq-q">副業を選ぶときも知能タイプは参考になりますか？</h3>
+      <p class="faq-a">参考になります。副業は限られた時間で成果を出す必要があるため、得意な知能に合った分野を選ぶと立ち上がりが早くなります。言語タイプはライティング、論理タイプはデータ分析やプログラミング、空間タイプはデザインなど、強みに沿った副業を選ぶのが効率的です。</p>
+    </div>
+  </section>
+
   <div class="related-articles">
     <div class="related-title">Related Articles · 関連記事</div>
     <div class="related-grid">
@@ -730,9 +822,9 @@ body::before { content:''; position:fixed; inset:0; background-image:radial-grad
         <div class="related-card-tag">比較解説</div>
         <div class="related-card-title">MBTI・StrengthsFinder・MI理論の違いを徹底比較</div>
       </a>
-      <a href="/articles/parenting-mi-theory.html" class="related-card">
-        <div class="related-card-tag">子育て</div>
-        <div class="related-card-title">子どもの才能を伸ばす親の関わり方</div>
+      <a href="/articles/what-job-suits-me.html" class="related-card">
+        <div class="related-card-tag">適職</div>
+        <div class="related-card-title">向いてる仕事がわからない人へ｜適職の見つけ方と才能診断</div>
       </a>
     </div>
   </div>
