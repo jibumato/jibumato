@@ -8006,7 +8006,18 @@ function showScreen(id) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// ============ ANALYTICS (GTM dataLayer) ============
+// 購入ファネル計測: diagnosis_start → result_view → premium_view → premium_buy_click
+// GTM側で「カスタムイベント」トリガー＋GA4イベントタグを設定して転送する。
+function trackEvent(name, params) {
+  try {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(Object.assign({ event: name }, params || {}));
+  } catch (e) { /* 計測失敗はUXに影響させない */ }
+}
+
 function startDiagnosis() {
+  trackEvent('diagnosis_start', { lang: currentLang });
   state.current = 0;
   state.answers = new Array(QUESTIONS.length).fill(null);
   state.lastChapterShown = -1;
@@ -8283,6 +8294,27 @@ function _showResultInner() {
   state.top2 = top2;
   state.top3 = top3;
   state.bottom = bottom;
+
+  // ファネル計測: 結果到達（アーキタイプ・上位知能・言語を付与）
+  trackEvent('result_view', {
+    archetype: (getArchetype(top1, top2) || {}).name || '',
+    top1: top1, top2: top2, lang: currentLang
+  });
+  // ファネル計測: 有料セクションが視界に入ったら premium_view（結果表示ごとに1回）
+  try {
+    const premEl = document.querySelector('.premium-section');
+    if (premEl && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(en => {
+          if (en.isIntersecting) {
+            trackEvent('premium_view', { top1: top1, lang: currentLang });
+            io.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+      io.observe(premEl);
+    }
+  } catch (e) { /* no-op */ }
 
   const talent = getTalent(top1);
 
@@ -8986,6 +9018,14 @@ function goToPremiumCheckout() {
   const langLinks = STRIPE_PAYMENT_LINKS[currentLang] || STRIPE_PAYMENT_LINKS.ja;
   const url = langLinks[type];
 
+  // ファネル計測: 購入ボタンクリック（決済リンク有無も記録）
+  trackEvent('premium_buy_click', {
+    talent_type: type,
+    archetype: (getArchetype(state.top1, state.top2) || {}).name || '',
+    has_payment_link: !!url,
+    lang: currentLang
+  });
+
   // その言語の Payment Link が未設定なら「興味あり集計」へフォールバック
   if (!url) {
     onPremiumInterest();
@@ -9371,6 +9411,7 @@ function getShareResultUrl() {
 }
 
 function shareResult() {
+  trackEvent('share_click', { top1: state.top1, lang: currentLang });
   const talent = getTalent(state.top1);
   const compound = makeCompoundName(state.top1, state.top2);
   const url = getShareResultUrl();

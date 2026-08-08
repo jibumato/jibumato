@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T7NLKV87');</script>
+<!-- End Google Tag Manager -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ご購入ありがとうございます｜じぶんマトリクス</title>
@@ -221,6 +228,10 @@
 </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7NLKV87"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
   <div class="card">
     <div class="badge">
       <span class="mark">✦</span>JIBU-MATO PREMIUM<span class="mark">✦</span>
@@ -360,6 +371,18 @@
     var lang = (params.get('lang') || 'ja').toLowerCase().trim();
     if (!UI[lang]) lang = 'ja';            // 不明な言語は日本語に
     var ui = UI[lang];
+
+    // ファネル計測: 購入完了（Stripe決済後にこのページへ戻る）
+    try {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'purchase_complete',
+        talent_type: type,
+        lang: lang,
+        value: 980,
+        currency: 'JPY'
+      });
+    } catch (e) { /* no-op */ }
 
     var successEl = document.getElementById('success');
     var errorEl = document.getElementById('errorBox');
