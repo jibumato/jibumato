@@ -133,6 +133,18 @@
 
   <!-- 記事（学び・育てる） -->
   <url>
+    <loc>https://www.jibunmatrix.com/articles/humanities-or-science.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.jibunmatrix.com/articles/cannot-focus.html</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.jibunmatrix.com/articles/study-by-type.html</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>monthly</changefreq>
