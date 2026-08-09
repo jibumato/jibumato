@@ -1,0 +1,26 @@
+# 単体 Worker としてデプロイする場合の設定。
+# Cloudflare Pages でホストしている場合はこのファイルは使わない
+# （functions/api/checkout.js が自動で Pages Functions として動く）。
+#
+#   npx wrangler deploy -c worker/wrangler.toml
+#   npx wrangler secret put STRIPE_SECRET_KEY -c worker/wrangler.toml
+#
+# ※ ルート直下ではなく worker/ に置いているのは、Pages のビルドが
+#    ルートの wrangler.toml を Pages 用設定として読んでしまうのを避けるため。
+
+name = "jibunmatrix-checkout"
+main = "index.js"
+compatibility_date = "2025-01-01"
+
+# 独自ドメインの /api/* をこの Worker に流す。
+# ゾーンが Cloudflare 管理下にある場合のみ有効。
+# routes = [
+#   { pattern = "www.jibunmatrix.com/api/*", zone_name = "jibunmatrix.com" }
+# ]
+
+[vars]
+SITE_ORIGIN = "https://www.jibunmatrix.com"
+PAYMENT_METHODS = "card,paypay"
+UNIT_AMOUNT_JPY = "980"
+
+# STRIPE_SECRET_KEY はここに書かない。必ず wrangler secret put で登録する。

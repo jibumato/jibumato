@@ -200,5 +200,6 @@ GA4管理画面 →「**管理**」→「**カスタム定義**」→「カス�
 | `sticky_cta_click` | 追従バーのボタンをクリック | `top1`, `lang` |
 | `share_click` | シェアボタンクリック | `top1`, `lang` |
 | `purchase_complete` | thanks.html 到達（決済完了後） | `talent_type`, `lang`, `value:980`, `currency:JPY` |
+| `checkout_api_fallback` | 日本語版で `/api/checkout` が使えず Payment Link に落ちた時 | `talent_type`, `lang` |
 
 ※ `has_payment_link` は必要に応じて変数・パラメータを追加してください（通常は不要）。

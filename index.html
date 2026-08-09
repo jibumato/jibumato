@@ -4849,12 +4849,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="premium-trust">
           <span data-i18n="prem.trust1">PDF即時ダウンロード</span>
           <span data-i18n="prem.trust2">買い切り</span>
-          <span data-i18n="prem.trust3">Apple Pay対応</span>
+          <span data-i18n="prem.trust3">カード・PayPay対応</span>
         </div>
 
         <p class="premium-note" data-i18n="prem.payment_ready">
           ※ 決済後すぐにPDFをダウンロードできます。<br>
-          クレジットカード・Apple Pay・Google Pay に対応。買い切り・税込です。
+          クレジットカード・Apple Pay・Google Pay・PayPay に対応。買い切り・税込です。
         </p>
       </div>
     </div>
@@ -9185,12 +9185,24 @@ function renderPremiumPreview(key) {
   }
 }
 
-// ============ PREMIUM CHECKOUT (Stripe Payment Links) ============
+// ============ PREMIUM CHECKOUT ============
+// 日本語版は PayPay を使うため、Payment Link ではなく
+// サーバー側（Cloudflare Worker / Pages Functions）で Checkout Session を
+// その都度生成する方式に切り替えている。
+// ─ 理由: Payment Link 側でアダプティブプライシング（自動通貨換算）が有効だと
+//   PayPay を決済手段として選べないため。
+// ─ 実装: shared/checkout-core.js（金額・商品名はすべてサーバー側で固定）
+// 日本語以外（en / zh / ko）は従来どおり Payment Link を使う。
+const CHECKOUT_API_ENDPOINT = '/api/checkout';
+const SERVER_CHECKOUT_LANGS = ['ja'];
+const CHECKOUT_API_TIMEOUT_MS = 12000;
+
 // 言語 × タイプ ごとの Stripe Payment Link URL。
 // Stripe ダッシュボードで各リンクの「決済後のリダイレクト先」を
 //   https://www.jibunmatrix.com/thanks.html?type=◯◯&lang=◯◯
 // に設定したうえで、発行された URL をここに貼ってください。
 // 空文字のタイプは「興味あり集計」にフォールバックします。
+// ja のリンクは、/api/checkout が未デプロイ・障害時の保険として残してある。
 const STRIPE_PAYMENT_LINKS = {
   ja: {
     linguistic:    'https://buy.stripe.com/cNi6oG0Od1DZ2Xf2ny8Ra00',
@@ -9299,7 +9311,69 @@ function onStickyCtaClick() {
   goToPremiumCheckout('sticky_bar');
 }
 
-function goToPremiumCheckout(source) {
+// 決済ページ生成中に二重クリックさせないためのフラグ
+let _checkoutInFlight = false;
+
+function _checkoutButtons() {
+  return Array.prototype.slice.call(
+    document.querySelectorAll('.premium-buy-btn, .sticky-cta-btn, .paid-lock-btn')
+  );
+}
+
+// サーバーへの往復がある分ボタンを「処理中」にする（連打・離脱防止）
+function setCheckoutBusy(busy) {
+  _checkoutButtons().forEach((btn) => {
+    if (busy) {
+      if (btn.getAttribute('data-orig-html') === null) {
+        btn.setAttribute('data-orig-html', btn.innerHTML);
+      }
+      btn.disabled = true;
+      btn.setAttribute('aria-busy', 'true');
+      btn.textContent = t('prem.redirecting');
+    } else {
+      btn.disabled = false;
+      btn.removeAttribute('aria-busy');
+      const orig = btn.getAttribute('data-orig-html');
+      if (orig !== null) {
+        btn.innerHTML = orig;
+        btn.removeAttribute('data-orig-html');
+      }
+    }
+  });
+}
+
+// Cloudflare 側の /api/checkout に Checkout Session を作らせ、その URL を得る。
+// 失敗したら null を返し、呼び出し側が Payment Link にフォールバックする。
+async function createCheckoutSession(type, source) {
+  if (typeof fetch !== 'function') return null;
+
+  let controller = null, timer = null;
+  if (typeof AbortController === 'function') {
+    controller = new AbortController();
+    timer = setTimeout(() => controller.abort(), CHECKOUT_API_TIMEOUT_MS);
+  }
+
+  try {
+    const res = await fetch(CHECKOUT_API_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: type, lang: currentLang, source: source || 'main_cta' }),
+      signal: controller ? controller.signal : undefined
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (data && typeof data.url === 'string' && data.url.indexOf('https://') === 0) {
+      return data.url;
+    }
+    return null;
+  } catch (e) {
+    return null;
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
+
+async function goToPremiumCheckout(source) {
   const type = state.top1;
   const langLinks = STRIPE_PAYMENT_LINKS[currentLang] || STRIPE_PAYMENT_LINKS.ja;
   const url = langLinks[type];
@@ -9312,6 +9386,26 @@ function goToPremiumCheckout(source) {
     source: source || 'main_cta',
     lang: currentLang
   });
+
+  // 日本語版は PayPay を使うためサーバー側で Checkout Session を生成する
+  if (SERVER_CHECKOUT_LANGS.indexOf(currentLang) !== -1 &&
+      Object.prototype.hasOwnProperty.call(STRIPE_PAYMENT_LINKS.ja, type)) {
+    if (_checkoutInFlight) return;
+    _checkoutInFlight = true;
+    setCheckoutBusy(true);
+
+    const sessionUrl = await createCheckoutSession(type, source);
+    if (sessionUrl) {
+      // 遷移するのでボタンは処理中のままにしておく
+      window.location.href = sessionUrl;
+      return;
+    }
+
+    _checkoutInFlight = false;
+    setCheckoutBusy(false);
+    // エンドポイント未デプロイ・障害時に購入を止めないよう Payment Link へ落とす
+    trackEvent('checkout_api_fallback', { talent_type: type, lang: currentLang });
+  }
 
   // その言語の Payment Link が未設定なら「興味あり集計」へフォールバック
   if (!url) {
@@ -11379,7 +11473,8 @@ const I18N = {
     'prem.outcome3.desc': '向いている道、苦手な相手、才能を引き出す環境まで整理します。',
     'prem.trust1': 'PDF即時ダウンロード',
     'prem.trust2': '買い切り',
-    'prem.trust3': 'Apple Pay対応',
+    'prem.trust3': 'カード・PayPay対応',
+    'prem.redirecting': '決済ページへ移動中…',
     'prem.features_label': '— このレポートに含まれるもの —',
     'prem.f.sci.title': '才能の深掘り',
     'prem.f.sci.desc': 'あなたの強み・伸びしろ・思考の罠、そして才能が見せる「四つの顔」',
@@ -11390,7 +11485,7 @@ const I18N = {
     'prem.f.side.title': '才能を活かす道（仕事・副業・お金）',
     'prem.f.side.desc': '副業ロードマップ＋あなたのタイプに合う100の職業リスト',
     'prem.payment_notice': '※ お試し公開中につき、現在は決済システムを準備中です。<br>「興味あり」のクリック数を集計しています。',
-    'prem.payment_ready': '※ 決済後すぐにPDFをダウンロードできます。<br>クレジットカード・Apple Pay・Google Pay に対応。買い切り・税込です。',
+    'prem.payment_ready': '※ 決済後すぐにPDFをダウンロードできます。<br>クレジットカード・Apple Pay・Google Pay・PayPay に対応。買い切り・税込です。',
     'gallery.title': 'キャラクター図鑑',
     'match.title': '相性をみる',
     'match.desc': 'もう一人の「才能コード」を入力すると、二人の才能の相性が見られます。',
@@ -11742,6 +11837,7 @@ const I18N = {
     'prem.trust1': 'Instant PDF download',
     'prem.trust2': 'One-time purchase',
     'prem.trust3': 'Apple Pay supported',
+    'prem.redirecting': 'Opening checkout…',
     'prem.features_label': '— What is included in this report —',
     'prem.f.sci.title': 'A deep dive into your talents',
     'prem.f.sci.desc': 'Your strengths, growth areas, thinking traps, and the "four faces" of your talent',
@@ -12098,6 +12194,7 @@ const I18N = {
     'prem.trust1': 'PDF即时下载',
     'prem.trust2': '一次性买断',
     'prem.trust3': '支持Apple Pay',
+    'prem.redirecting': '正在跳转到结算页面…',
     'prem.features_label': '— 本报告包含的内容 —',
     'prem.f.sci.title': '才能的深度剖析',
     'prem.f.sci.desc': '你的优势、成长空间、思维陷阱，以及才能展现的「四种面貌」',
@@ -12454,6 +12551,7 @@ const I18N = {
     'prem.trust1': 'PDF 즉시 다운로드',
     'prem.trust2': '1회 구매',
     'prem.trust3': 'Apple Pay 지원',
+    'prem.redirecting': '결제 페이지로 이동 중…',
     'prem.features_label': '— 이 리포트에 포함된 내용 —',
     'prem.f.sci.title': '재능의 심층 분석',
     'prem.f.sci.desc': '당신의 강점·성장 여지·사고의 함정, 그리고 재능이 보이는 「네 가지 얼굴」',
