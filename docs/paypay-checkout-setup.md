@@ -1,4 +1,4 @@
-# 日本語版の決済を PayPay 対応にする（Cloudflare + Stripe Checkout Session）
+# 日本語版の決済を PayPay 対応にする（Cloudflare Workers + Stripe Checkout Session）
 
 日本語版だけ **Stripe Payment Link をやめ**、`/api/checkout` でその都度 Checkout Session を
 サーバー側生成する方式に切り替えました。PayPay を使うための変更です。
@@ -12,13 +12,30 @@
 
 ---
 
+## 前提：このサイトは Cloudflare Workers で動いている
+
+Cloudflare の Worker `jibumato` に、**静的アセットだけ**が載っている状態でした。
+そのため設定画面の「変数とシークレット」に
+
+> 静的アセットのみを持つワーカーには変数を追加できません
+
+と表示され、**`STRIPE_SECRET_KEY` を登録できません**でした。
+そこで Worker にスクリプトを持たせる構成に変更しています。
+
+```
+リクエスト
+  ├ /api/checkout          → Worker が処理（Stripe Checkout Session を生成）
+  └ それ以外（/ , *.html …）→ 従来どおり静的アセットを配信（挙動は変わりません）
+```
+
 ## 構成
 
 | ファイル | 役割 |
 |---|---|
+| `wrangler.toml` | Worker の設定。`main`（スクリプト）と `assets`（静的ファイル）を両方指定 |
+| `worker/index.js` | 入口。`/api/checkout` だけ処理し、他はアセットへ委譲 |
 | `shared/checkout-core.js` | 本体。Stripe API を叩いて Checkout Session を作る |
-| `functions/api/checkout.js` | **Cloudflare Pages** で使う場合の入口（自動で有効） |
-| `worker/index.js` + `worker/wrangler.toml` | **単体 Worker** で使う場合の入口 |
+| `.assetsignore` | ソースや社内ドキュメントをサイトとして配信しないための除外リスト |
 | `index.html` | 購入ボタン。`ja` のときだけ `/api/checkout` を呼ぶ |
 
 金額（980円）・商品名・成功後のリダイレクト先は **すべてサーバー側で固定**しています。
@@ -40,48 +57,57 @@
 > `shared/checkout-core.js` が自動でカードのみに切り替えて再試行するため、
 > **決済が止まることはありません**（ログに `retrying without paypay` が出ます）。
 
-### 2. Cloudflare にシークレットを登録する
+### 2. デプロイして Worker にスクリプトを持たせる
 
-#### A. Cloudflare Pages でホストしている場合（`functions/` が自動で動きます）
+**この順番が重要です。** スクリプトが載るまでシークレットは登録できません。
 
-1. Cloudflare ダッシュボード → 対象の Pages プロジェクト
-2. 「**設定**」→「**変数とシークレット**」
-3. 以下を追加（**Production と Preview の両方**に）
+`main` を含む `wrangler.toml` をリポジトリに置いたので、
+GitHub 連携（Workers Builds）でビルドが走れば自動でスクリプト付きの Worker になります。
+
+うまくいかない場合は手元からデプロイしてください。
+
+```bash
+npx wrangler deploy
+```
+
+デプロイ後、ダッシュボードの Worker `jibumato` →「デプロイ」で
+**バージョンが更新され、「静的アセットのみ」の表示が消えている**ことを確認します。
+
+> **ビルドが失敗する場合**は、ダッシュボードの「デプロイ」→ 該当ビルドの
+> **ビルドログ**を確認してください。ビルドコマンドが設定されていると
+> （`npm run build` など。このリポジトリに `package.json` はありません）失敗します。
+> その場合はビルドコマンドを空に、デプロイコマンドを `npx wrangler deploy` にします。
+
+### 3. シークレットを登録する
+
+スクリプトが載ると「設定」→「**変数とシークレット**」が使えるようになります。
 
 | 種別 | 名前 | 値 |
 |---|---|---|
-| **シークレット** | `STRIPE_SECRET_KEY` | `sk_live_...`（本番） |
-| 変数（任意） | `SITE_ORIGIN` | `https://www.jibunmatrix.com` |
-| 変数（任意） | `PAYMENT_METHODS` | `card,paypay` |
-| 変数（任意） | `UNIT_AMOUNT_JPY` | `980` |
+| **シークレット** | `STRIPE_SECRET_KEY` | まず `sk_test_...`、確認後 `sk_live_...` |
 
-4. 再デプロイすると `/api/checkout` が有効になります
-
-#### B. Cloudflare Pages 以外（GitHub Pages など）でホストしている場合
-
-`www.jibunmatrix.com` の DNS が Cloudflare を通っている必要があります。
+CLI からでも登録できます。
 
 ```bash
-npx wrangler deploy -c worker/wrangler.toml
-npx wrangler secret put STRIPE_SECRET_KEY -c worker/wrangler.toml
+npx wrangler secret put STRIPE_SECRET_KEY
 ```
 
-そのうえで `worker/wrangler.toml` の `routes` のコメントを外し、
-`www.jibunmatrix.com/api/*` をこの Worker に割り当てます。
+`SITE_ORIGIN` / `PAYMENT_METHODS` / `UNIT_AMOUNT_JPY` は `wrangler.toml` の `[vars]` に
+書いてあるので、ダッシュボードでの登録は不要です。
 
 > **シークレットキーは絶対にリポジトリに書かないでください。**
-> 必ず Cloudflare の Secret として登録します。
+> `[vars]` はデプロイのたびに `wrangler.toml` の内容で上書きされますが、
+> シークレットはデプロイでは消えません。
 
-### 3. 動作確認
+### 4. 動作確認
 
-1. まず `sk_test_...`（テストキー）で登録してデプロイ
-2. 日本語版で診断 → 購入ボタンを押す
-3. ボタンが「決済ページへ移動中…」になり、Stripe の決済画面に飛べば成功
-4. 決済画面に **カード / Apple Pay / Google Pay / PayPay** が並ぶことを確認
+1. `sk_test_...` を登録した状態で日本語版の診断を進め、購入ボタンを押す
+2. ボタンが「決済ページへ移動中…」になり、Stripe の決済画面に飛べば成功
+3. 決済画面に **カード / Apple Pay / Google Pay / PayPay** が並ぶことを確認
    （PayPay が無い場合 = まだ審査中、または手順1が未完了）
-5. テストカード `4242 4242 4242 4242` で決済 → `thanks.html?type=◯◯&lang=ja` に戻り
+4. テストカード `4242 4242 4242 4242` で決済 → `thanks.html?type=◯◯&lang=ja` に戻り
    PDF がダウンロードできることを確認
-6. 問題なければ `STRIPE_SECRET_KEY` を `sk_live_...` に差し替え
+5. 問題なければ `STRIPE_SECRET_KEY` を `sk_live_...` に差し替え
 
 ---
 
@@ -97,6 +123,8 @@ npx wrangler secret put STRIPE_SECRET_KEY -c worker/wrangler.toml
       │                          └ 失敗 → Payment Link（従来どおり・PayPay なし）
       └ NO  → Payment Link
 ```
+
+つまり **デプロイやシークレット登録が終わっていない間も、日本語版の購入は今までどおり動きます。**
 
 フォールバックが起きると GTM に `checkout_api_fallback` イベントが飛びます。
 **このイベントが出続けている＝サーバー側決済が動いていない**サインなので、
@@ -124,8 +152,9 @@ GTM に同名のカスタムイベントトリガーと GA4 タグを足して�
 
 ## 変更したもの（サイト側）
 
+- `wrangler.toml` / `.assetsignore` を新規追加（Worker にスクリプトを持たせる設定）
+- `worker/index.js` / `shared/checkout-core.js` を新規追加
 - `index.html`
   - `goToPremiumCheckout()` を非同期化。`ja` のときだけ `/api/checkout` を経由
   - 生成待ちの間、購入ボタンを「決済ページへ移動中…」にして二重クリックを防止
   - 決済手段の表記を **カード・PayPay対応** に更新
-- `shared/checkout-core.js` / `functions/api/checkout.js` / `worker/` を新規追加

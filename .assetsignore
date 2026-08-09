@@ -1,0 +1,13 @@
+# 静的アセットとして配信しないもの（ソース・設定・社内ドキュメント）
+.git
+.gitignore
+.assetsignore
+wrangler.toml
+package.json
+package-lock.json
+node_modules
+worker
+shared
+docs
+CLAUDE.md
+README.md
