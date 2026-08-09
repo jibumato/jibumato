@@ -1,0 +1,30 @@
+# Cloudflare Workers の設定。
+#
+# このサイトは「静的アセットのみの Worker」として動いていたため、
+# Worker スクリプトが無く、シークレット（STRIPE_SECRET_KEY）を登録できなかった。
+# main を指定して Worker スクリプトを持たせることで、
+#   ・/api/checkout      → Worker が処理（Stripe Checkout Session を生成）
+#   ・それ以外のパス     → 従来どおり静的アセットを配信
+# という構成にする。
+#
+# name は Cloudflare 上の既存 Worker 名と一致させること（変えると別 Worker が作られる）。
+
+name = "jibumato"
+main = "worker/index.js"
+compatibility_date = "2025-09-01"
+
+[assets]
+# リポジトリ直下がそのままサイトのルート。
+# 配信したくないファイルは .assetsignore で除外する。
+directory = "./"
+binding = "ASSETS"
+
+[vars]
+SITE_ORIGIN = "https://www.jibunmatrix.com"
+PAYMENT_METHODS = "card,paypay"
+UNIT_AMOUNT_JPY = "980"
+
+# STRIPE_SECRET_KEY はここに書かない。
+# ダッシュボードの「設定 → 変数とシークレット」でシークレットとして登録するか、
+#   npx wrangler secret put STRIPE_SECRET_KEY
+# で登録する。
