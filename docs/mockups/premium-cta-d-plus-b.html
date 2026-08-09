@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>有料CTA D＋B 案 — 和モダン封書 × アンカリング</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #0f0e0c; --paper: #f4ede0; --paper-deep: #e8dcc4;
+  --gold: #b8893a; --gold-light: #d4ad5e; --crimson: #8a2922; --moss: #4a5d3a; --indigo: #2c3e5c;
+}
+body { background:#ded4c2; color:var(--ink); font-family:'Shippori Mincho',serif; line-height:1.8; padding:30px 16px 80px; }
+
+.page-head { max-width:900px; margin:0 auto 40px; text-align:center; }
+.page-head h1 { font-size:23px; letter-spacing:.04em; margin-bottom:10px; }
+.page-head p { font-size:13px; color:rgba(15,14,12,.7); line-height:1.9; }
+.page-head .note { display:inline-block; margin-top:14px; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.15em; color:var(--crimson); border:1px solid rgba(138,41,34,.35); padding:6px 14px; }
+
+.mock { max-width:560px; margin:0 auto 56px; }
+.mock-label { display:flex; align-items:baseline; gap:12px; margin-bottom:6px; padding-bottom:10px; border-bottom:2px solid rgba(15,14,12,.25); }
+.mock-num { font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.2em; color:var(--crimson); }
+.mock-name { font-size:17px; font-weight:700; letter-spacing:.03em; }
+.mock-desc { font-size:12px; color:rgba(15,14,12,.65); line-height:1.85; margin:10px 0 18px; }
+.mock-desc b { color:var(--ink); }
+.mock-desc .safe { color:var(--moss); font-weight:700; }
+.mock-desc .warn { color:var(--crimson); font-weight:700; }
+.frame { background:var(--paper); box-shadow:0 6px 24px rgba(0,0,0,.12); }
+
+/* ===== 共通: 和モダン封書ベース(D) ===== */
+.d-wrap { background:var(--paper); border:1px solid rgba(184,137,58,.45); position:relative; }
+.d-seal { position:absolute; top:-14px; left:50%; transform:translateX(-50%); width:56px; height:56px; border-radius:50%; background:var(--crimson); color:#faf3e1; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; line-height:1.3; text-align:center; box-shadow:0 3px 10px rgba(138,41,34,.35); z-index:3; }
+.d-inner { padding:52px 26px 28px; text-align:center; }
+.d-rule { width:40px; height:1px; background:var(--gold); margin:0 auto 16px; }
+.d-name { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; letter-spacing:.2em; color:var(--gold); margin-bottom:12px; }
+.d-title { font-size:21px; font-weight:800; line-height:1.55; margin-bottom:8px; }
+.d-title span { color:var(--crimson); }
+.d-lead { font-size:12.5px; color:rgba(15,14,12,.7); line-height:1.95; margin-bottom:20px; }
+.d-btn { display:block; width:100%; padding:19px; background:var(--ink); color:var(--paper); border:none; font-family:'Shippori Mincho',serif; font-size:15px; font-weight:700; letter-spacing:.18em; cursor:pointer; position:relative; }
+.d-btn::before { content:''; position:absolute; inset:5px; border:1px solid rgba(212,173,94,.45); pointer-events:none; }
+.d-foot { display:flex; justify-content:center; gap:14px; margin-top:14px; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.1em; color:rgba(15,14,12,.5); }
+
+/* ===== アンカリング: 中身の内訳（巻物風） ===== */
+.scroll-box { background:rgba(255,255,255,.5); border-top:1px solid rgba(184,137,58,.35); border-bottom:1px solid rgba(184,137,58,.35); padding:16px 18px; margin-bottom:20px; text-align:left; }
+.scroll-title { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.25em; color:var(--gold); text-transform:uppercase; text-align:center; margin-bottom:12px; }
+.scroll-row { display:flex; align-items:baseline; gap:10px; padding:7px 0; border-bottom:1px dotted rgba(184,137,58,.35); font-size:12.5px; }
+.scroll-row:last-child { border-bottom:none; }
+.scroll-mark { color:var(--crimson); font-size:10px; flex-shrink:0; }
+.scroll-name { flex:1; color:rgba(15,14,12,.85); line-height:1.6; }
+.scroll-val { font-family:'JetBrains Mono',monospace; font-size:11px; color:rgba(15,14,12,.45); white-space:nowrap; }
+
+/* D1: 単品価値の合算アンカー */
+.d1-total { display:flex; align-items:center; justify-content:space-between; padding:11px 16px; background:rgba(184,137,58,.12); border:1px solid rgba(184,137,58,.35); font-size:12px; margin-bottom:14px; }
+.d1-total-l { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.15em; color:rgba(15,14,12,.6); }
+.d1-total-v { font-family:'JetBrains Mono',monospace; font-size:15px; color:rgba(15,14,12,.55); text-decoration:line-through; }
+.d1-pricebox { display:inline-flex; flex-direction:column; align-items:center; gap:3px; padding:14px 34px; border-top:1px solid rgba(184,137,58,.4); border-bottom:1px solid rgba(184,137,58,.4); margin-bottom:20px; }
+.d1-pl { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.25em; color:var(--gold); }
+.d1-pv { font-size:40px; font-weight:800; line-height:1.1; }
+.d1-pv small { font-size:14px; }
+.d1-pt { font-size:10px; color:rgba(15,14,12,.5); }
+
+/* D2: 1日あたり換算アンカー */
+.d2-anchor { display:inline-block; padding:9px 18px; background:rgba(74,93,58,.1); border:1px solid rgba(74,93,58,.3); font-size:12px; color:var(--moss); margin-bottom:16px; line-height:1.7; }
+.d2-anchor b { font-size:16px; font-weight:800; }
+.d2-priceline { display:flex; align-items:baseline; justify-content:center; gap:6px; margin-bottom:6px; }
+.d2-num { font-size:44px; font-weight:800; line-height:1; }
+.d2-yen { font-size:16px; font-weight:700; }
+.d2-tax { font-size:10px; color:rgba(15,14,12,.5); margin-bottom:20px; }
+.d2-compare { font-size:11.5px; color:rgba(15,14,12,.6); line-height:1.9; margin-bottom:20px; padding-top:14px; border-top:1px dotted rgba(184,137,58,.4); }
+.d2-compare b { color:var(--crimson); }
+
+/* D3: ページ単価アンカー */
+.d3-volume { display:flex; justify-content:center; gap:0; margin-bottom:18px; }
+.d3-vcell { flex:1; padding:12px 6px; border:1px solid rgba(184,137,58,.35); border-right:none; }
+.d3-vcell:last-child { border-right:1px solid rgba(184,137,58,.35); }
+.d3-vnum { font-size:22px; font-weight:800; line-height:1.2; color:var(--crimson); }
+.d3-vlabel { font-family:'JetBrains Mono',monospace; font-size:8.5px; letter-spacing:.1em; color:rgba(15,14,12,.55); margin-top:3px; }
+.d3-pricerow { display:flex; align-items:center; justify-content:center; gap:14px; padding:14px 0; border-top:1px solid rgba(184,137,58,.4); border-bottom:1px solid rgba(184,137,58,.4); margin-bottom:20px; }
+.d3-main { display:flex; align-items:baseline; gap:4px; }
+.d3-num { font-size:38px; font-weight:800; line-height:1; }
+.d3-yen { font-size:14px; font-weight:700; }
+.d3-per { text-align:left; font-size:11px; color:rgba(15,14,12,.6); line-height:1.6; border-left:1px solid rgba(184,137,58,.35); padding-left:14px; }
+.d3-per b { color:var(--crimson); font-size:13px; }
+
+.summary { max-width:900px; margin:60px auto 0; background:var(--paper); padding:26px 22px; }
+.summary h2 { font-size:17px; margin-bottom:14px; letter-spacing:.03em; }
+.summary table { width:100%; border-collapse:collapse; font-size:12.5px; }
+.summary th, .summary td { border:1px solid rgba(184,137,58,.3); padding:9px 11px; text-align:left; vertical-align:top; line-height:1.75; }
+.summary th { background:rgba(184,137,58,.12); font-weight:700; }
+.summary td:first-child { font-weight:700; white-space:nowrap; }
+.legal { max-width:900px; margin:22px auto 0; background:rgba(138,41,34,.06); border:1px solid rgba(138,41,34,.3); padding:18px 20px; font-size:12.5px; line-height:1.95; }
+.legal h3 { font-size:13px; color:var(--crimson); margin-bottom:8px; letter-spacing:.05em; }
+@media (max-width:600px){
+  .summary { padding:18px 12px; }
+  .summary table { font-size:11.5px; }
+  .summary th, .summary td { padding:7px 8px; }
+  .d3-per { font-size:10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-head">
+  <h1>D＋B 案 — 和モダン封書 × アンカリング</h1>
+  <p>D案（和モダン・封書）の世界観を保ったまま、B案の「価値の可視化＝アンカリング」を組み込んだ3パターンです。<br>
+  アンカーの取り方だけが異なります。</p>
+  <div class="note">※ モックアップのみ・本番未反映（ボタンは押せません）</div>
+</div>
+
+<!-- ============ D1 ============ -->
+<div class="mock">
+  <div class="mock-label"><span class="mock-num">D-1</span><span class="mock-name">内訳の合算アンカー（B案に最も近い）</span></div>
+  <p class="mock-desc">
+    収録内容を巻物風に列挙し、<b>合計相当額 → 980円</b>で見せる王道の型。
+    値ごろ感は3案で最も強い。ただし<span class="warn">「相当¥○○」「合計¥2,500」は二重価格表示に該当し得る</span>ため、
+    実際にその価格で販売した実績が無い場合は D-2・D-3 を推奨。
+  </p>
+  <div class="frame">
+    <div class="d-wrap">
+      <div class="d-seal">才能<br>活用</div>
+      <div class="d-inner">
+        <div class="d-rule"></div>
+        <div class="d-name">Premium Guide</div>
+        <div class="d-title"><span>「構想家」</span>のあなたへ<br>才能活用ガイド</div>
+        <p class="d-lead">診断結果を、日々の選択で使える形に。</p>
+
+        <div class="scroll-box">
+          <div class="scroll-title">— 収録内容 —</div>
+          <div class="scroll-row"><span class="scroll-mark">✦</span><span class="scroll-name">才能の深掘り解説（才能が見せる4つの顔）</span><span class="scroll-val">相当 ¥600</span></div>
+          <div class="scroll-row"><span class="scroll-mark">✦</span><span class="scroll-name">1日10分・30日実践プログラム</span><span class="scroll-val">相当 ¥800</span></div>
+          <div class="scroll-row"><span class="scroll-mark">✦</span><span class="scroll-name">タイプに合う100の職業リスト</span><span class="scroll-val">相当 ¥500</span></div>
+          <div class="scroll-row"><span class="scroll-mark">✦</span><span class="scroll-name">書き込み式ワークブック</span><span class="scroll-val">相当 ¥600</span></div>
+        </div>
+
+        <div class="d1-total">
+          <span class="d1-total-l">個別に揃えるなら</span>
+          <span class="d1-total-v">¥2,500</span>
+        </div>
+
+        <div class="d1-pricebox">
+          <span class="d1-pl">この1冊で</span>
+          <span class="d1-pv">980<small>円</small></span>
+          <span class="d1-pt">税込・買い切り</span>
+        </div>
+
+        <button class="d-btn">ガイドを受け取る</button>
+        <div class="d-foot"><span>PDF即時DL</span><span>買い切り</span><span>Apple Pay</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ D2 ============ -->
+<div class="mock">
+  <div class="mock-label"><span class="mock-num">D-2</span><span class="mock-name">日割り換算アンカー（法務リスクなし・推奨）</span></div>
+  <p class="mock-desc">
+    <b>「30日プログラム＝1日あたり約33円」</b>と換算し、コーヒー1杯などの身近な出費と比較する型。
+    <span class="safe">架空の比較価格を使わないため景表法上の懸念がない</span>のが最大の利点。
+    30日プログラムという商品特性とも噛み合い、和モダンの静けさを損なわない。
+  </p>
+  <div class="frame">
+    <div class="d-wrap">
+      <div class="d-seal">才能<br>活用</div>
+      <div class="d-inner">
+        <div class="d-rule"></div>
+        <div class="d-name">Premium Guide</div>
+        <div class="d-title"><span>「構想家」</span>のあなたへ<br>才能活用ガイド</div>
+        <p class="d-lead">診断結果を、日々の選択で使える形に。<br>全26ページ・ワークブック付き。</p>
+
+        <div class="scroll-box">
+          <div class="scroll-title">— 収録内容 —</div>
+          <div class="scroll-row"><span class="scroll-mark">✦</span><span class="scroll-name">才能の深掘り解説（才能が見せる4つの顔）</span></div>
+          <div class="scroll-row"><span class="scroll-mark">✦</span><span class="scroll-name">1日10分・30日実践プログラム</span></div>
+          <div class="scroll-row"><span class="scroll-mark">✦</span><span class="scroll-name">タイプに合う100の職業リスト＋副業ロードマップ</span></div>
+          <div class="scroll-row"><span class="scroll-mark">✦</span><span class="scroll-name">書き込み式ワークブック</span></div>
+        </div>
+
+        <div class="d2-anchor">30日プログラムなら<br><b>1日あたり約33円</b></div>
+
+        <div class="d2-priceline">
+          <span class="d2-num">980</span><span class="d2-yen">円</span>
+        </div>
+        <div class="d2-tax">税込・買い切り／追加課金なし</div>
+
+        <button class="d-btn">ガイドを受け取る</button>
+        <div class="d-foot"><span>PDF即時DL</span><span>買い切り</span><span>Apple Pay</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ D3 ============ -->
+<div class="mock">
+  <div class="mock-label"><span class="mock-num">D-3</span><span class="mock-name">物量アンカー（法務リスクなし）</span></div>
+  <p class="mock-desc">
+    <b>26ページ・100職業・30日</b>という実数を先に見せ、<b>1ページあたり約38円</b>で締める型。
+    <span class="safe">事実の提示のみで完結</span>し、煽り感が最も少ない。
+    ボリューム＝価値と感じる層に効き、D案の落ち着いた印象を最も保てる。
+  </p>
+  <div class="frame">
+    <div class="d-wrap">
+      <div class="d-seal">才能<br>活用</div>
+      <div class="d-inner">
+        <div class="d-rule"></div>
+        <div class="d-name">Premium Guide</div>
+        <div class="d-title"><span>「構想家」</span>のあなたへ<br>才能活用ガイド</div>
+        <p class="d-lead">診断結果を、日々の選択で使える形に。</p>
+
+        <div class="d3-volume">
+          <div class="d3-vcell"><div class="d3-vnum">26</div><div class="d3-vlabel">PAGES</div></div>
+          <div class="d3-vcell"><div class="d3-vnum">100</div><div class="d3-vlabel">JOBS</div></div>
+          <div class="d3-vcell"><div class="d3-vnum">30</div><div class="d3-vlabel">DAYS</div></div>
+        </div>
+
+        <div class="scroll-box">
+          <div class="scroll-title">— 収録内容 —</div>
+          <div class="scroll-row"><span class="scroll-mark">✦</span><span class="scroll-name">才能の深掘り解説（才能が見せる4つの顔）</span></div>
+          <div class="scroll-row"><span class="scroll-mark">✦</span><span class="scroll-name">1日10分・30日実践プログラム</span></div>
+          <div class="scroll-row"><span class="scroll-mark">✦</span><span class="scroll-name">タイプに合う100の職業リスト＋副業ロードマップ</span></div>
+          <div class="scroll-row"><span class="scroll-mark">✦</span><span class="scroll-name">書き込み式ワークブック</span></div>
+        </div>
+
+        <div class="d3-pricerow">
+          <div class="d3-main"><span class="d3-num">980</span><span class="d3-yen">円</span></div>
+          <div class="d3-per">1ページあたり<br><b>約38円</b></div>
+        </div>
+
+        <button class="d-btn">ガイドを受け取る</button>
+        <div class="d-foot"><span>税込・買い切り</span><span>PDF即時DL</span><span>Apple Pay</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="summary">
+  <h2>3パターンの比較</h2>
+  <table>
+    <thead><tr><th>案</th><th>アンカーの取り方</th><th>値ごろ感</th><th>法務リスク</th><th>世界観との調和</th></tr></thead>
+    <tbody>
+      <tr><td>D-1</td><td>収録内容の個別価格を合算（¥2,500 → ¥980）</td><td>◎ 最も強い</td><td>△ 二重価格表示に注意</td><td>○</td></tr>
+      <tr><td>D-2</td><td>30日で割って「1日約33円」</td><td>○ 十分強い</td><td>◎ 問題なし</td><td>◎</td></tr>
+      <tr><td>D-3</td><td>物量（26p/100職業/30日）＋1ページ約38円</td><td>△〜○</td><td>◎ 問題なし</td><td>◎ 最も静か</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="legal">
+  <h3>D-1 を選ぶ場合の注意（重要）</h3>
+  「相当 ¥600」「個別に揃えるなら ¥2,500」といった表示は、<b>実際にその価格で販売した実績がない場合、景品表示法の「有利誤認表示（不当な二重価格表示）」に該当するおそれ</b>があります。
+  採用する場合は、(1) 各コンテンツを実際に単品販売して実績を作る、(2) 「相当」ではなく「他社の類似商品の相場」と明記し出典を持つ、
+  のいずれかが必要です。<b>回避したい場合は D-2 または D-3 を推奨します</b>（どちらも事実の提示のみでアンカリング効果を得られます）。
+</div>
+
+</body>
+</html>
