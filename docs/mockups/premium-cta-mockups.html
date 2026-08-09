@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>有料CTA デザイン案 5種 — モックアップ比較</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #0f0e0c; --paper: #f4ede0; --paper-deep: #e8dcc4;
+  --gold: #b8893a; --gold-light: #d4ad5e; --crimson: #8a2922; --moss: #4a5d3a; --indigo: #2c3e5c;
+}
+body {
+  background: #ded4c2;
+  color: var(--ink);
+  font-family: 'Shippori Mincho', serif;
+  line-height: 1.8;
+  padding: 30px 16px 80px;
+}
+
+/* ===== 比較ページのフレーム ===== */
+.page-head { max-width: 900px; margin: 0 auto 40px; text-align: center; }
+.page-head h1 { font-size: 24px; letter-spacing: .04em; margin-bottom: 10px; }
+.page-head p { font-size: 13px; color: rgba(15,14,12,.7); line-height: 1.9; }
+.page-head .note { display:inline-block; margin-top:14px; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.15em; color:var(--crimson); border:1px solid rgba(138,41,34,.35); padding:6px 14px; }
+
+.mock { max-width: 560px; margin: 0 auto 56px; }
+.mock-label {
+  display: flex; align-items: baseline; gap: 12px;
+  margin-bottom: 6px; padding-bottom: 10px;
+  border-bottom: 2px solid rgba(15,14,12,.25);
+}
+.mock-num { font-family:'JetBrains Mono',monospace; font-size: 11px; letter-spacing:.2em; color: var(--crimson); }
+.mock-name { font-size: 17px; font-weight: 700; letter-spacing:.03em; }
+.mock-desc { font-size: 12px; color: rgba(15,14,12,.65); line-height:1.85; margin: 10px 0 18px; }
+.mock-desc b { color: var(--ink); }
+.frame { background: var(--paper); padding: 0; box-shadow: 0 6px 24px rgba(0,0,0,.12); }
+
+/* ============================================
+   案A: 現状（比較用リファレンス）
+   ============================================ */
+.a-cta { background: var(--ink); color: var(--paper); padding: 30px 24px; text-align: center; position: relative; }
+.a-cta::before { content:''; position:absolute; inset:6px; border:1px solid rgba(212,173,94,.3); pointer-events:none; }
+.a-price-label { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.3em; color:var(--gold-light); text-transform:uppercase; margin-bottom:6px; }
+.a-price { display:flex; align-items:baseline; justify-content:center; gap:4px; margin-bottom:22px; }
+.a-cur { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:26px; color:var(--gold-light); }
+.a-num { font-weight:800; font-size:56px; line-height:1; }
+.a-tax { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:12px; color:rgba(244,237,224,.6); margin-left:8px; }
+.a-btn { width:100%; padding:20px; background:var(--gold-light); color:var(--ink); border:none; font-family:'Shippori Mincho',serif; font-size:15px; font-weight:700; letter-spacing:.25em; cursor:pointer; }
+.a-trust { display:flex; justify-content:center; gap:18px; margin-top:16px; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.1em; color:rgba(244,237,224,.55); }
+
+/* ============================================
+   案B: アンカリング＋価値の可視化
+   ============================================ */
+.b-wrap { background: linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%); border:1px solid rgba(184,137,58,.4); padding: 28px 22px; }
+.b-head { text-align:center; margin-bottom: 20px; }
+.b-eyebrow { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.3em; color:var(--gold); text-transform:uppercase; margin-bottom:10px; }
+.b-title { font-size:20px; font-weight:800; line-height:1.5; letter-spacing:.02em; }
+.b-title em { font-style:normal; color:var(--crimson); }
+.b-valuelist { background:rgba(255,255,255,.55); border:1px solid rgba(184,137,58,.25); padding:16px 18px; margin-bottom:18px; }
+.b-vrow { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px dashed rgba(184,137,58,.3); font-size:13px; }
+.b-vrow:last-child { border-bottom:none; }
+.b-vname { color:rgba(15,14,12,.85); }
+.b-vprice { font-family:'JetBrains Mono',monospace; font-size:12px; color:rgba(15,14,12,.5); }
+.b-total { display:flex; justify-content:space-between; align-items:baseline; padding:12px 18px; background:var(--ink); color:var(--paper); }
+.b-total-label { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; color:var(--gold-light); }
+.b-strike { font-family:'JetBrains Mono',monospace; font-size:13px; color:rgba(244,237,224,.5); text-decoration:line-through; margin-right:10px; }
+.b-now { font-weight:800; font-size:32px; }
+.b-now small { font-size:13px; font-weight:400; margin-left:2px; }
+.b-btn { display:block; width:100%; margin-top:14px; padding:19px; background:var(--crimson); color:#faf3e1; border:none; font-family:'Shippori Mincho',serif; font-size:15px; font-weight:700; letter-spacing:.12em; cursor:pointer; }
+.b-sub { text-align:center; font-size:11px; color:rgba(15,14,12,.6); margin-top:10px; }
+
+/* ============================================
+   案C: ミニマル・信頼重視
+   ============================================ */
+.c-wrap { background:#fff; border:1px solid rgba(15,14,12,.12); padding:32px 26px; }
+.c-label { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.25em; color:rgba(15,14,12,.45); text-transform:uppercase; margin-bottom:14px; }
+.c-title { font-size:19px; font-weight:700; line-height:1.55; margin-bottom:20px; }
+.c-priceline { display:flex; align-items:baseline; gap:8px; padding-bottom:20px; border-bottom:1px solid rgba(15,14,12,.1); margin-bottom:20px; }
+.c-num { font-size:40px; font-weight:800; line-height:1; letter-spacing:-.02em; }
+.c-yen { font-size:18px; font-weight:700; }
+.c-meta { font-size:11px; color:rgba(15,14,12,.5); margin-left:auto; }
+.c-list { list-style:none; margin-bottom:24px; }
+.c-list li { display:flex; gap:10px; font-size:13px; color:rgba(15,14,12,.8); padding:6px 0; }
+.c-check { color:var(--moss); font-weight:700; }
+.c-btn { display:block; width:100%; padding:18px; background:var(--ink); color:#fff; border:none; font-family:'Shippori Mincho',serif; font-size:15px; font-weight:700; letter-spacing:.08em; cursor:pointer; border-radius:2px; }
+.c-guard { display:flex; align-items:center; justify-content:center; gap:8px; margin-top:14px; font-size:11px; color:rgba(15,14,12,.55); }
+
+/* ============================================
+   案D: 和モダン・封書（ブランド強化型）
+   ============================================ */
+.d-wrap { background: var(--paper); border:1px solid rgba(184,137,58,.45); padding:0; position:relative; }
+.d-seal { position:absolute; top:-14px; left:50%; transform:translateX(-50%); width:56px; height:56px; border-radius:50%; background:var(--crimson); color:#faf3e1; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; letter-spacing:.05em; line-height:1.3; text-align:center; box-shadow:0 3px 10px rgba(138,41,34,.35); }
+.d-inner { padding:52px 26px 28px; text-align:center; }
+.d-rule { width:40px; height:1px; background:var(--gold); margin:0 auto 16px; }
+.d-name { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:13px; letter-spacing:.2em; color:var(--gold); margin-bottom:12px; }
+.d-title { font-size:21px; font-weight:800; line-height:1.55; margin-bottom:8px; }
+.d-title span { color:var(--crimson); }
+.d-lead { font-size:12.5px; color:rgba(15,14,12,.7); line-height:1.95; margin-bottom:22px; }
+.d-pricebox { display:inline-flex; flex-direction:column; align-items:center; gap:2px; padding:14px 34px; border-top:1px solid rgba(184,137,58,.4); border-bottom:1px solid rgba(184,137,58,.4); margin-bottom:22px; }
+.d-pl { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.25em; color:var(--gold); }
+.d-pv { font-size:38px; font-weight:800; line-height:1.1; }
+.d-pv small { font-size:14px; }
+.d-pt { font-size:10px; color:rgba(15,14,12,.5); }
+.d-btn { display:block; width:100%; padding:19px; background:var(--ink); color:var(--paper); border:none; font-family:'Shippori Mincho',serif; font-size:15px; font-weight:700; letter-spacing:.18em; cursor:pointer; position:relative; }
+.d-btn::before { content:''; position:absolute; inset:5px; border:1px solid rgba(212,173,94,.45); pointer-events:none; }
+.d-foot { display:flex; justify-content:center; gap:14px; margin-top:14px; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.1em; color:rgba(15,14,12,.5); }
+
+/* ============================================
+   案E: モバイル特化・スティッキーバー型
+   ============================================ */
+.e-demo { background:var(--paper); padding:24px 22px 0; }
+.e-content { font-size:13px; color:rgba(15,14,12,.55); line-height:2; }
+.e-fade { height:70px; background:linear-gradient(180deg, transparent, var(--paper)); margin-top:-40px; position:relative; }
+.e-bar { display:flex; align-items:center; gap:12px; background:var(--ink); color:var(--paper); padding:12px 14px; border-top:2px solid var(--gold-light); }
+.e-bar-info { flex:1; min-width:0; }
+.e-bar-name { font-size:11px; color:rgba(244,237,224,.7); letter-spacing:.04em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.e-bar-price { display:flex; align-items:baseline; gap:3px; }
+.e-bar-num { font-size:24px; font-weight:800; line-height:1.1; }
+.e-bar-yen { font-size:12px; }
+.e-bar-tax { font-size:9px; color:rgba(244,237,224,.5); margin-left:4px; }
+.e-bar-btn { flex-shrink:0; padding:14px 22px; background:var(--gold-light); color:var(--ink); border:none; font-family:'Shippori Mincho',serif; font-size:14px; font-weight:700; letter-spacing:.06em; cursor:pointer; white-space:nowrap; }
+.e-cap { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.12em; color:rgba(15,14,12,.45); text-align:center; padding:10px 0 0; }
+
+/* 比較まとめ表 */
+.summary { max-width: 900px; margin: 60px auto 0; background:var(--paper); padding:26px 22px; }
+.summary h2 { font-size:17px; margin-bottom:16px; letter-spacing:.03em; }
+.summary table { width:100%; border-collapse:collapse; font-size:12.5px; }
+.summary th, .summary td { border:1px solid rgba(184,137,58,.3); padding:9px 11px; text-align:left; vertical-align:top; line-height:1.75; }
+.summary th { background:rgba(184,137,58,.12); font-weight:700; }
+.summary td:first-child { font-weight:700; white-space:nowrap; }
+@media (max-width:600px){
+  .summary { padding:18px 12px; }
+  .summary table { font-size:11.5px; }
+  .summary th, .summary td { padding:7px 8px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-head">
+  <h1>有料コンテンツ CTA デザイン案</h1>
+  <p>「あなたのタイプ専用の才能活用ガイド（¥980）」の価格まわり・購入ボタンの比較モックアップです。<br>
+  すべて既存のブランドカラー（墨・和紙・金・臙脂）の範囲で作成しています。</p>
+  <div class="note">※ モックアップのみ・本番未反映（ボタンは押せません）</div>
+</div>
+
+<!-- ============ A: 現状 ============ -->
+<div class="mock">
+  <div class="mock-label"><span class="mock-num">A</span><span class="mock-name">現状（リファレンス）</span></div>
+  <p class="mock-desc">
+    黒背景に大きな価格 → 金色のボタン。<b>比較の基準として掲載</b>。価格が最も目立つが、
+    「なぜ980円の価値があるか」の根拠がこの枠内には無い。
+  </p>
+  <div class="frame">
+    <div class="a-cta">
+      <div class="a-price-label">あなたのタイプ専用の才能活用ガイド（ワークブック付き）</div>
+      <div class="a-price">
+        <span class="a-cur">¥</span><span class="a-num">980</span><span class="a-tax">（税込・買い切り）</span>
+      </div>
+      <button class="a-btn">「構想家」専用ガイドを購入する</button>
+      <div class="a-trust"><span>PDF即時DL</span><span>買い切り</span><span>Apple Pay対応</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ B: アンカリング型 ============ -->
+<div class="mock">
+  <div class="mock-label"><span class="mock-num">B</span><span class="mock-name">アンカリング＋価値の可視化</span></div>
+  <p class="mock-desc">
+    含まれる中身を<b>個別に値付けして合計を見せてから980円を提示</b>する構成。
+    「26ページ＋ワーク＋100職業リスト」の物量が価格の根拠として効く。
+    <b>最もCVRを押し上げやすい</b>が、比較価格の表記には景表法上の配慮が必要（下記注記）。
+  </p>
+  <div class="frame">
+    <div class="b-wrap">
+      <div class="b-head">
+        <div class="b-eyebrow">Premium Guide · 才能活用ガイド</div>
+        <div class="b-title">「構想家」のあなた専用に<br><em>26ページ</em>の活用ガイド</div>
+      </div>
+      <div class="b-valuelist">
+        <div class="b-vrow"><span class="b-vname">才能の深掘り解説（4つの顔）</span><span class="b-vprice">相当 ¥600</span></div>
+        <div class="b-vrow"><span class="b-vname">30日実践プログラム</span><span class="b-vprice">相当 ¥800</span></div>
+        <div class="b-vrow"><span class="b-vname">タイプ別100職業リスト</span><span class="b-vprice">相当 ¥500</span></div>
+        <div class="b-vrow"><span class="b-vname">書き込み式ワークブック</span><span class="b-vprice">相当 ¥600</span></div>
+      </div>
+      <div class="b-total">
+        <span class="b-total-label">今回のみ</span>
+        <span><span class="b-strike">¥2,500</span><span class="b-now">¥980<small>（税込）</small></span></span>
+      </div>
+      <button class="b-btn">いますぐ受け取る →</button>
+      <p class="b-sub">買い切り・PDF即時ダウンロード</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ C: ミニマル信頼型 ============ -->
+<div class="mock">
+  <div class="mock-label"><span class="mock-num">C</span><span class="mock-name">ミニマル・信頼重視</span></div>
+  <p class="mock-desc">
+    装飾を削ぎ、白背景＋箇条書きで<b>「何が手に入るか」を淡々と提示</b>。
+    煽りが無いぶん信頼感が高く、<b>返金・サポート表記と相性が良い</b>。
+    情報密度は高いが、インパクトは弱め。
+  </p>
+  <div class="frame">
+    <div class="c-wrap">
+      <div class="c-label">Premium Guide</div>
+      <div class="c-title">「構想家」専用<br>才能活用ガイド（PDF・全26ページ）</div>
+      <div class="c-priceline">
+        <span class="c-num">980</span><span class="c-yen">円</span>
+        <span class="c-meta">税込・買い切り</span>
+      </div>
+      <ul class="c-list">
+        <li><span class="c-check">✓</span><span>あなたの強み・伸びしろ・思考の罠の詳細解説</span></li>
+        <li><span class="c-check">✓</span><span>1日10分・30日間の実践プログラム</span></li>
+        <li><span class="c-check">✓</span><span>タイプに合う100の職業リスト＋副業ロードマップ</span></li>
+        <li><span class="c-check">✓</span><span>書き込み式ワークブック</span></li>
+      </ul>
+      <button class="c-btn">購入して受け取る</button>
+      <div class="c-guard">🔒 決済はStripe・カード情報は当サイトに保存されません</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ D: 和モダン封書型 ============ -->
+<div class="mock">
+  <div class="mock-label"><span class="mock-num">D</span><span class="mock-name">和モダン・封書（ブランド強化）</span></div>
+  <p class="mock-desc">
+    朱印風のシールと罫線で<b>「あなた宛の書状」の趣</b>を出す案。
+    サイトの世界観と最も調和し、<b>体験の余韻を壊さない</b>。
+    価格は控えめに提示するため、値ごろ感の訴求は弱い。
+  </p>
+  <div class="frame">
+    <div class="d-wrap">
+      <div class="d-seal">才能<br>活用</div>
+      <div class="d-inner">
+        <div class="d-rule"></div>
+        <div class="d-name">Premium Guide</div>
+        <div class="d-title"><span>「構想家」</span>のあなたへ<br>才能活用ガイド</div>
+        <p class="d-lead">診断結果を、日々の選択で使える形に。<br>全26ページ・ワークブック付き。</p>
+        <div class="d-pricebox">
+          <span class="d-pl">Price</span>
+          <span class="d-pv">980<small>円</small></span>
+          <span class="d-pt">税込・買い切り</span>
+        </div>
+        <button class="d-btn">ガイドを受け取る</button>
+        <div class="d-foot"><span>PDF即時DL</span><span>買い切り</span><span>Apple Pay</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ E: スティッキーバー ============ -->
+<div class="mock">
+  <div class="mock-label"><span class="mock-num">E</span><span class="mock-name">モバイル特化・追従バー</span></div>
+  <p class="mock-desc">
+    有料セクションを読んでいる間、<b>画面下に価格とボタンを常時表示</b>する案（A〜Dと併用可）。
+    スマホ中心の流入では<b>「読み終えてから戻る手間」を消せる</b>のが最大の利点。
+    やり過ぎると煩わしいので、有料セクション到達後のみ表示するのが前提。
+  </p>
+  <div class="frame">
+    <div class="e-demo">
+      <p class="e-content">……このガイドでは、あなたの強みが「どんな場面で武器になるのか」を具体的な行動レベルまで分解して解説します。読んで終わりにしないための30日プログラムと、書き込み式のワークも収録しています。</p>
+      <div class="e-fade"></div>
+    </div>
+    <div class="e-bar">
+      <div class="e-bar-info">
+        <div class="e-bar-name">「構想家」専用 才能活用ガイド</div>
+        <div class="e-bar-price"><span class="e-bar-num">980</span><span class="e-bar-yen">円</span><span class="e-bar-tax">税込・買い切り</span></div>
+      </div>
+      <button class="e-bar-btn">受け取る</button>
+    </div>
+    <div class="e-cap">↑ 画面下に固定表示されるイメージ</div>
+  </div>
+</div>
+
+<!-- ============ 比較まとめ ============ -->
+<div class="summary">
+  <h2>比較まとめ</h2>
+  <table>
+    <thead>
+      <tr><th>案</th><th>強み</th><th>弱み・注意点</th><th>向いている状況</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>A 現状</td>
+        <td>価格が明快でインパクトがある</td>
+        <td>価格の根拠がこの枠内に無い</td>
+        <td>—（比較基準）</td>
+      </tr>
+      <tr>
+        <td>B アンカリング</td>
+        <td>値ごろ感が最も強く、CVR改善の期待値が高い</td>
+        <td>「相当額」「参考価格」の表記は根拠が必要。二重価格表示にならない配慮が要る</td>
+        <td>とにかく売上を伸ばしたい段階</td>
+      </tr>
+      <tr>
+        <td>C ミニマル</td>
+        <td>信頼感が高く、内容が誤解なく伝わる</td>
+        <td>インパクトが弱く、衝動的な購入は起きにくい</td>
+        <td>単価を上げたい／返金保証を付ける場合</td>
+      </tr>
+      <tr>
+        <td>D 和モダン</td>
+        <td>世界観に最も忠実。ブランド毀損リスクが無い</td>
+        <td>値ごろ感の訴求は弱い</td>
+        <td>ブランド重視・リピート導線を育てたい場合</td>
+      </tr>
+      <tr>
+        <td>E 追従バー</td>
+        <td>離脱直前の取りこぼしを減らせる（A〜Dと併用可）</td>
+        <td>常時表示は煩わしさに繋がる。表示条件の制御が必須</td>
+        <td>モバイル流入が中心の現状と相性が良い</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
