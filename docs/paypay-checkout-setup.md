@@ -33,8 +33,9 @@ Cloudflare の Worker `jibumato` に、**静的アセットだけ**が載って�
 | ファイル | 役割 |
 |---|---|
 | `wrangler.toml` | Worker の設定。`main`（スクリプト）と `assets`（静的ファイル）を両方指定 |
-| `worker/index.js` | 入口。`/api/checkout` だけ処理し、他はアセットへ委譲 |
-| `shared/checkout-core.js` | 本体。Stripe API を叩いて Checkout Session を作る |
+| `worker/index.js` | 入口。`/api/checkout` と `/api/stripe-webhook` を処理し、他はアセットへ委譲 |
+| `shared/checkout-core.js` | Stripe API を叩いて Checkout Session を作る |
+| `shared/webhook-core.js` | 決済完了を受け取り、ダウンロードリンクをメール送信する |
 | `.assetsignore` | ソースや社内ドキュメントをサイトとして配信しないための除外リスト |
 | `index.html` | 購入ボタン。`ja` のときだけ `/api/checkout` を呼ぶ |
 
@@ -108,6 +109,85 @@ npx wrangler secret put STRIPE_SECRET_KEY
 4. テストカード `4242 4242 4242 4242` で決済 → `thanks.html?type=◯◯&lang=ja` に戻り
    PDF がダウンロードできることを確認
 5. 問題なければ `STRIPE_SECRET_KEY` を `sk_live_...` に差し替え
+
+---
+
+---
+
+## Webhook でのメール配信（PayPay には必須）
+
+### なぜ必要か
+
+**実際に発生した事象。** PayPay で ¥980 の決済が成功したにもかかわらず、
+ブラウザが `thanks.html` に戻れず、PDF が届きませんでした。
+
+```
+19:23:22  POST /v1/checkout/sessions   200 OK   ← Worker が Session 生成
+19:23:39  PayPay へリダイレクト
+19:24:04  支払い成功 ✅  ¥980 請求済み
+19:24:05  Checkout セッション完了
+19:25     ← スマホの画面はまだ「ぐるぐる」のまま
+```
+
+PayPay はスマホアプリを往復するため、承認後に Safari へ戻ってきても
+タブが凍結されていて `success_url` への自動遷移が起きないことがあります。
+カード決済でも「決済直後にブラウザを閉じた」場合に同じことが起きます。
+
+**ブラウザのリダイレクトだけを配信手段にしていると、「支払ったのに商品が届かない」が起きます。**
+Webhook はサーバー間通信なのでブラウザの状態に一切左右されず、確実に配信できます。
+
+### 設定手順
+
+**① Resend でメール送信を用意する**
+
+1. [resend.com](https://resend.com) でアカウントを作る（無料枠：月3,000通）
+2. 「Domains」で `jibunmatrix.com` を追加し、表示された **DNS レコード（SPF / DKIM）を
+   ドメインの DNS に登録**する。Cloudflare でドメインを管理しているならそこに追加
+3. 認証が済んだら「API Keys」で送信用キー（`re_...`）を作成
+
+> ドメイン認証をしないと、送ったメールが迷惑メール判定されます。ここは省略しないでください。
+> 差出人アドレスは `wrangler.toml` の `MAIL_FROM` で変更できます（既定 `noreply@jibunmatrix.com`）。
+
+**② Stripe に Webhook エンドポイントを登録する**
+
+1. Stripe ダッシュボード →「**開発者**」→「**Webhook**」→「エンドポイントを追加」
+2. エンドポイント URL：`https://www.jibunmatrix.com/api/stripe-webhook`
+3. 送信するイベントに以下の**2つ**を選ぶ
+   - `checkout.session.completed` … カードなど即時確定した決済
+   - `checkout.session.async_payment_succeeded` … PayPay などあとから確定した決済
+4. 作成後に表示される「**署名シークレット**」（`whsec_...`）をコピー
+
+**③ Cloudflare にシークレットを登録する**
+
+Worker `jibumato` →「設定」→「変数とシークレット」で追加します。
+
+| 種別 | 名前 | 値 |
+|---|---|---|
+| シークレット | `STRIPE_WEBHOOK_SECRET` | ②の `whsec_...` |
+| シークレット | `RESEND_API_KEY` | ①の `re_...` |
+
+**④ 動作確認**
+
+Stripe の Webhook 設定画面から「**テストイベントを送信**」で
+`checkout.session.completed` を送り、**200 が返る**ことを確認します。
+そのうえで実際に1件購入し、メールが届くことを確認してください。
+
+> `RESEND_API_KEY` を登録しないまま Webhook だけ動かした場合、Worker は
+> 200 を返しつつログに宛先とダウンロード URL を出します。
+> Cloudflare の「Observability（ログ）」から手動で救済できます。
+
+### 二重送信について
+
+`checkout.session.completed` で `payment_status` が `paid` でないものは送らず、
+あとから来る `async_payment_succeeded` で拾う作りにしてあります。
+どちらか一方でしか送信されないため、同じ購入で2通届くことはありません。
+
+### 併せて設定しておくとよいこと
+
+Stripe の**領収書メールが無効**になっています（ログに「領収書は送信されませんでした」）。
+現状お客様には支払いの証跡が何も届いていないので、
+Stripe ダッシュボード →「設定」→「**顧客のメール**」で
+「支払い成功時に領収書を送信」を有効にしておくことをお勧めします。
 
 ---
 

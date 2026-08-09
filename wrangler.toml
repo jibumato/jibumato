@@ -23,8 +23,13 @@ binding = "ASSETS"
 SITE_ORIGIN = "https://www.jibunmatrix.com"
 PAYMENT_METHODS = "card,paypay"
 UNIT_AMOUNT_JPY = "980"
+MAIL_FROM = "じぶんマトリクス <noreply@jibunmatrix.com>"
 
-# STRIPE_SECRET_KEY はここに書かない。
+# 以下はシークレット。ここには絶対に書かない。
 # ダッシュボードの「設定 → 変数とシークレット」でシークレットとして登録するか、
-#   npx wrangler secret put STRIPE_SECRET_KEY
+#   npx wrangler secret put <名前>
 # で登録する。
+#
+#   STRIPE_SECRET_KEY      … Checkout Session の生成に使う（sk_live_... / rk_live_...）
+#   STRIPE_WEBHOOK_SECRET  … Webhook の署名検証に使う（whsec_...）
+#   RESEND_API_KEY         … 配信メールの送信に使う（re_...）
