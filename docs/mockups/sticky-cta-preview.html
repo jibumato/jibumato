@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>モバイル追従CTAバー — プレビュー</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0f0e0c;--paper:#f4ede0;--gold:#b8893a;--gold-light:#d4ad5e;--crimson:#8a2922}
+body{background:var(--paper);font-family:'Shippori Mincho',serif;line-height:1.9;padding:24px 18px 120px}
+h1{font-size:19px;margin-bottom:10px}
+p.note{font-size:12.5px;color:rgba(15,14,12,.7);margin-bottom:20px}
+.demo{font-size:14px;color:rgba(15,14,12,.75);line-height:2.1}
+.spec{margin-top:26px;padding:16px 18px;background:rgba(255,255,255,.5);border:1px solid rgba(184,137,58,.3);font-size:12.5px;line-height:1.9}
+.spec b{color:var(--crimson)}
+.sticky-cta {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: var(--ink);
+    color: var(--paper);
+    border-top: 2px solid var(--gold-light);
+    box-shadow: 0 -4px 16px rgba(15,14,12,0.25);
+    transform: translateY(110%);
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    pointer-events: none;
+  }
+.sticky-cta { display: none; }
+.sticky-cta.visible {
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+.sticky-cta-info { flex: 1; min-width: 0; }
+.sticky-cta-name {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 11px;
+    color: rgba(244,237,224,0.72);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 1px;
+  }
+.sticky-cta-price { display: flex; align-items: baseline; gap: 2px; }
+.sticky-cta-num {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 1.1;
+  }
+.sticky-cta-yen { font-size: 12px; font-weight: 700; }
+.sticky-cta-tax {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: rgba(244,237,224,0.5);
+    margin-left: 6px;
+  }
+.sticky-cta-btn {
+    flex-shrink: 0;
+    padding: 14px 22px;
+    background: var(--gold-light);
+    color: var(--ink);
+    border: none;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.25s ease;
+  }
+.sticky-cta-btn:hover { background: var(--paper); }
+/* プレビューでは常時表示 */
+.sticky-cta { transform: translateY(0); pointer-events:auto; }
+@media (min-width:768px) { .sticky-cta { display:flex; } }
+</style></head><body>
+<h1>モバイル追従CTAバー</h1>
+<p class="note">画面下に固定表示されるバーです（下部をご覧ください）。</p>
+<div class="demo">…このガイドでは、あなたの強みが「どんな場面で武器になるのか」を具体的な行動レベルまで分解して解説します。読んで終わりにしないための30日プログラムと、書き込み式のワークも収録しています。<br><br>スクロールしても、バーは画面下に残り続けます。読み終えた位置から、戻らずにそのまま購入できます。</div>
+<div class="spec">
+<b>表示条件</b><br>
+・結果画面で<b>有料セクション付近まで読み進めたとき</b>に、下からスライドイン<br>
+・本体の購入ボタンが画面に入ると<b>自動で隠れる</b>（同じCTAの重複を回避）<br>
+・診断中・トップ画面では表示しない<br>
+・<b>768px以上（PC）では非表示</b>（本体CTAが十分見えるため）<br><br>
+<b>表記</b>：実際に届くPDFの単位＝<b>才能タイプ名</b>（例:「言語型」）<br>
+<b>計測</b>：表示で <code>sticky_cta_view</code>、クリックで <code>sticky_cta_click</code> と <code>premium_buy_click（source=sticky_bar）</code>
+</div>
+<!-- ===== モバイル追従CTAバー（結果画面で有料セクション付近に来たら表示） ===== -->
+<div class="sticky-cta visible" id="stickyCta" aria-hidden="false">
+  <div class="sticky-cta-info">
+    <div class="sticky-cta-name"><span id="stickyCtaType">「言語型」</span><span data-i18n="sticky.cta.name_suffix">専用 才能活用ガイド</span></div>
+    <div class="sticky-cta-price">
+      <span class="sticky-cta-num">980</span><span class="sticky-cta-yen" data-i18n="prem.price.yen">円</span><span class="sticky-cta-tax" data-i18n="sticky.cta.tax">税込・買い切り</span>
+    </div>
+  </div>
+  <button class="sticky-cta-btn" type="button" onclick="onStickyCtaClick()" data-i18n="sticky.cta.btn">受け取る</button>
+</div>
+</body></html>
