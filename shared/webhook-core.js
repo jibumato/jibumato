@@ -25,6 +25,14 @@ const SIGNATURE_TOLERANCE_SEC = 300;
 
 const encoder = new TextEncoder();
 
+/**
+ * 再送しても直らない失敗（イベントの中身が想定外）。
+ * Stripe の「テストイベント」はダミーの中身で届くため必ずこれに該当する。
+ * この場合に 500 を返すと Stripe が数日間再送し続け、
+ * エンドポイントが常時エラーに見えてしまうので 200 で受け切る。
+ */
+class PermanentError extends Error {}
+
 async function hmacSha256Hex(secret, payload) {
   const key = await crypto.subtle.importKey(
     'raw', encoder.encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']
@@ -121,12 +129,12 @@ function buildEmail(typeName, downloadUrl) {
 
 async function sendDeliveryEmail(session, env) {
   const to = session.customer_details && session.customer_details.email;
-  if (!to) throw new Error('customer_details.email が空です');
+  if (!to) throw new PermanentError('customer_details.email が空です');
 
   const meta = session.metadata || {};
   const talentType = meta.talent_type;
   if (!Object.prototype.hasOwnProperty.call(TALENT_TYPES, talentType)) {
-    throw new Error('metadata.talent_type が不正です: ' + talentType);
+    throw new PermanentError('metadata.talent_type が不正です: ' + talentType);
   }
 
   const lang = meta.lang || 'ja';
@@ -208,8 +216,13 @@ export async function handleStripeWebhook(request, env) {
   try {
     await sendDeliveryEmail(session, env);
   } catch (e) {
+    if (e instanceof PermanentError) {
+      // 再送しても直らないので 200 で受け切る（Stripe のテストイベントもここに来る）
+      console.error('[webhook] 配信対象外のイベント: ' + e.message);
+      return new Response('ignored_invalid_payload', { status: 200 });
+    }
     console.error('[webhook] 配信に失敗: ' + (e && e.message));
-    // 500 を返すと Stripe が指数バックオフで再送する
+    // 一時的な失敗。500 を返すと Stripe が指数バックオフで再送してくれる
     return new Response('delivery_failed', { status: 500 });
   }
 
