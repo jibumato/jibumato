@@ -4785,9 +4785,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span data-i18n="prem.trust3">Apple Pay対応</span>
         </div>
 
-        <p class="premium-note" data-i18n="prem.payment_notice">
-          ※ お試し公開中につき、現在は決済システムを準備中です。<br>
-          「興味あり」のクリック数を集計しています。
+        <p class="premium-note" data-i18n="prem.payment_ready">
+          ※ 決済後すぐにPDFをダウンロードできます。<br>
+          クレジットカード・Apple Pay・Google Pay に対応。買い切り・税込です。
         </p>
       </div>
     </div>
@@ -9025,21 +9025,25 @@ function renderPremiumPreview(key) {
     ctn.textContent = (currentLang === 'ja' || currentLang === 'zh')
       ? '「' + arcName + '」' : arcName;
   }
+  // 購入ボタンもCTA見出しと同じアーキタイプ名で統一する（訴求の一貫性）
   const bbt = document.getElementById('buyBtnTypeName');
   if (bbt) {
+    const arcNameForBtn = getArchetypeName(state.top1, state.top2) || typeName;
     bbt.textContent = currentLang === 'zh'
-      ? '购买「' + typeName + '」'
-      : (currentLang === 'ja' ? '「' + typeName + '」' : typeName);
+      ? '购买「' + arcNameForBtn + '」'
+      : (currentLang === 'ja' ? '「' + arcNameForBtn + '」' : arcNameForBtn);
   }
 
-  // 決済リンクが設定済みのタイプなら、「準備中」注記を実運用の案内へ差し替え
+  // 注記は「購入できる」前提をデフォルトにし、決済リンクが未設定のタイプに
+  // 限って「準備中」へ差し替える（JS未実行・失敗時に購入不可と誤認させないため）
   try {
     const note = document.querySelector('.premium-note');
     const langLinks = (typeof STRIPE_PAYMENT_LINKS !== 'undefined')
       ? (STRIPE_PAYMENT_LINKS[currentLang] || STRIPE_PAYMENT_LINKS.ja) : null;
     const linkReady = langLinks && langLinks[key];
-    if (note && linkReady) {
-      note.innerHTML = t('prem.payment_ready');
+    if (note) {
+      note.setAttribute('data-i18n', linkReady ? 'prem.payment_ready' : 'prem.payment_notice');
+      note.innerHTML = t(linkReady ? 'prem.payment_ready' : 'prem.payment_notice');
       note.style.color = '';
     }
   } catch (e) { /* ignore */ }
