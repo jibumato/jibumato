@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>実装後プレビュー — 有料CTA (D-1配色)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+:root { --ink:#0f0e0c; --paper:#f4ede0; --paper-deep:#e8dcc4; --gold:#b8893a; --gold-light:#d4ad5e; --crimson:#8a2922; }
+body { background:#ded4c2; font-family:'Shippori Mincho',serif; line-height:1.8; padding:30px 16px 60px; }
+.head { max-width:560px; margin:0 auto 24px; text-align:center; }
+.head h1 { font-size:20px; margin-bottom:8px; }
+.head p { font-size:12.5px; color:rgba(15,14,12,.7); }
+.wrap { max-width:560px; margin:0 auto; }
+  .premium-cta {
+    background: var(--paper);
+    color: var(--ink);
+    padding: 30px 24px;
+    text-align: center;
+    position: relative;
+    border: 1px solid rgba(184,137,58,0.45);
+  }
+  .premium-valuelist {
+    background: rgba(255,255,255,0.5);
+    border-top: 1px solid rgba(184,137,58,0.35);
+    border-bottom: 1px solid rgba(184,137,58,0.35);
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    text-align: left;
+  }
+  .premium-valuelist-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .pv-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px dotted rgba(184,137,58,0.35);
+    font-size: 12.5px;
+  }
+  .pv-row:last-child { border-bottom: none; }
+  .pv-mark { color: var(--crimson); font-size: 10px; flex-shrink: 0; }
+  .pv-name { flex: 1; color: rgba(15,14,12,0.85); line-height: 1.6; }
+  .pv-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: rgba(15,14,12,0.45);
+    white-space: nowrap;
+  }
+
+  .premium-anchor-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 16px;
+    background: rgba(184,137,58,0.12);
+    border: 1px solid rgba(184,137,58,0.35);
+    margin-bottom: 14px;
+  }
+  .pat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: rgba(15,14,12,0.6);
+  }
+  .pat-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    color: rgba(15,14,12,0.55);
+    text-decoration: line-through;
+  }
+  .premium-price-wrap { text-align: center; }
+
+  .premium-price-row {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    margin-bottom: 20px;
+    padding: 14px 34px;
+    border-top: 1px solid rgba(184,137,58,0.4);
+    border-bottom: 1px solid rgba(184,137,58,0.4);
+    position: relative;
+  }
+
+  .premium-price-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    line-height: 1.7;
+  }
+
+  .premium-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  .premium-price-currency {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--gold);
+  }
+
+  .premium-price-num {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+    .premium-price-num { font-size: 48px; }
+
+  .premium-price-tax {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: rgba(15,14,12,0.5);
+    margin-left: 0;
+  }
+  .premium-buy-btn {
+    width: 100%;
+    padding: 19px;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+  }
+
+  .premium-buy-btn::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border: 1px solid rgba(212,173,94,0.45);
+    pointer-events: none;
+  }
+
+  .premium-buy-btn:hover {
+    background: var(--crimson);
+    letter-spacing: 0.24em;
+  }
+
+  .premium-buy-icon {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--gold-light);
+  }
+  .buy-btn-type {
+    font-weight: 800;
+    color: var(--gold-light);
+    margin-right: 1px;
+  }
+
+  .premium-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    line-height: 1.7;
+    color: rgba(15,14,12,0.55);
+    margin-top: 18px;
+  }
+  .premium-note {
+    color: rgba(244,237,224,0.72);
+  }
+
+  .premium-trust {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 14px;
+    margin-top: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: rgba(15,14,12,0.5);
+    text-transform: uppercase;
+  }
+</style></head><body>
+<div class="head"><h1>実装後プレビュー（本番 index.html から抽出）</h1>
+<p>モックアップ D-1 の配色を反映した実際の有料CTAです。</p></div>
+<div class="wrap"><!-- 価格＆購入ボタン -->
+    <div class="premium-cta">
+      <!-- 収録内容の内訳（価値の可視化） -->
+      <div class="premium-valuelist">
+        <div class="premium-valuelist-title" data-i18n="prem.value.title">— 収録内容 —</div>
+        <div class="pv-row">
+          <span class="pv-mark">✦</span>
+          <span class="pv-name" data-i18n="prem.value.item1">才能の深掘り解説（才能が見せる4つの顔）</span>
+          <span class="pv-val" data-i18n="prem.value.price1">相当 ¥600</span>
+        </div>
+        <div class="pv-row">
+          <span class="pv-mark">✦</span>
+          <span class="pv-name" data-i18n="prem.value.item2">1日10分・30日実践プログラム</span>
+          <span class="pv-val" data-i18n="prem.value.price2">相当 ¥800</span>
+        </div>
+        <div class="pv-row">
+          <span class="pv-mark">✦</span>
+          <span class="pv-name" data-i18n="prem.value.item3">タイプに合う100の職業リスト</span>
+          <span class="pv-val" data-i18n="prem.value.price3">相当 ¥500</span>
+        </div>
+        <div class="pv-row">
+          <span class="pv-mark">✦</span>
+          <span class="pv-name" data-i18n="prem.value.item4">書き込み式ワークブック</span>
+          <span class="pv-val" data-i18n="prem.value.price4">相当 ¥600</span>
+        </div>
+      </div>
+
+      <div class="premium-anchor-total">
+        <span class="pat-label" data-i18n="prem.value.total_label">個別に揃えるなら</span>
+        <span class="pat-value" data-i18n="prem.value.total">¥2,500</span>
+      </div>
+
+      <div class="premium-price-wrap">
+        <div class="premium-price-row">
+          <div class="premium-price-label" data-i18n="prem.price.label">あなたのタイプ専用の才能活用ガイド（ワークブック付き）</div>
+          <div class="premium-price">
+            <span class="premium-price-currency">¥</span>
+            <span class="premium-price-num">980</span>
+          </div>
+          <div class="premium-price-tax" data-i18n="prem.price.tax">（税込・買い切り）</div>
+        </div>
+      </div>
+
+      <p class="premium-lang-notice" id="premiumLangNotice" style="display:none;"></p>
+
+      <button class="premium-buy-btn" onclick="goToPremiumCheckout()">
+        <span class="premium-buy-icon">✦</span>
+        <span><span class="buy-btn-type" id="buyBtnTypeName"></span><span data-i18n="premium.btn_suffix">専用の才能活用ガイドを購入する</span></span>
+      </button>
+
+      <div class="premium-trust">
+        <span data-i18n="prem.trust1">PDF即時ダウンロード</span>
+        <span data-i18n="prem.trust2">買い切り</span>
+        <span data-i18n="prem.trust3">Apple Pay対応</span>
+      </div>
+
+      <p class="premium-note" data-i18n="prem.payment_notice">
+        ※ お試し公開中につき、現在は決済システムを準備中です。<br>
+        「興味あり」のクリック数を集計しています。
+      </p>
+    </div></div>
+</body></html>
