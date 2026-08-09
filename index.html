@@ -9018,20 +9018,21 @@ function renderPremiumPreview(key) {
   const typeName = getTypeLabel(key);
   const tbn = document.getElementById('premiumTypeName');
   if (tbn) tbn.textContent = typeName;
-  // CTA見出しにはアーキタイプ名（例:「構想家」）を表示。モックアップD-1準拠。
+  // CTA見出しも「実際に届くPDFの単位」＝才能タイプ名で表示する。
+  // （28アーキタイプ専用PDFは存在しないため、購入物と表示を一致させる）
   const ctn = document.getElementById('ctaTypeName');
   if (ctn) {
-    const arcName = getArchetypeName(state.top1, state.top2) || typeName;
     ctn.textContent = (currentLang === 'ja' || currentLang === 'zh')
-      ? '「' + arcName + '」' : arcName;
+      ? '「' + typeName + '」' : typeName;
   }
-  // 購入ボタンもCTA見出しと同じアーキタイプ名で統一する（訴求の一貫性）
+  // 購入ボタンは「実際に届くPDFの単位」＝才能タイプ名で表示する。
+  // PDFは8才能タイプ別に用意されており、28アーキタイプ専用版は存在しないため、
+  // ここをアーキタイプ名にすると購入物と表示が食い違う。
   const bbt = document.getElementById('buyBtnTypeName');
   if (bbt) {
-    const arcNameForBtn = getArchetypeName(state.top1, state.top2) || typeName;
     bbt.textContent = currentLang === 'zh'
-      ? '购买「' + arcNameForBtn + '」'
-      : (currentLang === 'ja' ? '「' + arcNameForBtn + '」' : arcNameForBtn);
+      ? '购买「' + typeName + '」'
+      : (currentLang === 'ja' ? '「' + typeName + '」' : typeName);
   }
 
   // 注記は「購入できる」前提をデフォルトにし、決済リンクが未設定のタイプに
