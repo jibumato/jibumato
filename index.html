@@ -2277,6 +2277,73 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     text-transform: uppercase;
   }
 
+  /* ===== モバイル追従CTAバー ===== */
+  .sticky-cta {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: var(--ink);
+    color: var(--paper);
+    border-top: 2px solid var(--gold-light);
+    box-shadow: 0 -4px 16px rgba(15,14,12,0.25);
+    transform: translateY(110%);
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    pointer-events: none;
+  }
+  .sticky-cta.visible {
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .sticky-cta-info { flex: 1; min-width: 0; }
+  .sticky-cta-name {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 11px;
+    color: rgba(244,237,224,0.72);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 1px;
+  }
+  .sticky-cta-price { display: flex; align-items: baseline; gap: 2px; }
+  .sticky-cta-num {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 1.1;
+  }
+  .sticky-cta-yen { font-size: 12px; font-weight: 700; }
+  .sticky-cta-tax {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: rgba(244,237,224,0.5);
+    margin-left: 6px;
+  }
+  .sticky-cta-btn {
+    flex-shrink: 0;
+    padding: 14px 22px;
+    background: var(--gold-light);
+    color: var(--ink);
+    border: none;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.25s ease;
+  }
+  .sticky-cta-btn:hover { background: var(--paper); }
+
+  /* デスクトップでは本体CTAが見やすいため非表示 */
+  @media (min-width: 768px) {
+    .sticky-cta { display: none; }
+  }
+
   .back-to-top-btn {
     display: block;
     width: 100%;
@@ -8135,6 +8202,14 @@ function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  // 結果画面以外では追従CTAバーを必ず隠す（診断中・トップに残らないように）
+  if (id !== 'screen-result') {
+    const bar = document.getElementById('stickyCta');
+    if (bar) {
+      bar.classList.remove('visible');
+      bar.setAttribute('aria-hidden', 'true');
+    }
+  }
 }
 
 // ============ ANALYTICS (GTM dataLayer) ============
@@ -8446,6 +8521,9 @@ function _showResultInner() {
       io.observe(premEl);
     }
   } catch (e) { /* no-op */ }
+
+  // モバイル追従CTAバーの表示制御をセットアップ
+  setupStickyCta();
 
   const talent = getTalent(top1);
 
@@ -9156,16 +9234,82 @@ const STRIPE_PAYMENT_LINKS = {
   }
 };
 
-function goToPremiumCheckout() {
+// ============ モバイル追従CTAバー ============
+// 「読み終えてから購入ボタンまで戻る」手間をなくすための導線。
+// 有料セクションに近づいたら表示し、本体CTAが画面内にある間は隠す（重複回避）。
+let _stickyCtaObservers = [];
+
+function setupStickyCta() {
+  const bar = document.getElementById('stickyCta');
+  if (!bar) return;
+
+  // 既存の監視を解除（再診断・結果復元でも二重登録しない）
+  _stickyCtaObservers.forEach(o => { try { o.disconnect(); } catch (e) {} });
+  _stickyCtaObservers = [];
+  bar.classList.remove('visible');
+  bar.setAttribute('aria-hidden', 'true');
+
+  // バー内の商品名は「実際に届くPDFの単位」＝才能タイプ名で表示する
+  const st = document.getElementById('stickyCtaType');
+  if (st && state.top1) {
+    const tn = getTypeLabel(state.top1);
+    st.textContent = (currentLang === 'ja' || currentLang === 'zh') ? '「' + tn + '」' : tn;
+  }
+
+  if (!('IntersectionObserver' in window)) return;
+
+  const showBar = () => {
+    if (bar.classList.contains('visible')) return;
+    bar.classList.add('visible');
+    bar.setAttribute('aria-hidden', 'false');
+    trackEvent('sticky_cta_view', { top1: state.top1, lang: currentLang });
+  };
+  const hideBar = () => {
+    bar.classList.remove('visible');
+    bar.setAttribute('aria-hidden', 'true');
+  };
+
+  // ① 有料セクションの手前（＝チラ見せ以降）に到達したら表示
+  const trigger = document.querySelector('.premium-section');
+  if (trigger) {
+    const io1 = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        // 有料セクションの上端が画面より上に来た＝読み進めている状態
+        if (en.boundingClientRect.top < window.innerHeight) showBar();
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -20% 0px' });
+    io1.observe(trigger);
+    _stickyCtaObservers.push(io1);
+  }
+
+  // ② 本体の購入ボタンが見えている間はバーを隠す（同じCTAの重複表示を避ける）
+  const mainBtn = document.querySelector('.premium-buy-btn');
+  if (mainBtn) {
+    const io2 = new IntersectionObserver((entries) => {
+      entries.forEach(en => { if (en.isIntersecting) hideBar(); });
+    }, { threshold: 0.4 });
+    io2.observe(mainBtn);
+    _stickyCtaObservers.push(io2);
+  }
+}
+
+// 追従バーのボタン → 本体の購入処理へ（計測もソース付きで送る）
+function onStickyCtaClick() {
+  trackEvent('sticky_cta_click', { top1: state.top1, lang: currentLang });
+  goToPremiumCheckout('sticky_bar');
+}
+
+function goToPremiumCheckout(source) {
   const type = state.top1;
   const langLinks = STRIPE_PAYMENT_LINKS[currentLang] || STRIPE_PAYMENT_LINKS.ja;
   const url = langLinks[type];
 
-  // ファネル計測: 購入ボタンクリック（決済リンク有無も記録）
+  // ファネル計測: 購入ボタンクリック（どの導線から押されたかも記録）
   trackEvent('premium_buy_click', {
     talent_type: type,
     archetype: (getArchetype(state.top1, state.top2) || {}).name || '',
     has_payment_link: !!url,
+    source: source || 'main_cta',
     lang: currentLang
   });
 
@@ -11169,6 +11313,9 @@ const I18N = {
     'prem.cta.title_main': '才能活用ガイド',
     'prem.cta.lead': '診断結果を、日々の選択で使える形に。',
     'prem.price.this_book': 'この1冊で',
+    'sticky.cta.name_suffix': '専用 才能活用ガイド',
+    'sticky.cta.tax': '税込・買い切り',
+    'sticky.cta.btn': '受け取る',
     'prem.price.yen': '円',
     'prem.value.item1': '才能の深掘り解説（才能が見せる4つの顔）',
     'prem.value.price1': '相当 ¥600',
@@ -11528,6 +11675,9 @@ const I18N = {
     'prem.cta.title_main': 'Talent Playbook',
     'prem.cta.lead': 'Turn your result into something you can use every day.',
     'prem.price.this_book': 'All in one',
+    'sticky.cta.name_suffix': ' Talent Playbook',
+    'sticky.cta.tax': 'tax incl. / one-time',
+    'sticky.cta.btn': 'Get it',
     'prem.price.yen': ' JPY',
     'prem.value.item1': 'In-depth talent analysis (the four faces of your talent)',
     'prem.value.price1': 'approx. ¥600',
@@ -11881,6 +12031,9 @@ const I18N = {
     'prem.cta.title_main': '才能活用指南',
     'prem.cta.lead': '把测评结果，变成日常可用的形式。',
     'prem.price.this_book': '这一册',
+    'sticky.cta.name_suffix': '专属才能活用指南',
+    'sticky.cta.tax': '含税·一次买断',
+    'sticky.cta.btn': '获取',
     'prem.price.yen': '日元',
     'prem.value.item1': '才能深度解析（才能的四种面貌）',
     'prem.value.price1': '相当于 ¥600',
@@ -12234,6 +12387,9 @@ const I18N = {
     'prem.cta.title_main': '재능 활용 가이드',
     'prem.cta.lead': '진단 결과를, 매일의 선택에서 쓸 수 있는 형태로.',
     'prem.price.this_book': '이 한 권으로',
+    'sticky.cta.name_suffix': ' 전용 재능 활용 가이드',
+    'sticky.cta.tax': '세금 포함·한 번 결제',
+    'sticky.cta.btn': '받기',
     'prem.price.yen': '엔',
     'prem.value.item1': '재능 심층 해설 (재능이 보여주는 네 가지 얼굴)',
     'prem.value.price1': '상당 ¥600',
@@ -12615,6 +12771,17 @@ if (!didRestoreFromHash) {
 // 言語設定を適用
 setLang(currentLang);
 </script>
+
+<!-- ===== モバイル追従CTAバー（結果画面で有料セクション付近に来たら表示） ===== -->
+<div class="sticky-cta" id="stickyCta" aria-hidden="true">
+  <div class="sticky-cta-info">
+    <div class="sticky-cta-name"><span id="stickyCtaType">— —</span><span data-i18n="sticky.cta.name_suffix">専用 才能活用ガイド</span></div>
+    <div class="sticky-cta-price">
+      <span class="sticky-cta-num">980</span><span class="sticky-cta-yen" data-i18n="prem.price.yen">円</span><span class="sticky-cta-tax" data-i18n="sticky.cta.tax">税込・買い切り</span>
+    </div>
+  </div>
+  <button class="sticky-cta-btn" type="button" onclick="onStickyCtaClick()" data-i18n="sticky.cta.btn">受け取る</button>
+</div>
 
 </body>
 </html>
