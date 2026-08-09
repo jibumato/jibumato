@@ -3282,6 +3282,66 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     pointer-events: none;
   }
 
+  .premium-cta > * { position: relative; z-index: 2; }
+
+  /* ===== 収録内容の内訳（価値の可視化・アンカリング） ===== */
+  .premium-valuelist {
+    background: rgba(244,237,224,0.06);
+    border-top: 1px solid rgba(212,173,94,0.3);
+    border-bottom: 1px solid rgba(212,173,94,0.3);
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    text-align: left;
+  }
+  .premium-valuelist-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .pv-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px dotted rgba(212,173,94,0.28);
+    font-size: 12.5px;
+  }
+  .pv-row:last-child { border-bottom: none; }
+  .pv-mark { color: var(--gold-light); font-size: 10px; flex-shrink: 0; }
+  .pv-name { flex: 1; color: rgba(244,237,224,0.88); line-height: 1.6; }
+  .pv-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: rgba(244,237,224,0.5);
+    white-space: nowrap;
+  }
+
+  .premium-anchor-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 16px;
+    background: rgba(212,173,94,0.1);
+    border: 1px solid rgba(212,173,94,0.3);
+    margin-bottom: 18px;
+  }
+  .pat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: rgba(244,237,224,0.7);
+  }
+  .pat-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    color: rgba(244,237,224,0.55);
+    text-decoration: line-through;
+  }
+
   .premium-price-row {
     display: flex;
     flex-direction: column;
@@ -4633,6 +4693,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- 価格＆購入ボタン -->
     <div class="premium-cta">
+      <!-- 収録内容の内訳（価値の可視化） -->
+      <div class="premium-valuelist">
+        <div class="premium-valuelist-title" data-i18n="prem.value.title">— 収録内容 —</div>
+        <div class="pv-row">
+          <span class="pv-mark">✦</span>
+          <span class="pv-name" data-i18n="prem.value.item1">才能の深掘り解説（才能が見せる4つの顔）</span>
+          <span class="pv-val" data-i18n="prem.value.price1">相当 ¥600</span>
+        </div>
+        <div class="pv-row">
+          <span class="pv-mark">✦</span>
+          <span class="pv-name" data-i18n="prem.value.item2">1日10分・30日実践プログラム</span>
+          <span class="pv-val" data-i18n="prem.value.price2">相当 ¥800</span>
+        </div>
+        <div class="pv-row">
+          <span class="pv-mark">✦</span>
+          <span class="pv-name" data-i18n="prem.value.item3">タイプに合う100の職業リスト</span>
+          <span class="pv-val" data-i18n="prem.value.price3">相当 ¥500</span>
+        </div>
+        <div class="pv-row">
+          <span class="pv-mark">✦</span>
+          <span class="pv-name" data-i18n="prem.value.item4">書き込み式ワークブック</span>
+          <span class="pv-val" data-i18n="prem.value.price4">相当 ¥600</span>
+        </div>
+      </div>
+
+      <div class="premium-anchor-total">
+        <span class="pat-label" data-i18n="prem.value.total_label">個別に揃えるなら</span>
+        <span class="pat-value" data-i18n="prem.value.total">¥2,500</span>
+      </div>
+
       <div class="premium-price-row">
         <div class="premium-price-label" data-i18n="prem.price.label">あなたのタイプ専用の才能活用ガイド（ワークブック付き）</div>
         <div class="premium-price">
@@ -11019,6 +11109,17 @@ const I18N = {
     'prem.feat4.title': 'A4・26ページのPDF',
     'prem.feat4.desc': '保存・印刷していつでも見返せる、タイプ専用レポート',
     'prem.price.label': 'あなたのタイプ専用の才能活用ガイド（ワークブック付き）',
+    'prem.value.title': '— 収録内容 —',
+    'prem.value.item1': '才能の深掘り解説（才能が見せる4つの顔）',
+    'prem.value.price1': '相当 ¥600',
+    'prem.value.item2': '1日10分・30日実践プログラム',
+    'prem.value.price2': '相当 ¥800',
+    'prem.value.item3': 'タイプに合う100の職業リスト',
+    'prem.value.price3': '相当 ¥500',
+    'prem.value.item4': '書き込み式ワークブック',
+    'prem.value.price4': '相当 ¥600',
+    'prem.value.total_label': '個別に揃えるなら',
+    'prem.value.total': '¥2,500',
     'prem.price.tax': '（税込・買い切り）',
     'share.compat': '友達との相性をみる（URLコピー）',
     'share.gallery': 'キャラクター図鑑を見る（全8体）',
@@ -11360,6 +11461,17 @@ const I18N = {
     'prem.feat4.title': '26-page A4 PDF',
     'prem.feat4.desc': 'A type-specific report you can save, print, and revisit anytime',
     'prem.price.label': 'Your Personal Talent Playbook (with Workbook)',
+    'prem.value.title': '— What\'s Included —',
+    'prem.value.item1': 'In-depth talent analysis (the four faces of your talent)',
+    'prem.value.price1': 'approx. ¥600',
+    'prem.value.item2': '30-day program, 10 minutes a day',
+    'prem.value.price2': 'approx. ¥800',
+    'prem.value.item3': '100 careers matched to your type',
+    'prem.value.price3': 'approx. ¥500',
+    'prem.value.item4': 'Fill-in workbook',
+    'prem.value.price4': 'approx. ¥600',
+    'prem.value.total_label': 'If purchased separately',
+    'prem.value.total': '¥2,500',
     'prem.price.tax': '(Tax incl. · One-time purchase)',
     'share.compat': 'Check compatibility with a friend (copy URL)',
     'share.gallery': 'View the character gallery (all 8)',
@@ -11695,6 +11807,17 @@ const I18N = {
     'prem.feat4.title': 'A4·26页PDF',
     'prem.feat4.desc': '可保存、打印、随时回看的类型专属报告',
     'prem.price.label': '你的专属才能活用指南（含工作簿）',
+    'prem.value.title': '— 收录内容 —',
+    'prem.value.item1': '才能深度解析（才能的四种面貌）',
+    'prem.value.price1': '相当于 ¥600',
+    'prem.value.item2': '每天10分钟·30天实践计划',
+    'prem.value.price2': '相当于 ¥800',
+    'prem.value.item3': '适合你的100个职业清单',
+    'prem.value.price3': '相当于 ¥500',
+    'prem.value.item4': '填写式工作簿',
+    'prem.value.price4': '相当于 ¥600',
+    'prem.value.total_label': '若单独购买',
+    'prem.value.total': '¥2,500',
     'prem.price.tax': '（含税·一次性购买）',
     'share.compat': '查看与朋友的契合度（复制URL）',
     'share.gallery': '查看角色图鉴（全8个）',
@@ -12030,6 +12153,17 @@ const I18N = {
     'prem.feat4.title': 'A4·26페이지 PDF',
     'prem.feat4.desc': '저장·인쇄해 언제든 다시 볼 수 있는 유형 전용 리포트',
     'prem.price.label': '당신의 타입 전용 재능 활용 가이드 (워크북 포함)',
+    'prem.value.title': '— 수록 내용 —',
+    'prem.value.item1': '재능 심층 해설 (재능이 보여주는 네 가지 얼굴)',
+    'prem.value.price1': '상당 ¥600',
+    'prem.value.item2': '하루 10분·30일 실천 프로그램',
+    'prem.value.price2': '상당 ¥800',
+    'prem.value.item3': '타입에 맞는 100가지 직업 리스트',
+    'prem.value.price3': '상당 ¥500',
+    'prem.value.item4': '작성식 워크북',
+    'prem.value.price4': '상당 ¥600',
+    'prem.value.total_label': '개별로 구입한다면',
+    'prem.value.total': '¥2,500',
     'prem.price.tax': '(부가세 포함·1회 구매)',
     'share.compat': '친구와의 궁합 보기 (URL 복사)',
     'share.gallery': '캐릭터 도감 보기 (전 8체)',
