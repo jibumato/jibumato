@@ -9379,11 +9379,14 @@ async function goToPremiumCheckout(source) {
   const url = langLinks[type];
 
   // ファネル計測: 購入ボタンクリック（どの導線から押されたかも記録）
+  // パラメータ名を cta_source にしているのは、GA4 では source が
+  // 流入元の判定に使われる特別な名前で、CTA の位置を入れると
+  // 集客レポートを汚すおそれがあるため。
   trackEvent('premium_buy_click', {
     talent_type: type,
     archetype: (getArchetype(state.top1, state.top2) || {}).name || '',
     has_payment_link: !!url,
-    source: source || 'main_cta',
+    cta_source: source || 'main_cta',
     lang: currentLang
   });
 
