@@ -30,7 +30,7 @@ GTM 左メニュー →「**変数**」→ ユーザー定義変数の「**新�
 | DLV - top1 | `top1` |
 | DLV - top2 | `top2` |
 | DLV - lang | `lang` |
-| DLV - source | `source` |
+| DLV - cta_source | `cta_source` |
 | DLV - value | `value` |
 | DLV - currency | `currency` |
 
@@ -94,9 +94,13 @@ GTM 左メニュー →「**タグ**」→「**新規**」
 - イベントパラメータ：
   - `talent_type` = `{{DLV - talent_type}}`
   - `archetype` = `{{DLV - archetype}}`
-  - `source` = `{{DLV - source}}` ← **本体CTA（main_cta）か追従バー（sticky_bar）かの判別用**
+  - `cta_source` = `{{DLV - cta_source}}` ← **本体CTA（main_cta）か追従バー（sticky_bar）かの判別用**
   - `lang` = `{{DLV - lang}}`
 - トリガー：`CE - premium_buy_click`
+
+> パラメータ名を `source` ではなく `cta_source` にしているのは、GA4 では
+> `source` が流入元の判定に使われる特別な名前で、CTA の位置を入れると
+> 集客レポートを汚すおそれがあるためです。
 
 ### 3-5. 追従バー表示
 - タグ名：`GA4 - sticky_cta_view`／イベント名：`sticky_cta_view`
@@ -163,7 +167,7 @@ GA4管理画面 →「**管理**」→「**カスタム定義**」→「カス�
 |---|---|---|
 | 才能タイプ | イベント | `talent_type` |
 | アーキタイプ | イベント | `archetype` |
-| 購入導線 | イベント | `source` |
+| 購入導線 | イベント | `cta_source` |
 | 言語 | イベント | `lang` |
 
 > これを登録しないと、レポートでパラメータ別に分解できません。**登録前のデータは遡って見られない**ため、早めの登録を推奨します。
@@ -183,7 +187,7 @@ GA4管理画面 →「**管理**」→「**カスタム定義**」→「カス�
 ### 特に注目したい点
 - **有料到達率が低い**（例：30%未満）→ 結果画面が長すぎる可能性。CTAを上部にも置く施策が有効
 - **CTAクリック率は高いが決済完了率が低い** → Stripe決済画面での離脱。価格や決済手段の見直し
-- `source` 別の `premium_buy_click` → **追従バーの貢献度**が分かる
+- `cta_source` 別の `premium_buy_click` → **追従バーの貢献度**が分かる
 - `archetype` / `talent_type` 別の購入数 → **どのタイプが買いやすいか**が分かり、記事の狙いどころが定まる
 
 ---
@@ -195,7 +199,7 @@ GA4管理画面 →「**管理**」→「**カスタム定義**」→「カス�
 | `diagnosis_start` | 「診断をはじめる」クリック | `lang` |
 | `result_view` | 結果画面の表示（復元含む） | `archetype`, `top1`, `top2`, `lang` |
 | `premium_view` | 有料セクションが画面に入った時（結果ごと1回） | `top1`, `lang` |
-| `premium_buy_click` | 購入ボタンクリック | `talent_type`, `archetype`, `has_payment_link`, `source`, `lang` |
+| `premium_buy_click` | 購入ボタンクリック | `talent_type`, `archetype`, `has_payment_link`, `cta_source`, `lang` |
 | `sticky_cta_view` | 追従バーが表示された時 | `top1`, `lang` |
 | `sticky_cta_click` | 追従バーのボタンをクリック | `top1`, `lang` |
 | `share_click` | シェアボタンクリック | `top1`, `lang` |
