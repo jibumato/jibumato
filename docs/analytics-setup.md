@@ -55,6 +55,8 @@ GTM 左メニュー →「**トリガー**」→「**新規**」
 | CE - sticky_cta_view | `sticky_cta_view` |
 | CE - sticky_cta_click | `sticky_cta_click` |
 | CE - share_click | `share_click` |
+| CE - share_image_click | `share_image_click` |
+| CE - share_image_done | `share_image_done` |
 | CE - purchase_complete | `purchase_complete` |
 
 ---
@@ -116,6 +118,15 @@ GTM 左メニュー →「**タグ**」→「**新規**」
 - タグ名：`GA4 - share_click`／イベント名：`share_click`
 - パラメータ：`top1` / `lang`
 - トリガー：`CE - share_click`
+
+### 3-7b. 結果画像のシェア（Instagram流入の指標）
+- タグ名：`GA4 - share_image_click`／イベント名：`share_image_click`
+- タグ名：`GA4 - share_image_done`／イベント名：`share_image_done`
+- どちらもパラメータ：`top1` / `lang`
+- トリガー：それぞれ `CE - share_image_click` / `CE - share_image_done`
+
+> `done ÷ click` が、画像を作ったあと実際に投稿・保存まで進んだ割合になります。
+> ここが低ければ、画像のデザインか共有導線に問題があります。
 
 ### 3-8. 購入完了（最重要）
 - タグ名：`GA4 - purchase_complete`
@@ -202,7 +213,9 @@ GA4管理画面 →「**管理**」→「**カスタム定義**」→「カス�
 | `premium_buy_click` | 購入ボタンクリック | `talent_type`, `archetype`, `has_payment_link`, `cta_source`, `lang` |
 | `sticky_cta_view` | 追従バーが表示された時 | `top1`, `lang` |
 | `sticky_cta_click` | 追従バーのボタンをクリック | `top1`, `lang` |
-| `share_click` | シェアボタンクリック | `top1`, `lang` |
+| `share_click` | テキストシェアのクリック | `top1`, `lang` |
+| `share_image_click` | 「結果画像を保存・シェア」のクリック | `top1`, `lang` |
+| `share_image_done` | 共有シートで送信、または端末に保存できた時 | `top1`, `lang` |
 | `purchase_complete` | thanks.html 到達（決済完了後） | `talent_type`, `lang`, `value:980`, `currency:JPY` |
 | `checkout_api_fallback` | 日本語版で `/api/checkout` が使えず Payment Link に落ちた時 | `talent_type`, `lang` |
 
