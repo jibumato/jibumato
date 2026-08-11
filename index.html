@@ -4867,6 +4867,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="share-btn-icon">✉</span>
       <span data-i18n="result.email">結果をメールで受け取る</span>
     </button>
+    <button class="share-btn" onclick="shareResultCard()">
+      <span class="share-btn-icon">▣</span>
+      <span data-i18n="result.share_image">結果画像を保存・シェア</span>
+    </button>
     <button class="share-btn" onclick="shareResult()">
       <span class="share-btn-icon">✦</span>
       <span data-i18n="result.share_sns">テキストでシェア</span>
@@ -9796,14 +9800,9 @@ function getShareResultUrl() {
 
 function shareResult() {
   trackEvent('share_click', { top1: state.top1, lang: currentLang });
-  const talent = getTalent(state.top1);
-  const compound = makeCompoundName(state.top1, state.top2);
   const url = getShareResultUrl();
-  const text = t('share.text')
-    .replace('{character}', talent.character)
-    .replace('{compound}', compound)
-    .replace('{catchphrase}', talent.catchphrase)
-    .replace('{url}', url);
+  // 文面は画像シェアと共通（_resultShareText）。アーキタイプ名で統一する。
+  const text = _resultShareText();
 
   if (navigator.share) {
     navigator.share({ title: t('share.title'), text: text, url: url }).catch(() => copyToClipboard(text));
@@ -10445,15 +10444,19 @@ function _drawAnimalDirect_legacy(ctx, animal, cx, cy, size) {
   ctx.restore();
 }
 
-function downloadResultCard() {
+// ============ 結果シェア画像（1080x1920 / IGストーリーズ・X向け） ============
+// スマホでは共有シートを直接開く。保存 → アプリを開いて選び直す、という
+// 手間を挟むと投稿まで到達しないため、ここが拡散率を大きく左右する。
+function shareResultCard() {
+  trackEvent('share_image_click', { top1: state.top1, lang: currentLang });
   showToast(t('toast.image_generating'));
-  // プリロード後にCanvas描画
+  // キャラクター画像のプリロード後にCanvas描画
   preloadCharImages().then(() => {
-    setTimeout(_doDownloadResultCard, 50);
+    setTimeout(_doShareResultCard, 50);
   });
 }
 
-function _doDownloadResultCard() {
+function _buildResultCardCanvas() {
   const W = 1080;
   const H = 1920; // 9:16 ratio for IG Story / X / TikTok
   const canvas = document.createElement('canvas');
@@ -10503,35 +10506,54 @@ function _doDownloadResultCard() {
   // ハートビートで安全網: drawImage を一切使わない
   drawAnimalDirect(ctx, talent.animal, W/2, 620, 480);
 
-  // ===== Character name =====
+  // ===== アーキタイプ名（主役） =====
+  // サイトの訴求は「あなたは28人の才能アーキタイプのどれ？」。
+  // 見た人が反応するのは「言語型」ではなく「構想家」なので、
+  // 画像でいちばん大きい文字はアーキタイプ名にする。
+  const arcName = getArchetypeName(state.top1, state.top2) || talent.character;
+  const MINCHO = '"Shippori Mincho", "Hiragino Mincho ProN", serif';
+  // 「コミュニティデザイナー」「The Community Gardener」のような長い名前でも
+  // 枠に収まるよう、幅を測って自動で縮める
+  let arcSize = 90;
+  ctx.font = '800 ' + arcSize + 'px ' + MINCHO;
+  while (ctx.measureText(arcName).width > W - 160 && arcSize > 46) {
+    arcSize -= 4;
+    ctx.font = '800 ' + arcSize + 'px ' + MINCHO;
+  }
   ctx.fillStyle = '#f4ede0';
-  ctx.font = '800 90px "Shippori Mincho", "Hiragino Mincho ProN", serif';
   ctx.textAlign = 'center';
-  ctx.fillText(talent.character, W/2, 1020);
+  ctx.fillText(arcName, W/2, 1020);
 
-  // ===== English name =====
-  ctx.fillStyle = '#d4ad5e';
-  ctx.font = 'italic 36px serif';
-  ctx.fillText(talent.characterEn, W/2, 1075);
+  // en では上の見出しが既に英語名なので、重ねて出さない
+  const arcEn = getArchetypeEn(state.top1, state.top2);
+  if (arcEn && currentLang !== 'en') {
+    ctx.fillStyle = '#d4ad5e';
+    ctx.font = 'italic 36px serif';
+    ctx.fillText(arcEn, W/2, 1075);
+  }
 
-  // ===== Catchphrase =====
+  // ===== タグライン =====
   ctx.fillStyle = 'rgba(244,237,224,0.85)';
   ctx.font = '500 36px "Shippori Mincho", "Hiragino Mincho ProN", serif';
-  wrapText(ctx, talent.catchphrase, W/2, 1170, W - 200, 50);
+  wrapText(ctx, _resultTagline(), W/2, 1170, W - 200, 50);
 
   // ===== Divider =====
   ctx.fillStyle = '#d4ad5e';
   ctx.font = '500 24px monospace';
-  ctx.fillText('✦ ✦ ✦', W/2, 1310);
+  ctx.fillText('✦ ✦ ✦', W/2, 1300);
 
-  // ===== Compound =====
+  // ===== 才能タイプ（アーキタイプの内訳を補足する） =====
   ctx.fillStyle = '#d4ad5e';
   ctx.font = '500 24px monospace';
-  ctx.fillText('— Rare Type —', W/2, 1380);
+  ctx.fillText('— TALENT TYPE —', W/2, 1370);
 
   ctx.fillStyle = '#f4ede0';
   ctx.font = '700 44px "Shippori Mincho", "Hiragino Mincho ProN", serif';
-  ctx.fillText(makeCompoundName(state.top1, state.top2), W/2, 1450);
+  ctx.fillText(talent.character, W/2, 1435);
+
+  ctx.fillStyle = 'rgba(212,173,94,0.85)';
+  ctx.font = '500 28px "Shippori Mincho", "Hiragino Mincho ProN", serif';
+  ctx.fillText(getIntShortName(state.top1) + ' × ' + getIntShortName(state.top2), W/2, 1487);
 
   // ===== TOP 3 =====
   ctx.fillStyle = '#d4ad5e';
@@ -10555,33 +10577,94 @@ function _doDownloadResultCard() {
   ctx.font = 'italic 28px serif';
   ctx.fillText('Take your own at:  jibunmatrix.com', W/2, 1820);
 
-  // ===== Download =====
-  // canvas.toBlob と toDataURL の両方を試す（環境互換性のため）
+  return canvas;
+}
+
+function _resultCardFileName() {
+  const en = getArchetypeEn(state.top1, state.top2) ||
+             (getTalent(state.top1).characterEn || 'result');
+  return 'jibunmatrix-' + en.replace(/\s+/g, '-').toLowerCase() + '.png';
+}
+
+function _doShareResultCard() {
+  let canvas;
   try {
-    if (canvas.toBlob) {
-      canvas.toBlob(function(blob) {
-        if (!blob) {
-          // toBlobが失敗したらdataURLにフォールバック
-          downloadAsDataURL(canvas, talent);
+    canvas = _buildResultCardCanvas();
+  } catch (e) {
+    showToast(t('toast.image_failed_prefix') + e.message);
+    return;
+  }
+
+  const talent = getTalent(state.top1);
+  const fileName = _resultCardFileName();
+
+  if (!canvas.toBlob) {
+    downloadAsDataURL(canvas, talent);
+    return;
+  }
+
+  canvas.toBlob(function (blob) {
+    if (!blob) {
+      downloadAsDataURL(canvas, talent);
+      return;
+    }
+
+    // ① 共有シート（対応していればこれが最短。Instagram等へそのまま送れる）
+    try {
+      if (typeof File === 'function' && navigator.share && navigator.canShare) {
+        const file = new File([blob], fileName, { type: 'image/png' });
+        if (navigator.canShare({ files: [file] })) {
+          navigator.share({
+            files: [file],
+            title: t('share.title'),
+            text: _resultShareText()
+          }).then(() => {
+            trackEvent('share_image_done', { top1: state.top1, lang: currentLang });
+          }).catch(() => {
+            // ユーザーが共有をやめただけなので、何も表示しない
+          });
           return;
         }
-        const link = document.createElement('a');
-        link.download = `talent-matrix-${talent.characterEn.replace(/\s/g, '-').toLowerCase()}.png`;
-        const url = URL.createObjectURL(blob);
-        link.href = url;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        setTimeout(() => URL.revokeObjectURL(url), 2000);
-        showToast(t('toast.image_saved'));
-      }, 'image/png');
-    } else {
-      downloadAsDataURL(canvas, talent);
-    }
+      }
+    } catch (e) { /* File 非対応環境は②へ */ }
+
+    // ② 端末に保存
+    _saveCardBlob(blob, fileName, canvas, talent);
+  }, 'image/png');
+}
+
+function _saveCardBlob(blob, fileName, canvas, talent) {
+  try {
+    const link = document.createElement('a');
+    link.download = fileName;
+    const url = URL.createObjectURL(blob);
+    link.href = url;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+    showToast(t('toast.image_saved'));
+    trackEvent('share_image_done', { top1: state.top1, lang: currentLang });
   } catch (e) {
-    // タッチされていない（汚染されていない）はずだが、念のためフォールバック
     downloadAsDataURL(canvas, talent);
   }
+}
+
+// シェア文面（テキストシェアと共通）
+function _resultShareText() {
+  const talent = getTalent(state.top1);
+  return t('share.text')
+    .replace('{character}', getArchetypeName(state.top1, state.top2) || talent.character)
+    .replace('{compound}', makeCompoundName(state.top1, state.top2))
+    .replace('{catchphrase}', _resultTagline())
+    .replace('{url}', getShareResultUrl());
+}
+
+// アーキタイプのタグラインは日本語しか用意していないため、
+// 日本語以外では従来どおり翻訳済みのキャッチフレーズを使う。
+function _resultTagline() {
+  return (currentLang === 'ja' && getArchetypeTagline(state.top1, state.top2))
+    || getTalent(state.top1).catchphrase;
 }
 
 // iOS Safari等向け: dataURLで直接ダウンロード or 新規タブ開き
@@ -11220,6 +11303,7 @@ const I18N = {
     'result.share_img':  '結果カードを画像で保存',
     'result.share_match':'相性を診断する',
     'result.share_sns':  'SNSでシェア',
+    'result.share_image': '結果画像を保存・シェア',
     'result.email':      '結果をメールで受け取る',
     'result.back':       'もう一度診断する',
     'result.book':       'あなたにおすすめの一冊',
@@ -11589,6 +11673,7 @@ const I18N = {
     'result.share_img':  'Save Result Card as Image',
     'result.share_match':'Check Compatibility',
     'result.share_sns':  'Share on SNS',
+    'result.share_image': 'Save & share result image',
     'result.email':      'Send my result by email',
     'result.back':       'Take the Assessment Again',
     'result.book':       'A Book for You',
@@ -11950,6 +12035,7 @@ const I18N = {
     'result.share_img':  '保存结果卡片图片',
     'result.share_match':'查看与好友的相性',
     'result.share_sns':  '分享到社交媒体',
+    'result.share_image': '保存并分享结果图片',
     'result.email':      '通过邮件接收结果',
     'result.back':       '再测一次',
     'result.book':       '为你推荐的一本书',
@@ -12307,6 +12393,7 @@ const I18N = {
     'result.share_img':  '결과 카드 이미지로 저장',
     'result.share_match':'친구와의 궁합 보기',
     'result.share_sns':  'SNS에 공유하기',
+    'result.share_image': '결과 이미지 저장·공유',
     'result.email':      '결과를 이메일로 받기',
     'result.back':       '다시 진단하기',
     'result.book':       '당신에게 추천하는 한 권',
