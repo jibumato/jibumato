@@ -1256,6 +1256,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     margin-bottom: 28px;
   }
 
+  /* イラスト直下のキャラクター名。主役はアーキタイプ名なので、
+     こちらは「イラストのキャプション」として小さく添える */
+  .character-charname {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    color: var(--gold-light);
+    opacity: 0.9;
+    margin: -10px 0 20px;
+  }
+  .character-charname::before { content: '〜 '; opacity: 0.6; }
+  .character-charname::after  { content: ' 〜'; opacity: 0.6; }
+
   .character-tagline {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
@@ -4552,6 +4566,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- キャラクター本体 -->
       <div class="character-svg" id="characterSvg"></div>
     </div>
+
+    <div class="character-charname" id="characterCharName">— —</div>
 
     <div class="character-name-block">
       <div class="character-tagline" id="characterTagline">— —</div>
@@ -8544,6 +8560,10 @@ function _showResultInner() {
   document.getElementById('characterTagline').textContent = '— ' + (getArchetypeTagline(top1, top2) || talent.catchphrase) + ' —';
   document.getElementById('characterName').textContent = getArchetypeName(top1, top2) || talent.character;
   document.getElementById('characterEn').textContent = getArchetypeEn(top1, top2) || talent.characterEn;
+  // キャラクター名はイラストのキャプションとして復活させる。
+  // シェア画像の TALENT TYPE（コレクターゾウ等）と表示を一致させるため。
+  const charNameEl = document.getElementById('characterCharName');
+  if (charNameEl) charNameEl.textContent = talent.character;
 
   // 知性別シンボルをセット
   setCharacterSymbols(state.top1);
